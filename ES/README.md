@@ -1,9 +1,9 @@
-# IAS Automation
+# ES Automation
 
 ## Overview
-[IAS](https://www.iasonline.org/) The International Accreditation Service (IAS) provides objective evidence that an organization operates at the highest level of ethical, legal and technical standards.
+[ES](https://myportal.icc-es.org/) ICC-ES has been the industry leader in performing technical evaluations for code compliance, providing regulators and construction professionals with clear evidence that products comply with codes and standards.
 
-Web Automation Framework utilizes open source [Selenium](http://seleniumhq.org/) tool to interact with IAS Application....
+ES Web Automation Framework utilizes open source [Selenium](http://seleniumhq.org/) tool to interact with ES Application....
 
 ## Supported Platforms
 - **Chrome** Latest Version
@@ -12,15 +12,19 @@ Web Automation Framework utilizes open source [Selenium](http://seleniumhq.org/)
 
 
 ## Tools
-- **Selenium:** to 
+- **Selenium:** for browser interaction 
 - **Maven:** for Java project management  
-- **TestNG:** for Java testing framework 
-- **RestAssured:** to automate Mobile Web APIs
+- **TestNG:** for Java Testing framework 
+- **RestAssured:** to automate REST APIs
+- **Log4j:** to log test execution activities
+- **Allure Report:** to report test execution results
 - **Seleniun Grid:** for parallel test execution
 - **Jenkins:** for CI/CD
 
 ## Integration
-- **TBD** 
+- **yopmail:** to exchange information with user
+- **MS CRM:** to run cron jobs and provide approvals
+
 ---
 
 ## Execution
@@ -37,22 +41,22 @@ Web Automation Framework utilizes open source [Selenium](http://seleniumhq.org/)
 - **IE:** -DEnv=qa -DBrowser=IE -DTestSuite=smoke -Dexec.mainClass=com.ias.setup.DriverScript
 
 ### Jenkins
-
+In progress 
 
 
 ## Change Log
-- Version 1.0.5 - [Change Log](CHANGELOG.md)
+- Version 1.0.0 - [Change Log](CHANGELOG.md)
 
 ## Contributors
 - Shefali Garg <shefali.garg@infobeans.com>
 
 
 ## License & copyright
-Copyright � 1999 - 2017 IAS
+Copyright � 2018 ICC Evaluation Service, LLC.
 All rights reserved.
 This is the confidential and proprietary information of 
-IAS, Inc. ("Confidential Information").  You shall not
+ICC Evaluation Service, LLC. ("Confidential Information").  You shall not
 disclose such Confidential Information and shall use it only in
 accordance with the terms of the license agreement you entered into
-with IAS.
+with ICC Evaluation Service, LLC.
 
