@@ -1,6 +1,8 @@
 package com.es.setup;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -10,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterMethod;
 
+import com.es.util.CommonUtils;
 import com.es.util.Prop;
 
 public class Driver {
@@ -19,43 +22,27 @@ public class Driver {
 	private static Logger log = Logger.getLogger(Driver.class.getName());
 
 	public static WebDriver getDriver() throws IOException {
-
 		switch (System.getProperty("Browser")) {
-		case "chrome":
-			System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\driver\\chromedriver.exe");
+		case "chrome":			
+			System.setProperty("webdriver.chrome.driver", CommonUtils.getChromeDriverPath());
 			driver = new ChromeDriver();
+			log.info("Initialized Chrome driver");		
 			break;
 		case "FireFox":
 			System.setProperty("webdriver.firefox.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");
 			driver = new FirefoxDriver();
+			log.info("Initialized Firefox driver");
 			break;
 		case "IE":
 			System.setProperty("webdriver.ie.driver", ".\\src\\main\\resources\\driver\\IEDriverServer.exe");
 			driver = new InternetExplorerDriver();
+			log.info("Initialized Internet Explorer driver");
 			break;
 		default:
-			log.info("Set browser name - chrome or FireFox or IE ");
+			log.info("Enter browser name - chrome or FireFox or IE ");
 		}
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		return driver;
-
-	}
-
-	public static String getURL() throws IOException {
-
-		if (System.getProperty("Env").equalsIgnoreCase("qa")) {
-			url = Prop.getTestData("applicationURL-QA").toString();
-		} else if (System.getProperty("Env").equalsIgnoreCase("uat")) {
-			url = Prop.getTestData("applicationURL-UAT").toString();
-		} else {
-			url = Prop.getTestData("applicationURL-PROD").toString();
-		}
-		return url;
-	}
-
-	@AfterMethod
-	public static void tearDown() {
-		driver.close();
 	}
 }
