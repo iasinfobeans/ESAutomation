@@ -11,38 +11,37 @@ import com.es.pom.DashboardPage;
 import com.es.pom.QuotationRequestFormPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
+import com.es.util.CommonUtils;
 import com.es.util.Prop;
 
 import io.qameta.allure.Description;
 
-public class Login {
+public class Login extends Setup {
 	private static Logger log = Logger.getLogger(Login.class.getName());
 
-	@BeforeMethod(alwaysRun = true)
-	public void testSetup() throws IOException {
-		Setup.testSetup();
-	}
-
-	@Test(priority = 0, groups = { "smoke",
-			"regression" }, description = "valid Login Scenario with correct username and password.")
-	@Description("Test Description: Valid login with correct credentials")
+	@Test(priority = 0, groups = { "smoke" })
+	@Description("Valid login with correct credentials")
 	public static void testingLoginFunctionality() throws IOException, InterruptedException {
-		SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
-		DashboardPage.verifyDashboardPage();
-		Setup.CaptureScreenshot("login");
-
+		try{
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyDashboardPage();
+		}catch(Exception e){
+			CommonUtils.CaptureScreenshot("testingLoginFunctionality");
+			e.getStackTrace();
+			throw e;
+		}
 	}
 
-	@Test(priority = 1, groups = { "smoke",
-			"regression" }, description = "valid Get a Quote Scenario to generate a Quotation Request")
-	@Description("Test Description: get a quote form")
+	@Test(priority = 1, groups = { "smoke" })
+	@Description("Get a quote form")
 	public static void testingGetaQuoteFunctionality() throws IOException, InterruptedException {
-		QuotationRequestFormPage.getAQoute();
-		QuotationRequestFormPage.submitQuoteRequest();
+		try{
+			QuotationRequestFormPage.getAQoute();
+			QuotationRequestFormPage.submitQuoteRequest();
+		}catch(Exception e){
+			CommonUtils.CaptureScreenshot("testingGetaQuoteFunctionality");
+			e.getStackTrace();
+			throw e;
+		}
 	}
-
-	/*@AfterMethod
-	public void testTearDown() {
-		Setup.testTearDown();
-	}*/
 }
