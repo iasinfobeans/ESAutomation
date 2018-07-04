@@ -29,10 +29,10 @@ import com.surveymonkey.lib.Grid;*/
 public class DriverScript {
 
 	/**
-	 * Copyright © 1999 - 2017 SurveyMonkey All rights reserved.
+	 * Copyright 1999 - 2017 ES All rights reserved.
 	 *
 	 * This software is the confidential and proprietary information of
-	 * SurveyMonkey, Inc. ("Confidential Information"). You shall not disclose such
+	 * ES, Inc. ("Confidential Information"). You shall not disclose such
 	 * Confidential Information and shall use it only in accordance with the terms
 	 * of the license agreement you entered into with Sun.
 	 * 
