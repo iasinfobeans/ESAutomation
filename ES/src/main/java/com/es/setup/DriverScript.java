@@ -21,33 +21,27 @@ import org.testng.xml.XmlTest;
 public class DriverScript {
 
 	/**
-	 * Copyright 1999 - 2017 ES All rights reserved.
-	 *
-	 * This software is the confidential and proprietary information of
-	 * ES, Inc. ("Confidential Information"). You shall not disclose such
-	 * Confidential Information and shall use it only in accordance with the terms
-	 * of the license agreement you entered into with Sun.
-	 * 
+	 * Copyright 2018 ICC Evaluation Service, LLC.
+	 * All rights reserved.
+	 * This is the confidential and proprietary information of 
+	 * ICC Evaluation Service, LLC. ("Confidential Information").  
+	 * You shall not disclose such Confidential Information and 
+	 * shall use it only in accordance with the terms of the license agreement
+	 * you entered into with ICC Evaluation Service, LLC.
 	 * 
 	 */
 
 	/**
-	 * This driver script for Mobile Automation project, it is main class of this
+	 * This driver script for Web Automation project, it is main class of this
 	 * project. It gets following details from Jenkins job and create TestNG.xml
-	 * file programmatically 1. Platform : Android / iOS 2. TestSuite : Smoke /BVT /
-	 * SmallRegression / Regression 3. Feature: User/Billing etc 4. Module: SignIn,
-	 * Create Survey etc. 5. Env: MT1 / MT2 / MT3 / PROD 6. TestRunID: TestRail test
-	 * run id like 10661, 8747 Created TestNG.xml would be available with name
+	 * file programmatically. Created TestNG.xml would be available with name
 	 * programmedTestNG.xml in root directory of the project. It contains details of
-	 * test cases for execution. This driver script also load the OR properties and
-	 * test data.
+	 * test cases for execution.
 	 * 
 	 * @author pankaj.shukla
 	 * @version 1.0
 	 * @since 2017-03-31
 	 * 
-	 *        Ref link :
-	 *        //http://toolsqa.com/mobile-automation/appium/appium-parallel-execution-using-testng/
 	 */
 	public static String platform = null;
 	public static final Logger logger = Logger.getLogger(DriverScript.class.getName());
