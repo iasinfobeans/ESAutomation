@@ -19,6 +19,7 @@ ES Web Automation Framework utilizes open source [Selenium](http://seleniumhq.or
 - **RestAssured:** to automate REST APIs
 - **Log4j:** to log test execution activities
 - **Allure Report:** to report test execution results
+- **Git Repository:** to store code
 - **Seleniun Grid:** for parallel test execution
 - **Jenkins:** for CI/CD
 
@@ -28,12 +29,37 @@ ES Web Automation Framework utilizes open source [Selenium](http://seleniumhq.or
 
 ---
 
-## Execution
-- **Setup Steps** 
-   Take latest code from GIT repository. URL for git is - https://github.com/iasinfobeans/IASAutomation.git
-   Go to root folder of project ES, (right click) Run As->Run Configurations-> go to JRE tab and add -DEnv=qa -DBrowser=chrome      -DTestSuite=smoke -Dexec.mainClass=com.ias.setup.DriverScript to VM args
-   To run project as Maven -> Set up MAVEN_HOME and path in environment variable.Go to root folder of project IAS, (right click) Run As->Run Configurations->in Main tab, under goals , put - clean test site exec:java as maven goals.
-   
+## Project Setup
+- **Automation Code** 
+   GIT repository URL: https://github.com/iasinfobeans/ESAutomation/tree/master/ES
+- **Pre-requisites**
+   - Java SDK 1.8: JAVA_HOME and Java path is setup in system variables.
+   - Maven v3.x.x: M2_HOME and MAVEN_HOME are setup in system variables.
+   - Eclipse IDE is installed on machine and it should have Git, Maven, and TestNG plugins setup.
+   - Java and Maven installed path should be setup in Eclipse IDE.
+- **Steps**
+   - Launch Eclipse and open its Import window from File menu.
+   - Expand Git folder and select "Project From Git" option.
+   - Click on Next button.
+   - Select "Clone URI" as repository source and click on Next button.
+   - Enter Git repository URI - "https://github.com/iasinfobeans/ESAutomation.git"
+   - Enter credentials and click on Next button.
+   - Select "master" branch and click on Next button.
+   - Code should be started downlaoded in git folder inside the system user.
+   - Click on Finish button after code is downloaded.
+   - Reopen Eclipse Import window and expand Maven folder.
+   - Select "Existing Maven Projects" option and click on Next button.
+   - Click on Browser button to set root directory - System user -> git - > ESAutomation -> ES.
+   - Select pom.xml file and click on Next button.
+   - Click on finish button.
+   - ES maven project should be displayed in Eclipse.
+- **Execution**     
+   - Right Mouse Click on ES folder and select Run As-> Maven Build..
+   - Enter "clean test site exec:java" in Goals text box (without "").
+   - Select JRE tab and add "-DEnv=qa -DBrowser=chrome -DTestSuite=smoke -Dexec.mainClass=com.ias.setup.DriverScript" to VM args ((without "").
+   - Click on Run.
+   - Maven will start downloading project dependencies
+   - wait for some time, browser will launch and execution will starts.
 
 ## Execution
 ### Local 
