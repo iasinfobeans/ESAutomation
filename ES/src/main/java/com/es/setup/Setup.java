@@ -2,6 +2,7 @@ package com.es.setup;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -23,6 +25,7 @@ import com.es.pom.DashboardPage;
 import com.es.pom.QuotationRequestFormPage;
 import com.es.pom.SignInPage;
 import com.es.util.CommonUtils;
+import com.es.util.Prop;
 
 public class Setup {
 	public static WebDriver driver;
@@ -33,6 +36,9 @@ public class Setup {
 	private static String logPath = System.getProperty("user.dir") + File.separator + "log";
 	public static Properties testData = null;
 	public static Properties config = null;
+	private static String configPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "config.properties").toString();
+	private static String testDataPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "testData.properties").toString();
+
 
 	@BeforeSuite(alwaysRun = true)
 	public void testBedSetup() throws Exception {
@@ -46,6 +52,19 @@ public class Setup {
 		// Create or clean log directory
 		CommonUtils.cleanOrCreateDirectory(logPath);
 		
+		// load properties files
+		config = Prop.loadPropertiesFile(configPropertiesFilePath);
+		testData = Prop.loadPropertiesFile(testDataPropertiesFilePath);
+	}
+	
+	@AfterSuite(alwaysRun = true)
+	public void testBedTearDown() throws Exception {
+		try{
+			driver.close();
+			log.info("Closed browser");
+		}catch(Exception e){
+			log.info("Browser is already closed by test method");
+		}
 	}
 
 	@BeforeMethod(alwaysRun = true)

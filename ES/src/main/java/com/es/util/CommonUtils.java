@@ -21,11 +21,11 @@ public class CommonUtils {
 	public static String getURL() throws IOException {
 		String url = null;
 		if (System.getProperty("Env").equalsIgnoreCase("qa")) {
-			url = Prop.getTestData("applicationURL-QA").toString();
+			url = Prop.getConfigValue("applicationURL-QA").toString();
 		} else if (System.getProperty("Env").equalsIgnoreCase("uat")) {
-			url = Prop.getTestData("applicationURL-UAT").toString();
+			url = Prop.getConfigValue("applicationURL-UAT").toString();
 		} else {
-			url = Prop.getTestData("applicationURL-PROD").toString();
+			url = Prop.getConfigValue("applicationURL-PROD").toString();
 		}
 		return url;
 	}
