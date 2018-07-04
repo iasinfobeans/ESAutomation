@@ -1,9 +1,10 @@
 # ES Automation
 
-## Overview
-[ES](https://myportal.icc-es.org/) ICC-ES has been the industry leader in performing technical evaluations for code compliance, providing regulators and construction professionals with clear evidence that products comply with codes and standards.
+## Application Overview
+[ICC-ES](https://myportal.icc-es.org/) has been the industry leader in performing technical evaluations for code compliance, providing regulators and construction professionals with clear evidence that products comply with codes and standards.
 
-ES Web Automation Framework utilizes open source [Selenium](http://seleniumhq.org/) tool to interact with ES Application....
+## Automation Overview
+ES Web Automation Framework utilizes open source [Selenium](http://seleniumhq.org/) tool to automate ICC ES Application test cases on popular browsers.
 
 ## Supported Platforms
 - **Chrome** Latest Version
