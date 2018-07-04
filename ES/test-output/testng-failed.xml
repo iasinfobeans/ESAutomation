@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" name="Failed suite [IAS Automation Suite]" parallel="tests">
+  <listeners>
+    <listener class-name="com.es.util.LoggingListener"/>
+  </listeners>
+  <test thread-count="1" name="chrome(failed)" parallel="tests">
+    <parameter name="testName" value="chrome"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.es.tests.Login">
+        <methods>
+          <include name="testSetup"/>
+          <include name="testingGetaQuoteFunctionality"/>
+        </methods>
+      </class> <!-- com.es.tests.Login -->
+    </classes>
+  </test> <!-- chrome(failed) -->
+</suite> <!-- Failed suite [IAS Automation Suite] -->
