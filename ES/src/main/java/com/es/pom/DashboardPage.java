@@ -12,17 +12,10 @@ import com.es.setup.Driver;
 import io.qameta.allure.Step;
 
 public class DashboardPage {
-	WebDriver driver;
 	private static Logger log = Logger.getLogger(Driver.class.getName());
 	@FindBy(xpath="//h1[@class='entry-title post-title']")
 	static WebElement dashboardElement;
 	
-	
-	 public DashboardPage(WebDriver driver)
-	 {
-	        this.driver=driver;
-	        PageFactory.initElements(driver,this);
-	}
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{

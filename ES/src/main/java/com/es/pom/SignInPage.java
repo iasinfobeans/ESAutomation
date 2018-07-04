@@ -12,15 +12,7 @@ import io.qameta.allure.Step;
 
 public class SignInPage {
 	
-	
-	static WebDriver driver;
-	
 	private static Logger log = Logger.getLogger(Driver.class.getName());
-	
-	public SignInPage(WebDriver driver){
-        SignInPage.driver=driver;
-        PageFactory.initElements(driver,this);
-    }
 	
 	@FindBy(id="user_login")
 	static WebElement usernameplaceholder;
