@@ -3,6 +3,7 @@ package com.es.setup;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -12,75 +13,31 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Reporter;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 
 import com.es.pom.DashboardPage;
 import com.es.pom.QuotationRequestFormPage;
 import com.es.pom.SignInPage;
+import com.es.util.CommonUtils;
 
 public class Setup {
 	public static WebDriver driver;
+	public static int i=1;
 	private static Logger log = Logger.getLogger(Setup.class.getName());
-	private static String screenshotPath = System.getProperty("user.dir") + "\\" + "screenshots";
-	private static String allureReportPath = System.getProperty("user.dir") + "\\" + "alure-reports";
-	private static String logPath = System.getProperty("user.dir") + "\\" + "log";
-	
-	// public static ExtentTestManager test;
-
-	public static void testSetup() throws IOException {
-		driver = Driver.getDriver();
-		PageFactory.initElements(driver, SignInPage.class);
-		PageFactory.initElements(driver, DashboardPage.class);
-		PageFactory.initElements(driver, QuotationRequestFormPage.class);
-		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		driver.get(Driver.getURL());
-	}
-
-	public static void testTearDown() {
-		driver.close();
-		Reporter.log("Closed browser ", true);
-	}
-
-	public static String getCurrentTimeForScreenShot() {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("ddMM_hhmmss_aaa(zzz)");
-		java.util.Date curDate = new java.util.Date();
-		String strDate = sdf.format(curDate);
-		String strActDate = strDate.toString();
-		return strActDate;
-	}
-
-	public static String CaptureScreenshot(String testName) throws IOException {
-
-		String filePath = null;
-		try {
-			File scrFile = null;
-			log.info("Driver>>>>>> " + driver.toString());
-			scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			String scrFileName = testName + " AT-" + "-" + getCurrentTimeForScreenShot() + ".png";
-
-			File directory = new File(screenshotPath);
-			if (!directory.exists()) {
-				directory.mkdir();
-			}
-			filePath = directory + "\\" + scrFileName;
-			FileUtils.copyFile(scrFile, new File(filePath));
-			log.info(": => Please refer " + filePath);
-			log.debug(": => For Verification, Please refer " + scrFileName);
-		} catch (Exception e) {
-			// Setup.test.log(Status.FAIL, "Failed to take screenshot : " + e.getMessage());
-			log.info("Failed to take screenshot : " + e.getMessage());
-			e.printStackTrace();
-		}
-		return filePath;
-	}
+	public static String screenshotPath = System.getProperty("user.dir") + File.separator + "screenshots";
+	private static String allureReportPath = System.getProperty("user.dir") + File.separator + "alure-reports";
+	private static String logPath = System.getProperty("user.dir") + File.separator + "log";
+	public static Properties testData = null;
+	public static Properties config = null;
 
 	@BeforeSuite(alwaysRun = true)
 	public void setup() throws Exception {
 		// Clean or create screenshot directory
 		try {
-			log.info("in before suite");
 			FileUtils.cleanDirectory(new File(screenshotPath));
 			log.info("Cleaned Screenshots directory");
 		} catch (java.lang.IllegalArgumentException e) {
@@ -115,5 +72,30 @@ public class Setup {
 			}
 		}
 
+
 	}
+
+	@BeforeMethod(alwaysRun = true)
+	public static void testSetup() throws IOException {
+		log.info("\n");
+		log.info("**********************************************");
+		log.info("Executing Test Case Number: "+i++);
+		driver = Driver.getDriver();
+		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.get(CommonUtils.getURL());
+		//Initilize PageFactory classes
+		log.info("Initilize PageFactory classes");
+		PageFactory.initElements(driver, SignInPage.class);
+		PageFactory.initElements(driver, DashboardPage.class);
+		PageFactory.initElements(driver, QuotationRequestFormPage.class);
+	}
+
+	@AfterMethod(alwaysRun = true)
+	public static void testTearDown() {
+		driver.close();
+		log.info("Closed browser");
+	}
+
+
 }
