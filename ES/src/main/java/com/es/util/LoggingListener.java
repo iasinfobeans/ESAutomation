@@ -17,7 +17,7 @@ public class LoggingListener extends TestListenerAdapter {
 	public synchronized void onTestStart(ITestResult tr) {
 		String testsName = tr.getTestContext().getName();
 		String testName = tr.getMethod().getMethodName();
-		log.info("testName : " + testName);
+		log.info("Test Case Name: " + testName);
 		log.info("Started Execution for >>> " + tr.getMethod().getMethodName() + " from class "
 				+ tr.getTestClass().getName() + " with Thread ID - " + Thread.currentThread().getId()
 				+ " with Thread Name - " + Thread.currentThread().getName() + " with Thread Group - "
@@ -36,6 +36,8 @@ public class LoggingListener extends TestListenerAdapter {
 	public synchronized void onTestFailure(ITestResult tr) {
 		testName = tr.getMethod().getMethodName();
 		testsName = tr.getTestContext().getName();
+		tr.getThrowable();
+		log.info(tr.getThrowable());
 		log.info("FAILED: " + testName);
 	}
 
