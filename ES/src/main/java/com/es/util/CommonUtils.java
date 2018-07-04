@@ -40,34 +40,27 @@ public class CommonUtils {
 		return chromeDriverPath.toString();
 	}
 
-
-	public static String CaptureScreenshot(String testName) throws IOException {
-		String filePath = null;
-		try {
-			File scrFile = null;
-			log.info("Driver>>>>>> " + Setup.driver.toString());
-			scrFile = ((TakesScreenshot) Setup.driver).getScreenshotAs(OutputType.FILE);
-			String scrFileName = testName + "_" + CommonUtils.getCurrentTimeForScreenShot() + ".png";
-			File directory = new File(Setup.screenshotPath);
-			if (!directory.exists()) {
-				directory.mkdir();
-			}
-			filePath = directory + File.separator + scrFileName;
-			FileUtils.copyFile(scrFile, new File(filePath));
-			log.info(": => Please refer " + filePath);
-			log.debug(": => For Verification, Please refer " + scrFileName);
-		} catch (Exception e) {
-			log.info("Failed to take screenshot : " + e.getMessage());
-			e.printStackTrace();
-		}
-		return filePath;
-	}
-
 	public static String getCurrentTimeForScreenShot() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy_hh-mm-ss_aaa(zzz)");
 		java.util.Date curDate = new java.util.Date();
 		String strDate = sdf.format(curDate);
 		String strActDate = strDate.toString();
 		return strActDate;
+	}
+
+	public static void cleanOrCreateDirectory(String dirPath) {
+		try {
+			FileUtils.cleanDirectory(new File(dirPath));
+			log.info("empty "+dirPath+" directory");
+		} catch (java.lang.IllegalArgumentException e) {
+			log.info(dirPath + "  directory is not exist, created it");
+			File directory = new File(dirPath);
+			if (!directory.exists()) {
+				directory.mkdir();
+			}
+		} catch (IOException e) {
+			log.info("invalid path: "+dirPath);
+			e.printStackTrace();
+		}
 	}
 }

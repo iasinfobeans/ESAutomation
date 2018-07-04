@@ -35,44 +35,17 @@ public class Setup {
 	public static Properties config = null;
 
 	@BeforeSuite(alwaysRun = true)
-	public void setup() throws Exception {
-		// Clean or create screenshot directory
-		try {
-			FileUtils.cleanDirectory(new File(screenshotPath));
-			log.info("Cleaned Screenshots directory");
-		} catch (java.lang.IllegalArgumentException e) {
-			log.info(screenshotPath + "  directory is not exist, created it");
-			File directory = new File(screenshotPath);
-			if (!directory.exists()) {
-				directory.mkdir();
-			}
-		}
+	public void testBedSetup() throws Exception {
+		
+		// Create or clean screenshot directory
+		CommonUtils.cleanOrCreateDirectory(screenshotPath);
 
-		// Clean or create allure report directory
-		try {
-			FileUtils.cleanDirectory(new File(allureReportPath));
-			log.info("Cleaned Extent Report directory");
-		} catch (java.lang.IllegalArgumentException e) {
-			log.info(allureReportPath + "  directory is not exist, created it");
-			File directory = new File(allureReportPath);
-			if (!directory.exists()) {
-				directory.mkdir();
-			}
-		}
+		// Create or clean allure report directory
+		CommonUtils.cleanOrCreateDirectory(allureReportPath);
 
-		// Clean or create log directory
-		try {
-			FileUtils.cleanDirectory(new File(logPath));
-			log.info("Cleaned Log directory");
-		} catch (java.lang.IllegalArgumentException e) {
-			log.info(logPath + "  directory is not exist, created it");
-			File directory = new File(logPath);
-			if (!directory.exists()) {
-				directory.mkdir();
-			}
-		}
-
-
+		// Create or clean log directory
+		CommonUtils.cleanOrCreateDirectory(logPath);
+		
 	}
 
 	@BeforeMethod(alwaysRun = true)
@@ -84,8 +57,8 @@ public class Setup {
 		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(CommonUtils.getURL());
-		//Initilize PageFactory classes
-		log.info("Initilize PageFactory classes");
+		
+		//Initialize PageFactory classes
 		PageFactory.initElements(driver, SignInPage.class);
 		PageFactory.initElements(driver, DashboardPage.class);
 		PageFactory.initElements(driver, QuotationRequestFormPage.class);

@@ -13,6 +13,7 @@ import com.es.pom.SignInPage;
 import com.es.setup.Setup;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
+import com.es.util.SeleniumUtils;
 
 import io.qameta.allure.Description;
 
@@ -26,7 +27,7 @@ public class Login extends Setup {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyDashboardPage();
 		}catch(Exception e){
-			CommonUtils.CaptureScreenshot("testingLoginFunctionality");
+			SeleniumUtils.captureScreenshot("testingLoginFunctionality");
 			e.getStackTrace();
 			throw e;
 		}
@@ -39,7 +40,7 @@ public class Login extends Setup {
 			QuotationRequestFormPage.getAQoute();
 			QuotationRequestFormPage.submitQuoteRequest();
 		}catch(Exception e){
-			CommonUtils.CaptureScreenshot("testingGetaQuoteFunctionality");
+			SeleniumUtils.captureScreenshot("testingGetaQuoteFunctionality");
 			e.getStackTrace();
 			throw e;
 		}
