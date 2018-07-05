@@ -56,16 +56,16 @@ ES Web Automation Framework utilizes open source [Selenium](http://seleniumhq.or
 - **Execution**     
    - Right Mouse Click on ES folder and select Run As-> Maven Build..
    - Enter "clean test site exec:java" in Goals text box (without "").
-   - Select JRE tab and add "-DEnv=qa -DBrowser=chrome -DTestSuite=smoke -Dexec.mainClass=com.ias.setup.DriverScript" to VM args ((without "").
+   - Select JRE tab and add "-DEnv=qa -DBrowser=chrome -DTestSuite=smoke -Dexec.mainClass=com.es.setup.DriverScript" to VM args ((without "").
    - Click on Run.
    - Maven will start downloading project dependencies
    - wait for some time, browser will launch and execution will starts.
 
 ## Execution
 ### Local 
-- **Chrome:** -DEnv=qa -DBrowser=chrome -DTestSuite=smoke -Dexec.mainClass=com.ias.setup.DriverScript
-- **FireFox:** -DEnv=qa -DBrowser=Firefox -DTestSuite=smoke -Dexec.mainClass=com.ias.setup.DriverScript
-- **IE:** -DEnv=qa -DBrowser=IE -DTestSuite=smoke -Dexec.mainClass=com.ias.setup.DriverScript
+- **Chrome:** -DEnv=qa -DBrowser=chrome -DTestSuite=smoke -Dexec.mainClass=com.es.setup.DriverScript
+- **FireFox:** -DEnv=qa -DBrowser=Firefox -DTestSuite=smoke -Dexec.mainClass=com.es.setup.DriverScript
+- **IE:** -DEnv=qa -DBrowser=IE -DTestSuite=smoke -Dexec.mainClass=com.es.setup.DriverScript
 
 ### Jenkins
 In progress 
