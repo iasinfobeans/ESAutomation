@@ -41,7 +41,7 @@ public class SignInPage {
 	 * @param driver
 	 */
 	
-	@Step("Enter sign in details and sign in to account step...")
+	@Step("Perform login based on account type")
 	public static void login(String username, String password, String accountType)
 	{
 		System.out.println("user-"+username+"place--"+usernameplaceholder.getAttribute("id"));
