@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
@@ -20,9 +19,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
-
 import com.es.pom.DashboardPage;
-import com.es.pom.QuotationRequestFormPage;
+import com.es.pom.ForgotPasswordPage;
 import com.es.pom.SignInPage;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
@@ -80,7 +78,7 @@ public class Setup {
 		//Initialize PageFactory classes
 		PageFactory.initElements(driver, SignInPage.class);
 		PageFactory.initElements(driver, DashboardPage.class);
-		PageFactory.initElements(driver, QuotationRequestFormPage.class);
+		PageFactory.initElements(driver, ForgotPasswordPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
