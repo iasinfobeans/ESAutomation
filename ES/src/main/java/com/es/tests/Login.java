@@ -28,7 +28,7 @@ public class Login extends Setup {
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyDashboardPage();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("testingLoginAsCustomerFunctionality");
+			SeleniumUtils.captureScreenshot("verifyLoginAsCustomer");
 			e.getStackTrace();
 			throw e;
 		}
@@ -41,7 +41,7 @@ public class Login extends Setup {
 			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyDashboardPage();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("testingLoginAsStaffFunctionality");
+			SeleniumUtils.captureScreenshot("verifyLoginAsStaff");
 			e.getStackTrace();
 			throw e;
 		}
