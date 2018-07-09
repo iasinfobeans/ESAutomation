@@ -3,25 +3,21 @@ package com.es.setup;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.io.FileUtils;
+
 import org.apache.log4j.Logger;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+
 import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.SignInPage;
+import com.es.pom.YopmailPage;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
 
@@ -79,6 +75,8 @@ public class Setup {
 		PageFactory.initElements(driver, SignInPage.class);
 		PageFactory.initElements(driver, DashboardPage.class);
 		PageFactory.initElements(driver, ForgotPasswordPage.class);
+		PageFactory.initElements(driver, YopmailPage.class);
+		//>>>>>>>>>>> Tushar - here you have to pass yopmailPage class  as above
 	}
 
 	@AfterMethod(alwaysRun = true)
