@@ -3,12 +3,11 @@ package com.es.pom;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import com.es.setup.Driver;
 import io.qameta.allure.Step;
 
 public class SignInPage {
 
-	private static Logger log = Logger.getLogger(Driver.class.getName());
+	private static Logger log = Logger.getLogger(SignInPage.class.getName());
 
 	@FindBy(id="user-login")
 	static WebElement usernameplaceholder;
