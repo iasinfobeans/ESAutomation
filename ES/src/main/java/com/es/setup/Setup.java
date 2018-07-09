@@ -14,8 +14,11 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import com.es.pom.ApplicationPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
+import com.es.pom.OverlayPage;
+import com.es.pom.RegisterPage;
 import com.es.pom.SignInPage;
 import com.es.pom.YopmailPage;
 import com.es.util.CommonUtils;
@@ -76,7 +79,9 @@ public class Setup {
 		PageFactory.initElements(driver, DashboardPage.class);
 		PageFactory.initElements(driver, ForgotPasswordPage.class);
 		PageFactory.initElements(driver, YopmailPage.class);
-		//>>>>>>>>>>> Tushar - here you have to pass yopmailPage class  as above
+		PageFactory.initElements(driver, ApplicationPage.class);
+		PageFactory.initElements(driver, RegisterPage.class);
+		PageFactory.initElements(driver, OverlayPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
