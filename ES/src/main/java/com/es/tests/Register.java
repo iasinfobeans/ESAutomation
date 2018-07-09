@@ -13,16 +13,9 @@ import com.es.util.Prop;
 import io.qameta.allure.Description;
 
 
-public class Register {
+public class Register extends Setup{
 
-
-	@BeforeMethod(alwaysRun = true)
-	public void testSetup() throws IOException {
-
-		Setup.testSetup();
-	}
-
-	@Test(priority = 1, groups = { "smoke" })
+	@Test(groups = { "smoke" })
 	@Description("Verify that user is able to Register on Portal")
 	public void verifyRegistration() throws InterruptedException {
 		SignInPage.navigateToNormalRegistration() ;
@@ -32,7 +25,7 @@ public class Register {
 		DashboardPage.verifyDashboardPage();
 	}
 
-	@Test(priority = 2, groups = { "smoke" })
+	@Test(groups = { "smoke" })
 	@Description("Verify that user is able to Register on Portal from ER")
 	public void verifyRegistrationFromER() throws InterruptedException {
 		SignInPage.navigateToER();
@@ -43,7 +36,7 @@ public class Register {
 		ApplicationPage.verifyApplicationPageForER();
 
 	}
-	@Test(priority = 3, groups = { "smoke" })
+	@Test(groups = { "smoke" })
 	@Description("Valid Register with correct credentials for ER")
 	public void verifyRegistrationFromPMG() throws InterruptedException {
 		SignInPage.navigateToPMG();
@@ -54,7 +47,7 @@ public class Register {
 		ApplicationPage.verifyApplicationPageForPMG();
 	}
 
-	@Test(priority = 4, groups = { "smoke" })
+	@Test(groups = { "smoke" })
 	@Description("Valid Register with correct credentials for ESL")
 	public void testingRegisterFunctionalityFromESL() throws InterruptedException {
 		SignInPage.navigateToESL();
@@ -63,12 +56,6 @@ public class Register {
 		OverlayPage.skipoverlayPage();
 		DashboardPage.verifyDashboardPageforESL();
 		ApplicationPage.verifyApplicationPageForESL();
-	}
-
-
-	@AfterMethod
-	public void testTearDown() {
-		Setup.testTearDown();
 	}
 }
 
