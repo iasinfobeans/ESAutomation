@@ -4,12 +4,11 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import com.es.setup.Driver;
 import io.qameta.allure.Step;
 
 public class DashboardPage {
 
-	private static Logger log = Logger.getLogger(Driver.class.getName());
+	private static Logger log = Logger.getLogger(DashboardPage.class.getName());
 
 	@FindBy(xpath="//div[@class='ehading']")
 	static WebElement dashboardElement;
