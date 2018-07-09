@@ -34,8 +34,13 @@ public class Yopmail {
 	
 	public static void verifyRegistrationEmailBody(String email) {
 		YopmailPage.navigateToInbox(email);
-		YopmailPage.openRegistrationMail(); //impmeted this
-		YopmailPage.verifyRegistrationMailBody(); //implement thiss ok?ok
+		YopmailPage.openRegistrationMail(); 
+		YopmailPage.verifyRegistrationMailBody();
 	}
 
+	public static void verifyNewAccRegEmailBody(String email) {
+		YopmailPage.navigateToInbox(email);
+		YopmailPage.openNewAccRegMail(); 
+		YopmailPage.verifyNewAccRegMailBody();
+	}
 }

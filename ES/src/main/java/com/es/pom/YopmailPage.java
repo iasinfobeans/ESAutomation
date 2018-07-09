@@ -49,7 +49,7 @@ public class YopmailPage {
 	static WebElement openRegistrationMail;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
-	static WebElement registrationMailBodyLine1;
+	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -61,7 +61,16 @@ public class YopmailPage {
 	static WebElement registrationMailBodyLine4;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
-	static WebElement registrationMailBodyLine5;
+	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4;
+
+	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
+	static WebElement openNewAccRegistrationMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'A new account has been registered')]")
+	static WebElement newAccRegMailBodyLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Kindly log into the CRM')]")
+	static WebElement newAccRegMailBodyLine3;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -78,7 +87,7 @@ public class YopmailPage {
 
 	}
 
-	@Step("Open Otp mail..")
+	@Step("Opening Otp mail..")
 	public static void openOTPmail() {
 		driver.switchTo().frame("ifinbox");
 		openMail.click();
@@ -125,7 +134,7 @@ public class YopmailPage {
 
 	}
 
-	@Step("Open registraion succesful mail..")
+	@Step("Opening registraion succesful mail..")
 	public static void openRegistrationMail() {
 		driver.switchTo().frame("ifinbox");
 		openRegistrationMail.click();
@@ -136,6 +145,7 @@ public class YopmailPage {
 	@Step("Verifying Registration mail body..")
 	public static void verifyRegistrationMailBody() {
 		driver.switchTo().frame("ifmail");
+
 		String hi = registrationMailBodyLine1.getText();
 		String firstRgistrationLine = registrationMailBodyLine2.getText();
 		String secondRgistrationLine = registrationMailBodyLine3.getText();
@@ -163,6 +173,40 @@ public class YopmailPage {
 
 		driver.switchTo().defaultContent();
 
+	}
+
+	@Step("Opening New account registration mail..")
+	public static void openNewAccRegMail() {
+		driver.switchTo().frame("ifinbox");
+		openNewAccRegistrationMail.click();
+		driver.switchTo().defaultContent();
+	}
+
+	@Step("Verifying New account registration mail body..")
+	public static void verifyNewAccRegMailBody() {
+		driver.switchTo().frame("ifmail");
+
+		String hi = newAccRegMailBodyLine1.getText();
+		String firstRgistrationLine = newAccRegMailBodyLine2.getText();
+		String secondRgistrationLine = newAccRegMailBodyLine3.getText();
+		String thirdRgistrationLine = newAccRegMailBodyLine4.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("A new account has been registered by"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine,
+				"Kindly log into the CRM to view and qualify the lead for approving account registration.",
+				"Text is not contain in email body");
+
+		Assert.assertEquals(thirdRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(thirdRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		driver.switchTo().defaultContent();
 	}
 
 }
