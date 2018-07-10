@@ -43,4 +43,18 @@ public class Yopmail {
 		YopmailPage.openNewAccRegMail(); 
 		YopmailPage.verifyNewAccRegMailBody();
 	}
+	
+	public static void verifyPassResetEmailBody(String email) {
+		YopmailPage.navigateToInbox(email);
+		YopmailPage.openPassResetMail(); 
+		YopmailPage.verifyPassResetMailBody();
+	}
+	
+	public static String getPasswordResetLink(String email) {
+		String passResetLink = null;
+		YopmailPage.navigateToInbox(email);
+		YopmailPage.openPassResetMail(); 
+		passResetLink = YopmailPage.getResetLinkFromMail();
+		return passResetLink;
+	}
 }

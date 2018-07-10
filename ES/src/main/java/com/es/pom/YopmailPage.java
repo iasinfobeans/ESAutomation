@@ -49,7 +49,7 @@ public class YopmailPage {
 	static WebElement openRegistrationMail;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
-	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1;
+	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -61,7 +61,7 @@ public class YopmailPage {
 	static WebElement registrationMailBodyLine4;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
-	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4;
+	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -71,6 +71,21 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Kindly log into the CRM')]")
 	static WebElement newAccRegMailBodyLine3;
+
+	@FindBy(xpath = "//*[text()='ICC-ES: Password Reset']")
+	static WebElement openPassResetMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Please')]")
+	static WebElement passResetMailBodyLine3;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'If you did not make this request')]")
+	static WebElement passResetMailBodyLine4;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'request to reset your password')]")
+	static WebElement passResetMailBodyLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Please')]/a")
+	static WebElement passResetLink;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -207,6 +222,55 @@ public class YopmailPage {
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
 		driver.switchTo().defaultContent();
+	}
+
+	@Step("Opening password reset mail..")
+	public static void openPassResetMail() {
+		driver.switchTo().frame("ifinbox");
+		openPassResetMail.click();
+		driver.switchTo().defaultContent();
+
+	}
+
+	@Step("Verifying password reset mail body..")
+	public static void verifyPassResetMailBody() {
+		driver.switchTo().frame("ifmail");
+
+		String hi = passResetMailBodyLine1.getText();
+		String firstRgistrationLine = passResetMailBodyLine2.getText();
+		String secondRgistrationLine = passResetMailBodyLine3.getText();
+		String thirdRgistrationLine = passResetMailBodyLine4.getText();
+		String forthRgistrationLine = passResetMailBodyLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine,
+				"We have received a request to reset your password on the ICC-ES Customer Portal.",
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine,
+				"Please click here to reset your password, and log into your ICC-ES account.",
+				"Text is not contain in email body");
+
+		Assert.assertEquals(thirdRgistrationLine, "If you did not make this request, please ignore this e-mail.",
+				"Text 'If you did not make this request, please ignore this e-mail.' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		driver.switchTo().defaultContent();
+	}
+
+	@Step("Returning password reset link in string format..")
+	public static String getResetLinkFromMail() {
+		String resetPassLink = null;
+		driver.switchTo().frame("ifmail");
+		resetPassLink = passResetLink.getAttribute("href");
+		driver.switchTo().defaultContent();
+		return resetPassLink;
 	}
 
 }
