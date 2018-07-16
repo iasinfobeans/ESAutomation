@@ -13,9 +13,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import com.es.pom.ChangePasswordPage;
-import com.es.pom.ApplicationPage;
 
+import com.es.pom.ApplicationPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.OverlayPage;
@@ -83,10 +82,6 @@ public class Setup {
 		PageFactory.initElements(driver, ApplicationPage.class);
 		PageFactory.initElements(driver, RegisterPage.class);
 		PageFactory.initElements(driver, OverlayPage.class);
-<<<<<<< HEAD
-		PageFactory.initElements(driver, ChangePasswordPage.class);
-=======
->>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 
 	@AfterMethod(alwaysRun = true)
