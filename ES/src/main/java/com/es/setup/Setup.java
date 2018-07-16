@@ -34,7 +34,7 @@ public class Setup {
 	public static Properties testData = null;
 	public static Properties config = null;
 	private static String configPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "config.properties").toString();
-	private static String testDataPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "testData.properties").toString();
+	public static String testDataPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "testData.properties").toString();
 
 
 	@BeforeSuite(alwaysRun = true)
