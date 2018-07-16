@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import com.es.pom.ApplicationPage;
+import com.es.pom.ChangePasswordPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.OverlayPage;
@@ -23,6 +24,7 @@ import com.es.pom.SignInPage;
 import com.es.pom.YopmailPage;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
+import com.es.util.Yopmail;
 
 public class Setup {
 	public static WebDriver driver;
@@ -34,7 +36,7 @@ public class Setup {
 	public static Properties testData = null;
 	public static Properties config = null;
 	private static String configPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "config.properties").toString();
-	private static String testDataPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "testData.properties").toString();
+	public static String testDataPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "testData.properties").toString();
 
 
 	@BeforeSuite(alwaysRun = true)
@@ -82,6 +84,8 @@ public class Setup {
 		PageFactory.initElements(driver, ApplicationPage.class);
 		PageFactory.initElements(driver, RegisterPage.class);
 		PageFactory.initElements(driver, OverlayPage.class);
+		PageFactory.initElements(driver, ChangePasswordPage.class);
+		PageFactory.initElements(driver, Yopmail.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
