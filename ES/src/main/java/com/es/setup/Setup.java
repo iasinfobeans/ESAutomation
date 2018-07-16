@@ -82,7 +82,10 @@ public class Setup {
 		PageFactory.initElements(driver, ApplicationPage.class);
 		PageFactory.initElements(driver, RegisterPage.class);
 		PageFactory.initElements(driver, OverlayPage.class);
+<<<<<<< HEAD
 		PageFactory.initElements(driver, ChangePasswordPage.class);
+=======
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 
 	@AfterMethod(alwaysRun = true)
