@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
@@ -59,6 +61,10 @@ public class CommonUtils {
 	}
 
 	public static String getRandomYopMailId() {
-		return "Test."+(int)Math.random()+"@yopmail.com";
+		return "TestESApp."+new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date())+"@yopmail.com";
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(CommonUtils.getRandomYopMailId());
 	}
 }

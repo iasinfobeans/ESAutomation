@@ -1,9 +1,12 @@
 package com.es.util;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.io.Writer;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -13,8 +16,6 @@ import com.es.setup.Setup;
 public class Prop {
 
 	private static Logger log = Logger.getLogger(Prop.class.getName());
-	private static String configPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "config.properties").toString();
-	private static String testDataPropertiesFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "testData.properties").toString();
 
 	public static Properties loadPropertiesFile(String filePath) throws IOException {
 		FileInputStream fis;
@@ -31,15 +32,40 @@ public class Prop {
 		}
 		return property;
 	}
-	
+
 	public static String getConfigValue(String key) throws IOException {
 		String value = Setup.config.getProperty(key);
 		return value;
 	}
-	
+
 	public static String getTestData(String key) {
-		String value = Setup.testData.getProperty(key);
+		//String value = Setup.testData.getProperty(key);
+		String value="abc";
 		return value;
 	}
+
+	private static void appendTestData(String key, String value) throws IOException {
+		if(Prop.getTestData(key)==null){
+			try {
+				FileWriter fileWritter = new FileWriter(Setup.testDataPropertiesFilePath, true);
+				BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+				bufferWritter.newLine();
+				bufferWritter.append(key+"="+value);
+				bufferWritter.close();
+				log.info("Write "+Setup.testDataPropertiesFilePath+" file");
+			} catch (FileNotFoundException e) {
+				log.info("Failed to open "+Setup.testDataPropertiesFilePath+" file");
+			} catch (IOException e) {
+				log.info("Faied to write "+Setup.testDataPropertiesFilePath+" file");
+			}
+		}else{
+			log.info("Key aready exist");
+//			Properties testData = Prop.loadPropertiesFile(Setup.testDataPropertiesFilePath);
+//			testData.replace(key, value);
+//			Writer writer = new FileWriter(Setup.testDataPropertiesFilePath);
+//			testData.store(writer, "updated");
+		}
+	}
+
 
 }

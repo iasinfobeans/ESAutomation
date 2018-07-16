@@ -1,17 +1,8 @@
 package com.es.util;
-
-import java.nio.file.Paths;
-
-import org.apache.log4j.Logger;
-
 import com.es.pom.YopmailPage;
 
 public class Yopmail {
 
-	private static Logger log = Logger.getLogger(Yopmail.class.getName());
-	private static String testDataPropertiesFilePath = Paths
-			.get(System.getProperty("user.dir"), "src", "main", "resources", "properties", "testData.properties")
-			.toString();
 
 	/**
 	 * This Method will return Otp required for registration.

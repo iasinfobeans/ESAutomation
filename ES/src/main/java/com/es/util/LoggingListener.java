@@ -15,7 +15,7 @@ public class LoggingListener extends TestListenerAdapter {
 
 	@Override
 	public synchronized void onTestStart(ITestResult tr) {
-		String testsName = tr.getTestContext().getName();
+		//String testsName = tr.getTestContext().getName();
 		String testName = tr.getMethod().getMethodName();
 		log.info("Test Case Name: " + testName);
 		log.info("Started Execution for >>> " + tr.getMethod().getMethodName() + " from class "
