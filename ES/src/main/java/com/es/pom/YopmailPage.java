@@ -1,22 +1,17 @@
 package com.es.pom;
 
-import java.io.IOException;
-
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-
-import com.es.setup.Driver;
-
+import com.es.util.SeleniumUtils;
 import io.qameta.allure.Step;
 
 public class YopmailPage {
 
 	private static Logger log = Logger.getLogger(YopmailPage.class.getName());
 	private static String otp = null;
-	public static WebDriver driver = null;
+	public static String yopmailUrl = "http://www.yopmail.com";
 
 	@FindBy(id = "login")
 	static WebElement emailTextBox;
@@ -89,39 +84,33 @@ public class YopmailPage {
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
-		try {
-			driver = Driver.getDriver();
-		} catch (IOException e) {
-			log.error("Error while initializing webdriver..");
-			e.printStackTrace();
-		}
-		driver.get("http://www.yopmail.com");
+		SeleniumUtils.openUrl(yopmailUrl);
 		emailTextBox.sendKeys(email);
 		submitEmail.click();
 		refreshInbox.click();
-
+		log.info("Navigate to "+email+" inbox");
 	}
 
 	@Step("Opening Otp mail..")
 	public static void openOTPmail() {
-		driver.switchTo().frame("ifinbox");
+		SeleniumUtils.switchToIframeById("ifinbox");
 		openMail.click();
-		driver.switchTo().defaultContent();
-
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened OTP email");
 	}
 
 	@Step("Getting OTP from mail..")
 	public static String getOTPfromMail() {
-		driver.switchTo().frame("ifmail");
+		SeleniumUtils.switchToIframeById("ifmail");
 		otp = readOtp.getText();
-		driver.switchTo().defaultContent();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Got OTP: "+otp);
 		return otp;
 	}
 
 	@Step("Verifying otp mail body..")
 	public static void verifyOTPmailBody() {
-		driver.switchTo().frame("ifmail");
-
+		SeleniumUtils.switchToIframeById("ifmail");
 		String hiText = mailBodyLine1.getText();
 		String otpFirstLine = mailBodyLine2.getText();
 		String otpThirdLine = mailBodyLine3.getText();
@@ -145,21 +134,21 @@ public class YopmailPage {
 		Assert.assertEquals(otpFourthLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
-		driver.switchTo().defaultContent();
-
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified OTP mail body");
 	}
 
 	@Step("Opening registraion succesful mail..")
 	public static void openRegistrationMail() {
-		driver.switchTo().frame("ifinbox");
+		SeleniumUtils.switchToIframeById("ifinbox");
 		openRegistrationMail.click();
-		driver.switchTo().defaultContent();
-
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened Registration email");
 	}
 
 	@Step("Verifying Registration mail body..")
 	public static void verifyRegistrationMailBody() {
-		driver.switchTo().frame("ifmail");
+		SeleniumUtils.switchToIframeById("ifmail");
 
 		String hi = registrationMailBodyLine1.getText();
 		String firstRgistrationLine = registrationMailBodyLine2.getText();
@@ -186,20 +175,21 @@ public class YopmailPage {
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
-		driver.switchTo().defaultContent();
-
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified Registration email body");
 	}
 
 	@Step("Opening New account registration mail..")
 	public static void openNewAccRegMail() {
-		driver.switchTo().frame("ifinbox");
+		SeleniumUtils.switchToIframeById("ifinbox");
 		openNewAccRegistrationMail.click();
-		driver.switchTo().defaultContent();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened New account registration mail");
 	}
 
 	@Step("Verifying New account registration mail body..")
 	public static void verifyNewAccRegMailBody() {
-		driver.switchTo().frame("ifmail");
+		SeleniumUtils.switchToIframeById("ifmail");
 
 		String hi = newAccRegMailBodyLine1.getText();
 		String firstRgistrationLine = newAccRegMailBodyLine2.getText();
@@ -221,21 +211,21 @@ public class YopmailPage {
 		Assert.assertEquals(thirdRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
-		driver.switchTo().defaultContent();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified New account registration body");
 	}
 
 	@Step("Opening password reset mail..")
 	public static void openPassResetMail() {
-		driver.switchTo().frame("ifinbox");
+		SeleniumUtils.switchToIframeById("ifinbox");
 		openPassResetMail.click();
-		driver.switchTo().defaultContent();
-
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened password reset mail body");
 	}
 
 	@Step("Verifying password reset mail body..")
 	public static void verifyPassResetMailBody() {
-		driver.switchTo().frame("ifmail");
-
+		SeleniumUtils.switchToIframeById("ifmail");
 		String hi = passResetMailBodyLine1.getText();
 		String firstRgistrationLine = passResetMailBodyLine2.getText();
 		String secondRgistrationLine = passResetMailBodyLine3.getText();
@@ -261,15 +251,17 @@ public class YopmailPage {
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
-		driver.switchTo().defaultContent();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified Password reset mail body");
 	}
 
 	@Step("Returning password reset link in string format..")
 	public static String getResetLinkFromMail() {
 		String resetPassLink = null;
-		driver.switchTo().frame("ifmail");
+		SeleniumUtils.switchToIframeById("ifmail");
 		resetPassLink = passResetLink.getAttribute("href");
-		driver.switchTo().defaultContent();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Got password reset link: "+resetPassLink);
 		return resetPassLink;
 	}
 

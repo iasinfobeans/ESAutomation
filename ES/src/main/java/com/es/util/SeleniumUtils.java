@@ -6,6 +6,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.es.setup.Setup;
 
@@ -13,7 +17,7 @@ public class SeleniumUtils {
 
 	private static Logger log = Logger.getLogger(SeleniumUtils.class.getName());
 
-	public static String captureScreenshot(String testName) throws IOException {
+	public static String captureScreenshot(String testName) {
 		String filePath = null;
 		try {
 			File scrFile = null;
@@ -33,5 +37,36 @@ public class SeleniumUtils {
 			e.printStackTrace();
 		}
 		return filePath;
+	}
+
+	public static void openUrl(String url) {
+		Setup.driver.navigate().to(url);
+		log.info("Navigated to "+url);
+	}
+
+	public static void switchToIframeByName(String name) {
+		Setup.driver.switchTo().frame(name);
+		log.info("Switched to "+name+" iframe");
+	}
+
+	public static void switchToIframeById(String id) {
+		Setup.driver.switchTo().frame(id);
+		log.info("Switched to "+id+" iframe");
+	}
+
+	public static void switchToDefaultIframe() {
+		Setup.driver.switchTo().defaultContent();
+		log.info("Switched to default iframe");
+	}
+
+	public static void waitForElementVisibility(WebElement element) {
+		log.info("Waiting for element to be visible....");
+		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
+		wait.until(ExpectedConditions.visibilityOf(element));
+	}
+	
+	public static String getCurrentUrl() {
+		String currentUrl =  Setup.driver.getCurrentUrl();	
+		return currentUrl;
 	}
 }
