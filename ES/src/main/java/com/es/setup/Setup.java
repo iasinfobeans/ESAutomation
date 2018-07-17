@@ -21,6 +21,7 @@ import com.es.pom.ForgotPasswordPage;
 import com.es.pom.OverlayPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.SignInPage;
+import com.es.pom.UpdateProfilePage;
 import com.es.pom.YopmailPage;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
@@ -59,7 +60,7 @@ public class Setup {
 	@AfterSuite(alwaysRun = true)
 	public void testBedTearDown() throws Exception {
 		try{
-			driver.close();
+			driver.quit();
 			log.info("Closed browser");
 		}catch(Exception e){
 			log.info("Browser is already closed by test method");
@@ -86,11 +87,12 @@ public class Setup {
 		PageFactory.initElements(driver, OverlayPage.class);
 		PageFactory.initElements(driver, ChangePasswordPage.class);
 		PageFactory.initElements(driver, Yopmail.class);
+		PageFactory.initElements(driver, UpdateProfilePage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
 	public static void testTearDown() {
-		driver.close();
+		driver.quit();
 		log.info("Closed browser");
 	}
 
