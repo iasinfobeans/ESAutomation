@@ -39,8 +39,7 @@ public class Prop {
 	}
 
 	public static String getTestData(String key) {
-		//String value = Setup.testData.getProperty(key);
-		String value="abc";
+		String value = Setup.testData.getProperty(key);
 		return value;
 	}
 
