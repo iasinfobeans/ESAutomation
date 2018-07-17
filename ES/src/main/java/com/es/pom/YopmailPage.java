@@ -11,7 +11,6 @@ public class YopmailPage {
 
 	private static Logger log = Logger.getLogger(YopmailPage.class.getName());
 	private static String otp = null;
-	public static String yopmailUrl = "http://www.yopmail.com";
 
 	@FindBy(id = "login")
 	static WebElement emailTextBox;
@@ -84,7 +83,6 @@ public class YopmailPage {
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
-		SeleniumUtils.openUrl(yopmailUrl);
 		emailTextBox.sendKeys(email);
 		submitEmail.click();
 		refreshInbox.click();

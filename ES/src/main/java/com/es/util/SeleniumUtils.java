@@ -2,8 +2,12 @@ package com.es.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -59,7 +63,7 @@ public class SeleniumUtils {
 		log.info("Switched to default iframe");
 	}
 
-	public static void waitForElementVisibility(WebElement element) {
+	public static void waitForElementToBeVisible(WebElement element) {
 		log.info("Waiting for element to be visible....");
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.visibilityOf(element));
@@ -68,5 +72,23 @@ public class SeleniumUtils {
 	public static String getCurrentUrl() {
 		String currentUrl =  Setup.driver.getCurrentUrl();	
 		return currentUrl;
+	}
+	
+	public static String openUrlInNewWindow(String url) {
+		((JavascriptExecutor) Setup.driver).executeScript("window.open(arguments[0])", url);
+		Set<String> windowHandles = Setup.driver.getWindowHandles();
+		Iterator<String> itr = windowHandles.iterator();
+		String parentWindowHandle = null;
+		String newWindowHandle = null;
+		while(itr.hasNext()){
+			parentWindowHandle = itr.next();
+			newWindowHandle = itr.next();
+		}
+		SeleniumUtils.switchToWindow(newWindowHandle);
+		return parentWindowHandle;
+	}
+	
+	public static void switchToWindow(String handle) {
+		Setup.driver.switchTo().window(handle);
 	}
 }
