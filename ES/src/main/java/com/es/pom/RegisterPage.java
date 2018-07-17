@@ -4,13 +4,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.es.util.CommonUtils;
+import com.es.util.SeleniumUtils;
+import com.es.util.Yopmail;
 
 import io.qameta.allure.Step;
 
 public class RegisterPage {
 
 	private static Logger log = Logger.getLogger(RegisterPage.class.getName());
-
+	private static String email = null;
+	
 	@FindBy(id="emailaddress")
 	static WebElement emailTextBox;
 
@@ -40,6 +43,9 @@ public class RegisterPage {
 
 	@FindBy(id="confirmpassword")
 	static WebElement confirmPasswordTextBox;
+	
+	@FindBy(id="onetimepassword")
+	static WebElement oneTimePassword;
 
 	@FindBy(id="proceed")
 	static WebElement proceedButton;
@@ -52,12 +58,8 @@ public class RegisterPage {
 	 */
 	@Step("Enter User Details for Registration step...")
 	public static void  enterEmailInRegistration(){
-		String email= CommonUtils.getRandomYopMailId();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		email= CommonUtils.getRandomYopMailId();
+		SeleniumUtils.waitForElementToBeVisible(emailTextBox);
 		emailTextBox.clear();
 		emailTextBox.sendKeys(email);
 		log.info("Enter new email Address: "+email);
@@ -105,11 +107,7 @@ public class RegisterPage {
 		confirmPasswordTextBox.sendKeys(confirmPassword);
 		log.info("Enter your Confirm Password");
 
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		oneTimePassword.sendKeys(Yopmail.getOTP(email));
 
 		proceedButton.click();
 		log.info("Submit your Details");
