@@ -91,4 +91,8 @@ public class SeleniumUtils {
 	public static void switchToWindow(String handle) {
 		Setup.driver.switchTo().window(handle);
 	}
+	
+	public static void scrollBottom() {
+		((JavascriptExecutor)Setup.driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+	}
 }
