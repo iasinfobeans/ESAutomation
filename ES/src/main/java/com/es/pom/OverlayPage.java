@@ -1,5 +1,6 @@
 package com.es.pom;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -21,8 +22,14 @@ public class OverlayPage {
 	 */
 	@Step("Overlay Page is dispayed whwn User Completed Registration...")
 	public static void skipoverlayPage()
+
 	{
-		skipButtonMessage.click();
-		log.info("Overlay Page is displayed");
+		try {
+			skipButtonMessage.isEnabled();
+			skipButtonMessage.isDisplayed();
+			log.info("Overlay Page is displayed");
+		}catch(NoSuchElementException e) {
+			log.info("Overlay Page is not displayed");		
+		}
 	}
 }

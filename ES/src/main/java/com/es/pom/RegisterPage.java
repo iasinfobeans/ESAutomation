@@ -2,8 +2,10 @@ package com.es.pom;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import io.qameta.allure.Step;
+
 import com.es.util.CommonUtils;
+
+import io.qameta.allure.Step;
 
 public class RegisterPage {
 
@@ -12,8 +14,8 @@ public class RegisterPage {
 	@FindBy(id="emailaddress")
 	static WebElement emailTextBox;
 
-	@FindBy(xpath="//button[@type='submit']")
-	static WebElement registerButton;
+	@FindBy(xpath="//input[@id='apply']/parent::div[@class='pop-btn-wp']")
+	static WebElement submitButton;
 
 	@FindBy(xpath="//a[contains(text(),'Title')]")
 	static WebElement dropDownMenu;
@@ -51,22 +53,33 @@ public class RegisterPage {
 	@Step("Enter User Details for Registration step...")
 	public static void  enterEmailInRegistration(){
 		String email= CommonUtils.getRandomYopMailId();
-		emailTextBox.clear();
-		emailTextBox.sendKeys(email);
-		log.info("Enter new email Address: "+email);
-
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		emailTextBox.clear();
+		emailTextBox.sendKeys(email);
+		log.info("Enter new email Address: "+email);
 
-		registerButton.click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		submitButton.click();
 		log.info("Submit your Email Address Button ");
 	}
 
 	@Step("Enter User Details for Registration step...")
 	public static void enterPersonalInfoInRegistration(String firstName,String lastName,String companyName,String phone,String newPassword,String confirmPassword) {
+
+		dropDownMenu.isEnabled();
+		dropDownMenu.click();
+		log.info("Enter your Title");
+
+		optionTitle.click();
+		log.info("Enter your Title Option");
 
 		firstNameTextBox.clear();
 		firstNameTextBox.sendKeys(firstName);
@@ -93,7 +106,7 @@ public class RegisterPage {
 		log.info("Enter your Confirm Password");
 
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

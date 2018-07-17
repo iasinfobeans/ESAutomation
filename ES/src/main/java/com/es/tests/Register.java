@@ -20,7 +20,7 @@ public class Register extends Setup{
 	public void verifyRegistration() throws InterruptedException {
 		SignInPage.navigateToNormalRegistration() ;
 		RegisterPage.enterEmailInRegistration();
-		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("comfirmPassword"));
+		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
 		OverlayPage.skipoverlayPage();
 		DashboardPage.verifyDashboardPage();
 	}
@@ -30,9 +30,7 @@ public class Register extends Setup{
 	public void verifyRegistrationFromER() throws InterruptedException {
 		SignInPage.navigateToER();
 		RegisterPage.enterEmailInRegistration();
-		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("comfirmPassword"));
-		OverlayPage.skipoverlayPage();
-		DashboardPage.verifyDashboardPageforER();
+		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
 		ApplicationPage.verifyApplicationPageForER();
 
 	}
@@ -41,20 +39,16 @@ public class Register extends Setup{
 	public void verifyRegistrationFromPMG() throws InterruptedException {
 		SignInPage.navigateToPMG();
 		RegisterPage.enterEmailInRegistration();
-		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("comfirmPassword"));
-		OverlayPage.skipoverlayPage();
-		DashboardPage.verifyDashboardPageforPMG();
+		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
 		ApplicationPage.verifyApplicationPageForPMG();
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke","priya" })
 	@Description("Valid Register with correct credentials for ESL")
 	public void testingRegisterFunctionalityFromESL() throws InterruptedException {
 		SignInPage.navigateToESL();
 		RegisterPage.enterEmailInRegistration();
-		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("comfirmPassword"));
-		OverlayPage.skipoverlayPage();
-		DashboardPage.verifyDashboardPageforESL();
+		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
 		ApplicationPage.verifyApplicationPageForESL();
 	}
 }

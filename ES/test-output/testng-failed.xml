@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="1" name="Failed suite [IAS Automation Suite]" parallel="tests">
+<suite thread-count="1" name="Failed suite [ES Automation Suite]" parallel="tests">
   <listeners>
     <listener class-name="com.es.util.LoggingListener"/>
   </listeners>
@@ -8,16 +8,19 @@
     <parameter name="testName" value="chrome"/>
     <groups>
       <run>
-        <include name="smoke"/>
+        <include name="priya"/>
       </run>
     </groups>
     <classes>
-      <class name="com.es.tests.Login">
+      <class name="com.es.tests.Register">
         <methods>
+          <include name="testTearDown"/>
+          <include name="testBedTearDown"/>
+          <include name="testBedSetup"/>
           <include name="testSetup"/>
-          <include name="testingGetaQuoteFunctionality"/>
+          <include name="verifyRegistrationFromER"/>
         </methods>
-      </class> <!-- com.es.tests.Login -->
+      </class> <!-- com.es.tests.Register -->
     </classes>
   </test> <!-- chrome(failed) -->
-</suite> <!-- Failed suite [IAS Automation Suite] -->
+</suite> <!-- Failed suite [ES Automation Suite] -->
