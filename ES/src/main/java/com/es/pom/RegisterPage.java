@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
 import com.es.util.CommonUtils;
-import com.es.util.Yopmail;
 
 public class RegisterPage {
 
