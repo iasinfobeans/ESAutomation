@@ -63,7 +63,7 @@ public class SeleniumUtils {
 		log.info("Switched to default iframe");
 	}
 
-	public static void waitForElementVisibility(WebElement element) {
+	public static void waitForElementToBeVisible(WebElement element) {
 		log.info("Waiting for element to be visible....");
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.visibilityOf(element));
