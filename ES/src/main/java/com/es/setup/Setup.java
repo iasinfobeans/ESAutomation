@@ -59,7 +59,7 @@ public class Setup {
 	@AfterSuite(alwaysRun = true)
 	public void testBedTearDown() throws Exception {
 		try{
-			driver.close();
+			driver.quit();
 			log.info("Closed browser");
 		}catch(Exception e){
 			log.info("Browser is already closed by test method");
@@ -90,7 +90,7 @@ public class Setup {
 
 	@AfterMethod(alwaysRun = true)
 	public static void testTearDown() {
-		driver.close();
+		driver.quit();
 		log.info("Closed browser");
 	}
 
