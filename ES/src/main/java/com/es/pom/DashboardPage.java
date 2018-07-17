@@ -16,15 +16,7 @@ public class DashboardPage {
 	@FindBy(linkText="Change Password")
 	static WebElement changePasswordLink;
 
-	@FindBy(xpath="//a[@programslug='esr']")
-	static WebElement applyESRElement;
-
-	@FindBy(xpath="//a[@programslug='pmg']")
-	static WebElement applyPMGElement;
-
-	@FindBy(xpath="//a[@programslug='esl']")
-	static WebElement applyESLElement;
-
+	
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -40,23 +32,4 @@ public class DashboardPage {
 
 	}
 
-	@Step("verify dashboard page for ER Step...")
-	public static void verifyDashboardPageforER() {
-		applyESRElement.click();
-		log.info("Apply on DashboardPage is Displayed for ER ");
-
-
-	}
-
-	@Step("verify dashboard page for PMG Step...")
-	public static void verifyDashboardPageforPMG()	{
-		applyPMGElement.click();
-		log.info("apply on DashboardPage is Displayed for PMG");
-	}		
-
-	@Step("verify dashboard page for ESL Step...")
-	public static void verifyDashboardPageforESL() {
-		applyESLElement.click();
-		log.info("apply on DashboardPage is Displayed for ESL");
-	}
-}
+	   }

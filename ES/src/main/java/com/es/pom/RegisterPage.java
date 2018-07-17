@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
 import com.es.util.CommonUtils;
+import com.es.util.Yopmail;
 
 public class RegisterPage {
 
@@ -12,8 +13,8 @@ public class RegisterPage {
 	@FindBy(id="emailaddress")
 	static WebElement emailTextBox;
 
-	@FindBy(xpath="//button[@type='submit']")
-	static WebElement registerButton;
+	@FindBy(xpath="//input[@id='apply']/parent::div[@class='pop-btn-wp']")
+	static WebElement submitButton;
 
 	@FindBy(xpath="//a[contains(text(),'Title')]")
 	static WebElement dropDownMenu;
@@ -38,8 +39,8 @@ public class RegisterPage {
 
 	@FindBy(id="confirmpassword")
 	static WebElement confirmPasswordTextBox;
-
-	@FindBy(id="proceed")
+	
+    @FindBy(id="proceed")
 	static WebElement proceedButton;
 
 	/**
@@ -49,25 +50,40 @@ public class RegisterPage {
 	 * @param driver
 	 */
 	@Step("Enter User Details for Registration step...")
-	public static void  enterEmailInRegistration(){
-		String email= CommonUtils.getRandomYopMailId();
-		emailTextBox.clear();
-		emailTextBox.sendKeys(email);
-		log.info("Enter new email Address: "+email);
+	
+	      public static void  enterEmailInRegistration(){
+			String email= CommonUtils.getRandomYopMailId();
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			emailTextBox.clear();
+			emailTextBox.sendKeys(email);
+			log.info("Enter new email Address: "+email);
+
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			submitButton.click();
+			log.info("Submit your Email Address Button ");
 		}
 
-		registerButton.click();
-		log.info("Submit your Email Address Button ");
-	}
-
-	@Step("Enter User Details for Registration step...")
+		@Step("Enter User Details for Registration step...")
 	public static void enterPersonalInfoInRegistration(String firstName,String lastName,String companyName,String phone,String newPassword,String confirmPassword) {
-
+	
+		dropDownMenu.isEnabled();
+		dropDownMenu.click();
+		log.info("Enter your Title");
+		
+		optionTitle.click();
+		log.info("Enter your Title Option");
+		
 		firstNameTextBox.clear();
 		firstNameTextBox.sendKeys(firstName);
 		log.info("Enter your firstname");
@@ -91,14 +107,14 @@ public class RegisterPage {
 		confirmPasswordTextBox.clear();
 		confirmPasswordTextBox.sendKeys(confirmPassword);
 		log.info("Enter your Confirm Password");
-
+		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
-		proceedButton.click();
+		
+         proceedButton.click();
 		log.info("Submit your Details");
 
 	}     
