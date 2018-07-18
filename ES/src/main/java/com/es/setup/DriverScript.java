@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.json.JSONException;
 import org.testng.TestNG;
 import org.testng.xml.XmlGroups;
 import org.testng.xml.XmlPackage;
@@ -16,7 +15,6 @@ import org.testng.xml.XmlRun;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlSuite.ParallelMode;
 import org.testng.xml.XmlTest;
-
 
 public class DriverScript {
 
@@ -46,7 +44,7 @@ public class DriverScript {
 	public static String platform = null;
 	public static final Logger logger = Logger.getLogger(DriverScript.class.getName());
 
-	public static void main(String[] args) throws JSONException, InterruptedException, IOException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 
 		logger.info("Env : " + System.getProperty("Env"));
 		logger.info("Browser :" + System.getProperty("Browser"));
