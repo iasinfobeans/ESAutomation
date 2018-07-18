@@ -16,12 +16,42 @@ public class DashboardPage {
 	@FindBy(linkText="Change Password")
 	static WebElement changePasswordLink;
 
-	
-	@Step("verify dashboard page Step...")
+
+	@FindBy(xpath="//a[contains(@title, 'Dashboard')]")
+	static WebElement dashboardOptionElement;
+
+	@FindBy(xpath="//a[contains(@title,'Application')]")
+	static WebElement applicationOptionElement;
+
+	@FindBy(xpath="//a[contains(@title,'Payments')]")
+	static WebElement paymentsOptionElement;
+
+	@FindBy(xpath="//a[contains(@title, 'Contact Us')]")
+	static WebElement contactUsOptionElement;
+
+
+    @Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
 		Assert.assertTrue(dashboardElement.isDisplayed());
 		log.info("Dashboard displayed");
+	}
+
+	@Step("Verify the registration process once correct OTP and other fields are entered Step...")
+	public static void verifyRegistrationProcessAfterEnteringCorrectOTP()
+	{
+		Assert.assertTrue(dashboardOptionElement.isDisplayed());
+		log.info("Dashboard Option is displayed");
+
+
+		Assert.assertTrue(applicationOptionElement.isDisplayed());
+		log.info("Application Option is displayed");
+
+		Assert.assertTrue(paymentsOptionElement.isDisplayed());
+		log.info("Payments Option is displayed");
+
+		Assert.assertTrue(contactUsOptionElement.isDisplayed());
+		log.info("ContactUs Option is displayed");
 	}
 
 	@Step("redicting to password change page...")
@@ -32,4 +62,4 @@ public class DashboardPage {
 
 	}
 
-	   }
+}
