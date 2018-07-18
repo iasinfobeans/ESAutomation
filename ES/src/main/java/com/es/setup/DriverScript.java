@@ -16,7 +16,6 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlSuite.ParallelMode;
 import org.testng.xml.XmlTest;
 
-
 public class DriverScript {
 
 	/**
