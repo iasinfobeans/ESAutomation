@@ -69,6 +69,12 @@ public class SeleniumUtils {
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
+	public static void waitForElementToBeClickable(WebElement element) {
+		log.info("Waiting for element to be visible....");
+		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+	
 	public static String getCurrentUrl() {
 		String currentUrl =  Setup.driver.getCurrentUrl();	
 		return currentUrl;
@@ -94,5 +100,9 @@ public class SeleniumUtils {
 	
 	public static void scrollToBottom() {
 		((JavascriptExecutor)Setup.driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+	}
+	
+	public static void refreshPage() {
+		Setup.driver.navigate().refresh();
 	}
 }
