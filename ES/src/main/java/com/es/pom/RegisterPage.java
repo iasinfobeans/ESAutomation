@@ -57,7 +57,7 @@ public class RegisterPage {
 	 * @param driver
 	 */
 	@Step("Enter User Details for Registration step...")
-	public static void  enterEmailInRegistration(){
+	public static String  enterEmailInRegistration(){
 		email= CommonUtils.getRandomYopMailId();
 		SeleniumUtils.waitForElementToBeVisible(emailTextBox);
 		emailTextBox.clear();
@@ -71,6 +71,7 @@ public class RegisterPage {
 		}
 		submitButton.click();
 		log.info("Submit your Email Address Button ");
+		return email;
 	}
 
 	@Step("Enter User Details for Registration step...")
