@@ -15,59 +15,113 @@ public class Yopmail {
 	 * @return
 	 */
 	public static String getOTP(String email) {
-		String esWindowHandle = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		String otp = null;
-		YopmailPage.navigateToInbox(email);
-		YopmailPage.openOTPmail();
-		otp = YopmailPage.getOTPfromMail();
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);	
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openOTPmail();
+			otp = YopmailPage.getOTPfromMail();
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 		return otp;
 	}
 
 	public static void verifyOTPEmailBody(String email) {
-		String esWindowHandle = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
-		YopmailPage.navigateToInbox(email);
-		YopmailPage.openOTPmail();
-		YopmailPage.verifyOTPmailBody();
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openOTPmail();
+			YopmailPage.verifyOTPmailBody();
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	public static void verifyRegistrationEmailBody(String email) {
-		String esWindowHandle = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
-		YopmailPage.navigateToInbox(email);
-		YopmailPage.openRegistrationMail(); 
-		YopmailPage.verifyRegistrationMailBody();
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openRegistrationMail(); 
+			YopmailPage.verifyRegistrationMailBody();
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
 
 	public static void verifyNewAccRegEmailBody(String email) {
-		String esWindowHandle = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
-		YopmailPage.navigateToInbox(email);
-		YopmailPage.openNewAccRegMail(); 
-		YopmailPage.verifyNewAccRegMailBody();
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openNewAccRegMail(); 
+			YopmailPage.verifyNewAccRegMailBody();
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	public static void verifyPassResetEmailBody(String email) {
-		String esWindowHandle = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
-		YopmailPage.navigateToInbox(email);
-		YopmailPage.openPassResetMail(); 
-		YopmailPage.verifyPassResetMailBody();
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPassResetMail(); 
+			YopmailPage.verifyPassResetMailBody();
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	public static String getPasswordResetLink(String email) {
-		String esWindowHandle = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		String passResetLink = null;
-		YopmailPage.navigateToInbox(email);
-		/*try {
-			Thread.sleep(12000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		YopmailPage.openPassResetMail(); 
-		passResetLink = YopmailPage.getResetLinkFromMail();
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPassResetMail(); 
+			passResetLink = YopmailPage.getResetLinkFromMail();
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 		return passResetLink;
 	}
