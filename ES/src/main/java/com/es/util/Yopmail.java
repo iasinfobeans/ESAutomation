@@ -60,6 +60,12 @@ public class Yopmail {
 		String esWindowHandle = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		String passResetLink = null;
 		YopmailPage.navigateToInbox(email);
+		/*try {
+			Thread.sleep(12000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		YopmailPage.openPassResetMail(); 
 		passResetLink = YopmailPage.getResetLinkFromMail();
 		SeleniumUtils.switchToWindow(esWindowHandle);

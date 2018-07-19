@@ -1,7 +1,6 @@
 package com.es.tests;
 
 import java.io.IOException;
-import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 import com.es.pom.DashboardPage;
 import com.es.pom.SignInPage;
