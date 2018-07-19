@@ -80,22 +80,18 @@ public class SeleniumUtils {
 		return currentUrl;
 	}
 	
-	public static String openUrlInNewWindow(String url) {
+	public static Set<String> openUrlInNewWindow(String url) {
 		((JavascriptExecutor) Setup.driver).executeScript("window.open(arguments[0])", url);
 		Set<String> windowHandles = Setup.driver.getWindowHandles();
-		Iterator<String> itr = windowHandles.iterator();
-		String parentWindowHandle = null;
-		String newWindowHandle = null;
-		while(itr.hasNext()){
-			parentWindowHandle = itr.next();
-			newWindowHandle = itr.next();
-		}
-		SeleniumUtils.switchToWindow(newWindowHandle);
-		return parentWindowHandle;
+		return windowHandles;
 	}
 	
 	public static void switchToWindow(String handle) {
 		Setup.driver.switchTo().window(handle);
+	}
+	
+	public static void switchToWindowAndClose(String handle) {
+		Setup.driver.switchTo().window(handle).close();
 	}
 	
 	public static void scrollToBottom() {
