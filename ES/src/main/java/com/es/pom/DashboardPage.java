@@ -31,12 +31,24 @@ public class DashboardPage {
 
 	@FindBy(xpath="//div[@class='enjoyhint_close_btn']")
 	static WebElement popupWindow;
-	
+
 	@FindBy(linkText="Edit Profile")
 	static WebElement editProfileLink;
 
 	@FindBy(xpath="//span[@class='dropdown-menu-user-name']")
 	static WebElement myAccountDropdown;
+
+	@FindBy(xpath="//*[@title=\"Quotations\"]")
+	static WebElement quotationOption;
+
+	@FindBy(xpath="//*[@title=\"Reports\"]")
+	static WebElement reportOption;
+
+	@FindBy(xpath="//*[@title=\"Invoices\"]")
+	static WebElement invoicesOption;
+	
+	@FindBy(xpath="//a[@title='Applications']")
+	static WebElement applicationPageLink;
 	
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
@@ -71,7 +83,6 @@ public class DashboardPage {
 	@Step("redirecting to Edit Profile page...")
 	public static void navigateToEditProfilePage()
 	{
-		log.info("Nvaigated to Edit profile page");
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
@@ -82,4 +93,23 @@ public class DashboardPage {
 		log.info("Navigated to edit profile page");
 	}
 
+	@Step("User is qualified and all the portal options get available to user.")
+	public static void verifyPortalOptionForQualifiedUser() {
+
+		Assert.assertTrue(quotationOption.isDisplayed());
+		log.info("Verify Quotation Option displayed");
+
+		Assert.assertTrue(reportOption.isDisplayed());
+		log.info("Verify Report Option displayed");
+
+		Assert.assertTrue(invoicesOption.isDisplayed());
+		log.info("Verify Invoices Option displayed");
+	}
+	
+	@Step("redirecting to Edit Profile page...")
+	public static void navigateToApplicationPage()
+	{
+		applicationPageLink.click();
+		log.info("Navigated to application page");
+	}
 }
