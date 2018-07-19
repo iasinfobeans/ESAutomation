@@ -107,12 +107,10 @@ public class YopmailPage {
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
-		SeleniumUtils.waitForElementToBeVisible(emailTextBox);
-		emailTextBox.clear();
 		emailTextBox.sendKeys(email);
 		submitEmail.click();
 		refreshInbox.click();
-		log.info("Navigate to "+email+" inbox");
+		log.info("Navigate to " + email + " inbox");
 	}
 
 	@Step("Opening Otp mail..")
@@ -128,7 +126,7 @@ public class YopmailPage {
 		SeleniumUtils.switchToIframeById("ifmail");
 		otp = readOtp.getText();
 		SeleniumUtils.switchToDefaultIframe();
-		log.info("Got OTP: "+otp);
+		log.info("Got OTP: " + otp);
 		return otp;
 	}
 
@@ -173,6 +171,7 @@ public class YopmailPage {
 	@Step("Verifying Registration mail body..")
 	public static void verifyRegistrationMailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
+
 		String hi = registrationMailBodyLine1.getText();
 		String firstRgistrationLine = registrationMailBodyLine2.getText();
 		String secondRgistrationLine = registrationMailBodyLine3.getText();
@@ -284,7 +283,7 @@ public class YopmailPage {
 		SeleniumUtils.switchToIframeById("ifmail");
 		resetPassLink = passResetLink.getAttribute("href");
 		SeleniumUtils.switchToDefaultIframe();
-		log.info("Got password reset link: "+resetPassLink);
+		log.info("Got password reset link: " + resetPassLink);
 		return resetPassLink;
 	}
 
