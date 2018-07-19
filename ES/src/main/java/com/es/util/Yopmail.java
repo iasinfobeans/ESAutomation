@@ -1,4 +1,5 @@
 package com.es.util;
+
 import java.util.Iterator;
 import java.util.Set;
 
@@ -9,8 +10,10 @@ import com.es.pom.YopmailPage;
 public class Yopmail {
 	public static String yopmailUrl = "http://www.yopmail.com";
 	private static Logger log = Logger.getLogger(Yopmail.class.getName());
+
 	/**
 	 * This Method will return Otp required for registration.
+	 * 
 	 * @param otp
 	 * @return
 	 */
@@ -20,14 +23,14 @@ public class Yopmail {
 		Iterator<String> itr = windowHandles.iterator();
 		String esWindowHandle = itr.next();
 		String yopmailWindowHandle = itr.next();
-		SeleniumUtils.switchToWindow(yopmailWindowHandle);	
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
 		try {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openOTPmail();
 			otp = YopmailPage.getOTPfromMail();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw e;
-		}finally {
+		} finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
@@ -44,9 +47,9 @@ public class Yopmail {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openOTPmail();
 			YopmailPage.verifyOTPmailBody();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw e;
-		}finally {
+		} finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
@@ -60,11 +63,11 @@ public class Yopmail {
 		SeleniumUtils.switchToWindow(yopmailWindowHandle);
 		try {
 			YopmailPage.navigateToInbox(email);
-			YopmailPage.openRegistrationMail(); 
+			YopmailPage.openRegistrationMail();
 			YopmailPage.verifyRegistrationMailBody();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw e;
-		}finally {
+		} finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
@@ -78,11 +81,11 @@ public class Yopmail {
 		SeleniumUtils.switchToWindow(yopmailWindowHandle);
 		try {
 			YopmailPage.navigateToInbox(email);
-			YopmailPage.openNewAccRegMail(); 
+			YopmailPage.openNewAccRegMail();
 			YopmailPage.verifyNewAccRegMailBody();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw e;
-		}finally {
+		} finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
@@ -96,11 +99,11 @@ public class Yopmail {
 		SeleniumUtils.switchToWindow(yopmailWindowHandle);
 		try {
 			YopmailPage.navigateToInbox(email);
-			YopmailPage.openPassResetMail(); 
+			YopmailPage.openPassResetMail();
 			YopmailPage.verifyPassResetMailBody();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw e;
-		}finally {
+		} finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
@@ -115,14 +118,50 @@ public class Yopmail {
 		SeleniumUtils.switchToWindow(yopmailWindowHandle);
 		try {
 			YopmailPage.navigateToInbox(email);
-			YopmailPage.openPassResetMail(); 
+			YopmailPage.openPassResetMail();
 			passResetLink = YopmailPage.getResetLinkFromMail();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw e;
-		}finally {
+		} finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 		return passResetLink;
+	}
+
+	public static void verifyReqForProfileUpdate(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openProfileReqEmail();
+			YopmailPage.verifyReqForProfileUpdateBody();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+
+	public static void verifyProfileUpdatedMail(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openProfileUpdatedEmail();
+			YopmailPage.verifyProfileUpdatedEmailBody();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
 }
