@@ -83,6 +83,8 @@ public class YopmailPage {
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
+		SeleniumUtils.waitForElementToBeVisible(emailTextBox);
+		emailTextBox.clear();
 		emailTextBox.sendKeys(email);
 		submitEmail.click();
 		refreshInbox.click();
