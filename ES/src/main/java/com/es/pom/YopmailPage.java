@@ -147,7 +147,6 @@ public class YopmailPage {
 	@Step("Verifying Registration mail body..")
 	public static void verifyRegistrationMailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
-
 		String hi = registrationMailBodyLine1.getText();
 		String firstRgistrationLine = registrationMailBodyLine2.getText();
 		String secondRgistrationLine = registrationMailBodyLine3.getText();
