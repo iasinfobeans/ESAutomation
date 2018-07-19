@@ -46,14 +46,10 @@ public class DashboardPage {
 
 	@FindBy(xpath="//*[@title=\"Invoices\"]")
 	static WebElement invoicesOption;
-<<<<<<< HEAD
 	
 	@FindBy(xpath="//a[@title='Applications']")
 	static WebElement applicationPageLink;
 	
-=======
-
->>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
