@@ -31,13 +31,22 @@ public class DashboardPage {
 
 	@FindBy(xpath="//div[@class='enjoyhint_close_btn']")
 	static WebElement popupWindow;
-	
+
 	@FindBy(linkText="Edit Profile")
 	static WebElement editProfileLink;
 
 	@FindBy(xpath="//span[@class='dropdown-menu-user-name']")
 	static WebElement myAccountDropdown;
-	
+
+	@FindBy(xpath="//*[@title=\"Quotations\"]")
+	static WebElement quotationOption;
+
+	@FindBy(xpath="//*[@title=\"Reports\"]")
+	static WebElement reportOption;
+
+	@FindBy(xpath="//*[@title=\"Invoices\"]")
+	static WebElement invoicesOption;
+
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -82,4 +91,16 @@ public class DashboardPage {
 		log.info("Navigated to edit profile page");
 	}
 
+	@Step("User is qualified and all the portal options get available to user.")
+	public static void verifyPortalOptionForQualifiedUser() {
+
+		Assert.assertTrue(quotationOption.isDisplayed());
+		log.info("Verify Quotation Option displayed");
+
+		Assert.assertTrue(reportOption.isDisplayed());
+		log.info("Verify Report Option displayed");
+
+		Assert.assertTrue(invoicesOption.isDisplayed());
+		log.info("Verify Invoices Option displayed");
+	}
 }
