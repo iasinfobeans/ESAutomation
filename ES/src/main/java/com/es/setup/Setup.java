@@ -20,6 +20,7 @@ import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.OverlayPage;
 import com.es.pom.RegisterPage;
+import com.es.pom.ResetPasswordPage;
 import com.es.pom.SignInPage;
 import com.es.pom.UpdateProfilePage;
 import com.es.pom.YopmailPage;
@@ -88,6 +89,7 @@ public class Setup {
 		PageFactory.initElements(driver, ChangePasswordPage.class);
 		PageFactory.initElements(driver, Yopmail.class);
 		PageFactory.initElements(driver, UpdateProfilePage.class);
+		PageFactory.initElements(driver, ResetPasswordPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
