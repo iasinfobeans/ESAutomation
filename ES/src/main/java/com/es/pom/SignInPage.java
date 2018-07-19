@@ -69,12 +69,14 @@ public class SignInPage {
 			customerRadioButton.click();
 			log.info("Selected the user type");
 			loginButton.click();
+			log.info("Logged in as Customer");
 			break;
 		case "Staff":
 			log.info("selecting a staff account");
 			staffRadioButton.click();
 			log.info("Selected the user type");
 			loginButton.click();
+			log.info("Logged in as Staff");
 			break;
 		default: 
 			log.info("Please enter user type");
