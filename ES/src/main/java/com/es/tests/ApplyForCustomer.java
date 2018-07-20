@@ -1,6 +1,7 @@
 package com.es.tests;
 import org.testng.annotations.Test;
 import com.es.pom.ApplicationPage;
+import com.es.pom.ApplicationsListingPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
@@ -31,7 +32,7 @@ public class ApplyForCustomer extends Setup{
 		SignInPage.navigateToPMG();
 		RegisterPage.enterEmailInRegistration();
 		RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
-		ApplicationPage.verifyApplicationPageForPMG();
+		ApplicationsListingPage.verifyApplicationPageForPMG();
 	}
 
 	@Test(groups = { "smoke"})
