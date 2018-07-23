@@ -200,4 +200,22 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
+	
+	public static void verifyPMGApplicationMail(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPMGApplEmail();
+			YopmailPage.verifyPMGApplEmailBody();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
 }

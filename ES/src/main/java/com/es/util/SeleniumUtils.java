@@ -42,17 +42,22 @@ public class SeleniumUtils {
 
 	public static void openUrl(String url) {
 		Setup.driver.navigate().to(url);
-		log.info("Navigated to "+url);
+		log.info("Navigated to " + url);
 	}
 
 	public static void switchToIframeByName(String name) {
 		Setup.driver.switchTo().frame(name);
-		log.info("Switched to "+name+" iframe");
+		log.info("Switched to " + name + " iframe");
 	}
 
 	public static void switchToIframeById(String id) {
 		Setup.driver.switchTo().frame(id);
-		log.info("Switched to "+id+" iframe");
+		log.info("Switched to " + id + " iframe");
+	}
+
+	public static void switchToIframeByIndex(int i) {
+		Setup.driver.switchTo().frame(i);
+		log.info("Switched to " + i + " iframe");
 	}
 
 	public static void switchToDefaultIframe() {
@@ -65,37 +70,38 @@ public class SeleniumUtils {
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
-	
+
 	public static void waitForElementToBeClickable(WebElement element) {
 		log.info("Waiting for element to be visible....");
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
-	
+
 	public static String getCurrentUrl() {
-		String currentUrl =  Setup.driver.getCurrentUrl();	
+		String currentUrl = Setup.driver.getCurrentUrl();
 		return currentUrl;
 	}
-	
+
 	public static Set<String> openUrlInNewWindow(String url) {
 		((JavascriptExecutor) Setup.driver).executeScript("window.open(arguments[0])", url);
 		Set<String> windowHandles = Setup.driver.getWindowHandles();
 		return windowHandles;
 	}
-	
+
 	public static void switchToWindow(String handle) {
 		Setup.driver.switchTo().window(handle);
 	}
-	
+
 	public static void switchToWindowAndClose(String handle) {
 		Setup.driver.switchTo().window(handle).close();
 	}
-	
+
 	public static void scrollToBottom() {
-		((JavascriptExecutor)Setup.driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		((JavascriptExecutor) Setup.driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
 	}
-	
+
 	public static void refreshPage() {
 		Setup.driver.navigate().refresh();
 	}
+
 }
