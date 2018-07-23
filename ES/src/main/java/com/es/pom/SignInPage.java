@@ -33,7 +33,6 @@ public class SignInPage {
 	@FindBy(linkText="Register")
 	static WebElement registrationLink;
 
-
 	@FindBy(linkText="Register")
 	static WebElement newUserLink;
 
