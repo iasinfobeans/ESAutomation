@@ -45,7 +45,7 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
-			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1;
+			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -58,7 +58,7 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
-			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4;
+			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -125,6 +125,18 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//a[@class='igif next']']")
 	static WebElement searchOnNextPage;
+
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Application PMG')]")
+	static WebElement openPMGApplMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Your PMG application has been submitted')]")
+	static WebElement pmgMailLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'The application ID for the same is')]")
+	static WebElement pmgMailLine3;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Once all the signatures have been received,')]")
+	static WebElement pmgMailLine4;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -472,6 +484,52 @@ public class YopmailPage {
 
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified New Account Registration mail body");
+	}
+
+	@Step("Opening PMG Application mail..")
+	public static void openPMGApplEmail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openPMGApplMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openPMGApplMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened PMG Application mail");
+	}
+
+	@Step("Verifying PMG Application mail body..")
+	public static void verifyPMGApplEmailBody() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = pmgMailLine1.getText();
+		String firstRgistrationLine = pmgMailLine2.getText();
+		String secondRgistrationLine = pmgMailLine3.getText();
+		String thirdRgistrationLine = pmgMailLine4.getText();
+		String forthRgistrationLine = pmgMailLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("Your PMG application has been submitted"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("The application ID for the same is"), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(thirdRgistrationLine.contains("Once all the signatures have been received,"), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+		
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified PMG Application mail body");
 	}
 
 }
