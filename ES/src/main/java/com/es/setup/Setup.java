@@ -1,5 +1,4 @@
 package com.es.setup;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -19,7 +18,10 @@ import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.GetAQuotePage;
 import com.es.pom.OverlayPage;
+<<<<<<< HEAD
 import com.es.pom.PMGApplicationFormPage;
+=======
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 import com.es.pom.QuotationPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ResetPasswordPage;
@@ -95,9 +97,13 @@ public class Setup {
 		PageFactory.initElements(driver, ResetPasswordPage.class);
 		PageFactory.initElements(driver, ApplicationPage.class);
 		PageFactory.initElements(driver, QuotationPage.class);
+<<<<<<< HEAD
 		PageFactory.initElements(driver, GetAQuotePage.class);
 		PageFactory.initElements(driver, PMGApplicationFormPage.class);
 		PageFactory.initElements(driver, UserListingsPage.class);
+=======
+		PageFactory.initElements(driver, GetAQuotePage.class);
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 
 	@AfterMethod(alwaysRun = true)

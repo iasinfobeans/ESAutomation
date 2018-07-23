@@ -45,7 +45,7 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
-			profileUpdatedLine1;
+			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -58,7 +58,7 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
-			profileUpdatedLine4;
+			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -104,6 +104,27 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To review and approve/reject the request, please ')]")
 	static WebElement profileUpdatedLine3;
+
+	@FindBy(xpath = "//*[text()='ICC-ES: Account Registration Approved']")
+	static WebElement openNewAccRegMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Profile has been updated by')]")
+	static WebElement newAccRegMailLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To review and approve/reject the request, please ')]")
+	static WebElement newAccRegMailLine3;
+
+	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
+	static WebElement openNewAccApprovedMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Profile has been updated by')]")
+	static WebElement newAccRegApprovedLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To review and approve/reject the request, please ')]")
+	static WebElement newAccRegApprovedLine3;
+
+	@FindBy(xpath = "//a[@class='igif next']']")
+	static WebElement searchOnNextPage;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -348,21 +369,109 @@ public class YopmailPage {
 		String forthRgistrationLine = profileUpdatedLine4.getText();
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
-		
+
 		Assert.assertEquals(firstRgistrationLine.contains("Profile has been updated by"), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(secondRgistrationLine.contains("To review and approve/reject the request, please "), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
 				"Text 'Thank you,' is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified Profile updated mail body");
+	}
+
+	@Step("Opening New Account Registration mail..")
+	public static void openNewAccRegEmail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openNewAccRegMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openNewAccRegMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened New Account Registration mail");
+	}
+
+	@Step("Verifying New Account Registration mail body..")
+	public static void verifyNewAccRegEmailBody() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = newAccRegMailLine1.getText();
+		String firstRgistrationLine = newAccRegMailLine2.getText();
+		String secondRgistrationLine = newAccRegMailLine3.getText();
+		String forthRgistrationLine = newAccRegMailLine4.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(
+				firstRgistrationLine.contains("Your account has been approved by ICC Evaluation Service, LLC"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(
+				secondRgistrationLine.contains("More features have been added to your account on the portal."), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified New Account Registration mail body");
+	}
+
+	@Step("Opening New Account Approved mail..")
+	public static void openNewAccApprovedEmail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openNewAccApprovedMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openNewAccApprovedMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened New Account Approved mail");
+	}
+
+	@Step("Verifying New Account Approved mail body..")
+	public static void verifyNewAccApprovedEmailBody() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = newAccRegApprovedLine1.getText();
+		String firstRgistrationLine = newAccRegApprovedLine2.getText();
+		String secondRgistrationLine = newAccRegApprovedLine3.getText();
+		String forthRgistrationLine = newAccRegApprovedLine4.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(
+				firstRgistrationLine.contains("Your account has been approved by ICC Evaluation Service, LLC"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(
+				secondRgistrationLine.contains("More features have been added to your account on the portal."), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified New Account Registration mail body");
 	}
 
 }
