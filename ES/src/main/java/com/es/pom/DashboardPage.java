@@ -46,22 +46,22 @@ public class DashboardPage {
 
 	@FindBy(xpath="//*[@title=\"Invoices\"]")
 	static WebElement invoicesOption;
-	
+
 	@FindBy(xpath="//a[@title='Applications']")
 	static WebElement applicationPageLink;
-	
+
 	@FindBy(linkText="PMG Listing Program")
 	static WebElement PMGListingProgramLinkApprovedUser;
-	
+
 	@FindBy(xpath="//a[@programslug='pmg']")
 	static WebElement PMGListingLinkForUnapprovedUser;
-	
+
 	@FindBy(linkText="Update Profile Requests")
 	static WebElement updateProfileRequestsLink;
-	
+
 	@FindBy(xpath="//div[@class='ehading']")
 	static WebElement userListingsPageElement;
-	
+
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -124,8 +124,7 @@ public class DashboardPage {
 		applicationPageLink.click();
 		log.info("Navigated to application page");
 	}
-<<<<<<< HEAD
-	
+
 	@Step("redirecting to PMG Application Form...")
 	public static void navigateToPMGApplicationProgramApprovedUser()
 	{
@@ -137,18 +136,13 @@ public class DashboardPage {
 		PMGListingProgramLinkApprovedUser.click();
 		log.info("Navigated to PMG Application Form");
 	}
-	
-
-	}
 
 	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
 	public static void verifyQuotationOption() {
-
 		quotationOption.click();
 		log.info("Verify Quotation Option displayed");
-
 	}
-	
+
 	@Step("redirecting to PMG Application Form...")
 	public static void navigateToPMGApplicationProgramUnapprovedUser()
 	{
@@ -160,7 +154,7 @@ public class DashboardPage {
 		PMGListingLinkForUnapprovedUser.click();
 		log.info("Navigated to PMG Application Form");
 	}
-	
+
 	@Step("redirecting to modified users listing page...")
 	public static void navigateToModifiedUsersList()
 	{
@@ -170,14 +164,5 @@ public class DashboardPage {
 		log.info("Navigated to update profile requests list page");
 		userListingsPageElement.isDisplayed();
 		log.info("Verified navigation");
-=======
-
-	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
-	public static void verifyQuotationOption() {
-
-		quotationOption.click();
-		log.info("Verify Quotation Option displayed");
-
->>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 }
