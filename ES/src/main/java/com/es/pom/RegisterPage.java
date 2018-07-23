@@ -21,10 +21,10 @@ public class RegisterPage {
 	static WebElement submitButton;
 
 	@FindBy(xpath="//a[contains(text(),'Title')]")
-	static WebElement dropDownMenu;
-
+	static WebElement dropDownMenu;    
+                                           
 	@FindBy(linkText="Miss")
-	static WebElement optionTitle;
+	static WebElement optionTitle;           
 
 	@FindBy(id="firstname")
 	static WebElement firstNameTextBox;
@@ -50,12 +50,7 @@ public class RegisterPage {
 	@FindBy(id="proceed")
 	static WebElement proceedButton;
 
-	/**
-	 * @author Shefali.Garg
-	 * @description This method would perform login based on account type
-	 * @return void
-	 * @param driver
-	 */
+	
 	@Step("Enter User Details for Registration step...")
 	public static String  enterEmailInRegistration(){
 		email= CommonUtils.getRandomYopMailId();
