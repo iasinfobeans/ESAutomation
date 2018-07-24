@@ -58,6 +58,24 @@ public class QuotesManagement extends Setup{
 		}
 	}
 
+	// 167-178 CRM based 
+
+	@Test(groups = {"smoke" })
+	@Description("Verify the different statuses of the quotation request.")
+	public void verifyStatusesOfQuotationRequest() throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.viewQuotesOptions();
+			AvaliableQuotesPage.applyForViewQuotesOptions();
+			ApplicationPageForQuotation.verifyApplicationPageForViewQuote();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyStatusesOfQuotationRequest");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
 	@Test(groups = {"smoke" })
 	@Description("Verify the status of the Quotation request once the application is saved.")
 	public void verifyStatusesOfQuotationRequestApplicationSaved() throws InterruptedException {
@@ -75,5 +93,6 @@ public class QuotesManagement extends Setup{
 	}
 }
 
+//181-185 crm
 
 

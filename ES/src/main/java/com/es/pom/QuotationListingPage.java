@@ -13,7 +13,7 @@ public class QuotationListingPage {
 	@FindBy(xpath="//a[contains(text(),'Get a Quote')]")
 	static WebElement getQuoteButton;
 
-	@FindBy(xpath="//a[@class='view-quote-popupbox']")
+	@FindBy(xpath="//strong[text()='Active']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
 	static WebElement viewQuotesBox;
 
 	@Step("Verify that a 'Get a Quote' button is present on the Quotation Listing page for the customer...")
