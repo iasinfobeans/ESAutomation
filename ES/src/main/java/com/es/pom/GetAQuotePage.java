@@ -37,7 +37,7 @@ public class GetAQuotePage {
 	}	
 
 	@Step("Verify that the customer is able to request for a quote")
-	public static void verifyCustomerReportforQuote(String productType,String productDescription) {
+	public static void verifyCustomerRequestforQuote(String productType,String productDescription) {
 		SeleniumUtils.waitForElementToBeVisible(productTypeBox);
 
 		productTypeBox.clear();
