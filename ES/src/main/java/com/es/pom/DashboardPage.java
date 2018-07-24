@@ -46,10 +46,22 @@ public class DashboardPage {
 
 	@FindBy(xpath="//*[@title=\"Invoices\"]")
 	static WebElement invoicesOption;
-	
+
 	@FindBy(xpath="//a[@title='Applications']")
 	static WebElement applicationPageLink;
-	
+
+	@FindBy(linkText="PMG Listing Program")
+	static WebElement PMGListingProgramLinkApprovedUser;
+
+	@FindBy(xpath="//a[@programslug='pmg']")
+	static WebElement PMGListingLinkForUnapprovedUser;
+
+	@FindBy(linkText="Update Profile Requests")
+	static WebElement updateProfileRequestsLink;
+
+	@FindBy(xpath="//div[@class='ehading']")
+	static WebElement userListingsPageElement;
+
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -113,11 +125,51 @@ public class DashboardPage {
 		log.info("Navigated to application page");
 	}
 
+	@Step("redirecting to PMG Application Form...")
+	public static void navigateToPMGApplicationProgramApprovedUser()
+	{
+		log.info("popup arrived");
+		SeleniumUtils.waitForElementToBeVisible(popupWindow);
+		popupWindow.click();
+		log.info("popup closed");
+		SeleniumUtils.refreshPage();   
+		PMGListingProgramLinkApprovedUser.click();
+		log.info("Navigated to PMG Application Form");
+	}
+
 	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
 	public static void verifyQuotationOption() {
-
 		quotationOption.click();
 		log.info("Verify Quotation Option displayed");
+	}
 
+	@Step("redirecting to PMG Application Form...")
+	public static void navigateToPMGApplicationProgramUnapprovedUser()
+	{
+		log.info("popup arrived");
+		SeleniumUtils.waitForElementToBeVisible(popupWindow);
+		popupWindow.click();
+		log.info("popup closed");
+		SeleniumUtils.refreshPage();   
+		PMGListingLinkForUnapprovedUser.click();
+		log.info("Navigated to PMG Application Form");
+	}
+
+	@Step("redirecting to modified users listing page...")
+	public static void navigateToModifiedUsersList()
+	{
+		updateProfileRequestsLink.isDisplayed();
+		log.info("Update request link present");
+		updateProfileRequestsLink.click();
+		log.info("Navigated to update profile requests list page");
+		userListingsPageElement.isDisplayed();
+		log.info("Verified navigation");
+	}
+	
+	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
+	public static void verifyTitleReports(){
+
+		reportOption.click();
+		log.info("Verify Reports Option displayed");
 	}
 }
