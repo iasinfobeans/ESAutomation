@@ -50,7 +50,7 @@ public class QuotesManagement extends Setup{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.customerClickOnGetAQuoteButton();
-			GetAQuotePage.verifyCustomerReportforQuote( Prop.getTestData("productType"), Prop.getTestData ("productDescription"));
+			GetAQuotePage.verifyCustomerRequestforQuote( Prop.getTestData("productType"), Prop.getTestData ("productDescription"));
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyCustomerReportforQuote");
 			e.getStackTrace();
