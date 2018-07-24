@@ -21,13 +21,15 @@ import com.es.pom.ForgotPasswordPage;
 import com.es.pom.GetAQuotePage;
 import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
+<<<<<<< HEAD
 import com.es.pom.PMGApplicationFormPage;
+=======
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
 import com.es.pom.ResetPasswordPage;
 import com.es.pom.SignInPage;
 import com.es.pom.UpdateProfilePage;
-import com.es.pom.UserListingsPage;
 import com.es.pom.YopmailPage;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
@@ -97,13 +99,18 @@ public class Setup {
 		PageFactory.initElements(driver, ResetPasswordPage.class);
 		PageFactory.initElements(driver, ApplicationPage.class);
 		PageFactory.initElements(driver, QuotationListingPage.class);
+<<<<<<< HEAD
+		PageFactory.initElements(driver, GetAQuotePage.class);
+		PageFactory.initElements(driver, ReportsPage.class);
+		PageFactory.initElements(driver, AvaliableQuotesPage.class);
+		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
+=======
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 		PageFactory.initElements(driver, GetAQuotePage.class);
 		PageFactory.initElements(driver, ReportsPage.class);
 		PageFactory.initElements(driver, AvaliableQuotesPage.class);
 		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
 		PageFactory.initElements(driver, GetAQuotePage.class);
-		PageFactory.initElements(driver, PMGApplicationFormPage.class);
-		PageFactory.initElements(driver, UserListingsPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
