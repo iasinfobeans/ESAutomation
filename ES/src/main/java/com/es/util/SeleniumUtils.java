@@ -103,5 +103,13 @@ public class SeleniumUtils {
 	public static void refreshPage() {
 		Setup.driver.navigate().refresh();
 	}
+	
+	public static void acceptPopup() {
+		Setup.driver.switchTo().alert().accept();
+	}
+	
+	public static void dismissPopup() {
+		Setup.driver.switchTo().alert().dismiss();
+	}
 
 }
