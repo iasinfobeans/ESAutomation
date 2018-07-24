@@ -171,7 +171,6 @@ public class DashboardPage {
 		userListingsPageElement.isDisplayed();
 		log.info("Verified navigation");
 	}
-<<<<<<< HEAD
 
 	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
 	public static void verifyTitleReports(){
@@ -186,12 +185,6 @@ public class DashboardPage {
 		log.info("clicked on main menu");
 		logoutLink.click();
 		log.info("clicked on logout Link");
-=======
-	
-	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
-	public static void verifyTitleReports(){
-		reportOption.click();
-		log.info("Verify Reports Option displayed");
->>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
+
 	}
 }
