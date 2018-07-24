@@ -96,6 +96,7 @@ public class Setup {
 		PageFactory.initElements(driver, UpdateProfilePage.class);
 		PageFactory.initElements(driver, ResetPasswordPage.class);
 		PageFactory.initElements(driver, ApplicationPage.class);
+<<<<<<< HEAD
 		PageFactory.initElements(driver, QuotationListingPage.class);
 		PageFactory.initElements(driver, GetAQuotePage.class);
 		PageFactory.initElements(driver, PMGApplicationFormPage.class);
@@ -103,6 +104,12 @@ public class Setup {
 		PageFactory.initElements(driver, ReportsPage.class);
 		PageFactory.initElements(driver, AvaliableQuotesPage.class);
 		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
+=======
+		PageFactory.initElements(driver, QuotationPage.class);
+		PageFactory.initElements(driver, GetAQuotePage.class);
+		PageFactory.initElements(driver, PMGApplicationFormPage.class);
+		PageFactory.initElements(driver, UserListingsPage.class);
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 
 	@AfterMethod(alwaysRun = true)

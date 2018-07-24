@@ -164,6 +164,7 @@ public class DashboardPage {
 		log.info("Navigated to update profile requests list page");
 		userListingsPageElement.isDisplayed();
 		log.info("Verified navigation");
+<<<<<<< HEAD
 	}
 	
 	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
@@ -171,5 +172,7 @@ public class DashboardPage {
 
 		reportOption.click();
 		log.info("Verify Reports Option displayed");
+=======
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 }

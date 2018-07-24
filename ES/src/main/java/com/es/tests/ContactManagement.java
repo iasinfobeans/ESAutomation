@@ -1,17 +1,15 @@
 package com.es.tests;
 
 import java.io.IOException;
-
 import org.testng.annotations.Test;
-
 import com.es.pom.DashboardPage;
 import com.es.pom.SignInPage;
 import com.es.pom.UpdateProfilePage;
+import com.es.pom.UserListingsPage;
 import com.es.setup.Setup;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
 import com.es.util.Yopmail;
-
 import io.qameta.allure.Description;
 
 public class ContactManagement extends Setup {
@@ -72,6 +70,47 @@ public class ContactManagement extends Setup {
 			Yopmail.verifyProfileUpdatedMail(Prop.getTestData("Staffuser"));
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyUpdateAccountEmail_Staff");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = {"smoke"})
+	@Description("Verify that the dashboard widget has a link to navigate to the 'Modified users' titled 'Update Profile Requests'")
+	public static void verifyNavigateToModifiedUsersList() throws IOException, InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.navigateToModifiedUsersList();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyNavigateToModifiedUsersList");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = {"smoke"})
+	@Description("Verify that the dashboard widget has a link to navigate to the 'Modified users' titled 'Update Profile Requests'")
+	public static void verifyViewProfileOption() throws IOException, InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.navigateToModifiedUsersList();
+			UserListingsPage.checkViewProfileOption();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyViewProfileOption");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = {"smoke"})
+	@Description("Verify that the staff has an option to Approve/Decline the profile changes")
+	public static void verifyApproveAndDeclineRequestOption() throws IOException, InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.navigateToModifiedUsersList();
+			UserListingsPage.checkApproveAndDeclineOption();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyApproveAndDeclineRequestOption");
 			e.getStackTrace();
 			throw e;
 		}
