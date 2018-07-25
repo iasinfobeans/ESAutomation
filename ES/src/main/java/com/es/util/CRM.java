@@ -25,15 +25,15 @@ public class CRM {
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
 	
-	public static void qualifyLeadInCRM(String name,String email) {
+	public static void qualifyLeadInCRM(String username , String password , String name,String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(crmPortalUrl);
 		Iterator<String> itr = windowHandles.iterator();
 		String esWindowHandle = itr.next();
 		String crmWindowHandle = itr.next();
 		SeleniumUtils.switchToWindow(crmWindowHandle);
 		try {
-			//CRMPage.login(username,Password);
-			CRMPage.qaulifyLeadInCRMPage(name,email);
+			CRMPage.login(username,password);
+			CRMPage.qaulifyLeadInCRMPage(name,"TestESApp.20180716-160156@yopmail.com");
 		} catch (Exception e) {
 			throw e;
 		} finally {

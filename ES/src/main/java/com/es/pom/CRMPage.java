@@ -38,7 +38,7 @@ public class CRMPage {
 	@FindBy(xpath = "//*[text()='Microsoft Dynamics CRM']")
 	static WebElement moveToSales;
 	
-	@FindBy(xpath = "//*[text()='Microsoft Dynamics CRM']")
+	@FindBy(xpath = "//*[@id='SFA' and @title='Sales']")
 	static WebElement clickOnSales;
 	
 	@FindBy(xpath = "//*[@id='crmGrid_findCriteria']")
@@ -54,32 +54,31 @@ public class CRMPage {
 			passwordTextbox.sendKeys(password);
 			crmLoginButton.click();
 			log.info("Logged in successfully in CRM.");
-		} catch (Exception e) {
-			log.error(e);
 			SeleniumUtils.switchToIframeById("InlineDialog_Iframe");
 			dontShowAgainFirst.click();
 			noThanks.click();
 			SeleniumUtils.switchToDefaultIframe();
+		} catch (Exception e) {
+			log.error(e);
 		}
 	}
 
 	@Step("qualifying lead in CRM..")
 	public static void qaulifyLeadInCRMPage(String name, String email) {
 		try {
-			WebDriver driver = Driver.getDriver();
 			String findLead = "//*[text()='" + email + "']";
-			Actions act = new Actions(driver);
+			Actions act = new Actions(Setup.driver);
 			act.moveToElement(moveToSales).perform();
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 			act.moveToElement(clickOnSales).click().build().perform();
 			SeleniumUtils.switchToIframeByIndex(0);
 
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 			searchFilter.sendKeys(name);
 			searchFilter.sendKeys(Keys.RETURN);
-			Thread.sleep(10000);
-			WebElement ele = driver.findElement(By.xpath(findLead));
-			JavascriptExecutor js = (JavascriptExecutor) driver;
+			Thread.sleep(20000);
+			WebElement ele = Setup.driver.findElement(By.xpath(findLead));
+			JavascriptExecutor js = (JavascriptExecutor) Setup.driver;
 			js.executeScript("arguments[0].click();", ele);
 
 		} catch (Exception e) {
