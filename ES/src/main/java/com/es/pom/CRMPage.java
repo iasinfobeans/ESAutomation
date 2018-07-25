@@ -4,12 +4,10 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import com.es.setup.Driver;
 import com.es.setup.Setup;
 import com.es.util.SeleniumUtils;
 
@@ -47,6 +45,15 @@ public class CRMPage {
 	@FindBy(xpath = "//*[text()=' Qualify ']")
 	static WebElement qualify;
 	
+	@FindBy(xpath = "//*[@id='datetimeFilterPopupcrmGridleadcreatedon']/div/a/div")
+	static WebElement clickOnDropDown;
+	
+	@FindBy(xpath = "//*[text()='Sort Newest to Oldest']")
+	static WebElement selNewToOld;
+	
+	@FindBy(xpath = "//*[@title='Sort by Email']")
+	static WebElement clickForSort;
+	
 	@Step("Signing in CRM..")
 	public static void login(String username, String password) {
 		try {
@@ -72,14 +79,55 @@ public class CRMPage {
 			Thread.sleep(20000);
 			act.moveToElement(clickOnSales).click().build().perform();
 			SeleniumUtils.switchToIframeByIndex(0);
-
-			Thread.sleep(20000);
+			Thread.sleep(10000);
+			//*[@id="grid_refresh"]
+			WebElement refresh = Setup.driver.findElement(By.xpath("//*[@id='grid_refresh']"));
+			JavascriptExecutor jsrefresh = (JavascriptExecutor) Setup.driver;
+			jsrefresh.executeScript("arguments[0].click();", refresh);
+			
+			Thread.sleep(10000);
 			searchFilter.sendKeys(name);
 			searchFilter.sendKeys(Keys.RETURN);
-			Thread.sleep(20000);
+			Thread.sleep(10000);
+			clickForSort.click();
+			clickForSort.click();
+			Thread.sleep(10000);
+			
+			
 			WebElement ele = Setup.driver.findElement(By.xpath(findLead));
 			JavascriptExecutor js = (JavascriptExecutor) Setup.driver;
 			js.executeScript("arguments[0].click();", ele);
+			
+			
+			/*WebElement selectView = Setup.driver.findElement(By.xpath("//*[@id='crmGrid_SavedNewQuerySelector']/span/img"));
+			JavascriptExecutor jsselectView = (JavascriptExecutor) Setup.driver;
+			jsselectView.executeScript("arguments[0].click();", selectView);
+			
+			Setup.driver.findElement(By.xpath("//*[text()='Create Personal View']")).click();
+			
+			for(String winHandle : Setup.driver.getWindowHandles()){
+				Setup.driver.switchTo().window(winHandle);
+			}
+			
+			Thread.sleep(20000);
+			Setup.driver.switchTo().frame(0);
+			Setup.driver.findElement(By.xpath("//*[@class='ms-crm-SelectBox']")).click();
+			Thread.sleep(20000);
+			Setup.driver.findElement(By.xpath("//*[@id='fld']/option[56]")).click();
+			WebElement filterEle = Setup.driver.findElement(By.xpath("//*[@id='filterButtonImage']"));
+			JavascriptExecutor jsfilter = (JavascriptExecutor) Setup.driver;
+			jsfilter.executeScript("arguments[0].click();", filterEle);
+			Thread.sleep(10000);
+			clickOnDropDown.click();
+			Thread.sleep(10000);
+			selNewToOld.click();
+			
+			
+			
+			Thread.sleep(20000);
+			WebElement ele = Setup.driver.findElement(By.xpath(findLead));
+			JavascriptExecutor js = (JavascriptExecutor) Setup.driver;
+			js.executeScript("arguments[0].click();", ele);*/
 
 		} catch (Exception e) {
 			e.printStackTrace();
