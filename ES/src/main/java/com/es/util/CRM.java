@@ -9,6 +9,10 @@ public class CRM {
 
 	public static String crmPortalUrl = "https://esuat.iccsafe.org/";
 	
+	/**
+	 * This method will Login into CRM .
+	 * @param username,Password
+	 */	
 	public static void crmLogin(String username, String Password) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(crmPortalUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -25,14 +29,22 @@ public class CRM {
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
 	
-	public static void qualifyLeadInCRM(String name,String email) {
+	
+	/**
+	 * This method will Qualify Lead in CRM.
+	 * @param username
+	 * @param password
+	 * @param name
+	 * @param email
+	 */
+	public static void qualifyLeadInCRM(String username , String password , String name,String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(crmPortalUrl);
 		Iterator<String> itr = windowHandles.iterator();
 		String esWindowHandle = itr.next();
 		String crmWindowHandle = itr.next();
 		SeleniumUtils.switchToWindow(crmWindowHandle);
 		try {
-			//CRMPage.login(username,Password);
+			CRMPage.login(username,password);
 			CRMPage.qaulifyLeadInCRMPage(name,email);
 		} catch (Exception e) {
 			throw e;
