@@ -91,7 +91,6 @@ public class ApplyForCustomer extends Setup{
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
 			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"),Prop.getTestData("Name"),email);
-			Yopmail.verifyNewAccountApprovedBody(email);
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyESStaffQualifyLeadinCRMForER");
 			e.getStackTrace();
