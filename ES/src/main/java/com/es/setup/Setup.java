@@ -22,7 +22,6 @@ import com.es.pom.ForgotPasswordPage;
 import com.es.pom.GetAQuotePage;
 import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
-import com.es.pom.PMGApplicationFormPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
 import com.es.pom.ResetPasswordPage;
@@ -101,12 +100,8 @@ public class Setup {
 		PageFactory.initElements(driver, ReportsPage.class);
 		PageFactory.initElements(driver, AvaliableQuotesPage.class);
 		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
-<<<<<<< HEAD
 		PageFactory.initElements(driver, GetAQuotePage.class);
 		PageFactory.initElements(driver, CRMPage.class);
-=======
-	
->>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 
 	@AfterMethod(alwaysRun = true)
