@@ -54,6 +54,12 @@ public class CRMPage {
 	@FindBy(xpath = "//*[@title='Sort by Email']")
 	static WebElement clickForSort;
 	
+<<<<<<< HEAD
+=======
+	@FindBy(xpath = "//*[@id='grid_refresh']")
+	static WebElement refreshLeadList;
+	
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	@Step("Signing in CRM..")
 	public static void login(String username, String password) {
 		try {
@@ -76,9 +82,14 @@ public class CRMPage {
 			String findLead = "//*[text()='" + email + "']";
 			Actions act = new Actions(Setup.driver);
 			act.moveToElement(moveToSales).perform();
+<<<<<<< HEAD
 			Thread.sleep(20000);
+=======
+			SeleniumUtils.waitForElementToBeVisible(clickOnSales);
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 			act.moveToElement(clickOnSales).click().build().perform();
 			SeleniumUtils.switchToIframeByIndex(0);
+<<<<<<< HEAD
 			Thread.sleep(10000);
 			//*[@id="grid_refresh"]
 			WebElement refresh = Setup.driver.findElement(By.xpath("//*[@id='grid_refresh']"));
@@ -86,8 +97,16 @@ public class CRMPage {
 			jsrefresh.executeScript("arguments[0].click();", refresh);
 			
 			Thread.sleep(10000);
+=======
+			SeleniumUtils.waitForElementToBeVisible(refreshLeadList);
+			JavascriptExecutor jsrefresh = (JavascriptExecutor) Setup.driver;
+			jsrefresh.executeScript("arguments[0].click();", refreshLeadList);
+			
+			SeleniumUtils.waitForElementToBeVisible(searchFilter);
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 			searchFilter.sendKeys(name);
 			searchFilter.sendKeys(Keys.RETURN);
+<<<<<<< HEAD
 			Thread.sleep(10000);
 			clickForSort.click();
 			clickForSort.click();
@@ -95,6 +114,14 @@ public class CRMPage {
 			
 			
 			WebElement ele = Setup.driver.findElement(By.xpath(findLead));
+=======
+			SeleniumUtils.waitForElementToBeVisible(clickForSort);
+			clickForSort.click();
+			clickForSort.click();			
+			
+			WebElement ele = Setup.driver.findElement(By.xpath(findLead));
+			SeleniumUtils.waitForElementToBeVisible(ele);
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 			JavascriptExecutor js = (JavascriptExecutor) Setup.driver;
 			js.executeScript("arguments[0].click();", ele);
 			

@@ -101,8 +101,12 @@ public class Setup {
 		PageFactory.initElements(driver, ReportsPage.class);
 		PageFactory.initElements(driver, AvaliableQuotesPage.class);
 		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
+<<<<<<< HEAD
 		PageFactory.initElements(driver, GetAQuotePage.class);
 		PageFactory.initElements(driver, CRMPage.class);
+=======
+	
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 
 	@AfterMethod(alwaysRun = true)
