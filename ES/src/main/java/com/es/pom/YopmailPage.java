@@ -1,11 +1,12 @@
 package com.es.pom;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
 import com.es.util.SeleniumUtils;
+
 import io.qameta.allure.Step;
 
 public class YopmailPage {
@@ -45,7 +46,8 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
-			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1;
+			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
+			quatReqRecMailLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -58,7 +60,8 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
-			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5;
+			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
+			quatReqRecMailLine4;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -105,7 +108,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To review and approve/reject the request, please ')]")
 	static WebElement profileUpdatedLine3;
 
-	@FindBy(xpath = "//*[text()='ICC-ES: Account Registration Approved']")
+	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegMail;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Profile has been updated by')]")
@@ -114,7 +117,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To review and approve/reject the request, please ')]")
 	static WebElement newAccRegMailLine3;
 
-	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
+	@FindBy(xpath = "//*[text()='ICC-ES: Account Registration Approved']")
 	static WebElement openNewAccApprovedMail;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Profile has been updated by')]")
@@ -133,10 +136,34 @@ public class YopmailPage {
 	static WebElement pmgMailLine2;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'The application ID for the same is')]")
-	static WebElement pmgMailLine3;
+	static WebElement pmgMailLine3, esrMailLine3;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Once all the signatures have been received,')]")
-	static WebElement pmgMailLine4;
+	static WebElement pmgMailLine4, esrMailLine4;
+
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Application ESR')]")
+	static WebElement openESRApplMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Your ESR application has been submitted successfully')]")
+	static WebElement esrMailLine2;
+
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Quotation Request QOT')]")
+	static WebElement openQuatReqSubMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Your quotation request')]")
+	static WebElement quatMailLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'An ICC-ES staff representative is reviewing your request')]")
+	static WebElement quatMailLine3;
+
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Quotation Raised By')]")
+	static WebElement openQuatReqRecMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'A new quotation request QOT')]")
+	static WebElement quatReqRecMailLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details please ')]")
+	static WebElement quatReqRecMailLine3;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -518,10 +545,140 @@ public class YopmailPage {
 
 		Assert.assertEquals(secondRgistrationLine.contains("The application ID for the same is"), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(thirdRgistrationLine.contains("Once all the signatures have been received,"), true,
 				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified PMG Application mail body");
+	}
+
+	@Step("Opening ESR Application mail..")
+	public static void openESRApplEmail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openESRApplMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openESRApplMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened ESR Application mail");
+	}
+
+	@Step("Verifying ESR Application mail body..")
+	public static void verifyESRApplEmailBody() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = esrMailLine1.getText();
+		String firstRgistrationLine = esrMailLine2.getText();
+		String secondRgistrationLine = esrMailLine3.getText();
+		String thirdRgistrationLine = esrMailLine4.getText();
+		String forthRgistrationLine = esrMailLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("Your ESR application has been submitted successfully"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("The application ID for the same is"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(thirdRgistrationLine.contains("Once all the signatures have been received,"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified ESR Application mail body");
+	}
+
+	@Step("Opening Quatation Request Submit mail..")
+	public static void openQuotationEmail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openQuatReqSubMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openQuatReqSubMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened Quatation Request Submit mail");
+	}
+
+	@Step("Verifying Quatation Request Submit mail body..")
+	public static void verifyQuotationBody() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = quatMailLine1.getText();
+		String firstRgistrationLine = quatMailLine2.getText();
+		String secondRgistrationLine = quatMailLine3.getText();
+		String forthRgistrationLine = quatMailLine4.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("Your quotation request"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("An ICC-ES staff representative is reviewing your request"),
+				true, "Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified Quatation Request Submit mail body");
+	}
+
+	@Step("Opening Quatation Request Received mail..")
+	public static void openQuotationReqRecEmail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openQuatReqRecMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openQuatReqRecMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened Quatation Request Received mail");
+	}
+
+	@Step("Verifying Quatation Request Received mail body..")
+	public static void verifyQuotationReqRecBody() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = quatReqRecMailLine1.getText();
+		String firstRgistrationLine = quatReqRecMailLine2.getText();
+		String secondRgistrationLine = quatReqRecMailLine3.getText();
+		String forthRgistrationLine = quatReqRecMailLine4.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
 		
+		Assert.assertEquals(firstRgistrationLine.contains("A new quotation request QOT"), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(secondRgistrationLine.contains("To view details please "), true,
+				"Text is not contain in email body");
+
 		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
 				"Text 'Thank you,' is not contain in email body");
 		
@@ -529,7 +686,7 @@ public class YopmailPage {
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
 		SeleniumUtils.switchToDefaultIframe();
-		log.info("Verified PMG Application mail body");
+		log.info("Verified Quatation Request Received mail body");
 	}
 
 }
