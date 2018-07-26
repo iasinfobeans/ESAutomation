@@ -54,6 +54,9 @@ public class CRMPage {
 	@FindBy(xpath = "//*[@title='Sort by Email']")
 	static WebElement clickForSort;
 	
+	@FindBy(xpath = "//*[@id='grid_refresh']")
+	static WebElement refreshLeadList;
+	
 	@Step("Signing in CRM..")
 	public static void login(String username, String password) {
 		try {
@@ -76,25 +79,22 @@ public class CRMPage {
 			String findLead = "//*[text()='" + email + "']";
 			Actions act = new Actions(Setup.driver);
 			act.moveToElement(moveToSales).perform();
-			Thread.sleep(20000);
+			SeleniumUtils.waitForElementToBeVisible(clickOnSales);
 			act.moveToElement(clickOnSales).click().build().perform();
 			SeleniumUtils.switchToIframeByIndex(0);
-			Thread.sleep(10000);
-			//*[@id="grid_refresh"]
-			WebElement refresh = Setup.driver.findElement(By.xpath("//*[@id='grid_refresh']"));
+			SeleniumUtils.waitForElementToBeVisible(refreshLeadList);
 			JavascriptExecutor jsrefresh = (JavascriptExecutor) Setup.driver;
-			jsrefresh.executeScript("arguments[0].click();", refresh);
+			jsrefresh.executeScript("arguments[0].click();", refreshLeadList);
 			
-			Thread.sleep(10000);
+			SeleniumUtils.waitForElementToBeVisible(searchFilter);
 			searchFilter.sendKeys(name);
 			searchFilter.sendKeys(Keys.RETURN);
-			Thread.sleep(10000);
+			SeleniumUtils.waitForElementToBeVisible(clickForSort);
 			clickForSort.click();
-			clickForSort.click();
-			Thread.sleep(10000);
-			
+			clickForSort.click();			
 			
 			WebElement ele = Setup.driver.findElement(By.xpath(findLead));
+			SeleniumUtils.waitForElementToBeVisible(ele);
 			JavascriptExecutor js = (JavascriptExecutor) Setup.driver;
 			js.executeScript("arguments[0].click();", ele);
 			
