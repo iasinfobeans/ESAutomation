@@ -87,11 +87,11 @@ public class ApplyForCustomer extends Setup{
 	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
 	public void verifyESStaffQualifyLeadinCRMForER()throws InterruptedException {
 		try{
-			SignInPage.navigateToER();RegisterPage.enterEmailInRegistration();
-			RegisterPage.enterEmailInRegistration();
+			SignInPage.navigateToER();
+			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
-			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"),Prop.getTestData("Name"),"email");
-			Yopmail.verifyNewAccountApprovedBody("email");
+			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"),Prop.getTestData("Name"),email);
+			Yopmail.verifyNewAccountApprovedBody(email);
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyESStaffQualifyLeadinCRMForER");
 			e.getStackTrace();
