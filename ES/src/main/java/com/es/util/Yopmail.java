@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 
 import com.es.pom.YopmailPage;
 
@@ -317,6 +319,28 @@ public class Yopmail {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openQuotationReqRecEmail();
 			YopmailPage.verifyQuotationReqRecBody();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+	
+	/**
+	 * This method will verified approved or decline profile changes mail body in customer inbox.
+	 * @param email -- iasinfobeans@yopmail.com
+	 */
+	public static void verifyApprovedOrDeclineProfileChanges(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openApprovedOrDeclineProfileChangesEmail();
+			YopmailPage.verifyApprovedOrDeclineProfileChangesEmail();
 		} catch (Exception e) {
 			throw e;
 		} finally {

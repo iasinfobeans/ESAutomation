@@ -1,6 +1,7 @@
 package com.es.pom;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -47,7 +48,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
 			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
-			quatReqRecMailLine1;
+			quatReqRecMailLine1, approvedOrDeclineProfileChange1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -61,7 +62,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
 			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
-			quatReqRecMailLine4;
+			quatReqRecMailLine4, approvedOrDeclineProfileChange5;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -164,6 +165,18 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details please ')]")
 	static WebElement quatReqRecMailLine3;
+
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Your Request For Profile Update has been')]")
+	static WebElement openApprovedOrDeclinedProfChangesMail;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Your request to update profile information has been')]")
+	static WebElement approvedOrDeclineProfileChange2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To review your profile, please ')]")
+	static WebElement approvedOrDeclineProfileChange3;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'In case you have any questions, please get in touch with the ')]")
+	static WebElement approvedOrDeclineProfileChange4;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -672,13 +685,60 @@ public class YopmailPage {
 		String forthRgistrationLine = quatReqRecMailLine4.getText();
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
-		
+
 		Assert.assertEquals(firstRgistrationLine.contains("A new quotation request QOT"), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(secondRgistrationLine.contains("To view details please "), true,
 				"Text is not contain in email body");
 
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified Quatation Request Received mail body");
+	}
+
+	@Step("Opening Approved Or Decline Profile Changes mail..")
+	public static void openApprovedOrDeclineProfileChangesEmail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openApprovedOrDeclinedProfChangesMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openApprovedOrDeclinedProfChangesMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened Approved Or Decline Profile Changes mail");
+	}
+
+	@Step("Verifying Approved Or Decline Profile Changes mail body..")
+	public static void verifyApprovedOrDeclineProfileChangesEmail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = approvedOrDeclineProfileChange1.getText();
+		String firstRgistrationLine = approvedOrDeclineProfileChange2.getText();
+		String secondRgistrationLine = approvedOrDeclineProfileChange3.getText();
+		String thirdRgistrationLine = approvedOrDeclineProfileChange4.getText();
+		String forthRgistrationLine = approvedOrDeclineProfileChange5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+		
+		Assert.assertEquals(firstRgistrationLine.contains("Your request to update profile information has been"), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(secondRgistrationLine.contains("To review your profile, please "), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(
+				thirdRgistrationLine.contains("In case you have any questions, please get in touch with the "), true,
+				"Text is not contain in email body");
+		
 		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
 				"Text 'Thank you,' is not contain in email body");
 		
@@ -686,7 +746,7 @@ public class YopmailPage {
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
 		SeleniumUtils.switchToDefaultIframe();
-		log.info("Verified Quatation Request Received mail body");
+		log.info("Verified Approved Or Decline Profile Changes mail body");
 	}
 
 }
