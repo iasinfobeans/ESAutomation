@@ -53,7 +53,7 @@ public class ContactManagement extends Setup {
 			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateRestriction();
 			UpdateProfilePage.updateProfile();
-			Yopmail.verifyReqForProfileUpdate(Prop.getTestData("username"));
+			Yopmail.verifyRequestForProfileUpdate(Prop.getTestData("username"));
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyUpdateAccountEmail_Customer");
 			e.getStackTrace();
