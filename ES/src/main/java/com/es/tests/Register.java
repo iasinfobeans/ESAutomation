@@ -4,6 +4,7 @@ import com.es.pom.DashboardPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
+import com.es.util.CRM;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
 import com.es.util.Yopmail;
@@ -105,9 +106,53 @@ public class Register extends Setup{
 			e.getStackTrace();
 			throw e;
 		}
+	}   // 5,6 and 7 are CRM Based 
+
+	@Test(groups = {"smoke"})
+	@Description("Verify the email notifications sent to the Staff upon successful registration.")
+	public void verifyEmailNotificationsToStaff() throws InterruptedException {
+		try{
+			SignInPage.navigateToNormalRegistration(); 
+			RegisterPage.enterEmailInRegistration();
+			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
+			Yopmail.verifyNewAccountRegistrationEmailBody(Prop.getTestData("EmailId"));
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifynEmailNotificationsToStaff");
+			e.getStackTrace();
+			throw e;
+		}
 	}
 
-	// 5,6 and 7 are CRM Based 
+	@Test(groups = {"smoke"})
+	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
+	public void verifyESStaffQualifyLeadinCRM() throws InterruptedException {
+		try{
+			SignInPage.navigateToNormalRegistration(); 
+			String email = RegisterPage.enterEmailInRegistration();
+			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
+			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"),Prop.getTestData("Name"),email);
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyESStaffQualifyLeadinCRM");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = {"smoke"})
+	@Description("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.")
+	public void verifyConfirmationEmailToCustomerCRMQualifying() throws InterruptedException {
+		try{
+			SignInPage.navigateToNormalRegistration(); 
+			String email = RegisterPage.enterEmailInRegistration();
+			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
+			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"),Prop.getTestData("Name"),email);
+			Yopmail.verifyNewAccountApprovedBody(email);
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyConfirmationEmailToCustomerCRMQualifying");
+			e.getStackTrace();
+			throw e;
+		}
+	}
 
 	@Test(groups = { "smoke" })
 	@Description("Verify that the user is qualified and all the portal options get available to user.")
