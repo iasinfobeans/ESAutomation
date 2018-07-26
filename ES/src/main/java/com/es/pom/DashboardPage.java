@@ -123,6 +123,15 @@ public class DashboardPage {
 		log.info("Navigated to edit profile page");
 	}
 
+	@Step("redirecting to Edit Profile page again...")
+	public static void navigateToEditProfilePageAgain()
+	{
+		SeleniumUtils.scrollToBottom();
+		SeleniumUtils.refreshPage();   
+		editProfileLink.click();
+		log.info("Navigated to edit profile page");
+	}
+	
 	@Step("User is qualified and all the portal options get available to user.")
 	public static void verifyPortalOptionForQualifiedUser() {
 
@@ -199,11 +208,13 @@ public class DashboardPage {
 		log.info("clicked on logout Link");
 
 	}
+	
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport(){
 		reportName.click();
 		log.info("Hover on Report Name");
 	}
+	
 	@Step("Verify the actions available on hovering over any report...")
 	public static void actionsAvailableHoveringOverAnyReport()
 	{
