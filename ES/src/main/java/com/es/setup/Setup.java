@@ -15,12 +15,14 @@ import com.es.pom.ApplicationPage;
 import com.es.pom.ApplicationPageForQuotation;
 import com.es.pom.ApplicationsListingPage;
 import com.es.pom.AvaliableQuotesPage;
+import com.es.pom.CRMPage;
 import com.es.pom.ChangePasswordPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.GetAQuotePage;
 import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
+import com.es.pom.PMGApplicationFormPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
 import com.es.pom.ResetPasswordPage;
@@ -100,6 +102,7 @@ public class Setup {
 		PageFactory.initElements(driver, AvaliableQuotesPage.class);
 		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
 		PageFactory.initElements(driver, GetAQuotePage.class);
+		PageFactory.initElements(driver, CRMPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
