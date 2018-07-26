@@ -1,15 +1,17 @@
 package com.es.tests;
 
 import java.io.IOException;
+
 import org.testng.annotations.Test;
+
 import com.es.pom.DashboardPage;
 import com.es.pom.SignInPage;
 import com.es.pom.UpdateProfilePage;
-import com.es.pom.UserListingsPage;
 import com.es.setup.Setup;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
 import com.es.util.Yopmail;
+
 import io.qameta.allure.Description;
 
 public class ContactManagement extends Setup {
