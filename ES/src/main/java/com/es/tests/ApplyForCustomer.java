@@ -4,6 +4,7 @@ import com.es.pom.ApplicationsListingPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
+import com.es.util.CRM;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
 import com.es.util.Yopmail;
@@ -62,6 +63,37 @@ public class ApplyForCustomer extends Setup{
 			Yopmail.verifyRegistrationEmailBody(email);
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyEmailNotificationsToCustomerForApplyWorkFlow");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke"})
+	@Description("Verify the email notifications sent to the Staff upon successful registration.")
+	public void verifynEmailNotificationsToStaffForER() throws InterruptedException {
+		try{	
+			SignInPage.navigateToER();
+			RegisterPage.enterEmailInRegistration();
+			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
+			Yopmail.verifyNewAccountRegistrationEmailBody(Prop.getTestData("EmailId"));
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifynEmailNotificationsToStaffForER");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = {"smoke"})
+	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
+	public void verifyESStaffQualifyLeadinCRMForER()throws InterruptedException {
+		try{
+			SignInPage.navigateToER();RegisterPage.enterEmailInRegistration();
+			RegisterPage.enterEmailInRegistration();
+			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
+			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"),Prop.getTestData("Name"),"email");
+			Yopmail.verifyNewAccountApprovedBody("email");
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyESStaffQualifyLeadinCRMForER");
 			e.getStackTrace();
 			throw e;
 		}
