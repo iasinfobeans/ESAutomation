@@ -1,8 +1,11 @@
 package com.es.tests;
 import org.testng.annotations.Test;
+
+import com.es.pom.ApplicationPageForQuotation;
+import com.es.pom.AvaliableQuotesPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.GetAQuotePage;
-import com.es.pom.QuotationPage;
+import com.es.pom.QuotationListingPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
 import com.es.util.Prop;
@@ -17,7 +20,7 @@ public class QuotesManagement extends Setup{
 		try{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
-			QuotationPage.verifyGetAQuoteButton();
+			QuotationListingPage.verifyGetAQuoteButton();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyGetAQuoteButtonOnQuotationListingPage");
 			e.getStackTrace();
@@ -31,7 +34,7 @@ public class QuotesManagement extends Setup{
 		try{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
-			QuotationPage.customerClickOnGetAQuoteButton();
+			QuotationListingPage.customerClickOnGetAQuoteButton();
 			GetAQuotePage.verifyGetAQuoteButton();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyCustomerClickOnGetAQuoteButton");
@@ -46,15 +49,14 @@ public class QuotesManagement extends Setup{
 		try{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
-			QuotationPage.customerClickOnGetAQuoteButton();
-			GetAQuotePage.verifyCustomerReportforQuote( Prop.getTestData("productType"), Prop.getTestData ("productDescription"));
+			QuotationListingPage.customerClickOnGetAQuoteButton();
+			GetAQuotePage.verifyCustomerRequestforQuote( Prop.getTestData("productType"), Prop.getTestData ("productDescription"));
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyCustomerReportforQuote");
 			e.getStackTrace();
 			throw e;
 		}
 	}
-<<<<<<< HEAD
 
 	// 167-185 CRM based 
 
@@ -90,10 +92,3 @@ public class QuotesManagement extends Setup{
 		}
 	}
 }
-
-
-
-
-=======
-}
->>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
