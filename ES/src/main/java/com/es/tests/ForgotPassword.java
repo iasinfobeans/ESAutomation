@@ -33,7 +33,7 @@ public class ForgotPassword extends Setup {
 		try{
 			SignInPage.navigateToForgotPassword();
 			ForgotPasswordPage.resetPassword(Prop.getTestData("username"));
-			Yopmail.verifyPassResetEmailBody(Prop.getTestData("username"));
+			Yopmail.verifyPasswordResetEmailBody(Prop.getTestData("username"));
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyForgotPasswordFlow");
 			e.getStackTrace();
