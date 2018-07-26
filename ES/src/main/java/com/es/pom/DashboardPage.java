@@ -62,6 +62,12 @@ public class DashboardPage {
 	@FindBy(xpath="//div[@class='ehading']")
 	static WebElement userListingsPageElement;
 
+	@FindBy(xpath="//div[contains(@class,'hide-user-menu-moblie')]//span[text()='My Account']")
+	static WebElement myAccountText;
+
+	@FindBy(linkText="Logout")
+	static WebElement logoutLink;
+
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -165,10 +171,20 @@ public class DashboardPage {
 		userListingsPageElement.isDisplayed();
 		log.info("Verified navigation");
 	}
-	
+
 	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
 	public static void verifyTitleReports(){
 		reportOption.click();
 		log.info("Verify Reports Option displayed");
+	}
+
+	@Step("Logging out from account...")
+	public static void logout()
+	{
+		myAccountText.click();
+		log.info("clicked on main menu");
+		logoutLink.click();
+		log.info("clicked on logout Link");
+
 	}
 }
