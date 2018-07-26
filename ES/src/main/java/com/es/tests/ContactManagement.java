@@ -185,7 +185,7 @@ public class ContactManagement extends Setup {
 		}
 	}
 
-	@Test(groups = {"nisha"})
+	@Test(groups = {"smoke"})
 	@Description("Verify that the customer can update their information any no. of times.")
 	public static void verifyUpdateProfileMultipleTimes() throws IOException, InterruptedException {
 		try{
@@ -194,7 +194,7 @@ public class ContactManagement extends Setup {
 			UpdateProfilePage.updateProfile();
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("updateProfileUser"),Prop.getTestData("updateProfileUserPassword"), "Customer");
-			DashboardPage.navigateToEditProfilePage();
+			DashboardPage.navigateToEditProfilePageAgain();
 			UpdateProfilePage.updateProfileAgain();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyUpdateProfileMultipleTimes");
@@ -212,7 +212,7 @@ public class ContactManagement extends Setup {
 			UpdateProfilePage.updateProfile();
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("updateProfileUser"),Prop.getTestData("updateProfileUserPassword"), "Customer");
-			DashboardPage.navigateToEditProfilePage();
+			DashboardPage.navigateToEditProfilePageAgain();
 			UpdateProfilePage.updateProfileAgain();
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
