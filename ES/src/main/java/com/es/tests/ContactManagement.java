@@ -121,71 +121,7 @@ public class ContactManagement extends Setup {
 		}
 	}
 
-	//require crm methods now
 	@Test(groups = {"smoke"})
-	@Description("Verify that the staff is able to Approve the user profile changes")
-	public static void verifyApproveUpdationRequest() throws IOException, InterruptedException {
-		try{
-			SignInPage.navigateToNormalRegistration();
-			RegisterPage.enterEmailInRegistration();
-			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
-			DashboardPage.verifyRegistrationProcessAfterEnteringCorrectOTP();
-			CRM.crmLogin(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"));
-			//crm method
-			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
-			DashboardPage.navigateToModifiedUsersList();
-			UserListingsPage.approveProfileUpdateRequest();
-		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyApproveUpdationRequest");
-			e.getStackTrace();
-			throw e;
-		}
-	}
-
-	@Test(groups = {"smoke"})
-	@Description("Verify that the staff is able to Decline the user profile changes")
-	public static void verifyDeclineUpdationRequest() throws IOException, InterruptedException {
-		try{
-			SignInPage.navigateToNormalRegistration();
-			RegisterPage.enterEmailInRegistration();
-			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
-			DashboardPage.verifyRegistrationProcessAfterEnteringCorrectOTP();
-			CRM.crmLogin(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"));
-			//qualify the user created by the above method
-			//logout CRM portal
-			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
-			DashboardPage.navigateToModifiedUsersList();
-			UserListingsPage.declineProfileUpdateRequest();
-		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyDeclineUpdationRequest");
-			e.getStackTrace();
-			throw e;
-		}
-	}
-
-	@Test(groups = {"smoke"})
-	@Description("Verify that the customer is notified once the staff approves/declines the changes")
-	public static void verifyApproveUpdationMail() throws IOException, InterruptedException {
-		try{
-			SignInPage.navigateToNormalRegistration();
-			RegisterPage.enterEmailInRegistration();
-			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
-			DashboardPage.verifyRegistrationProcessAfterEnteringCorrectOTP();
-			//CRM method to login as staff 
-			//qualify the user created by the above method
-			//logout CRM portal
-			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
-			DashboardPage.navigateToModifiedUsersList();
-			UserListingsPage.approveProfileUpdateRequest();
-			Yopmail.verifyPMGApplicationMail(Prop.getTestData("Staffuser"));
-		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyApproveUpdationMail");
-			e.getStackTrace();
-			throw e;
-		}
-	}
-
-	@Test(groups = {"nisha"})
 	@Description("Verify that the customer can update their information any no. of times.")
 	public static void verifyUpdateProfileMultipleTimes() throws IOException, InterruptedException {
 		try{
@@ -194,7 +130,7 @@ public class ContactManagement extends Setup {
 			UpdateProfilePage.updateProfile();
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("updateProfileUser"),Prop.getTestData("updateProfileUserPassword"), "Customer");
-			DashboardPage.navigateToEditProfilePage();
+			DashboardPage.navigateToEditProfilePageAgain();
 			UpdateProfilePage.updateProfileAgain();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyUpdateProfileMultipleTimes");
@@ -203,26 +139,5 @@ public class ContactManagement extends Setup {
 		}
 	}
 
-	@Test(groups = {"nisha"})
-	@Description("Verify that the staff personnel would only see the most recent change requests and can approve/deny the same")
-	public static void verifyRecentChangesVisibility() throws IOException, InterruptedException {
-		try{
-			SignInPage.login(Prop.getTestData("updateProfileUser"),Prop.getTestData("updateProfileUserPassword"), "Customer");
-			DashboardPage.navigateToEditProfilePage();
-			UpdateProfilePage.updateProfile();
-			DashboardPage.logout();
-			SignInPage.login(Prop.getTestData("updateProfileUser"),Prop.getTestData("updateProfileUserPassword"), "Customer");
-			DashboardPage.navigateToEditProfilePage();
-			UpdateProfilePage.updateProfileAgain();
-			DashboardPage.logout();
-			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
-			DashboardPage.navigateToModifiedUsersList();
-			UserListingsPage.checkViewProfileOption();
-			UpdateProfilePage.verifyChanges();
-		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyRecentChangesVisibility");
-			e.getStackTrace();
-			throw e;
-		}
-	}
+	
 }
