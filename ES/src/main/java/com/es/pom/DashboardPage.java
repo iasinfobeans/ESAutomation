@@ -68,6 +68,18 @@ public class DashboardPage {
 	@FindBy(linkText="Logout")
 	static WebElement logoutLink;
 
+	@FindBy(xpath="//span[@class='report-name']")
+	static WebElement reportName;
+
+	@FindBy(xpath="//a[text()='Pay']/@href")
+	static WebElement payForReport;
+
+	@FindBy(xpath="//a[text()='View Projects']/@href")
+	static WebElement viewProjectsForReport;
+
+	@FindBy(xpath="[//a[text()='View Invoices']/@href")
+	static WebElement viewInvoicesForReport;
+
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -187,4 +199,25 @@ public class DashboardPage {
 		log.info("clicked on logout Link");
 
 	}
+	@Step("actions available on hovering over any report...")
+	public static void hoveringOverAnyReport(){
+		reportName.click();
+		log.info("Hover on Report Name");
+	}
+	@Step("Verify the actions available on hovering over any report...")
+	public static void actionsAvailableHoveringOverAnyReport()
+	{
+		SeleniumUtils.waitForElementToBeVisible(payForReport);
+		
+		Assert.assertTrue(payForReport.isDisplayed());
+		log.info("pay For Report is displayed");
+
+		Assert.assertTrue(viewProjectsForReport.isDisplayed());
+		log.info("view Projects For Report is displayed");
+
+		Assert.assertTrue(viewInvoicesForReport.isDisplayed());
+		log.info("view Invoices For Report is displayed");
+
+	}
+
 }
