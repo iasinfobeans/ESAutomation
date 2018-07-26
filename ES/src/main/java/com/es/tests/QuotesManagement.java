@@ -58,7 +58,7 @@ public class QuotesManagement extends Setup{
 		}
 	}
 
-	// 167-178 CRM based 
+	// 167-185 CRM based 
 
 	@Test(groups = {"smoke" })
 	@Description("Verify the different statuses of the quotation request.")
@@ -93,6 +93,6 @@ public class QuotesManagement extends Setup{
 	}
 }
 
-//181-185 crm
+
 
 
