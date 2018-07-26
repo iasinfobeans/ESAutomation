@@ -22,11 +22,13 @@ import com.es.pom.ForgotPasswordPage;
 import com.es.pom.GetAQuotePage;
 import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
+import com.es.pom.PMGApplicationFormPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
 import com.es.pom.ResetPasswordPage;
 import com.es.pom.SignInPage;
 import com.es.pom.UpdateProfilePage;
+import com.es.pom.UserListingsPage;
 import com.es.pom.YopmailPage;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
@@ -102,6 +104,8 @@ public class Setup {
 		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
 		PageFactory.initElements(driver, GetAQuotePage.class);
 		PageFactory.initElements(driver, CRMPage.class);
+		PageFactory.initElements(driver, UserListingsPage.class);
+		PageFactory.initElements(driver, PMGApplicationFormPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
