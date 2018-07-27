@@ -10,6 +10,7 @@ import com.es.pom.SignInPage;
 import com.es.setup.Setup;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
+import com.es.util.Yopmail;
 import io.qameta.allure.Description;
 
 public class QuotesManagement extends Setup{
@@ -57,6 +58,38 @@ public class QuotesManagement extends Setup{
 			throw e;
 		}
 	}
+	
+	@Test(groups = {"smoke" })
+	@Description("Verify that once the quote is submitted, the staff is notified about the same.")
+	public void verifyStaffNotifiedForQuote() throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.customerClickOnGetAQuoteButton();
+			GetAQuotePage.verifyCustomerRequestforQuote( Prop.getTestData("productType"), Prop.getTestData ("productDescription"));
+			Yopmail.verifyQuotationReceivedByStaff( Prop.getTestData("EmailId"));
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyStaffNotifiedforQuote");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+	
+	@Test(groups = {"smoke" })
+	@Description("Verify that once the quote is submitted, the customer is notified about the same.")
+	public void verifyCustomerNotifiedForQuote() throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.customerClickOnGetAQuoteButton();
+			GetAQuotePage.verifyCustomerRequestforQuote( Prop.getTestData("productType"), Prop.getTestData ("productDescription"));
+			Yopmail.verifyQuotationSubmitByCustomer(Prop.getTestData("username"));
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyCustomerReportforQuote");
+			e.getStackTrace();
+			throw e;
+		}
+	}
 
 	// 167-185 CRM based 
 
@@ -77,7 +110,7 @@ public class QuotesManagement extends Setup{
 	}
 
 	@Test(groups = {"smoke" })
-	@Description("Verify the status of the Quotation request once the application is saved.")
+	@Description("Verify that once the quote is submitted, the staff is notified about the same..")
 	public void verifyStatusesOfQuotationRequestApplicationSaved() throws InterruptedException {
 		try{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
@@ -92,3 +125,5 @@ public class QuotesManagement extends Setup{
 		}
 	}
 }
+
+
