@@ -79,6 +79,72 @@ public class DashboardPage {
 
 	@FindBy(xpath="[//a[text()='View Invoices']/@href")
 	static WebElement viewInvoicesForReport;
+	
+	@FindBy(linkText = "View")
+	static WebElement viewLink;
+
+	@FindBy(xpath = "//*[text()='Requested By: ']")
+	static WebElement requestedBy;
+
+	@FindBy(xpath = "//*[text()='Company Name: ']")
+	static WebElement companyName;
+
+	@FindBy(xpath = "//*[text()='Email: ']")
+	static WebElement email;
+
+	@FindBy(xpath = "//*[text()='Phone: ']")
+	static WebElement phone;
+
+	@FindBy(xpath = "//*[text()='Contact Preference: ']")
+	static WebElement contactReference;
+
+	@FindBy(xpath = "//*[text()='Address: ']")
+	static WebElement address;
+
+	@FindBy(xpath = "//*[text()='City: ']")
+	static WebElement city;
+
+	@FindBy(xpath = "//*[text()='State: ']")
+	static WebElement state;
+
+	@FindBy(xpath = "//*[text()='Country: ']")
+	static WebElement country;
+
+	@FindBy(xpath = "//*[text()='Product Type: ']")
+	static WebElement productType;
+
+	@FindBy(xpath = "//*[text()='Product Description: ']")
+	static WebElement ProductDescription;
+
+	@FindBy(xpath = "//*[@value='Close']")
+	static WebElement close;
+
+	@FindBy(xpath = "//*[contains(text(),'Quotation Request :')]")
+	static WebElement quotationRequest;
+	
+	@FindBy(linkText = "Upload")
+	static WebElement upload;
+	
+	@FindBy(xpath = "//*[contains(text(),'Send Quotation for ')]")
+	static WebElement sendQuotation;	 
+	
+	@FindBy(xpath = "//*[@id='program_type']")
+	static WebElement dropDownInUploadQuotation;
+	
+	@FindBy(xpath = "//*[@id='quotes-document']")
+	static WebElement uploadButton;
+	
+	@FindBy(xpath = "//*[@id='amountDiv']")
+	static WebElement amountField;
+	
+	@FindBy(xpath = "//*[@id='expireDateDiv']")
+	static WebElement expiredate;
+	
+	@FindBy(xpath = "//*[@id='upload_quote']")
+	static WebElement send;
+	
+	@FindBy(xpath = "//*[@name='cancel_quote']")
+	static WebElement cancelQuote;
 
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
@@ -229,6 +295,39 @@ public class DashboardPage {
 		Assert.assertTrue(viewInvoicesForReport.isDisplayed());
 		log.info("view Invoices For Report is displayed");
 
+	}
+	
+	@Step("Click on View Button")
+	public static void verifyViewOption() {
+		Assert.assertTrue(viewLink.isDisplayed());
+		viewLink.click();
+		log.info("Verify View option displayed");
+	}
+
+	@Step("Observing Pop up Window")
+	public static void verifyPopUpWindowForView() {
+		Assert.assertTrue(quotationRequest.isDisplayed());
+		Assert.assertTrue(requestedBy.isDisplayed());
+		Assert.assertTrue(companyName.isDisplayed());
+		Assert.assertTrue(email.isDisplayed());
+		Assert.assertTrue(phone.isDisplayed());
+		Assert.assertTrue(contactReference.isDisplayed());
+		Assert.assertTrue(address.isDisplayed());
+		Assert.assertTrue(city.isDisplayed());
+		Assert.assertTrue(state.isDisplayed());
+		Assert.assertTrue(country.isDisplayed());
+		Assert.assertTrue(productType.isDisplayed());
+		Assert.assertTrue(ProductDescription.isDisplayed());
+		Assert.assertTrue(close.isDisplayed());
+
+		log.info("Verified Pop up Window and parameters on it for view option.");
+
+	}
+
+	public static void verifyUploadOption() {
+		Assert.assertTrue(upload.isDisplayed());
+		upload.click();
+		log.info("Verify Upload option displayed");
 	}
 
 }

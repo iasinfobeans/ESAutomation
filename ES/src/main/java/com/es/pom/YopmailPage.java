@@ -180,6 +180,7 @@ public class YopmailPage {
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
+		emailTextBox.clear();
 		emailTextBox.sendKeys(email);
 		submitEmail.click();
 		refreshInbox.click();
