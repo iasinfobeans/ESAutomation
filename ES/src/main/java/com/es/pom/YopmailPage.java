@@ -48,7 +48,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
 			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
-			quatReqRecMailLine1, approvedOrDeclineProfileChange1;
+			quatReqRecMailLine1, approvedOrDeclineProfileChange1,newQuotationAvailableMail1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -62,7 +62,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
 			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
-			quatReqRecMailLine4, approvedOrDeclineProfileChange5;
+			quatReqRecMailLine4, approvedOrDeclineProfileChange5,newQuotationAvailableMail5;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -177,6 +177,18 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'In case you have any questions, please get in touch with the ')]")
 	static WebElement approvedOrDeclineProfileChange4;
+	
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: New Quotation Available for Quotation Request QOT')]")
+	static WebElement openNewQuotationAvailableMail;
+	
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'As requested by you, please find enclosed')]")
+	static WebElement newQuotationAvailableMail2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the quotation and apply for report, please ')]")
+	static WebElement newQuotationAvailableMail3;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),' This Quote will expire on')]")
+	static WebElement newQuotationAvailableMail4;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -748,6 +760,53 @@ public class YopmailPage {
 
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified Approved Or Decline Profile Changes mail body");
+	}
+
+	@Step("Opening New Quotation Available in mail for customer..")
+	public static void openNewQuotationAvailableMail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openNewQuotationAvailableMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openNewQuotationAvailableMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened New Quotation Available in mail for customer");
+	}
+
+	@Step("Verifying New Quotation Available mail body..")
+	public static void verifyNewQuotationAvailableMail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = newQuotationAvailableMail1.getText();
+		String firstRgistrationLine = newQuotationAvailableMail2.getText();
+		String secondRgistrationLine = newQuotationAvailableMail3.getText();
+		String thirdRgistrationLine = newQuotationAvailableMail4.getText();
+		String forthRgistrationLine = newQuotationAvailableMail5.getText();
+
+		Assert.assertEquals(hi.contains("Hello"), true, "Hi is not contain in email body");
+		
+		Assert.assertEquals(firstRgistrationLine.contains("As requested by you, please find enclosed"), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(secondRgistrationLine.contains("To view the quotation and apply for report, please "), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(
+				thirdRgistrationLine.contains(" This Quote will expire on"), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+		
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified New Quotation Available Mail body");
 	}
 
 }
