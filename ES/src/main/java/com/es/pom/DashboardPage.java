@@ -31,13 +31,55 @@ public class DashboardPage {
 
 	@FindBy(xpath="//div[@class='enjoyhint_close_btn']")
 	static WebElement popupWindow;
-	
+
 	@FindBy(linkText="Edit Profile")
 	static WebElement editProfileLink;
 
 	@FindBy(xpath="//span[@class='dropdown-menu-user-name']")
 	static WebElement myAccountDropdown;
-	
+
+	@FindBy(xpath="//*[@title=\"Quotations\"]")
+	static WebElement quotationOption;
+
+	@FindBy(xpath="//*[@title=\"Reports\"]")
+	static WebElement reportOption;
+
+	@FindBy(xpath="//*[@title=\"Invoices\"]")
+	static WebElement invoicesOption;
+
+	@FindBy(xpath="//a[@title='Applications']")
+	static WebElement applicationPageLink;
+
+	@FindBy(linkText="PMG Listing Program")
+	static WebElement PMGListingProgramLinkApprovedUser;
+
+	@FindBy(xpath="//a[@programslug='pmg']")
+	static WebElement PMGListingLinkForUnapprovedUser;
+
+	@FindBy(linkText="Update Profile Requests")
+	static WebElement updateProfileRequestsLink;
+
+	@FindBy(xpath="//div[@class='ehading']")
+	static WebElement userListingsPageElement;
+
+	@FindBy(xpath="//div[contains(@class,'hide-user-menu-moblie')]//span[text()='My Account']")
+	static WebElement myAccountText;
+
+	@FindBy(linkText="Logout")
+	static WebElement logoutLink;
+
+	@FindBy(xpath="//span[@class='report-name']")
+	static WebElement reportName;
+
+	@FindBy(xpath="//a[text()='Pay']/@href")
+	static WebElement payForReport;
+
+	@FindBy(xpath="//a[text()='View Projects']/@href")
+	static WebElement viewProjectsForReport;
+
+	@FindBy(xpath="[//a[text()='View Invoices']/@href")
+	static WebElement viewInvoicesForReport;
+
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -71,7 +113,6 @@ public class DashboardPage {
 	@Step("redirecting to Edit Profile page...")
 	public static void navigateToEditProfilePage()
 	{
-		log.info("Nvaigated to Edit profile page");
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
@@ -80,6 +121,114 @@ public class DashboardPage {
 		SeleniumUtils.refreshPage();   
 		editProfileLink.click();
 		log.info("Navigated to edit profile page");
+	}
+
+	@Step("redirecting to Edit Profile page again...")
+	public static void navigateToEditProfilePageAgain()
+	{
+		SeleniumUtils.scrollToBottom();
+		SeleniumUtils.refreshPage();   
+		editProfileLink.click();
+		log.info("Navigated to edit profile page");
+	}
+	
+	@Step("User is qualified and all the portal options get available to user.")
+	public static void verifyPortalOptionForQualifiedUser() {
+
+		Assert.assertTrue(quotationOption.isDisplayed());
+		log.info("Verify Quotation Option displayed");
+
+		Assert.assertTrue(reportOption.isDisplayed());
+		log.info("Verify Report Option displayed");
+
+		Assert.assertTrue(invoicesOption.isDisplayed());
+		log.info("Verify Invoices Option displayed");
+	}
+
+	@Step("redirecting to Application page...")
+	public static void navigateToApplicationPage()
+	{
+		applicationPageLink.click();
+		log.info("Navigated to application page");
+	}
+
+	@Step("redirecting to PMG Application Form...")
+	public static void navigateToPMGApplicationProgramApprovedUser()
+	{
+		log.info("popup arrived");
+		SeleniumUtils.waitForElementToBeVisible(popupWindow);
+		popupWindow.click();
+		log.info("popup closed");
+		SeleniumUtils.refreshPage();   
+		PMGListingProgramLinkApprovedUser.click();
+		log.info("Navigated to PMG Application Form");
+	}
+
+	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
+	public static void verifyQuotationOption() {
+		quotationOption.click();
+		log.info("Verify Quotation Option displayed");
+	}
+
+	@Step("redirecting to PMG Application Form...")
+	public static void navigateToPMGApplicationProgramUnapprovedUser()
+	{
+		log.info("popup arrived");
+		SeleniumUtils.waitForElementToBeVisible(popupWindow);
+		popupWindow.click();
+		log.info("popup closed");
+		SeleniumUtils.refreshPage();   
+		PMGListingLinkForUnapprovedUser.click();
+		log.info("Navigated to PMG Application Form");
+	}
+
+	@Step("redirecting to modified users listing page...")
+	public static void navigateToModifiedUsersList()
+	{
+		updateProfileRequestsLink.isDisplayed();
+		log.info("Update request link present");
+		updateProfileRequestsLink.click();
+		log.info("Navigated to update profile requests list page");
+		userListingsPageElement.isDisplayed();
+		log.info("Verified navigation");
+	}
+
+	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
+	public static void verifyTitleReports(){
+		reportOption.click();
+		log.info("Verify Reports Option displayed");
+	}
+
+	@Step("Logging out from account...")
+	public static void logout()
+	{
+		myAccountText.click();
+		log.info("clicked on main menu");
+		logoutLink.click();
+		log.info("clicked on logout Link");
+
+	}
+	
+	@Step("actions available on hovering over any report...")
+	public static void hoveringOverAnyReport(){
+		reportName.click();
+		log.info("Hover on Report Name");
+	}
+	
+	@Step("Verify the actions available on hovering over any report...")
+	public static void actionsAvailableHoveringOverAnyReport()
+	{
+		SeleniumUtils.waitForElementToBeVisible(payForReport);
+		
+		Assert.assertTrue(payForReport.isDisplayed());
+		log.info("pay For Report is displayed");
+
+		Assert.assertTrue(viewProjectsForReport.isDisplayed());
+		log.info("view Projects For Report is displayed");
+
+		Assert.assertTrue(viewInvoicesForReport.isDisplayed());
+		log.info("view Invoices For Report is displayed");
+
 	}
 
 }

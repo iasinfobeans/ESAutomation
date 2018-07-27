@@ -4,9 +4,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-
 import com.es.util.Prop;
-
 import io.qameta.allure.Step;
 
 public class UpdateProfilePage {
@@ -73,6 +71,30 @@ public class UpdateProfilePage {
 		log.info( successfullUpdateMessage.getText());
 	}
 
+	public static void updateProfileAgain()
+	{
+		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle2"));
+		log.info("job tile entered");
+		mailingAddressTextbox.sendKeys(Prop.getTestData("MailingAddress2"));
+		log.info("Mailing Address entered");
+		textboxToEnterCity.sendKeys(Prop.getTestData("city2"));
+		log.info("city entered");
+		stateTextbox.click();
+		log.info("selecting state");
+		stateSelection.click();
+		log.info("state selected");
+		zipcodeTextbox.sendKeys("452001");
+		log.info("Zipcode entered");
+		countryTextbox.click();
+		log.info("selecting country");
+		countrySelection.click();
+		log.info("country selected");
+		updateProfileButton.click();
+		log.info("updated profile");
+		successfullUpdateMessage.isDisplayed();
+		log.info( successfullUpdateMessage.getText());
+	}
+	
 	@Step("Restrictions on updating profile verification steps...")
 	public static void updateRestriction()
 	{
@@ -84,4 +106,21 @@ public class UpdateProfilePage {
 		log.info("Verified that company text box is non editable");
 	}
 
+	@Step("Verify if only the recent changes are visible...")
+	public static void verifyChanges()
+	{
+		if(Prop.getTestData("jobtitle2")==jobtitleTextbox.getText())
+		{
+			log.info("Recent Changes is only getting displayed in job title");
+		}
+		if(Prop.getTestData("MailingAddress2")==mailingAddressTextbox.getText())
+		{
+			log.info("Recent Changes is only getting displayed in mailing address");
+		}
+		if(Prop.getTestData("city2")==textboxToEnterCity.getText())
+		{
+			log.info("Recent Changes is only getting displayed in city textbox");
+		}
+	}
+	
 }

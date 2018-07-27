@@ -1,11 +1,9 @@
 package com.es.setup;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -13,16 +11,24 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
 import com.es.pom.ApplicationPage;
+import com.es.pom.ApplicationPageForQuotation;
+import com.es.pom.ApplicationsListingPage;
+import com.es.pom.AvaliableQuotesPage;
+import com.es.pom.CRMPage;
 import com.es.pom.ChangePasswordPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
+import com.es.pom.GetAQuotePage;
 import com.es.pom.OverlayPage;
+import com.es.pom.QuotationListingPage;
+import com.es.pom.PMGApplicationFormPage;
 import com.es.pom.RegisterPage;
+import com.es.pom.ReportsPage;
 import com.es.pom.ResetPasswordPage;
 import com.es.pom.SignInPage;
 import com.es.pom.UpdateProfilePage;
+import com.es.pom.UserListingsPage;
 import com.es.pom.YopmailPage;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
@@ -83,13 +89,23 @@ public class Setup {
 		PageFactory.initElements(driver, DashboardPage.class);
 		PageFactory.initElements(driver, ForgotPasswordPage.class);
 		PageFactory.initElements(driver, YopmailPage.class);
-		PageFactory.initElements(driver, ApplicationPage.class);
+		PageFactory.initElements(driver, ApplicationsListingPage.class);
 		PageFactory.initElements(driver, RegisterPage.class);
 		PageFactory.initElements(driver, OverlayPage.class);
 		PageFactory.initElements(driver, ChangePasswordPage.class);
 		PageFactory.initElements(driver, Yopmail.class);
 		PageFactory.initElements(driver, UpdateProfilePage.class);
 		PageFactory.initElements(driver, ResetPasswordPage.class);
+		PageFactory.initElements(driver, ApplicationPage.class);
+		PageFactory.initElements(driver, QuotationListingPage.class);
+		PageFactory.initElements(driver, GetAQuotePage.class);
+		PageFactory.initElements(driver, ReportsPage.class);
+		PageFactory.initElements(driver, AvaliableQuotesPage.class);
+		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
+		PageFactory.initElements(driver, GetAQuotePage.class);
+		PageFactory.initElements(driver, CRMPage.class);
+		PageFactory.initElements(driver, UserListingsPage.class);
+		PageFactory.initElements(driver, PMGApplicationFormPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
