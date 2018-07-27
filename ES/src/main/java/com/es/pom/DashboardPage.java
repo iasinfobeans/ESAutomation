@@ -77,15 +77,17 @@ public class DashboardPage {
 	@FindBy(xpath="//span[@class='report-name']")
 	static WebElement reportName;
 
-	@FindBy(xpath="//a[text()='Pay']/@href")
-	static WebElement payForReport;
+	@FindBy(xpath = "//div[@class='report_renewal_btn']//a[text()='Pay']")
+	static WebElement payForReportButton;
 
-	@FindBy(xpath="//a[text()='View Projects']/@href")
-	static WebElement viewProjectsForReport;
+	@FindBy(xpath="//a[contains(text(),'View Projects')]")
+	static WebElement viewProjectsForReportButton;
 
-	@FindBy(xpath="[//a[text()='View Invoices']/@href")
-	static WebElement viewInvoicesForReport;
-	
+	@FindBy(xpath="//a[contains(text(),'View Invoices')]")
+	static WebElement viewInvoicesForReportButton;
+
+
+
 	@FindBy(linkText = "View")
 	static WebElement viewLink;
 
@@ -295,24 +297,47 @@ public class DashboardPage {
 	
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport(){
-		reportName.click();
+		SeleniumUtils.mouseHover(reportName);
 		log.info("Hover on Report Name");
 	}
 	
 	@Step("Verify the actions available on hovering over any report...")
 	public static void actionsAvailableHoveringOverAnyReport()
 	{
-		SeleniumUtils.waitForElementToBeVisible(payForReport);
-		
-		Assert.assertTrue(payForReport.isDisplayed());
-		log.info("pay For Report is displayed");
+		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
 
-		Assert.assertTrue(viewProjectsForReport.isDisplayed());
-		log.info("view Projects For Report is displayed");
+		Assert.assertTrue(payForReportButton.isDisplayed());
+		log.info("pay For Report Button is displayed");
 
-		Assert.assertTrue(viewInvoicesForReport.isDisplayed());
-		log.info("view Invoices For Report is displayed");
+		Assert.assertTrue(viewProjectsForReportButton.isDisplayed());
+		log.info("view Projects For Report Button is displayed");
 
+		Assert.assertTrue(viewInvoicesForReportButton.isDisplayed());
+		log.info("view Invoices For Report  Button is displayed");
+
+	}
+	@Step("action on clicking the 'Pay' button...")
+	public static void clickActionOnPayButton()
+	{
+		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
+		payForReportButton.click();
+		log.info("pay For Report Button is clicked");
+	}
+
+	@Step("action on clicking the view Projects button...")
+	public static void clickActionOnViewProjectsButton()
+	{
+		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
+		viewProjectsForReportButton.click();
+		log.info("view Projects button is clicked");
+	}
+
+	@Step("action on clicking the view Projects button...")
+	public static void clickActionOnViewInvoicesButton()
+	{
+		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
+		viewInvoicesForReportButton.click();
+		log.info("view Invoices button is clicked");
 	}
 	
 	@Step("Click on View Button")
