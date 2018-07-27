@@ -122,7 +122,8 @@ public class SeleniumUtils {
 	public static void mouseHover(WebElement webElement) {
 		SeleniumUtils.waitForElementToBeVisible(webElement);
 		Actions actionBuilder = new Actions(Setup.driver);
-		actionBuilder.moveToElement(webElement).build().perform();	
+		actionBuilder.moveToElement(webElement).build().perform();
+		log.info("Mouse hovered on target element");
 	}
 
 }
