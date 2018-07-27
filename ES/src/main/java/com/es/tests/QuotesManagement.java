@@ -46,14 +46,14 @@ public class QuotesManagement extends Setup{
 
 	@Test(groups = {"smoke" })
 	@Description("Verify that the customer is able to request for a quote.")
-	public void verifyCustomerReportforQuote() throws InterruptedException {
+	public void verifyCustomerRequestforQuote() throws InterruptedException {
 		try{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.customerClickOnGetAQuoteButton();
 			GetAQuotePage.verifyCustomerRequestforQuote( Prop.getTestData("productType"), Prop.getTestData ("productDescription"));
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyCustomerReportforQuote");
+			SeleniumUtils.captureScreenshot("verifyCustomerRequestforQuote");
 			e.getStackTrace();
 			throw e;
 		}
@@ -124,6 +124,49 @@ public class QuotesManagement extends Setup{
 			throw e;
 		}
 	}
+	
+	@Test(groups = {"smoke" })
+	@Description("Verify that the staff is able to verify number of quotes in View Quotes column .")
+	public void verifyNumberOfQuote() throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyQuotationOption();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyNumberOfQuote");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+	
+	@Test(groups = {"smoke" })
+	@Description("Verify that the staff is able to click on the view button.")
+	public void verifyViewButton() throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyQuotationOption();
+			DashboardPage.verifyViewOption();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyViewButton");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+	
+	@Test(groups = {"smoke" })
+	@Description("Verify that the staff is able to view pop up window.")
+	public void verifyViewButtonWithPopPupWindow() throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyQuotationOption();
+			DashboardPage.verifyViewOption();
+			DashboardPage.verifyPopUpWindowForView();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyViewButtonWithPopPupWindow");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
 }
 
 
