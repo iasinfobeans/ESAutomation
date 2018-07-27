@@ -45,7 +45,7 @@ public class CRM {
 		SeleniumUtils.switchToWindow(crmWindowHandle);
 		try {
 			CRMPage.login(username,password);
-			CRMPage.qaulifyLeadInCRMPage(name,email);
+			CRMPage.qualifyLeadInCRMPage(name,email);
 		} catch (Exception e) {
 			throw e;
 		} finally {
