@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -110,6 +111,18 @@ public class SeleniumUtils {
 	
 	public static void dismissPopup() {
 		Setup.driver.switchTo().alert().dismiss();
+	}
+	
+	public static void executeJavaScript(String javaScript, WebElement webElement) {
+		SeleniumUtils.waitForElementToBeVisible(webElement);
+		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Setup.driver;
+		javascriptExecutor.executeScript(javaScript, webElement);
+	}
+	
+	public static void mouseHover(WebElement webElement) {
+		SeleniumUtils.waitForElementToBeVisible(webElement);
+		Actions actionBuilder = new Actions(Setup.driver);
+		actionBuilder.moveToElement(webElement).build().perform();	
 	}
 
 }
