@@ -20,9 +20,11 @@ import com.es.pom.ChangePasswordPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.GetAQuotePage;
+import com.es.pom.InvoiceListingPage;
 import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
 import com.es.pom.PMGApplicationFormPage;
+import com.es.pom.PaymentPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
 import com.es.pom.ResetPasswordPage;
@@ -33,6 +35,7 @@ import com.es.pom.YopmailPage;
 import com.es.util.CommonUtils;
 import com.es.util.Prop;
 import com.es.util.Yopmail;
+import com.es.pom.ProjectListingPage;
 
 public class Setup {
 	public static WebDriver driver;
@@ -106,6 +109,9 @@ public class Setup {
 		PageFactory.initElements(driver, CRMPage.class);
 		PageFactory.initElements(driver, UserListingsPage.class);
 		PageFactory.initElements(driver, PMGApplicationFormPage.class);
+		PageFactory.initElements(driver, PaymentPage.class);
+		PageFactory.initElements(driver, ProjectListingPage.class);
+		PageFactory.initElements(driver, InvoiceListingPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
