@@ -126,6 +126,7 @@ public class QuotesManagement extends Setup {
 					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
 					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
 					Prop.getTestData("subjectOfReport"));
+			ApplicationPageForQuotation.verifySuccessfulSubmissionOfreport();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyStatusesOfQuotationRequestApplicationSaved");
 			e.getStackTrace();
@@ -223,7 +224,7 @@ public class QuotesManagement extends Setup {
 			throw e;
 		}
 	}
-	
+
 	@Test(groups = { "smoke" })
 	@Description("Verify the email triggered to the customer once the staff creates a quote.")
 	public void verifyCustomerMailAfterGivenInputInUploadOption() throws InterruptedException {
