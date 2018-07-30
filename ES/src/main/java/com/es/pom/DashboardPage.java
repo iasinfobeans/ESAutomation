@@ -1,5 +1,11 @@
 package com.es.pom;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -71,15 +77,17 @@ public class DashboardPage {
 	@FindBy(xpath="//span[@class='report-name']")
 	static WebElement reportName;
 
-	@FindBy(xpath="//a[text()='Pay']/@href")
-	static WebElement payForReport;
+	@FindBy(xpath = "//div[@class='report_renewal_btn']//a[text()='Pay']")
+	static WebElement payForReportButton;
 
-	@FindBy(xpath="//a[text()='View Projects']/@href")
-	static WebElement viewProjectsForReport;
+	@FindBy(xpath="//a[contains(text(),'View Projects')]")
+	static WebElement viewProjectsForReportButton;
 
-	@FindBy(xpath="[//a[text()='View Invoices']/@href")
-	static WebElement viewInvoicesForReport;
-	
+	@FindBy(xpath="//a[contains(text(),'View Invoices')]")
+	static WebElement viewInvoicesForReportButton;
+
+
+
 	@FindBy(linkText = "View")
 	static WebElement viewLink;
 
@@ -128,7 +136,7 @@ public class DashboardPage {
 	@FindBy(xpath = "//*[contains(text(),'Send Quotation for ')]")
 	static WebElement sendQuotation;	 
 	
-	@FindBy(xpath = "//*[@id='program_type']")
+	@FindBy(xpath = "//*[@name='program_type']/following-sibling::div")
 	static WebElement dropDownInUploadQuotation;
 	
 	@FindBy(xpath = "//*[@id='quotes-document']")
@@ -136,6 +144,9 @@ public class DashboardPage {
 	
 	@FindBy(xpath = "//*[@id='amountDiv']")
 	static WebElement amountField;
+	
+	@FindBy(xpath = "//*[@id='quote_amount']")
+	static WebElement amountTextBox;
 	
 	@FindBy(xpath = "//*[@id='expireDateDiv']")
 	static WebElement expiredate;
@@ -145,6 +156,15 @@ public class DashboardPage {
 	
 	@FindBy(xpath = "//*[@name='cancel_quote']")
 	static WebElement cancelQuote;
+	
+	@FindBy(linkText = "ES Core")
+	static WebElement esCore;
+	
+	@FindBy(linkText = "Plumbing Mechanical and Gas")
+	static WebElement plumbingMechanicAndGas;
+	
+	@FindBy(linkText = "Evaluation Service Listing")
+	static WebElement evaluationServiceListing;
 
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
@@ -277,24 +297,47 @@ public class DashboardPage {
 	
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport(){
-		reportName.click();
+		SeleniumUtils.mouseHover(reportName);
 		log.info("Hover on Report Name");
 	}
 	
 	@Step("Verify the actions available on hovering over any report...")
 	public static void actionsAvailableHoveringOverAnyReport()
 	{
-		SeleniumUtils.waitForElementToBeVisible(payForReport);
-		
-		Assert.assertTrue(payForReport.isDisplayed());
-		log.info("pay For Report is displayed");
+		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
 
-		Assert.assertTrue(viewProjectsForReport.isDisplayed());
-		log.info("view Projects For Report is displayed");
+		Assert.assertTrue(payForReportButton.isDisplayed());
+		log.info("pay For Report Button is displayed");
 
-		Assert.assertTrue(viewInvoicesForReport.isDisplayed());
-		log.info("view Invoices For Report is displayed");
+		Assert.assertTrue(viewProjectsForReportButton.isDisplayed());
+		log.info("view Projects For Report Button is displayed");
 
+		Assert.assertTrue(viewInvoicesForReportButton.isDisplayed());
+		log.info("view Invoices For Report  Button is displayed");
+
+	}
+	@Step("action on clicking the 'Pay' button...")
+	public static void clickActionOnPayButton()
+	{
+		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
+		payForReportButton.click();
+		log.info("pay For Report Button is clicked");
+	}
+
+	@Step("action on clicking the view Projects button...")
+	public static void clickActionOnViewProjectsButton()
+	{
+		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
+		viewProjectsForReportButton.click();
+		log.info("view Projects button is clicked");
+	}
+
+	@Step("action on clicking the view Projects button...")
+	public static void clickActionOnViewInvoicesButton()
+	{
+		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
+		viewInvoicesForReportButton.click();
+		log.info("view Invoices button is clicked");
 	}
 	
 	@Step("Click on View Button")
@@ -323,11 +366,74 @@ public class DashboardPage {
 		log.info("Verified Pop up Window and parameters on it for view option.");
 
 	}
-
+	
+	@Step("Verifying Upload option id visible...")
 	public static void verifyUploadOption() {
 		Assert.assertTrue(upload.isDisplayed());
 		upload.click();
 		log.info("Verify Upload option displayed");
+	}
+	
+	@Step("Observing Pop up Window for Upload option..")
+	public static void verifyPopUpWindowForUpload() {
+		SeleniumUtils.waitForElementToBeVisible(sendQuotation);
+		Assert.assertTrue(sendQuotation.isDisplayed());
+		SeleniumUtils.waitForElementToBeVisible(dropDownInUploadQuotation);
+		Assert.assertTrue(dropDownInUploadQuotation.isDisplayed());
+		Assert.assertTrue(uploadButton.isDisplayed());
+		Assert.assertTrue(amountField.isDisplayed());
+		Assert.assertTrue(expiredate.isDisplayed());
+		Assert.assertTrue(send.isDisplayed());
+		Assert.assertTrue(cancelQuote.isDisplayed());
+		
+		log.info("Verified Pop up Window and parameters on it for upload option.");
+
+	}
+	
+	@Step("click on send button while uploading Quotation..")
+	public static void clickSendWhileUploadingQuotation() {
+		SeleniumUtils.waitForElementToBeVisible(send);
+		Assert.assertTrue(send.isDisplayed());
+		send.click();
+		log.info("clicked on send button while uploading Quotation.");
+	}
+
+	@Step("Input valid values while uploading Quotation..")
+	public static void InputValuesInUploadOption(String progarmType, String amount, String uploadFilePath) {
+		dropDownInUploadQuotation.click();
+		if (progarmType.equalsIgnoreCase("ES Core")) {
+			esCore.click();
+		}
+		if (progarmType.equalsIgnoreCase("plumbingMechanicAndGas")) {
+			plumbingMechanicAndGas.click();
+		}
+		if (progarmType.equalsIgnoreCase("Evaluation Service Listing")) {
+			evaluationServiceListing.click();
+		}
+		
+		amountTextBox.sendKeys(amount);
+		uploadButton.click();
+		uploadFilePath = uploadFilePath.replace("/", "\\");
+		StringSelection ss = new StringSelection(uploadFilePath);
+	    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+	    try {
+			Robot robot = new Robot();
+			robot.delay(250);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.delay(50);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+		} catch (AWTException e) {
+			log.error("Error while uploading file is: "+e);
+			e.printStackTrace();
+		}
+	   
+		log.info("Given input while uploading Quotation.");
 	}
 
 }
