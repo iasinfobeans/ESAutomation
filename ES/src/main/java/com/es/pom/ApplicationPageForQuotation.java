@@ -43,6 +43,9 @@ public class ApplicationPageForQuotation {
 	@FindBy(id="app_sidebar_save")
 	static WebElement saveButton;
 
+	@FindBy(xpath="//span[@class='message success alert']")
+	static WebElement successAlert;
+
 
 	@Step("verify Application page for View Quote...")
 	public static void verifyApplicationPageForViewQuote() {
@@ -93,5 +96,12 @@ public class ApplicationPageForQuotation {
 
 		saveButton.click();
 		log.info("Click on save Button");
+	}
+
+	@Step("Verify successful submission of information to be published in report...")
+	public static void verifySuccessfulSubmissionOfreport()
+	{
+        Assert.assertTrue(successAlert.isDisplayed());
+		log.info("success Alert is displayed");
 	}
 }
