@@ -348,4 +348,26 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
+	
+	/**
+	 * This method will verified new quotation available mail in customer inbox.
+	 * @param email  -- iasinfobeans@yopmail.com
+	 */
+	public static void verifyNewQuotationAvailableMail(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openNewQuotationAvailableMail();
+			YopmailPage.verifyNewQuotationAvailableMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
 }
