@@ -15,6 +15,10 @@ public class QuotationListingPage {
 
 	@FindBy(xpath="//strong[text()='Active']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
 	static WebElement viewQuotesBox;
+	
+	@FindBy(xpath="//div[@class='ehading']")
+	static WebElement quotationElement;
+
 
 	@Step("Verify that a 'Get a Quote' button is present on the Quotation Listing page for the customer...")
 	public static void verifyGetAQuoteButton(){
@@ -37,5 +41,12 @@ public class QuotationListingPage {
 		log.info("Verify Customer is able to Click on 'View Quotes' options");
 
 	}
+	@Step("verify Quotation page Step...")
+	public static void verifyDashboardPage()
+	{
+		Assert.assertTrue(quotationElement.isDisplayed());
+		log.info("Dashboard displayed");
+	}
+
 }
 
