@@ -4,6 +4,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.es.util.SeleniumUtils;
+
 import io.qameta.allure.Step;
 
 
@@ -14,19 +16,13 @@ public class OverlayPage {
 	@FindBy(xpath="//div[contains(@class,'enjoyhint_skip_btn') and text()='Skip']")
 	static WebElement skipButtonMessage;
 
-	/**   
-	 * @author Shefali.Garg
-	 * @description This method would perform login based on account type
-	 * @return void
-	 * @param driver
-	 */
 	@Step("Overlay Page is dispayed whwn User Completed Registration...")
 	public static void skipoverlayPage()
 
 	{
 		try {
-			skipButtonMessage.isEnabled();
-			skipButtonMessage.isDisplayed();
+			SeleniumUtils.waitForElementToBeVisible(skipButtonMessage);
+			skipButtonMessage.click();
 			log.info("Overlay Page is displayed");
 		}catch(NoSuchElementException e) {
 			log.info("Overlay Page is not displayed");		
