@@ -67,7 +67,7 @@ private static Logger log = Logger.getLogger(UserListingsPage.class.getName());
 			declineOption.click();
 			log.info("Request approved");
 			SeleniumUtils.acceptPopup();
-			log.info("final Request approved popup clicked");
+			log.info("final Request denied popup clicked");
 		}
 	}
 	
