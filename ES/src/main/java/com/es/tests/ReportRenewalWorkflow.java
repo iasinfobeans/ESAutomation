@@ -51,7 +51,7 @@ public class ReportRenewalWorkflow extends Setup{
 			OverlayPage.skipoverlayPage();
 			DashboardPage.hoveringOverAnyReport();
 			DashboardPage.clickActionOnPayButton();
-			PaymentPage.verifyPaymentPage();
+			PaymentPage.verifyPaymentPageElements();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyActionOnPayButton()");
 			e.getStackTrace();
