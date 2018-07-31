@@ -125,7 +125,6 @@ public class PaymentPage {
 		cityTextbox.sendKeys(Prop.getTestData("billingCity"));
 		log.info("City entered");
 		SeleniumUtils.scrollToBottom();
-		SeleniumUtils.waitForElementToBeVisible(stateTextbox);
 		stateTextbox.click();
 		log.info("selecting state");
 		stateList.get(3).click();

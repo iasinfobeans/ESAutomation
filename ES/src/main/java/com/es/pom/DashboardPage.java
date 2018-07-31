@@ -86,8 +86,6 @@ public class DashboardPage {
 	@FindBy(xpath="//a[contains(text(),'View Invoices')]")
 	static WebElement viewInvoicesForReportButton;
 
-
-
 	@FindBy(linkText = "View")
 	static WebElement viewLink;
 
@@ -166,6 +164,9 @@ public class DashboardPage {
 	@FindBy(linkText = "Evaluation Service Listing")
 	static WebElement evaluationServiceListing;
 
+	@FindBy(linkText = "Invoices")
+	static WebElement invoicePageLink;
+	
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -436,4 +437,10 @@ public class DashboardPage {
 		log.info("Given input while uploading Quotation.");
 	}
 
+	@Step("Navigating to invoice page...")
+	public static void navigatingToMyInvoices() {
+		invoicePageLink.click();
+		log.info("Nvaigating to my invoices page");
+	}
+	
 }
