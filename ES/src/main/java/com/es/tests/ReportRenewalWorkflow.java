@@ -96,7 +96,7 @@ public class ReportRenewalWorkflow extends Setup{
 	@Description("Verify that the Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval)")
 	public void verifyTechnicalContactAssociatedWithReport() throws InterruptedException {
 		try{
-			SignInPage.loginTechnicalContactAssociated(Prop.getTestData("technicalContactAssociatedUsername"),Prop.getTestData("technicalContactAssociatedPassword"),"Customer");
+			SignInPage.login(Prop.getTestData("technicalContactAssociatedUsername"),Prop.getTestData("technicalContactAssociatedPassword"),"Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.technicalContactAssociatedWithReport();
 		}catch(Exception e){
