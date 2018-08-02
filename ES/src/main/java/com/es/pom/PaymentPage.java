@@ -220,4 +220,39 @@ public class PaymentPage {
 		Assert.assertTrue(renewaFormOption.isDisplayed());
 		log.info("renewa Form option displayed");
 	}
+	
+	@Step("Fill Payment Page Form...")
+	public static void fillPaymentPageForm()
+	{
+		payAmountTextbox.clear();
+		payAmountTextbox.sendKeys(Prop.getTestData("payAmount"));
+		log.info("Pay amount entered");
+		addressTextbox.clear();
+		addressTextbox.sendKeys(Prop.getTestData("billingAddress"));
+		log.info("Address entered");
+		cityTextbox.clear();
+		cityTextbox.sendKeys(Prop.getTestData("billingCity"));
+		log.info("City entered");
+		SeleniumUtils.scrollToBottom();
+		SeleniumUtils.waitForElementToBeVisible(stateTextbox);
+		stateTextbox.click();
+		log.info("selecting state");
+		stateList.get(3).click();
+		log.info("state selected");
+		countryDropdown.click();
+		log.info("selecting country");
+		countryList.get(1).click();
+		log.info("country selected");
+		phoneTextbox.clear();
+		phoneTextbox.sendKeys(Prop.getTestData("billingPhone"));
+		log.info("Phone number entered");
+	}
+	
+	@Step("Navigate to payment detail page...")
+	public static void navigateToPaymentDetailPage()
+	{
+		payLink.click();
+		log.info("Clicked on pay link");
+	}
+	
 }
