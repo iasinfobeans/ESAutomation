@@ -24,6 +24,7 @@ import com.es.pom.InvoiceListingPage;
 import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
 import com.es.pom.PMGApplicationFormPage;
+import com.es.pom.PaymentDetailsPage;
 import com.es.pom.PaymentPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
@@ -112,6 +113,7 @@ public class Setup {
 		PageFactory.initElements(driver, PaymentPage.class);
 		PageFactory.initElements(driver, ProjectListingPage.class);
 		PageFactory.initElements(driver, InvoiceListingPage.class);
+		PageFactory.initElements(driver, PaymentDetailsPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
