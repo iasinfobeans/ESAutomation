@@ -394,8 +394,8 @@ public class Yopmail {
 	}
 	
 	/**
-	 * This method will verify email for received payment in customer inbox.
-	 * @param email  -- iasinfobeans@yopmail.com
+	 * This method will verify email for received payment in Staff inbox.
+	 * @param email  -- esportal@yopmail.com
 	 */
 	public static void verifyMailReceivedToStaffForPayment(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -407,6 +407,28 @@ public class Yopmail {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openPaymentReceivedToStaffMail();
 			YopmailPage.verifyPaymentReceivedToStaffMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+	
+	/**
+	 * This method will verify new renewal file mail body in Staff inbox.
+	 * @param email  -- esportal@yopmail.com
+	 */
+	public static void verifyNewRenewalFile(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openNewRenewalFileMail();
+			YopmailPage.verifyNewRenewalFileMail();
 		} catch (Exception e) {
 			throw e;
 		} finally {
