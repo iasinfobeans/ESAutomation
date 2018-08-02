@@ -44,13 +44,13 @@ public class DashboardPage {
 	@FindBy(xpath="//span[@class='dropdown-menu-user-name']")
 	static WebElement myAccountDropdown;
 
-	@FindBy(xpath="//*[@title=\"Quotations\"]")
+	@FindBy(xpath="//*[@title='Quotations']")
 	static WebElement quotationOption;
 
-	@FindBy(xpath="//*[@title=\"Reports\"]")
+	@FindBy(xpath="//*[@title='Reports']")
 	static WebElement reportOption;
 
-	@FindBy(xpath="//*[@title=\"Invoices\"]")
+	@FindBy(xpath="//*[@title='Invoices']")
 	static WebElement invoicesOption;
 
 	@FindBy(xpath="//a[@title='Applications']")
@@ -85,8 +85,6 @@ public class DashboardPage {
 
 	@FindBy(xpath="//a[contains(text(),'View Invoices')]")
 	static WebElement viewInvoicesForReportButton;
-
-
 
 	@FindBy(linkText = "View")
 	static WebElement viewLink;
@@ -165,6 +163,12 @@ public class DashboardPage {
 	
 	@FindBy(linkText = "Evaluation Service Listing")
 	static WebElement evaluationServiceListing;
+	
+	@FindBy(linkText = "Invoices")
+	static WebElement invoicePageLink;
+	
+	@FindBy(xpath = "//div[@class='unpaid-lwa-loading']")
+	static WebElement loadingIcon;
 
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
@@ -297,6 +301,8 @@ public class DashboardPage {
 	
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport(){
+		SeleniumUtils.waitForElementToBeInvisible(loadingIcon);
+		SeleniumUtils.waitForElementToBeVisible(reportName);
 		SeleniumUtils.mouseHover(reportName);
 		log.info("Hover on Report Name");
 	}
@@ -435,5 +441,30 @@ public class DashboardPage {
 	   
 		log.info("Given input while uploading Quotation.");
 	}
+	
+	@Step("Navigating to invoice page...")
+	public static void navigatingToMyInvoices() {
+		invoicePageLink.click();
+		log.info("Nvaigating to my invoices page");
+	}
+	
+	@Step("Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval).")
+	public static void technicalContactAssociatedWithReport() {
 
+		Assert.assertTrue(reportName.isDisplayed());
+		log.info("Technical Contact Associated is displayed");
+
+	}
+
+	@Step("Additional Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval).")
+	public static void additionalTechnicalContactAssociatedWithReport() {
+		Assert.assertTrue(reportName.isDisplayed());
+		log.info("Additional Technical Contact Associated is displayed");
+	}
+	
+	@Step("Authorized signatory associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval)")
+	public static void authorizedSignatoryAssociatedWithReport() {
+		Assert.assertTrue(reportName.isDisplayed());
+		log.info("Technical Contact Associated is displayed");
+	}
 }
