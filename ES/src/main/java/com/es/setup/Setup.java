@@ -21,9 +21,12 @@ import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.GetAQuotePage;
 import com.es.pom.InvoiceListingPage;
+import com.es.pom.InvoiceListingPage;
 import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
 import com.es.pom.PMGApplicationFormPage;
+import com.es.pom.PaymentHistoryPage;
+import com.es.pom.CardDetailsPage;
 import com.es.pom.PaymentPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
@@ -112,6 +115,9 @@ public class Setup {
 		PageFactory.initElements(driver, PaymentPage.class);
 		PageFactory.initElements(driver, ProjectListingPage.class);
 		PageFactory.initElements(driver, InvoiceListingPage.class);
+		PageFactory.initElements(driver, InvoiceListingPage.class);
+		PageFactory.initElements(driver, CardDetailsPage.class);
+		PageFactory.initElements(driver, PaymentHistoryPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
