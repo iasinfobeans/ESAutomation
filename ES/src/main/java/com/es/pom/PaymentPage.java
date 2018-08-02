@@ -167,7 +167,7 @@ public class PaymentPage {
 		uploadElement.click();
 		log.info("Enter upload pdf ");
 
-		RobotUtils.uploadFile("Filepath");
+		RobotUtils.uploadFile(".\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf");
 		log.info("upload pdf from drive ");
 
 		billingAddressBox.clear();
@@ -210,7 +210,7 @@ public class PaymentPage {
 		uploadElement.click();
 		log.info("Enter upload pdf ");
 
-		RobotUtils.uploadFile("filepath");
+		RobotUtils.uploadFile(".\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf");
 		log.info("upload pdf from drive ");
 
 	}
