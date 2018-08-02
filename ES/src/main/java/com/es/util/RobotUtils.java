@@ -6,14 +6,15 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
-public class RobotUtils {
+public class RobotUtils {              
 
-	public static void uploadFile(String filepath){
+	public static void uploadFile(String filePath){
 
 		//String str = "C:\\Users\\Priya.Jain\\git\\ESAutomation\\ES\\UploadFile\\Scanned_20180713-1115.pdf";
+
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Clipboard clipboard = toolkit.getSystemClipboard();
-		StringSelection strSel = new StringSelection(filepath);
+		StringSelection strSel = new StringSelection(filePath);
 		clipboard.setContents(strSel, null);
 
 		Robot robot = null;
@@ -28,3 +29,13 @@ public class RobotUtils {
 		robot.keyPress(KeyEvent.VK_ENTER);
 	}
 }
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,7 @@
 package com.es.pom;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,21 +24,21 @@ public class UpdateProfilePage {
 	@FindBy(id="street")
 	static WebElement mailingAddressTextbox;
 
-	@FindBy(linkText="Select State")
+	@FindBy(xpath="//div[@tabindex='11']")
 	static WebElement stateTextbox;
 
-	@FindBy(linkText="Alabama")
-	static WebElement stateSelection;
+	@FindBy(xpath="//label[contains(text(),'State')]/../div[@class='sbHolder']/ul/li/a")
+	static List<WebElement> stateList;
 
-	@FindBy(linkText="Select Country")
-	static WebElement countryTextbox;
+	@FindBy(xpath="//div[@tabindex='13']")
+	static WebElement countryDropdown;
 
+	@FindBy(xpath="//label[contains(text(),'Country')]/../div[@class='sbHolder']/ul/li/a")
+	static List<WebElement> countryList;
+	
 	@FindBy(id="zipcode")
 	static WebElement zipcodeTextbox;
-
-	@FindBy(linkText="Afghanistan")
-	static WebElement countrySelection;
-
+	
 	@FindBy(xpath="//span[@class='message success alert']//ul//li")
 	static WebElement successfullUpdateMessage;
 
@@ -46,24 +48,37 @@ public class UpdateProfilePage {
 	@FindBy(id="company_name")
 	static WebElement companyTextbox;
 
+	@FindBy(xpath="//input[@value='Developer']")
+	static WebElement jobTitleVerifyElement;
+	
+	@FindBy(xpath="//input[@value='developer@yopmail.com']")
+	static WebElement mailingAddressVerifyElement;
+	
+	@FindBy(xpath="//input[@value='Pune']")
+	static WebElement cityVerifyElement;
+	
 	@Step("Updating a customer account steps...")
 	public static void updateProfile()
 	{
+		jobtitleTextbox.clear();
 		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle"));
 		log.info("job tile entered");
+		mailingAddressTextbox.clear();
 		mailingAddressTextbox.sendKeys(Prop.getTestData("MailingAddress"));
 		log.info("Mailing Address entered");
+		textboxToEnterCity.clear();
 		textboxToEnterCity.sendKeys(Prop.getTestData("city"));
 		log.info("city entered");
 		stateTextbox.click();
 		log.info("selecting state");
-		stateSelection.click();
+		stateList.get(1).click();
 		log.info("state selected");
+		zipcodeTextbox.clear();
 		zipcodeTextbox.sendKeys("452001");
 		log.info("Zipcode entered");
-		countryTextbox.click();
+		countryDropdown.click();
 		log.info("selecting country");
-		countrySelection.click();
+		countryList.get(1).click();
 		log.info("country selected");
 		updateProfileButton.click();
 		log.info("updated profile");
@@ -73,21 +88,25 @@ public class UpdateProfilePage {
 
 	public static void updateProfileAgain()
 	{
-		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle2"));
+		jobtitleTextbox.clear();
+		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle"));
 		log.info("job tile entered");
-		mailingAddressTextbox.sendKeys(Prop.getTestData("MailingAddress2"));
+		mailingAddressTextbox.clear();
+		mailingAddressTextbox.sendKeys(Prop.getTestData("MailingAddress"));
 		log.info("Mailing Address entered");
-		textboxToEnterCity.sendKeys(Prop.getTestData("city2"));
+		textboxToEnterCity.clear();
+		textboxToEnterCity.sendKeys(Prop.getTestData("city"));
 		log.info("city entered");
 		stateTextbox.click();
 		log.info("selecting state");
-		stateSelection.click();
+		stateList.get(1).click();
 		log.info("state selected");
+		zipcodeTextbox.clear();
 		zipcodeTextbox.sendKeys("452001");
 		log.info("Zipcode entered");
-		countryTextbox.click();
+		countryDropdown.click();
 		log.info("selecting country");
-		countrySelection.click();
+		countryList.get(1).click();
 		log.info("country selected");
 		updateProfileButton.click();
 		log.info("updated profile");
@@ -109,18 +128,20 @@ public class UpdateProfilePage {
 	@Step("Verify if only the recent changes are visible...")
 	public static void verifyChanges()
 	{
-		if(Prop.getTestData("jobtitle2")==jobtitleTextbox.getText())
-		{
-			log.info("Recent Changes is only getting displayed in job title");
-		}
-		if(Prop.getTestData("MailingAddress2")==mailingAddressTextbox.getText())
-		{
-			log.info("Recent Changes is only getting displayed in mailing address");
-		}
-		if(Prop.getTestData("city2")==textboxToEnterCity.getText())
-		{
-			log.info("Recent Changes is only getting displayed in city textbox");
-		}
+		if(jobTitleVerifyElement.getAttribute("value").equals(Prop.getTestData("jobtitle2"))){
+			log.info("Recent Change is only getting displayed in job title");
+		}else {
+			log.info("Recent Change not getting displayed in job title");
+			}
+		if(mailingAddressVerifyElement.getAttribute("value").equals(Prop.getTestData("MailingAddress2"))){
+			log.info("Recent Change is only getting displayed in Mailing textbox");
+		}else {
+			log.info("Recent Change not getting displayed in Mailing textbox");
+			}
+		if(cityVerifyElement.getAttribute("value").equals(Prop.getTestData("city2"))){
+			log.info("Recent Change is only getting displayed in City textbox");
+		}else {
+			log.info("Recent Change not getting displayed in City textbox");
+			}
 	}
-	
 }

@@ -163,6 +163,7 @@ public class DashboardPage {
 	
 	@FindBy(linkText = "Evaluation Service Listing")
 	static WebElement evaluationServiceListing;
+<<<<<<< HEAD
 	
 	@FindBy(linkText = "Invoices")
 	static WebElement invoicePageLink;
@@ -170,6 +171,12 @@ public class DashboardPage {
 	@FindBy(xpath = "//div[@class='unpaid-lwa-loading']")
 	static WebElement loadingIcon;
 
+=======
+
+	@FindBy(linkText = "Invoices")
+	static WebElement invoicePageLink;
+	
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -451,6 +458,7 @@ public class DashboardPage {
 	@Step("Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval).")
 	public static void technicalContactAssociatedWithReport() {
 
+<<<<<<< HEAD
 		Assert.assertTrue(reportName.isDisplayed());
 		log.info("Technical Contact Associated is displayed");
 
@@ -467,4 +475,12 @@ public class DashboardPage {
 		Assert.assertTrue(reportName.isDisplayed());
 		log.info("Technical Contact Associated is displayed");
 	}
+=======
+	@Step("Navigating to invoice page...")
+	public static void navigatingToMyInvoices() {
+		invoicePageLink.click();
+		log.info("Nvaigating to my invoices page");
+	}
+	
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 }
