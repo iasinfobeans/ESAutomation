@@ -25,8 +25,12 @@ import com.es.pom.InvoiceListingPage;
 import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
 import com.es.pom.PMGApplicationFormPage;
+<<<<<<< HEAD
 import com.es.pom.PaymentHistoryPage;
 import com.es.pom.CardDetailsPage;
+=======
+import com.es.pom.PaymentDetailsPage;
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 import com.es.pom.PaymentPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
@@ -115,9 +119,13 @@ public class Setup {
 		PageFactory.initElements(driver, PaymentPage.class);
 		PageFactory.initElements(driver, ProjectListingPage.class);
 		PageFactory.initElements(driver, InvoiceListingPage.class);
+<<<<<<< HEAD
 		PageFactory.initElements(driver, InvoiceListingPage.class);
 		PageFactory.initElements(driver, CardDetailsPage.class);
 		PageFactory.initElements(driver, PaymentHistoryPage.class);
+=======
+		PageFactory.initElements(driver, PaymentDetailsPage.class);
+>>>>>>> branch 'master' of https://github.com/iasinfobeans/ESAutomation.git
 	}
 
 	@AfterMethod(alwaysRun = true)

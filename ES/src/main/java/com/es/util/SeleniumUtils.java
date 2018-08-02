@@ -71,6 +71,12 @@ public class SeleniumUtils {
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
+	
+	public static void waitForElementToBeInvisible(WebElement element) {
+		log.info("Waiting for element to be invisible....");
+		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
+		wait.until(ExpectedConditions.invisibilityOf(element));
+	}
 
 	public static void waitForElementToBeClickable(WebElement element) {
 		log.info("Waiting for element to be visible....");
