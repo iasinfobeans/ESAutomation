@@ -370,4 +370,48 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
+	
+	/**
+	 * This method will verify email for received payment in customer inbox.
+	 * @param email  -- iasinfobeans@yopmail.com
+	 */
+	public static void verifyMailReceivedByCustomerForPayment(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPaymentReceivedMail();
+			YopmailPage.verifyPaymentReceivedMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+	
+	/**
+	 * This method will verify email for received payment in customer inbox.
+	 * @param email  -- iasinfobeans@yopmail.com
+	 */
+	public static void verifyMailReceivedToStaffForPayment(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPaymentReceivedToStaffMail();
+			YopmailPage.verifyPaymentReceivedToStaffMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
 }
