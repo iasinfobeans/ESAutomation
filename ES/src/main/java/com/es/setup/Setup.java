@@ -16,6 +16,7 @@ import com.es.pom.ApplicationPageForQuotation;
 import com.es.pom.ApplicationsListingPage;
 import com.es.pom.AvaliableQuotesPage;
 import com.es.pom.CRMPage;
+import com.es.pom.CardDetailsPage;
 import com.es.pom.ChangePasswordPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.ForgotPasswordPage;
@@ -25,6 +26,7 @@ import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
 import com.es.pom.PMGApplicationFormPage;
 import com.es.pom.PaymentDetailsPage;
+import com.es.pom.PaymentHistoryPage;
 import com.es.pom.PaymentPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
@@ -114,6 +116,8 @@ public class Setup {
 		PageFactory.initElements(driver, ProjectListingPage.class);
 		PageFactory.initElements(driver, InvoiceListingPage.class);
 		PageFactory.initElements(driver, PaymentDetailsPage.class);
+		PageFactory.initElements(driver, PaymentHistoryPage.class);
+		PageFactory.initElements(driver, CardDetailsPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
