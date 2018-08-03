@@ -48,7 +48,8 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
 			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
-			quatReqRecMailLine1, approvedOrDeclineProfileChange1,newQuotationAvailableMail1,paymentReceivedLine1,paymentReceivedToStaffLine1;
+			quatReqRecMailLine1, approvedOrDeclineProfileChange1, newQuotationAvailableMail1, paymentReceivedLine1,newRenewalLine1,
+			paymentReceivedToStaffLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -62,7 +63,8 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
 			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
-			quatReqRecMailLine4, approvedOrDeclineProfileChange5,newQuotationAvailableMail5,paymentReceivedLine5,paymentReceivedToStaffLine5;
+			quatReqRecMailLine4, approvedOrDeclineProfileChange5, newQuotationAvailableMail5, paymentReceivedLine5,
+			paymentReceivedToStaffLine5,newRenewalLine5;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -177,10 +179,10 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'In case you have any questions, please get in touch with the ')]")
 	static WebElement approvedOrDeclineProfileChange4;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'ICC-ES: New Quotation Available for Quotation Request QOT')]")
 	static WebElement openNewQuotationAvailableMail;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'As requested by you, please find enclosed')]")
 	static WebElement newQuotationAvailableMail2;
 
@@ -189,10 +191,10 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),' This Quote will expire on')]")
 	static WebElement newQuotationAvailableMail4;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'Payment Received')]")
 	static WebElement openPaymentReceivedMail;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through credit card')]")
 	static WebElement paymentReceivedLine2;
 
@@ -201,18 +203,30 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the Transaction History, please ')]")
 	static WebElement paymentReceivedLine4;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'Payment Received')]")
 	static WebElement openPaymentReceivedToStaffMail;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through credit card')]")
 	static WebElement paymentReceivedToStaffLine2;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'The transaction reference number is')]")
 	static WebElement paymentReceivedToStaffLine3;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the Transaction History, please ')]")
 	static WebElement paymentReceivedToStaffLine4;
+
+	@FindBy(xpath = "//*[contains(text(),'renewal application form has been uploaded')]")
+	static WebElement openNewRenewalFileMail;
+	
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'renewal application form for Report')]")
+	static WebElement newRenewalLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Please find enclosed')]")
+	static WebElement newRenewalLine3;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details, please ')]")
+	static WebElement newRenewalLine4;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -765,20 +779,20 @@ public class YopmailPage {
 		String forthRgistrationLine = approvedOrDeclineProfileChange5.getText();
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
-		
+
 		Assert.assertEquals(firstRgistrationLine.contains("Your request to update profile information has been"), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(secondRgistrationLine.contains("To review your profile, please "), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(
 				thirdRgistrationLine.contains("In case you have any questions, please get in touch with the "), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
 				"Text 'Thank you,' is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
@@ -812,20 +826,19 @@ public class YopmailPage {
 		String forthRgistrationLine = newQuotationAvailableMail5.getText();
 
 		Assert.assertEquals(hi.contains("Hello"), true, "Hi is not contain in email body");
-		
+
 		Assert.assertEquals(firstRgistrationLine.contains("As requested by you, please find enclosed"), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(secondRgistrationLine.contains("To view the quotation and apply for report, please "), true,
 				"Text is not contain in email body");
-		
-		Assert.assertEquals(
-				thirdRgistrationLine.contains(" This Quote will expire on"), true,
+
+		Assert.assertEquals(thirdRgistrationLine.contains(" This Quote will expire on"), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
 				"Text 'Thank you,' is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
@@ -859,20 +872,19 @@ public class YopmailPage {
 		String forthRgistrationLine = paymentReceivedLine5.getText();
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
-		
+
 		Assert.assertEquals(firstRgistrationLine.contains("has been received through credit card"), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(secondRgistrationLine.contains("The transaction reference number is"), true,
 				"Text is not contain in email body");
-		
-		Assert.assertEquals(
-				thirdRgistrationLine.contains("To view the Transaction History, please "), true,
+
+		Assert.assertEquals(thirdRgistrationLine.contains("To view the Transaction History, please "), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
 				"Text 'Thank you,' is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
@@ -906,25 +918,70 @@ public class YopmailPage {
 		String forthRgistrationLine = paymentReceivedToStaffLine5.getText();
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
-		
+
 		Assert.assertEquals(firstRgistrationLine.contains("has been received through credit card"), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(secondRgistrationLine.contains("The transaction reference number is"), true,
 				"Text is not contain in email body");
-		
-		Assert.assertEquals(
-				thirdRgistrationLine.contains("To view the Transaction History, please "), true,
+
+		Assert.assertEquals(thirdRgistrationLine.contains("To view the Transaction History, please "), true,
 				"Text is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
 				"Text 'Thank you,' is not contain in email body");
-		
+
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified payment recieved mail body in Staff inbox.");
+	}
+
+	@Step("Opening new renewal file mail in Staff inbox..")
+	public static void openNewRenewalFileMail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openNewRenewalFileMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openNewRenewalFileMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened new renewal file mail in Staff inbox.");
+	}
+
+	@Step("Verifying new report renewal file mail body in Staff inbox.")
+	public static void verifyNewRenewalFileMail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = newRenewalLine1.getText();
+		String firstRgistrationLine = newRenewalLine2.getText();
+		String secondRgistrationLine = newRenewalLine3.getText();
+		String thirdRgistrationLine = newRenewalLine4.getText();
+		String forthRgistrationLine = newRenewalLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("renewal application form for Report"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("Please find enclosed"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(thirdRgistrationLine.contains("To view details, please "), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified new report renewal file mail body in Staff inbox.");
 	}
 
 }

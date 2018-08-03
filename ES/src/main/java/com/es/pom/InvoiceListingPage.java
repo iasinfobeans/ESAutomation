@@ -14,6 +14,9 @@ public class InvoiceListingPage {
 	@FindBy(xpath="//span[@class='message notices alert']//ul//li")
 	static WebElement messageNoticeAlert;
 
+	@FindBy(xpath="//th[@tabindex='0']")
+	static WebElement elementsToWaitForReload;
+
 	@FindBy(linkText="All Status")
 	static WebElement sortingDropdown;
 
@@ -34,11 +37,11 @@ public class InvoiceListingPage {
 
 	@Step("Method to Verify the displayed details on Payment page")
 	public static void navigateToPaymentPage(){
-		messageNoticeAlert.isDisplayed();
-		log.info(messageNoticeAlert.getText());
-		SeleniumUtils.waitForElementToBeClickable(sortingDropdown);
+		SeleniumUtils.refreshPage();
+		SeleniumUtils.waitForElementToBeClickable(elementsToWaitForReload);
 		sortingDropdown.click();
 		log.info("Sorting selected");
+		SeleniumUtils.waitForElementToBeClickable(partialSort);
 		partialSort.click();
 		log.info("partially sorted");
 		paymentPageLink.click();

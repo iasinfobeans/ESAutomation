@@ -13,7 +13,12 @@ import org.apache.log4j.Logger;
 public class CommonUtils {
 
 	private static Logger log = Logger.getLogger(CommonUtils.class.getName());
-
+	
+	/**
+	 * @description This method returns application url based on execution environment.
+	 * @return String
+	 * @param void
+	 */
 	public static String getURL() throws IOException {
 		String url = null;
 		if (System.getProperty("Env").equalsIgnoreCase("qa")) {
@@ -25,7 +30,12 @@ public class CommonUtils {
 		}
 		return url;
 	}
-
+	
+	/**
+	 * @description This method returns Chrome driver path based on execution operating system.
+	 * @return String
+	 * @param void
+	 */
 	public static String getChromeDriverPath(){
 		Path chromeDriverPath;
 		if(System.getProperty("os.name").startsWith("Mac")){
@@ -35,7 +45,12 @@ public class CommonUtils {
 		}
 		return chromeDriverPath.toString();
 	}
-
+	
+	/**
+	 * @description This method returns current time in dd_MMM_yyyy_hh-mm-ss_aaa(zzz) format.
+	 * @return String
+	 * @param void
+	 */
 	public static String getCurrentTimeForScreenShot() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy_hh-mm-ss_aaa(zzz)");
 		java.util.Date curDate = new java.util.Date();
@@ -43,7 +58,12 @@ public class CommonUtils {
 		String strActDate = strDate.toString();
 		return strActDate;
 	}
-
+	
+	/**
+	 * This method deletes all the files of a directory or create a directory if it doesn't exist.
+	 * @return void
+	 * @param directoy Path
+	 */
 	public static void cleanOrCreateDirectory(String dirPath) {
 		try {
 			FileUtils.cleanDirectory(new File(dirPath));
@@ -59,12 +79,14 @@ public class CommonUtils {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * This method generate random yopmail id i.e. TestESApp.yyyyMMdd-HHmmss@yopmail.com
+	 * @return String
+	 * @param void
+	 */
 	public static String getRandomYopMailId() {
 		return "TestESApp."+new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date())+"@yopmail.com";
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(CommonUtils.getRandomYopMailId());
-	}
+
 }
