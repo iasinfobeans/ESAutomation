@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-
 import com.es.setup.Driver;
 import com.es.util.Prop;
 import io.qameta.allure.Step;
