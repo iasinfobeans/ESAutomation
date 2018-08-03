@@ -18,7 +18,13 @@ import com.es.setup.Setup;
 public class SeleniumUtils {
 
 	private static Logger log = Logger.getLogger(SeleniumUtils.class.getName());
-
+	
+	/**
+	 * This method capture screenshot, copy the screenshot to screenshot directory, 
+	 * if directory is not exist then it creates the directory
+	 * @return Screenshot File path
+	 * @param Test case name
+	 */
 	public static String captureScreenshot(String testName) {
 		String filePath = null;
 		try {
@@ -41,95 +47,185 @@ public class SeleniumUtils {
 		return filePath;
 	}
 
+	/**
+	 * This method opens the given user in the current browser session.
+	 * @return void
+	 * @param url
+	 */
 	public static void openUrl(String url) {
 		Setup.driver.navigate().to(url);
 		log.info("Navigated to " + url);
 	}
-
+	
+	/**
+	 * This method switch driver inside the frame by frame name
+	 * @return void
+	 * @param frame name
+	 */
 	public static void switchToIframeByName(String name) {
 		Setup.driver.switchTo().frame(name);
 		log.info("Switched to " + name + " iframe");
 	}
-
+	
+	/**
+	 * This method switch driver inside the frame by frame ID
+	 * @return void
+	 * @param frame ID
+	 */
 	public static void switchToIframeById(String id) {
 		Setup.driver.switchTo().frame(id);
 		log.info("Switched to " + id + " iframe");
 	}
-
+	
+	/**
+	 * This method switch driver inside the frame by frame ID
+	 * @return void
+	 * @param frame ID
+	 */
 	public static void switchToIframeByIndex(int i) {
 		Setup.driver.switchTo().frame(i);
 		log.info("Switched to " + i + " iframe");
 	}
 
+	/**
+	 * This method switch back driver to default frame, if driver is inside any frame
+	 * @return void
+	 * @param void
+	 */
 	public static void switchToDefaultIframe() {
 		Setup.driver.switchTo().defaultContent();
 		log.info("Switched to default iframe");
 	}
 
+	/**
+	 * This method wait for given element to be visible in DOM
+	 * @return void
+	 * @param WebElement
+	 */
 	public static void waitForElementToBeVisible(WebElement element) {
 		log.info("Waiting for element to be visible....");
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
+	/**
+	 * This method wait for given element to be invisible in DOM
+	 * @return void
+	 * @param WebElement
+	 */
 	public static void waitForElementToBeInvisible(WebElement element) {
 		log.info("Waiting for element to be invisible....");
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
 
+	/**
+	 * This method wait for given element to be clickable in DOM
+	 * @return void
+	 * @param WebElement
+	 */
 	public static void waitForElementToBeClickable(WebElement element) {
 		log.info("Waiting for element to be visible....");
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 
+	/**
+	 * This method returns the current url.
+	 * @return current url
+	 * @param void
+	 */
 	public static String getCurrentUrl() {
 		String currentUrl = Setup.driver.getCurrentUrl();
 		return currentUrl;
 	}
-
+	
+	/**
+	 * This method opens given url in new window and return current and new window handles.
+	 * @return window handles
+	 * @param url
+	 */
 	public static Set<String> openUrlInNewWindow(String url) {
 		((JavascriptExecutor) Setup.driver).executeScript("window.open(arguments[0])", url);
 		Set<String> windowHandles = Setup.driver.getWindowHandles();
 		return windowHandles;
 	}
 
+	/**
+	 * This method switch to new window.
+	 * @return void
+	 * @param window handles
+	 */
 	public static void switchToWindow(String handle) {
 		Setup.driver.switchTo().window(handle);
 	}
 
+	/**
+	 * This method switch to new window and close it.
+	 * @return void
+	 * @param window handles
+	 */
 	public static void switchToWindowAndClose(String handle) {
 		Setup.driver.switchTo().window(handle).close();
 	}
-
+	
+	/**
+	 * This method scrolls window to the bottom.
+	 * @return void
+	 * @param void
+	 */
 	public static void scrollToBottom() {
 		((JavascriptExecutor) Setup.driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
 	}
 
+	/**
+	 * This method refresh/reload the current page.
+	 * @return void
+	 * @param void
+	 */
 	public static void refreshPage() {
 		Setup.driver.navigate().refresh();
 	}
 	
+	/**
+	 * This method click on ok/yes button of a javascript popup
+	 * @return void
+	 * @param void
+	 */
 	public static void acceptPopup() {
 		Setup.driver.switchTo().alert().accept();
 	}
 	
+	/**
+	 * This method click on cancle/no button of a javascript popup
+	 * @return void
+	 * @param void
+	 */
 	public static void dismissPopup() {
 		Setup.driver.switchTo().alert().dismiss();
 	}
 	
+	/**
+	 * This method executes javascript on target web element
+	 * @return void
+	 * @param javascript, webelement
+	 */
 	public static void executeJavaScript(String javaScript, WebElement webElement) {
 		SeleniumUtils.waitForElementToBeVisible(webElement);
 		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Setup.driver;
 		javascriptExecutor.executeScript(javaScript, webElement);
 	}
 	
+	/**
+	 * This method mouse hovers on target web element
+	 * @return void
+	 * @param webelement
+	 */
 	public static void mouseHover(WebElement webElement) {
 		SeleniumUtils.waitForElementToBeVisible(webElement);
 		Actions actionBuilder = new Actions(Setup.driver);
 		actionBuilder.moveToElement(webElement).build().perform();
 		log.info("Mouse hovered on target element");
 	}
-
+	
 }
