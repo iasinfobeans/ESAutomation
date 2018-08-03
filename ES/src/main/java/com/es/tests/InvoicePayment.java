@@ -11,6 +11,8 @@ import com.es.pom.SignInPage;
 import com.es.setup.Setup;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
+import com.es.util.Yopmail;
+
 import io.qameta.allure.Description;
 
 public class InvoicePayment extends Setup {
@@ -82,4 +84,60 @@ public class InvoicePayment extends Setup {
 		}
 	}
 	
+	@Test(groups = {"smoke"})
+	@Description("Verify the Balance due amount on the Portal")
+	public static void verifyDueAmount() throws IOException, InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			DashboardPage.navigatingToMyInvoices();
+			InvoiceListingPage.navigateToPaymentPage();
+			PaymentPage.fillPaymentPageForm();
+			PaymentPage.navigateToPaymentGatewayPage();
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			PaymentHistoryPage.verifyPaymentSucess();
+			DashboardPage.navigatingToMyInvoicesWhenLoggedInAlready();
+			InvoiceListingPage.navigateToPaymentPage();
+			PaymentPage.compareBalanceAmountBeforAndAfterPay();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyDueAmount");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+	
+	@Test(groups = {"smoke"})
+	@Description("Verify mail sent to customer/payee on making payment for an Invoice")
+	public static void verifyPaymentMail_Customer() throws IOException, InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			DashboardPage.navigatingToMyInvoices();
+			InvoiceListingPage.navigateToPaymentPage();
+			PaymentPage.fillPaymentPageForm();
+			PaymentPage.navigateToPaymentGatewayPage();
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			Yopmail.verifyPaymentForInvoiceMail(Prop.getTestData("username"));
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyPaymentMail_Customer");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+	
+	@Test(groups = {"smoke"})
+	@Description("Verify mail sent to staff when customer makes payment for an Invoice")
+	public static void verifyPaymentMail_Staff() throws IOException, InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			DashboardPage.navigatingToMyInvoices();
+			InvoiceListingPage.navigateToPaymentPage();
+			PaymentPage.fillPaymentPageForm();
+			PaymentPage.navigateToPaymentGatewayPage();
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			//Yopmail method for Staff
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyPaymentMail_Staff");
+			e.getStackTrace();
+			throw e;
+		}
+	}
 }
