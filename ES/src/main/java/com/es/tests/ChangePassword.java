@@ -17,7 +17,7 @@ public class ChangePassword extends Setup {
 	@Description("Verify that customer is able to reset the password using the forgot password functionality")
 	public static void verifyChangePasswordFlow() throws IOException, InterruptedException {
 		try{
-			SignInPage.login(Prop.getTestData("usertotest"),Prop.getTestData("passwordToTest"), "Customer");
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyDashboardPage();
 			DashboardPage.navigateToChangePasswordPage();
 			ChangePasswordPage.changePassword();
@@ -27,6 +27,4 @@ public class ChangePassword extends Setup {
 			throw e;
 		}
 	}
-
-
 }
