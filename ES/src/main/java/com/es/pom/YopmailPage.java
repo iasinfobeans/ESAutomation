@@ -49,7 +49,7 @@ public class YopmailPage {
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
 			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
 			quatReqRecMailLine1, approvedOrDeclineProfileChange1, newQuotationAvailableMail1, paymentReceivedLine1,newRenewalLine1,
-			paymentReceivedToStaffLine1;
+			paymentReceivedToStaffLine1,invoicePaymentReceivedMailLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -64,7 +64,7 @@ public class YopmailPage {
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
 			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
 			quatReqRecMailLine4, approvedOrDeclineProfileChange5, newQuotationAvailableMail5, paymentReceivedLine5,
-			paymentReceivedToStaffLine5,newRenewalLine5;
+			paymentReceivedToStaffLine5,newRenewalLine5,invoicePaymentReceivedMailLine5;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -195,7 +195,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[contains(text(),'Payment Received')]")
 	static WebElement openPaymentReceivedMail;
 
-	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through credit card')]")
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through')]")
 	static WebElement paymentReceivedLine2;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'The transaction reference number is')]")
@@ -207,7 +207,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[contains(text(),'Payment Received')]")
 	static WebElement openPaymentReceivedToStaffMail;
 
-	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through credit card')]")
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through')]")
 	static WebElement paymentReceivedToStaffLine2;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'The transaction reference number is')]")
@@ -227,6 +227,18 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details, please ')]")
 	static WebElement newRenewalLine4;
+	
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Invoice')]")
+	static WebElement openInvoicePaymentReceivedMail;
+	
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through') and contains(text(),'for invoice')]")
+	static WebElement invoicePaymentReceivedMailLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'The transaction reference number is')]")
+	static WebElement invoicePaymentReceivedMailLine3;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the Transaction History, please ')]")
+	static WebElement invoicePaymentReceivedMailLine4;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -873,7 +885,7 @@ public class YopmailPage {
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
 
-		Assert.assertEquals(firstRgistrationLine.contains("has been received through credit card"), true,
+		Assert.assertEquals(firstRgistrationLine.contains("has been received through"), true,
 				"Text is not contain in email body");
 
 		Assert.assertEquals(secondRgistrationLine.contains("The transaction reference number is"), true,
@@ -919,7 +931,7 @@ public class YopmailPage {
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
 
-		Assert.assertEquals(firstRgistrationLine.contains("has been received through credit card"), true,
+		Assert.assertEquals(firstRgistrationLine.contains("has been received through"), true,
 				"Text is not contain in email body");
 
 		Assert.assertEquals(secondRgistrationLine.contains("The transaction reference number is"), true,
@@ -982,6 +994,52 @@ public class YopmailPage {
 
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified new report renewal file mail body in Staff inbox.");
+	}
+
+	@Step("Opening payment for invoice mail in customer inbox..")
+	public static void openPaymentForInvoiceMail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openInvoicePaymentReceivedMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openInvoicePaymentReceivedMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened payment for invoice mail in customer inbox.");
+	}
+
+	@Step("Verifying payment for invoice mail body in customer inbox.")
+	public static void verifyPaymentForInvoiceMail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = invoicePaymentReceivedMailLine1.getText();
+		String firstRgistrationLine = invoicePaymentReceivedMailLine2.getText();
+		String secondRgistrationLine = invoicePaymentReceivedMailLine3.getText();
+		String thirdRgistrationLine = invoicePaymentReceivedMailLine4.getText();
+		String forthRgistrationLine = invoicePaymentReceivedMailLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("has been received through"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("The transaction reference number is"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(thirdRgistrationLine.contains("To view the Transaction History, please "), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified payment for invoice mail body in customer inbox.");
 	}
 
 }
