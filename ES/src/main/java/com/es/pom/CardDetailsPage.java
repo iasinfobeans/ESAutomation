@@ -70,4 +70,14 @@ public class CardDetailsPage {
 		log.info("Sumbit payment Details");
 
 	}
+
+	@Step("User should be navigated to the payment gateway....")
+	public static void verifyUserNavigatedPaymentGateway()
+	{
+		SeleniumUtils.waitForElementToBeClickable(cardHolderName);
+		Assert.assertTrue(cardHolderName.isDisplayed());
+		log.info("Dashboard Option is displayed");
+	}
+
 }
+
