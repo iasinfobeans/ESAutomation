@@ -1,9 +1,11 @@
 package com.es.tests;
 import org.testng.annotations.Test;
+import com.es.pom.ApplicationsListingPage;
+import com.es.pom.CardDetailsPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.InvoiceListingPage;
 import com.es.pom.OverlayPage;
-import com.es.pom.PaymentDetailsPage;
+import com.es.pom.PaymentHistoryPage;
 import com.es.pom.PaymentPage;
 import com.es.pom.ProjectListingPage;
 import com.es.pom.ReportsPage;
@@ -11,6 +13,7 @@ import com.es.pom.SignInPage;
 import com.es.setup.Setup;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
+import com.es.util.Yopmail;
 import io.qameta.allure.Description;
 
 public class ReportRenewalWorkflow extends Setup{
@@ -54,12 +57,12 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.verifyPaymentPageElements();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyActionOnPayButton()");
+			SeleniumUtils.captureScreenshot("verifyActionOnPayButton");
 			e.getStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@Test(groups = { "smoke" })  
 	@Description("Verify the action on clicking the 'View Projects' button")
 	public void verifyActionOnViewInvoicessButton() throws InterruptedException {
@@ -70,12 +73,12 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.clickActionOnViewProjectsButton();
 			ProjectListingPage.verifyViewProjectsPage();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyActionOnViewInvoicessButton()");
+			SeleniumUtils.captureScreenshot("verifyActionOnViewProjectsButton");
 			e.getStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@Test(groups = { "smoke" })  
 	@Description("Verify the action on clicking the 'View Invoices' button")
 	public void verifyActionOnViewInvoicesButton() throws InterruptedException {
@@ -86,12 +89,12 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.clickActionOnViewInvoicesButton();
 			InvoiceListingPage.verifyViewInvoicesPage();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyActionOnViewInvoicesButton(");
+			SeleniumUtils.captureScreenshot("verifyActionOnViewInvoicesButton");
 			e.getStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@Test(groups = { "smoke" })  
 	@Description("Verify that the Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval)")
 	public void verifyTechnicalContactAssociatedWithReport() throws InterruptedException {
@@ -100,7 +103,7 @@ public class ReportRenewalWorkflow extends Setup{
 			OverlayPage.skipoverlayPage();
 			DashboardPage.technicalContactAssociatedWithReport();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyTechnicalContactAssociatedWithReport()");
+			SeleniumUtils.captureScreenshot("verifyTechnicalContactAssociatedWithReport");
 			e.getStackTrace();
 			throw e;
 		}
@@ -114,7 +117,7 @@ public class ReportRenewalWorkflow extends Setup{
 			OverlayPage.skipoverlayPage();
 			DashboardPage.additionalTechnicalContactAssociatedWithReport();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyAdditionalTechnicalContactAssociatedWithReport()");
+			SeleniumUtils.captureScreenshot("verifyAdditionalTechnicalContactAssociatedWithReport");
 			e.getStackTrace();
 			throw e;
 		}
@@ -128,15 +131,15 @@ public class ReportRenewalWorkflow extends Setup{
 			OverlayPage.skipoverlayPage();
 			DashboardPage.authorizedSignatoryAssociatedWithReport();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyAuthorizedSignatoryAssociatedWithReport()");
+			SeleniumUtils.captureScreenshot("verifyAuthorizedSignatoryAssociatedWithReport");
 			e.getStackTrace();
 			throw e;
 		}
 	}
 
-	@Test(groups = { "smoke" })   
+	@Test(groups = { "smoke" })    
 	@Description("Verify that the payment screen allows the customer to pay any amount greater than zero for renewal.")
-	public void verifyCustomerDeatailsPayForRenewal()  throws InterruptedException {
+	public void verifyCustomerDetailsPayForRenewal()  throws InterruptedException {
 		try{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
@@ -144,7 +147,7 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyCustomerDeatailsPayForRenewal()");
+			SeleniumUtils.captureScreenshot("verifyCustomerDetailsPayForRenewal");
 			e.getStackTrace();
 			throw e;
 		}
@@ -160,7 +163,7 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.uploadRenewalApplicationForCustomer();
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyCustomerAllowedUploadRenewalApplication()");
+			SeleniumUtils.captureScreenshot("verifyCustomerAllowedUploadRenewalApplication");
 			e.getStackTrace();
 			throw e;
 		}
@@ -176,8 +179,8 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.hoveringOverAnyReport();
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.additionalCustomerFieldRenewalForm();
-		}	catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyCustomerFieldRenewalForm()");
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyCustomerFieldRenewalForm");
 			e.getStackTrace();
 			throw e;
 		}
@@ -194,7 +197,7 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyRenewalFormMandatoryFieldPMGRenewal()");
+			SeleniumUtils.captureScreenshot("verifyRenewalFormMandatoryFieldPMGRenewal");
 			e.getStackTrace();
 			throw e;
 		}
@@ -205,13 +208,13 @@ public class ReportRenewalWorkflow extends Setup{
 	@Description("Verify that the Renewal Form field is not a mandatory field for ESL & ESR renewal")
 	public void verifyRenewalFormNotMandatoryRenewalEslEsr() throws InterruptedException {
 		try{
-			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			SignInPage.login(Prop.getTestData("usernameESL"),Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.hoveringOverAnyReport();
 			DashboardPage.clickActionOnPayButton();
-			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
+			PaymentPage.renewalFormNotMandatoryEslEsr(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyRenewalFormMandatoryFieldPMGRenewal()");
+			SeleniumUtils.captureScreenshot("verifyRenewalFormNotMandatoryRenewalEslEsr");
 			e.getStackTrace();
 			throw e;
 		}
@@ -226,6 +229,7 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.hoveringOverAnyReport();
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
+			CardDetailsPage.verifyUserNavigatedPaymentGateway();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyRenewalFeesAgainstReportNo");
 			e.getStackTrace();
@@ -242,15 +246,52 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.hoveringOverAnyReport();
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
-			PaymentDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyRenewalFeesAgainstReportNo");
+			SeleniumUtils.captureScreenshot("verifyRenewalPaymentSubmitted");
 			e.getStackTrace();
 			throw e;
 		}
 	}
 
 	@Test(groups = { "smoke" })   
+	@Description("Verify the mail received by customer for Payment.")
+	public void verifyMailReceivedByCustomerForPayment()  throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
+			DashboardPage.hoveringOverAnyReport();
+			DashboardPage.clickActionOnPayButton();
+			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			Yopmail.verifyMailReceivedByCustomerForPayment(Prop.getTestData("username"));
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyMailReceivedByCustomerForPayment");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+
+	@Test(groups = { "smoke" })   
+	@Description("Verify the mail received to associated staff for Payment.")
+	public void verifyMailReceivedByStaffForPayment()  throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
+			DashboardPage.hoveringOverAnyReport();
+			DashboardPage.clickActionOnPayButton();
+			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			Yopmail.verifyMailReceivedToStaffForPayment(Prop.getTestData("EmailId"));
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyMailReceivedByStaffForPayment");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })  
 	@Description("Verify that on successful renewal payment for any application, a new application is created on the portal of the same program type.")
 	public void verifyNewApplicationOnPortal()  throws InterruptedException {
 		try{
@@ -259,11 +300,107 @@ public class ReportRenewalWorkflow extends Setup{
 			DashboardPage.hoveringOverAnyReport();
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
-			PaymentDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			PaymentHistoryPage.verifyNewApplicationCreated();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyNewApplicationOnPortal");
 			e.getStackTrace();
 			throw e;
 		}
 	}
-}// 228=GP
+
+	@Test(groups = { "smoke" })  
+	@Description("Verify that on newly created applications, user should not be able to perform predefined operations like edit/view/delete/recall")
+	public void verifyUserUnablePerformPredefinedOperations()  throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
+			DashboardPage.hoveringOverAnyReport();
+			DashboardPage.clickActionOnPayButton();
+			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			PaymentHistoryPage.verifyNewApplicationCreated();
+			DashboardPage.verifyDashboardPage();
+			DashboardPage.navigateToApplicationPage();
+			ApplicationsListingPage.verifyUserUnablePerformPredefinedOperations();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyUserUnablePerformPredefinedOperations");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })  
+	@Description("Verify that on newly created applications, user should not be able to perform predefined operations like edit/view/delete/recall")
+	public void verifyStaffUserUnablePerformPredefinedOperations()  throws InterruptedException {
+
+		try{	SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+		DashboardPage.verifyDashboardPage();
+		DashboardPage.navigateToApplicationPage();
+		ApplicationsListingPage.verifyUserUnablePerformPredefinedOperations();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyStaffUserUnablePerformPredefinedOperations");
+			e.getStackTrace();
+			throw e;
+		}
+
+	}
+
+
+	@Test(groups = { "smoke" })  
+	@Description("Verify that the Customer is able to download Renewal Application document from application listing")
+	public void verifyCustomerDownloadRenewalApplicationDocument()  throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
+			DashboardPage.hoveringOverAnyReport();
+			DashboardPage.clickActionOnPayButton();
+			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			PaymentHistoryPage.verifyNewApplicationCreated();
+			DashboardPage.verifyDashboardPage();
+			DashboardPage.navigateToApplicationPage();
+			ApplicationsListingPage.customerDownloadRenewalApplicationDocument();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyCustomerDownloadRenewalApplicationDocument");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })  
+	@Description("Verify that the Staff is able to download Renewal Application document from application listing.")
+	public void verifyStaffDownloadRenewalApplicationDocument()  throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyDashboardPage();
+			DashboardPage.navigateToApplicationPage();
+			ApplicationsListingPage.customerDownloadRenewalApplicationDocument();
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyStaffDownloadRenewalApplicationDocument");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+
+	@Test(groups = { "smoke" })    
+	@Description("Verify that after successful payment, staff is notified about new renewal file available.")
+	public void verifyStaffNotifiedAboutNewRenewalFile()  throws InterruptedException {
+		try{
+			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
+			DashboardPage.hoveringOverAnyReport();
+			DashboardPage.clickActionOnPayButton();
+			PaymentPage.detailCustomerPayForRenewal(Prop.getTestData("payAmount"),Prop.getTestData("billingAddress"),Prop.getTestData("city"),Prop.getTestData("zip"),Prop.getTestData("phone"));
+			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
+			Yopmail.verifyNewRenewalFile(Prop.getTestData("EmailId"));
+		}catch(Exception e){
+			SeleniumUtils.captureScreenshot("verifyStaffNotifiedAboutNewRenewalFile()");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+}
+// 228=GP
