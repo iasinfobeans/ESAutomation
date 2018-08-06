@@ -173,7 +173,8 @@ public class PaymentPage {
 		log.info("Enter pay Amount ");
 		uploadElement.click();
 		log.info("Enter upload pdf ");
-		RobotUtils.uploadFile(".\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf");
+		String uploadfilePath = System.getProperty("user.dir")+"\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
+		RobotUtils.uploadFile(uploadfilePath);
 		log.info("upload pdf from drive ");
 		billingAddressBox.clear();
 		billingAddressBox.sendKeys(billingAddress);
@@ -181,13 +182,16 @@ public class PaymentPage {
 		cityBox.clear();
 		cityBox.sendKeys(city);
 		log.info("Enter your city");
+
 		stateBox.click();
 		log.info("choose one state from given states");
+
 		state.click();
 		log.info("Enter your state");
+
 		zipBox.clear();
 		zipBox.sendKeys(zip);
-		log.info("Enter your zip"); 
+		log.info("Enter your zip");
 		countryBox.click();
 		log.info("choose one country from given country");
 
@@ -208,7 +212,8 @@ public class PaymentPage {
 	public static void uploadRenewalApplicationForCustomer() { 
 		uploadElement.click();
 		log.info("Enter upload pdf ");
-		RobotUtils.uploadFile(".\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf");
+		String uploadfilePath = System.getProperty("user.dir")+"\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
+		RobotUtils.uploadFile(uploadfilePath);
 		log.info("upload pdf from drive ");
 	}
 
@@ -267,5 +272,47 @@ public class PaymentPage {
 		balanceAmountAfterPay=balanceAmount.getAttribute("value");
 		log.info("stored balance amount after pay");
 		assertEquals(balanceAmountAfterPay, balanceAmountbeforePay, "Compare balance amount before and after pay");
+	}
+	
+	@Step("Renewal Form field is not a mandatory field for ESL & ESR renewal..")
+	public static void renewalFormNotMandatoryEslEsr(String payAmount,String billingAddress,String city,String zip,String phone){
+		SeleniumUtils.waitForElementToBeVisible(payAmountBox);
+		payAmountBox.clear();
+		payAmountBox.sendKeys(payAmount);
+		log.info("Enter pay Amount ");
+
+		billingAddressBox.clear();
+		billingAddressBox.sendKeys(billingAddress);
+		log.info("Enter billing Address For Renewal of Report ");
+
+		cityBox.clear();
+		cityBox.sendKeys(city);
+		log.info("Enter your city");
+
+		stateBox.click();
+		log.info("choose one state from given states");
+
+		state.click();
+		log.info("Enter your state");
+
+		zipBox.clear();
+		zipBox.sendKeys(zip);
+		log.info("Enter your zip");
+
+
+		countryBox.click();
+		log.info("choose one country from given country");
+
+		country.click();
+		log.info("Enter your country");
+
+		SeleniumUtils.waitForElementToBeClickable(phoneBox);
+		phoneBox.clear();
+		phoneBox.sendKeys(phone);
+		log.info("Enter your phone details");
+
+		SeleniumUtils.waitForElementToBeClickable(payButton);
+		payButton.click();
+		log.info("Enter pay option for payment");
 	}
 }
