@@ -49,7 +49,7 @@ public class YopmailPage {
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
 			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
 			quatReqRecMailLine1, approvedOrDeclineProfileChange1, newQuotationAvailableMail1, paymentReceivedLine1,newRenewalLine1,
-			paymentReceivedToStaffLine1,invoicePaymentReceivedMailLine1;
+			paymentReceivedToStaffLine1,invoicePaymentReceivedMailLine1,invoicePaymentReceivedToStaffMailLine1,PMGApplicationSubmitByNonApprovedUserMailLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -64,7 +64,7 @@ public class YopmailPage {
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
 			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
 			quatReqRecMailLine4, approvedOrDeclineProfileChange5, newQuotationAvailableMail5, paymentReceivedLine5,
-			paymentReceivedToStaffLine5,newRenewalLine5,invoicePaymentReceivedMailLine5;
+			paymentReceivedToStaffLine5,newRenewalLine5,invoicePaymentReceivedMailLine5,invoicePaymentReceivedToStaffMailLine5,PMGApplicationSubmitByNonApprovedUserMailLine4;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -239,6 +239,27 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the Transaction History, please ')]")
 	static WebElement invoicePaymentReceivedMailLine4;
+	
+	@FindBy(xpath = "//*[contains(text(),'Payment Received')]")
+	static WebElement openInvoicePaymentReceivedToStaffMail;
+	
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through') and contains(text(),'for invoice')]")
+	static WebElement invoicePaymentReceivedToStaffMailLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'The transaction reference number is')]")
+	static WebElement invoicePaymentReceivedToStaffMailLine3;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the Transaction History, please ')]")
+	static WebElement invoicePaymentReceivedToStaffMailLine4;
+	
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Application PMG')]")
+	static WebElement openPMGApplicationSubmitByNonApprovedUserMail;
+	
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'for PMG application has been submitted successfully')]")
+	static WebElement PMGApplicationSubmitByNonApprovedUserMailLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Once your account is approved,')]")
+	static WebElement PMGApplicationSubmitByNonApprovedUserMailLine3;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -1040,6 +1061,94 @@ public class YopmailPage {
 
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified payment for invoice mail body in customer inbox.");
+	}
+
+	@Step("Opening payment received for invoice mail in staff inbox..")
+	public static void openPaymentForInvoiceReceivedMail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openInvoicePaymentReceivedToStaffMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openInvoicePaymentReceivedToStaffMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened payment received for invoice mail in staff inbox.");
+	}
+
+	@Step("Verifying payment received for invoice mail body in staff inbox.")
+	public static void verifyPaymentForInvoiceReceivedMail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = invoicePaymentReceivedToStaffMailLine1.getText();
+		String firstRgistrationLine = invoicePaymentReceivedToStaffMailLine2.getText();
+		String secondRgistrationLine = invoicePaymentReceivedToStaffMailLine3.getText();
+		String thirdRgistrationLine = invoicePaymentReceivedToStaffMailLine4.getText();
+		String forthRgistrationLine = invoicePaymentReceivedToStaffMailLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("has been received through"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("The transaction reference number is"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(thirdRgistrationLine.contains("To view the Transaction History, please "), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified payment received for invoice mail body in staff inbox.");
+	}
+
+	@Step("Opening PMG Application Submit By Non-Approved User mail in customer inbox.")
+	public static void openPMGApplicationSubmitByNonApprovedUserMail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openPMGApplicationSubmitByNonApprovedUserMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openPMGApplicationSubmitByNonApprovedUserMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened PMG Application Submit By Non-Approved User mail in customer inbox.");
+	}
+
+	@Step("Verifying PMG Application Submit By Non-Approved User mail body in customer inbox.")
+	public static void verifyPMGApplicationSubmitByNonApprovedUserMail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = PMGApplicationSubmitByNonApprovedUserMailLine1.getText();
+		String firstRgistrationLine = PMGApplicationSubmitByNonApprovedUserMailLine2.getText();
+		String secondRgistrationLine = PMGApplicationSubmitByNonApprovedUserMailLine3.getText();
+		String forthRgistrationLine = PMGApplicationSubmitByNonApprovedUserMailLine4.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("for PMG application has been submitted successfully"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("Once your account is approved,"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified PMG Application Submit By Non-Approved User mail body in customer inbox.");
 	}
 
 }
