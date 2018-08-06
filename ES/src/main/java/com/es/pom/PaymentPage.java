@@ -1,4 +1,6 @@
 package com.es.pom;
+import static org.testng.Assert.assertEquals;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -50,58 +52,58 @@ public class PaymentPage {
 
 	@FindBy(xpath="//*[@id='pay_button'and @class='btn btn-primary btn-lg btn-default payment-button']")
 	static WebElement payButton;
-	
+
 	@FindBy(xpath="//label[contains(text(),'Renewal')][contains(text(),'Form')]")
 	static WebElement renewaFormOption;
 
 	@FindBy(xpath="//span[@class='message notices alert']//ul//li")
 	static WebElement messageNoticeAlert;
-	
+
 	@FindBy(xpath="//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Invoice')]")
 	static WebElement invoiceLabel;
-	
+
 	@FindBy(xpath="//div[@class='form-group invoice-no-patch']//table//tbody/tr//td//label[contains(text(),'Total Amount')]")
 	static WebElement totalAmountLabel;
-	
+
 	@FindBy(xpath="//div[@class='form-group invoice-no-patch']//table//tbody/tr//td//label[contains(text(),'Balance Amount')]")
 	static WebElement balanceAmountLabel;
-	
+
 	@FindBy(xpath="//div[@class='form-group invoice-no-patch']//table//tbody/tr//td//label[contains(text(),'')]//span[@class='mandatory']")
 	static WebElement payAmountLabelWithAsterick;
-	
+
 	@FindBy(id="address")
 	static WebElement billingAddressLable;
-	
+
 	@FindBy(id="city")
 	static WebElement cityLable;
-	
+
 	@FindBy(xpath="//div[@class='form-group']//label[contains(text(),'State / Province')]")
 	static WebElement stateOrProvinceLable;
-	
+
 	@FindBy(xpath="//div[@class='form-group']//label[contains(text(),'Zip or Postal Code')]")
 	static WebElement zipCodeLable;
-	
+
 	@FindBy(xpath="//div[@class='form-group']//label[contains(text(),'Country')]")
 	static WebElement CountryLable;
-	
+
 	@FindBy(xpath="//div[@class='form-group']//label[contains(text(),'Phone')]")
 	static WebElement phoneLable;
-	
+
 	@FindBy(linkText="Go Back")
 	static WebElement goBackLink;
-	
+
 	@FindBy(xpath="//input[@type='submit']")
 	static WebElement payLink;
-	
+
 	@FindBy(id="other_amount")
 	static WebElement payAmountTextbox ;
-	
+
 	@FindBy(id="address")
 	static WebElement addressTextbox ;
-	
+
 	@FindBy(id="city")
 	static WebElement cityTextbox ;
-	
+
 	@FindBy(xpath="//div[@tabindex='8']")
 	static WebElement stateTextbox;
 
@@ -110,16 +112,23 @@ public class PaymentPage {
 
 	@FindBy(xpath="//div[@tabindex='10']")
 	static WebElement countryDropdown;
-	
+
 	@FindBy(xpath="//label[contains(text(),'Country')]/../div[@class='sbHolder']/ul/li/a")
 	static List<WebElement> countryList;
-	
+
 	@FindBy(id="zip")
 	static WebElement zipTextbox ;
-	
+
 	@FindBy(id="phone")
 	static WebElement phoneTextbox ;
-	
+
+	@FindBy(xpath="//input[@class='custom-input-box balance_amount']")
+	static WebElement balanceAmount;
+
+	static String balanceAmountbeforePay;
+
+	static String balanceAmountAfterPay;
+
 	@Step("verify Payment page elements...")
 	public static void verifyPaymentPageElements()
 	{
@@ -148,7 +157,7 @@ public class PaymentPage {
 		Assert.assertTrue(payLink.isDisplayed());
 		log.info("Pay Link displayed");
 	}
-	
+
 	@Step("verify Payment page Step...")
 	public static void verifyPaymentPage()
 	{
@@ -162,33 +171,23 @@ public class PaymentPage {
 		payAmountBox.clear();
 		payAmountBox.sendKeys(payAmount);
 		log.info("Enter pay Amount ");
-
-
 		uploadElement.click();
 		log.info("Enter upload pdf ");
-
 		RobotUtils.uploadFile(".\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf");
 		log.info("upload pdf from drive ");
-
 		billingAddressBox.clear();
 		billingAddressBox.sendKeys(billingAddress);
 		log.info("Enter billing Address For Renewal of Report ");
-
 		cityBox.clear();
 		cityBox.sendKeys(city);
 		log.info("Enter your city");
-
 		stateBox.click();
 		log.info("choose one state from given states");
-
 		state.click();
 		log.info("Enter your state");
-
 		zipBox.clear();
 		zipBox.sendKeys(zip);
-		log.info("Enter your zip");
-
-
+		log.info("Enter your zip"); 
 		countryBox.click();
 		log.info("choose one country from given country");
 
@@ -209,10 +208,8 @@ public class PaymentPage {
 	public static void uploadRenewalApplicationForCustomer() { 
 		uploadElement.click();
 		log.info("Enter upload pdf ");
-
 		RobotUtils.uploadFile(".\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf");
 		log.info("upload pdf from drive ");
-
 	}
 
 	@Step("presence of an additional field 'Renewal Form' on the payment screen for Application Renewal payment")
@@ -220,10 +217,13 @@ public class PaymentPage {
 		Assert.assertTrue(renewaFormOption.isDisplayed());
 		log.info("renewa Form option displayed");
 	}
-	
+
 	@Step("Fill Payment Page Form...")
 	public static void fillPaymentPageForm()
 	{
+		SeleniumUtils.refreshPage();
+		balanceAmountbeforePay=balanceAmount.getAttribute("value");
+		log.info("stored balance amount");
 		payAmountTextbox.clear();
 		payAmountTextbox.sendKeys(Prop.getTestData("payAmount"));
 		log.info("Pay amount entered");
@@ -237,22 +237,35 @@ public class PaymentPage {
 		SeleniumUtils.waitForElementToBeVisible(stateTextbox);
 		stateTextbox.click();
 		log.info("selecting state");
+		SeleniumUtils.waitForElementToBeClickable(stateList.get(3));
 		stateList.get(3).click();
 		log.info("state selected");
+		zipTextbox.clear();
+		zipTextbox.sendKeys(Prop.getTestData("zipBillingCity"));
+		SeleniumUtils.waitForElementToBeVisible(countryDropdown);
 		countryDropdown.click();
 		log.info("selecting country");
+		SeleniumUtils.waitForElementToBeClickable(countryList.get(1));
 		countryList.get(1).click();
 		log.info("country selected");
 		phoneTextbox.clear();
 		phoneTextbox.sendKeys(Prop.getTestData("billingPhone"));
 		log.info("Phone number entered");
 	}
-	
+
 	@Step("Navigate to payment detail page...")
-	public static void navigateToPaymentDetailPage()
+	public static void navigateToPaymentGatewayPage()
 	{
+		SeleniumUtils.waitForElementToBeVisible(payLink);
 		payLink.click();
 		log.info("Clicked on pay link");
 	}
-	
+
+	@Step("Verify the Balance due amount on the Portal...")
+	public static void compareBalanceAmountBeforAndAfterPay()
+	{
+		balanceAmountAfterPay=balanceAmount.getAttribute("value");
+		log.info("stored balance amount after pay");
+		assertEquals(balanceAmountAfterPay, balanceAmountbeforePay, "Compare balance amount before and after pay");
+	}
 }
