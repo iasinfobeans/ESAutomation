@@ -12,7 +12,7 @@ public class PaymentHistoryPage {
 	@FindBy(xpath="//span[@class='message success alert']//ul//li")
 	static WebElement paymentSuccessMessege;
 
-	@Step("verify that the payment was successful.")
+	@Step("Verify that the payment was successful.")
 	public static void verifyPaymentSucess(){
 		if(paymentSuccessMessege.getText().equals(Prop.getTestData("paymentSuccessMessage"))){
 			log.info("Payment was successful");
