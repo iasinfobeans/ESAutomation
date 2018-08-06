@@ -38,7 +38,7 @@ public class InvoiceListingPage {
 	@Step("Method to Verify the displayed details on Payment page")
 	public static void navigateToPaymentPage(){
 		SeleniumUtils.refreshPage();
-		SeleniumUtils.waitForElementToBeClickable(elementsToWaitForReload);
+		SeleniumUtils.waitForElementToBeClickable(sortingDropdown);
 		sortingDropdown.click();
 		log.info("Sorting selected");
 		SeleniumUtils.waitForElementToBeClickable(partialSort);

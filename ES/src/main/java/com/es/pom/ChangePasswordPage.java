@@ -3,6 +3,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 import com.es.setup.Driver;
 import com.es.util.Prop;
 import io.qameta.allure.Step;
@@ -28,17 +29,19 @@ public class ChangePasswordPage {
 	
 	static String storePassword;
 	
-	@Step("cahnge password for user account...")
+	@Step("Change password for user account...")
 	public static void changePassword() throws IOException
 	{
-		currentPasswordTextbox.sendKeys(Prop.getTestData("passwordToTest"));
+		currentPasswordTextbox.sendKeys(Prop.getTestData("password"));
 		log.info("entered current password");
-		newPassword.sendKeys(Prop.getTestData("passwordToTest"));
+		newPassword.sendKeys(Prop.getTestData("password"));
 		log.info("entered new password");
-		reenterNewPassword.sendKeys(Prop.getTestData("passwordToTest"));
+		reenterNewPassword.sendKeys(Prop.getTestData("password"));
 		log.info("Re enter new password");
-		log.info("Changed Password");
-		successMessage.isDisplayed()
-;	}
+		submitButton.click();
+		log.info("Changed Password by clicking on submit");
+		Assert.assertTrue(successMessage.isDisplayed());
+		log.info(successMessage.getText());
+	}
 
 }

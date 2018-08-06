@@ -103,7 +103,7 @@ public class QuotesManagement extends Setup {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
-			QuotationListingPage.viewQuotesOptions();
+			QuotationListingPage.viewQuotesTab();
 			AvaliableQuotesPage.applyForViewQuotesOptions();
 			ApplicationPageForQuotation.verifyApplicationPageForViewQuote();
 		} catch (Exception e) {
@@ -119,6 +119,7 @@ public class QuotesManagement extends Setup {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.viewQuotesTab();
 			QuotationListingPage.viewQuotesOptions();
 			AvaliableQuotesPage.applyForViewQuotesOptions();
 			ApplicationPageForQuotation.fillApplication(Prop.getTestData("companyName"),
@@ -126,7 +127,6 @@ public class QuotesManagement extends Setup {
 					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
 					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
 					Prop.getTestData("subjectOfReport"));
-			ApplicationPageForQuotation.verifySuccessfulSubmissionOfreport();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyStatusesOfQuotationRequestApplicationSaved");
 			e.getStackTrace();
@@ -215,7 +215,8 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyQuotationOption();
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
-			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),Prop.getTestData("uploadFilePath"));
+			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),
+					Prop.getTestData("uploadFilePath"));
 			Thread.sleep(30000);
 			DashboardPage.clickSendWhileUploadingQuotation();
 		} catch (Exception e) {
@@ -233,12 +234,180 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyQuotationOption();
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
-			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),Prop.getTestData("uploadFilePath"));
+			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),
+					Prop.getTestData("uploadFilePath"));
 			Thread.sleep(30000);
 			DashboardPage.clickSendWhileUploadingQuotation();
 			Yopmail.verifyNewQuotationAvailableMail(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCustomerMailAfterGivenInputInUploadOption");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })
+	@Description("Verify that the staff should be able to delete any quote if it has not been used to apply for an application.")
+	public void verifyDeleteQuoteByStaff() throws InterruptedException {
+		try {
+			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyQuotationOption();
+			DashboardPage.verifyUploadOption();
+			DashboardPage.verifyPopUpWindowForUpload();
+			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),
+					Prop.getTestData("uploadFilePath"));
+			Thread.sleep(30000);
+			DashboardPage.clickSendWhileUploadingQuotation();
+			QuotationListingPage.viewQuotesOptions();
+			QuotationListingPage.deleteQuoteByStaff();
+		} catch (Exception e) {
+			SeleniumUtils.captureScreenshot("verifyDeleteQuoteByStaff");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })
+	@Description("Verify that the staff person, on receiving the quotation request, will have an option to upload a quote.")
+	public void verifyUploadOptionForStaffOnQuotationRequest() throws Exception {
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.verifyGetAQuoteButton();
+			QuotationListingPage.customerClickOnGetAQuoteButton();
+			QuotationListingPage.inputForProductType(Prop.getTestData("productType"));
+			QuotationListingPage.inputForProductDescription(Prop.getTestData("productDescription"));
+			QuotationListingPage.submitQuotationRequest();
+			DashboardPage.logout();
+			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyQuotationOption();
+			DashboardPage.verifyUploadOption();
+		} catch (Exception e) {
+			SeleniumUtils.captureScreenshot("verifyUploadOptionForStaffOnQuotationRequest");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })
+	@Description("Verify the different statuses of the quotation request.")
+	public void verifyDifferentStatusesOfQuotationRequest() throws Exception {
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.verifyDifferentStatus();
+		} catch (Exception e) {
+			SeleniumUtils.captureScreenshot("verifyDifferentStatusesOfQuotationRequest");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })
+	@Description("Verify that if customer has applied for the quote and saved the application, the quote would not be allowed to be used for submitting another application.")
+	public void verifyCustomerAppliedForQuoteAndSaveApplication() throws InterruptedException {
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.viewQuotesTab();
+			QuotationListingPage.viewQuotesOptions();
+			AvaliableQuotesPage.applyForViewQuotesOptions();
+			ApplicationPageForQuotation.fillApplication(Prop.getTestData("companyName"),
+					Prop.getTestData("companyLegalStatus"), Prop.getTestData("mailingAddress"),
+					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
+					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
+					Prop.getTestData("subjectOfReport"));
+		} catch (Exception e) {
+			SeleniumUtils.captureScreenshot("verifyCustomerAppliedForQuoteAndSaveApplication");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })
+	@Description("Verify that the Quotation amount would be basic fees for the application.")
+	public void verifyQuotationAmountWithBasicFees() throws InterruptedException {
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.viewQuotesTab();
+			QuotationListingPage.viewQuotesOptions();
+			AvaliableQuotesPage.applyForViewQuotesOptions();
+			ApplicationPageForQuotation.fillApplication(Prop.getTestData("companyName"),
+					Prop.getTestData("companyLegalStatus"), Prop.getTestData("mailingAddress"),
+					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
+					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
+					Prop.getTestData("subjectOfReport"));
+			ApplicationPageForQuotation.fillContactDetails(Prop.getTestData("technicalRepresentativeName"),
+					Prop.getTestData("authSignatoryName"), Prop.getTestData("billingRepresentativeName"),
+					Prop.getTestData("technicalRepresentativeEmail"), Prop.getTestData("authSignatoryEmail"),
+					Prop.getTestData("billingRepresentativeEmail"));
+			ApplicationPageForQuotation.submitApplication();
+			ApplicationPageForQuotation.agreementCheckBox();
+			ApplicationPageForQuotation.submitAgreement();
+			ApplicationPageForQuotation.pay();
+			ApplicationPageForQuotation.observFees();
+		} catch (Exception e) {
+			SeleniumUtils.captureScreenshot("verifyQuotationAmountWithBasicFees");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })
+	@Description("Verify that the customer cannot apply for a coupon discount for applications applied through a quote request.")
+	public void verifyCouponDiscountApplicableOrNotForQuotation() throws InterruptedException {
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.viewQuotesTab();
+			QuotationListingPage.viewQuotesOptions();
+			AvaliableQuotesPage.applyForViewQuotesOptions();
+			ApplicationPageForQuotation.fillApplication(Prop.getTestData("companyName"),
+					Prop.getTestData("companyLegalStatus"), Prop.getTestData("mailingAddress"),
+					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
+					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
+					Prop.getTestData("subjectOfReport"));
+			ApplicationPageForQuotation.fillContactDetails(Prop.getTestData("technicalRepresentativeName"),
+					Prop.getTestData("authSignatoryName"), Prop.getTestData("billingRepresentativeName"),
+					Prop.getTestData("technicalRepresentativeEmail"), Prop.getTestData("authSignatoryEmail"),
+					Prop.getTestData("billingRepresentativeEmail"));
+			ApplicationPageForQuotation.submitApplication();
+			ApplicationPageForQuotation.agreementCheckBox();
+			ApplicationPageForQuotation.submitAgreement();
+			ApplicationPageForQuotation.pay();
+			ApplicationPageForQuotation.observFees();
+			ApplicationPageForQuotation.couponOption();
+		} catch (Exception e) {
+			SeleniumUtils.captureScreenshot("verifyCouponDiscountApplicableOrNotForQuotation");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke" })
+	@Description("Verify that if the customer has selected the quote and saved/submitted the application, but tries to make payment after the expiration date of the quote, then for such applications, the customer should not be able to make the payment.")
+	public void verifyPaymentAfterExpiryDate() throws InterruptedException {
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.viewQuotesTab();
+			QuotationListingPage.viewQuotesOptions();
+			AvaliableQuotesPage.applyForViewQuotesOptions();
+			ApplicationPageForQuotation.fillApplication(Prop.getTestData("companyName"),
+					Prop.getTestData("companyLegalStatus"), Prop.getTestData("mailingAddress"),
+					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
+					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
+					Prop.getTestData("subjectOfReport"));
+			ApplicationPageForQuotation.fillContactDetails(Prop.getTestData("technicalRepresentativeName"),
+					Prop.getTestData("authSignatoryName"), Prop.getTestData("billingRepresentativeName"),
+					Prop.getTestData("technicalRepresentativeEmail"), Prop.getTestData("authSignatoryEmail"),
+					Prop.getTestData("billingRepresentativeEmail"));
+			ApplicationPageForQuotation.submitApplication();
+			ApplicationPageForQuotation.agreementCheckBox();
+			ApplicationPageForQuotation.submitAgreement();
+		} catch (Exception e) {
+			SeleniumUtils.captureScreenshot("verifyPaymentAfterExpiryDate");
 			e.getStackTrace();
 			throw e;
 		}
