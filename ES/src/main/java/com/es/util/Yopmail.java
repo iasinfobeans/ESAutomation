@@ -438,7 +438,7 @@ public class Yopmail {
 	}
 	
 	/**
-	 * This method will verify payment for invoice mail body in Staff inbox.
+	 * This method will verify payment for invoice mail body in cutomer inbox.
 	 * @param email  -- iasinfobeans@yopmail.com
 	 */
 	public static void verifyPaymentForInvoiceMail(String email) {
@@ -451,6 +451,50 @@ public class Yopmail {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openPaymentForInvoiceMail();
 			YopmailPage.verifyPaymentForInvoiceMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+	
+	/**
+	 * This method will verify payment received for invoice mail body in Staff inbox.
+	 * @param email  -- esportal@yopmail.com
+	 */
+	public static void verifyPaymentForInvoiceReceivedMail(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPaymentForInvoiceReceivedMail();
+			YopmailPage.verifyPaymentForInvoiceReceivedMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+	
+	/**
+	 * This method will verify PMG Application Submit By Non-Approved User in customer inbox.
+	 * @param email  -- ecinfobeans@yopmail.com
+	 */
+	public static void verifyPMGApplicationSubmitByNonApprovedUser(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPMGApplicationSubmitByNonApprovedUserMail();
+			YopmailPage.verifyPMGApplicationSubmitByNonApprovedUserMail();
 		} catch (Exception e) {
 			throw e;
 		} finally {
