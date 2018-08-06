@@ -1,11 +1,11 @@
 package com.es.pom;
-
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import io.qameta.allure.Step;
+import com.es.util.SeleniumUtils;
 
 public class  ApplicationsListingPage {
 
@@ -28,6 +28,21 @@ public class  ApplicationsListingPage {
 
 	@FindBy(linkText="Edit")
 	static WebElement editApplicationLink;
+
+	@FindBy(xpath="//*[@id='app-list-dataTable']/tbody/tr[7]/td[7]/a")
+	static WebElement downloadOption;
+
+
+	@FindBy(xpath="//a[contains(text(),'view')]")
+	static WebElement viewOption;
+
+	@FindBy(xpath="//a[contains(text(),'Edit')]")
+	static WebElement editOption;
+
+	@FindBy(xpath="")
+	static WebElement assignProjectNumberOption;
+
+
 
 	@Step("verify Application page for ER Step...")
 	public static void verifyApplicationPageForER(){
@@ -65,6 +80,20 @@ public class  ApplicationsListingPage {
 		log.info("navigated to edit application page");
 		}
 
+	@Step("On newly created applications, user should not be able to perform predefined operations like edit/view/delete/recall....")
+	public static void verifyUserUnablePerformPredefinedOperations()
+	{
+		SeleniumUtils.waitForElementToBeClickable(downloadOption);
+		Assert.assertTrue(downloadOption.isDisplayed());
+		log.info("Download Option is displayed");
+	}
+
+	@Step("")
+	public static void customerDownloadRenewalApplicationDocument()
+	{
+		SeleniumUtils.waitForElementToBeClickable(downloadOption);
+		downloadOption.click();
+		log.info("Renewal Application Document is Downloaded ");
+	}
+
 }
-
-
