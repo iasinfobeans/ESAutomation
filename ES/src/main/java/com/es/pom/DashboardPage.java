@@ -127,49 +127,53 @@ public class DashboardPage {
 
 	@FindBy(xpath = "//*[contains(text(),'Quotation Request :')]")
 	static WebElement quotationRequest;
-	
+
 	@FindBy(linkText = "Upload")
 	static WebElement upload;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'Send Quotation for ')]")
 	static WebElement sendQuotation;	 
-	
+
 	@FindBy(xpath = "//*[@name='program_type']/following-sibling::div")
 	static WebElement dropDownInUploadQuotation;
-	
+
 	@FindBy(xpath = "//*[@id='quotes-document']")
 	static WebElement uploadButton;
-	
+
 	@FindBy(xpath = "//*[@id='amountDiv']")
 	static WebElement amountField;
-	
+
 	@FindBy(xpath = "//*[@id='quote_amount']")
 	static WebElement amountTextBox;
-	
+
 	@FindBy(xpath = "//*[@id='expireDateDiv']")
 	static WebElement expiredate;
-	
+
 	@FindBy(xpath = "//*[@id='upload_quote']")
 	static WebElement send;
-	
+
 	@FindBy(xpath = "//*[@name='cancel_quote']")
 	static WebElement cancelQuote;
-	
+
 	@FindBy(linkText = "ES Core")
 	static WebElement esCore;
-	
+
 	@FindBy(linkText = "Plumbing Mechanical and Gas")
 	static WebElement plumbingMechanicAndGas;
-	
+
 	@FindBy(linkText = "Evaluation Service Listing")
 	static WebElement evaluationServiceListing;
-	
+
 	@FindBy(xpath = "//div[@class='unpaid-lwa-loading']")
 	static WebElement loadingIcon;
 
 	@FindBy(linkText = "Invoices")
 	static WebElement invoicePageLink;
-	
+
+	@FindBy(xpath="//a[@title='SOW']")
+	static WebElement sowSection; 
+
+
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage()
 	{
@@ -310,7 +314,7 @@ public class DashboardPage {
 		log.info("clicked on logout Link");
 
 	}
-	
+
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport(){
 		SeleniumUtils.waitForElementToBeInvisible(loadingIcon);
@@ -318,7 +322,7 @@ public class DashboardPage {
 		SeleniumUtils.mouseHover(reportName);
 		log.info("Hover on Report Name");
 	}
-	
+
 	@Step("Verify the actions available on hovering over any report...")
 	public static void actionsAvailableHoveringOverAnyReport()
 	{
@@ -357,7 +361,7 @@ public class DashboardPage {
 		viewInvoicesForReportButton.click();
 		log.info("view Invoices button is clicked");
 	}
-	
+
 	@Step("Click on View Button")
 	public static void verifyViewOption() {
 		Assert.assertTrue(viewLink.isDisplayed());
@@ -384,14 +388,14 @@ public class DashboardPage {
 		log.info("Verified Pop up Window and parameters on it for view option.");
 
 	}
-	
+
 	@Step("Verifying Upload option id visible...")
 	public static void verifyUploadOption() {
 		Assert.assertTrue(upload.isDisplayed());
 		upload.click();
 		log.info("Verify Upload option displayed");
 	}
-	
+
 	@Step("Observing Pop up Window for Upload option..")
 	public static void verifyPopUpWindowForUpload() {
 		SeleniumUtils.waitForElementToBeVisible(sendQuotation);
@@ -403,11 +407,11 @@ public class DashboardPage {
 		Assert.assertTrue(expiredate.isDisplayed());
 		Assert.assertTrue(send.isDisplayed());
 		Assert.assertTrue(cancelQuote.isDisplayed());
-		
+
 		log.info("Verified Pop up Window and parameters on it for upload option.");
 
 	}
-	
+
 	@Step("click on send button while uploading Quotation..")
 	public static void clickSendWhileUploadingQuotation() {
 		SeleniumUtils.waitForElementToBeVisible(send);
@@ -428,13 +432,13 @@ public class DashboardPage {
 		if (progarmType.equalsIgnoreCase("Evaluation Service Listing")) {
 			evaluationServiceListing.click();
 		}
-		
+
 		amountTextBox.sendKeys(amount);
 		uploadButton.click();
 		uploadFilePath = uploadFilePath.replace("/", "\\");
 		StringSelection ss = new StringSelection(uploadFilePath);
-	    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-	    try {
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+		try {
 			Robot robot = new Robot();
 			robot.delay(250);
 			robot.keyPress(KeyEvent.VK_ENTER);
@@ -450,10 +454,10 @@ public class DashboardPage {
 			log.error("Error while uploading file is: "+e);
 			e.printStackTrace();
 		}
-	   
+
 		log.info("Given input while uploading Quotation.");
 	}
-	
+
 	@Step("Navigating to invoice page...")
 	public static void navigatingToMyInvoices() {
 		log.info("popup arrived");
@@ -485,11 +489,17 @@ public class DashboardPage {
 		Assert.assertTrue(reportName.isDisplayed());
 		log.info("Additional Technical Contact Associated is displayed");
 	}
-	
+
 	@Step("Authorized signatory associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval)")
 	public static void authorizedSignatoryAssociatedWithReport() {
 		Assert.assertTrue(reportName.isDisplayed());
 		log.info("Technical Contact Associated is displayed");
 	}
-	
+
+	@Step("click on the SOW option from the header section")
+	public static void clickOnSOWOption() {
+		sowSection.click();
+		log.info("clicked on the SOW option from the header section");
+	}
+
 }
