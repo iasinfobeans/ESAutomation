@@ -193,14 +193,21 @@ public class DashboardPage {
 		log.info("ContactUs Option is displayed");
 	}
 
-	@Step("redirecting to password change page...")
+	@Step("Redirecting to password change page...")
 	public static void navigateToChangePasswordPage()
 	{
+		log.info("popup arrived");
+		SeleniumUtils.waitForElementToBeVisible(popupWindow);
+		popupWindow.click();
+		log.info("popup closed");
+		SeleniumUtils.scrollToBottom();
+		SeleniumUtils.refreshPage();   
+		SeleniumUtils.waitForElementToBeVisible(changePasswordLink);
 		changePasswordLink.click();
 		log.info("Clicked on change password link");
 	}
 
-	@Step("redirecting to Edit Profile page...")
+	@Step("Redirecting to Edit Profile page...")
 	public static void navigateToEditProfilePage()
 	{
 		log.info("popup arrived");
@@ -238,6 +245,11 @@ public class DashboardPage {
 	@Step("redirecting to Application page...")
 	public static void navigateToApplicationPage()
 	{
+		log.info("popup arrived");
+		SeleniumUtils.waitForElementToBeVisible(popupWindow);
+		popupWindow.click();
+		log.info("popup closed");
+		SeleniumUtils.refreshPage();   
 		applicationPageLink.click();
 		log.info("Navigated to application page");
 	}
@@ -444,6 +456,20 @@ public class DashboardPage {
 	
 	@Step("Navigating to invoice page...")
 	public static void navigatingToMyInvoices() {
+		log.info("popup arrived");
+		SeleniumUtils.waitForElementToBeVisible(popupWindow);
+		popupWindow.click();
+		log.info("popup closed");
+		SeleniumUtils.refreshPage(); 
+		SeleniumUtils.waitForElementToBeVisible(invoicePageLink);
+		invoicePageLink.click();
+		log.info("Nvaigating to my invoices page");
+	}
+	
+	@Step("Navigating to invoice page when already logged in...")
+	public static void navigatingToMyInvoicesWhenLoggedInAlready() {
+		SeleniumUtils.refreshPage(); 
+		SeleniumUtils.waitForElementToBeVisible(invoicePageLink);
 		invoicePageLink.click();
 		log.info("Nvaigating to my invoices page");
 	}
@@ -452,7 +478,6 @@ public class DashboardPage {
 	public static void technicalContactAssociatedWithReport() {
 		Assert.assertTrue(reportName.isDisplayed());
 		log.info("Technical Contact Associated is displayed");
-
 	}
 
 	@Step("Additional Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval).")
