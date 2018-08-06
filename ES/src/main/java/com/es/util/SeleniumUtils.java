@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.es.setup.Setup;
 
+import io.qameta.allure.Attachment;
+
 public class SeleniumUtils {
 
 	private static Logger log = Logger.getLogger(SeleniumUtils.class.getName());
@@ -25,7 +27,8 @@ public class SeleniumUtils {
 	 * @return Screenshot File path
 	 * @param Test case name
 	 */
-	public static String captureScreenshot(String testName) {
+	 @Attachment(value = "Page screenshot", type = "image/png")
+	public static byte [] captureScreenshot(String testName) {
 		String filePath = null;
 		try {
 			File scrFile = null;
@@ -44,7 +47,9 @@ public class SeleniumUtils {
 			log.info("Failed to take screenshot : " + e.getMessage());
 			e.printStackTrace();
 		}
-		return filePath;
+		//return filePath;
+		log.info("File path for screenshot" + filePath);
+		 return ((TakesScreenshot)Setup.driver).getScreenshotAs(OutputType.BYTES);
 	}
 
 	/**
