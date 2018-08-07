@@ -2,12 +2,7 @@ package com.es.util;
 
 import java.util.Iterator;
 import java.util.Set;
-
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.testng.Assert;
-
-import com.es.pom.SOWFeaturePage;
 import com.es.pom.YopmailPage;
 
 public class Yopmail {
