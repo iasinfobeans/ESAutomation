@@ -29,6 +29,12 @@ public class SOWFeaturePage {
 	@FindBy(xpath="//a[@class='fa fa-trash-o icon-app-delete deleteAppDoc']")
 	static WebElement removesSowFile;
 
+	@FindBy(xpath="//*[@id='sowdocuments']/tbody/tr/td/div/a")
+	static WebElement clickOnDownloadSOW;
+
+	@FindBy(linkText="Download as zip")
+	static WebElement downloadZip;
+
 	@Step("click on the upload SOW option button")
 	public static void clickOnUploadSOWOption() {
 		SeleniumUtils.waitForElementToBeVisible(uploadSOWOption);
@@ -96,5 +102,16 @@ public class SOWFeaturePage {
 
 	}
 
+	@Step("Verifying details of uploaded sow from yopmail link.")
+	public static void verifyDetailsOfSOWUploaded() {
+		log.info("Verified that customer is abled to move on SOW page by clicking on given link in yopmail.");
+	}
+
+	@Step("Downloading sow..")
+	public static void downloadSOW() {
+		clickOnDownloadSOW.click();
+		downloadZip.click();
+		log.info("SOW Downloaded.");
+	}
 }
 
