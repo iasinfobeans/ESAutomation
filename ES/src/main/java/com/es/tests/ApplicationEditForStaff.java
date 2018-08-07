@@ -18,7 +18,7 @@ public class ApplicationEditForStaff extends Setup {
 	public static void verifyEditOptionForPendingReview() throws IOException, InterruptedException {
 		try{
 			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
-			DashboardPage.navigateToApplicationPage();
+			DashboardPage.navigateToApplicationListingPage();
 			ApplicationsListingPage.checkEditOptionInPendingReviewApp();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyEditOptionForPendingReview");
@@ -32,7 +32,7 @@ public class ApplicationEditForStaff extends Setup {
 	public static void verifyEditOptionForSignatoryInformation() throws IOException, InterruptedException {
 		try{
 			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
-			DashboardPage.navigateToApplicationPage();
+			DashboardPage.navigateToApplicationListingPage();
 			ApplicationsListingPage.navigateToEditApplicationPage();
 			ApplicationPage.verifySignatoryInfoIsNotEditable();
 		}catch(Exception e){
@@ -41,6 +41,4 @@ public class ApplicationEditForStaff extends Setup {
 			throw e;
 		}
 	}
-
-
 }

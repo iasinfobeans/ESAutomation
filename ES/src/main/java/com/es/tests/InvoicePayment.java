@@ -24,7 +24,7 @@ public class InvoicePayment extends Setup {
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			DashboardPage.navigatingToMyInvoices();
 			InvoiceListingPage.navigateToPaymentPage();
-			PaymentPage.verifyPaymentPageElements();
+			PaymentPage.verifyPaymentPageElementsForInvoice();
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyInvoicePaymentPageElements");
 			e.getStackTrace();
@@ -133,7 +133,7 @@ public class InvoicePayment extends Setup {
 			PaymentPage.fillPaymentPageForm();
 			PaymentPage.navigateToPaymentGatewayPage();
 			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"), Prop.getTestData("cVCNumber"));
-			//Yopmail method for Staff
+			Yopmail.verifyPaymentForInvoiceReceivedMail(Prop.getTestData("username"));
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyPaymentMail_Staff");
 			e.getStackTrace();
