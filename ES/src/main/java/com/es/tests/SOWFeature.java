@@ -10,9 +10,6 @@ import io.qameta.allure.Description;
 
 public class  SOWFeature extends Setup {
 
-
-
-
 	@Test(groups = { "smoke" })  
 	@Description("Verify that the staff is able to 'Upload SOW' for ESR applications.")
 	public void verifyStaffUploadSOWForESRApplications()  throws InterruptedException {
@@ -107,7 +104,7 @@ public class  SOWFeature extends Setup {
 		}
 
 	}
-	
+
 
 
 }
