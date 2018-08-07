@@ -28,7 +28,7 @@ public class  ApplicationsListingPage {
 
 	@FindBy(linkText="Edit")
 	static WebElement editApplicationLink;
-
+	
 	@FindBy(xpath="//*[@id='app-list-dataTable']/tbody/tr[7]/td[7]/a")
 	static WebElement downloadOption;
 
@@ -42,13 +42,31 @@ public class  ApplicationsListingPage {
 	@FindBy(xpath="")
 	static WebElement assignProjectNumberOption;
 
-
-
+	@FindBy(linkText="All Applications")
+	static WebElement sortingDropdown;
+	
+	@FindBy(linkText="New")
+	static WebElement newSort;
+	//
+	@FindBy(linkText="Renewal")
+	static WebElement renewalSort;
+	
+	@FindBy(linkText="Pay")
+	static WebElement paymentPageLink;
+	
+	@FindBy(xpath="//th[@tabindex='0']")
+	static WebElement elementsToWaitForReload;
+	
+	@FindBy(xpath="//a[@id='sbToggle_58028408']")
+	static WebElement applicationStatusDropdown;
+	
+	@FindBy(linkText="Pending Signature")
+	static WebElement applicationStatusPendingSignature;
+	
 	@Step("verify Application page for ER Step...")
 	public static void verifyApplicationPageForER(){
 		Assert.assertTrue(verifyRegisterfromER.isDisplayed());
 		log.info("Verify Register from ER displayed");
-
 	}
 
 	@Step("verify Application page for PGM Step...")
@@ -95,5 +113,27 @@ public class  ApplicationsListingPage {
 		downloadOption.click();
 		log.info("Renewal Application Document is Downloaded ");
 	}
-
+	
+	@Step("Navigate to Payment page")
+	public static void navigateToPaymentPage(){
+		SeleniumUtils.waitForElementToBeVisible(elementsToWaitForReload);
+		SeleniumUtils.refreshPage();
+		sortingDropdown.click();
+		log.info("Sorting dropdown selected");
+		SeleniumUtils.waitForElementToBeVisible(elementsToWaitForReload);
+		newSort.click();
+		log.info("new sort");
+		paymentPageLink.click();
+		log.info("Payment page");
+	}
+	
+	@Step("Click on recall application...")
+	public static void clickOnRecallApplication(){
+		applicationStatusDropdown.click();
+		log.info("Dropdown to select an application status");
+		applicationStatusPendingSignature.click();
+		log.info("Clicked on pending signature status");
+		SeleniumUtils.acceptPopup();
+		log.info("Popup accepted");
+	}
 }
