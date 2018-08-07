@@ -116,6 +116,7 @@ public class Setup {
 		PageFactory.initElements(driver, InvoiceListingPage.class);
 		PageFactory.initElements(driver, CardDetailsPage.class);
 		PageFactory.initElements(driver, PaymentHistoryPage.class);
+	
 	}
 
 	@AfterMethod(alwaysRun = true)

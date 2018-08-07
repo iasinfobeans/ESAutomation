@@ -125,12 +125,24 @@ public class PaymentPage {
 	@FindBy(xpath="//input[@class='custom-input-box balance_amount']")
 	static WebElement balanceAmount;
 
+	@FindBy(xpath="///div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Application')][contains(text(),'No.')]")
+	static WebElement ApplicationNumberLabel;
+	
+	@FindBy(xpath="//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Quotation Id')]")
+	static WebElement quotationIdLabel;
+	
+	@FindBy(xpath="//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Basic Fees')]")
+	static WebElement basicFeesLabel;
+	
+	@FindBy(xpath="//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Pay')][contains(text(),'Amount')]")
+	static WebElement payAmountLabel;
+	
 	static String balanceAmountbeforePay;
 
 	static String balanceAmountAfterPay;
 
-	@Step("verify Payment page elements...")
-	public static void verifyPaymentPageElements()
+	@Step("verify Payment page elements for Invoice...")
+	public static void verifyPaymentPageElementsForInvoice()
 	{
 		Assert.assertEquals(messageNoticeAlert.getText(),Prop.getTestData("message_invoice_payment"));
 		log.info(messageNoticeAlert.getText());
@@ -314,5 +326,36 @@ public class PaymentPage {
 		SeleniumUtils.waitForElementToBeClickable(payButton);
 		payButton.click();
 		log.info("Enter pay option for payment");
+	}
+	
+	@Step("Verify payment page elements for Applications...")
+	public static void verifyPaymentPageElementsForApplication()
+	{
+		Assert.assertEquals(messageNoticeAlert.getText(),Prop.getTestData("message_invoice_payment"));
+		log.info(messageNoticeAlert.getText());
+		Assert.assertTrue(ApplicationNumberLabel.isDisplayed());
+		log.info("label for Application no. displayed");
+		Assert.assertTrue(quotationIdLabel.isDisplayed());
+		log.info("label for Quotation Id is displayed");
+		Assert.assertTrue(payAmountLabel.isDisplayed());
+		log.info("label for Pay amount displayed");
+		Assert.assertTrue(basicFeesLabel.isDisplayed());
+		log.info("label for Basic Fees displayed");
+		Assert.assertTrue(payAmountLabelWithAsterick.isDisplayed());
+		log.info("label for Pay Amount displayed and it is mandatory");
+		Assert.assertTrue(billingAddressLable.isDisplayed());
+		log.info("label for billing address displayed");
+		Assert.assertTrue(cityLable.isDisplayed());
+		log.info("label for city displayed");
+		Assert.assertTrue(stateOrProvinceLable.isDisplayed());
+		log.info("label for state Or Province displayed");
+		Assert.assertTrue(CountryLable.isDisplayed());
+		log.info("label for Country displayed");
+		Assert.assertTrue(phoneLable.isDisplayed());
+		log.info("label for phone displayed");
+		Assert.assertTrue(goBackLink.isDisplayed());
+		log.info("Go Back link displayed");
+		Assert.assertTrue(payLink.isDisplayed());
+		log.info("Pay Link displayed");
 	}
 }
