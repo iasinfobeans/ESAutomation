@@ -30,6 +30,7 @@ import com.es.pom.PaymentPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.ReportsPage;
 import com.es.pom.ResetPasswordPage;
+import com.es.pom.SOWFeaturePage;
 import com.es.pom.SignInPage;
 import com.es.pom.UpdateProfilePage;
 import com.es.pom.UserListingsPage;
@@ -116,7 +117,8 @@ public class Setup {
 		PageFactory.initElements(driver, InvoiceListingPage.class);
 		PageFactory.initElements(driver, CardDetailsPage.class);
 		PageFactory.initElements(driver, PaymentHistoryPage.class);
-	
+		PageFactory.initElements(driver, PaymentHistoryPage.class);
+		PageFactory.initElements(driver, SOWFeaturePage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
