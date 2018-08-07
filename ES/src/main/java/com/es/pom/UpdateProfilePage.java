@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import com.es.util.Prop;
+import com.es.util.SeleniumUtils;
 import io.qameta.allure.Step;
 
 public class UpdateProfilePage {
@@ -71,6 +72,7 @@ public class UpdateProfilePage {
 		log.info("city entered");
 		stateTextbox.click();
 		log.info("selecting state");
+		SeleniumUtils.waitForElementToBeVisible(stateList.get(1));
 		stateList.get(1).click();
 		log.info("state selected");
 		zipcodeTextbox.clear();
@@ -78,6 +80,7 @@ public class UpdateProfilePage {
 		log.info("Zipcode entered");
 		countryDropdown.click();
 		log.info("selecting country");
+		SeleniumUtils.waitForElementToBeVisible(countryList.get(1));
 		countryList.get(1).click();
 		log.info("country selected");
 		updateProfileButton.click();
@@ -89,16 +92,17 @@ public class UpdateProfilePage {
 	public static void updateProfileAgain()
 	{
 		jobtitleTextbox.clear();
-		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle"));
+		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle2"));
 		log.info("job tile entered");
 		mailingAddressTextbox.clear();
-		mailingAddressTextbox.sendKeys(Prop.getTestData("MailingAddress"));
+		mailingAddressTextbox.sendKeys(Prop.getTestData("MailingAddress2"));
 		log.info("Mailing Address entered");
 		textboxToEnterCity.clear();
-		textboxToEnterCity.sendKeys(Prop.getTestData("city"));
+		textboxToEnterCity.sendKeys(Prop.getTestData("city2"));
 		log.info("city entered");
 		stateTextbox.click();
 		log.info("selecting state");
+		SeleniumUtils.waitForElementToBeVisible(stateList.get(1));
 		stateList.get(1).click();
 		log.info("state selected");
 		zipcodeTextbox.clear();
@@ -106,6 +110,7 @@ public class UpdateProfilePage {
 		log.info("Zipcode entered");
 		countryDropdown.click();
 		log.info("selecting country");
+		SeleniumUtils.waitForElementToBeVisible(countryList.get(1));
 		countryList.get(1).click();
 		log.info("country selected");
 		updateProfileButton.click();
