@@ -3,7 +3,11 @@ package com.es.pom;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
 import com.es.util.Prop;
+import com.es.util.SeleniumUtils;
+
 import io.qameta.allure.Step;
 
 public class PaymentHistoryPage {
