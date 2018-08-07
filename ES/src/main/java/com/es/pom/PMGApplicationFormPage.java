@@ -88,8 +88,12 @@ public class PMGApplicationFormPage {
 	@FindBy(xpath="//span[@class='message success alert']//ul//li")
 	static  WebElement successMessage;
 
+	@FindBy(id="app_sidebar_save")
+	static  WebElement saveButton;
+	
 	@Step("PMG Listing application form...")
 	public static void PmgApplicationFormFill(){
+		SeleniumUtils.waitForElementToBeVisible(companyNameTextbox);
 		companyNameTextbox.sendKeys(Prop.getTestData("companyName"));
 		log.info("Entered company name");
 		applicantEmailTextbox.sendKeys(Prop.getTestData("applicantEmail"));
@@ -148,6 +152,13 @@ public class PMGApplicationFormPage {
 		log.info(successMessage.getText());
 	}
 
+	@Step("Saving PMG application...")
+	public static void PmgApplicationSave(){
+		saveButton.click();
+		log.info("clicked on save button");
+		successMessage.isDisplayed();
+		log.info(successMessage.getText());
+	}
 }
 
 
