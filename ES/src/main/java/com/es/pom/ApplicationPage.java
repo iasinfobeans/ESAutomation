@@ -42,7 +42,7 @@ public class ApplicationPage {
 		log.info("Verified that signer email text box is non editable");
 	}
 
-	@Step("Verify Delete Application...")
+	@Step("Verify Delete Application")
 	public static void deleteApplication(){
 		Assert.assertTrue(draftApplicationElement.isDisplayed());
 		deleteApplicationFromDraft.click();
