@@ -20,6 +20,15 @@ public class ApplicationPage {
 	@FindBy(id="appcompanyname")
 	static  WebElement companyNameTextbox;
 
+	@FindBy(id="Delete")
+	static  WebElement deleteApplication;
+	
+	@FindBy(xpath="//a[@class='tbl-btn del-application']/ancestor::td/preceding-sibling::td//strong[text()='Draft']")
+	static WebElement draftApplicationElement;
+	
+	@FindBy(linkText="Delete")
+	static  WebElement deleteApplicationFromDraft;
+	
 	@Step("verify Edit Application page can't allow to edit signatory information(i.e. name and email)...")
 	public static void verifySignatoryInfoIsNotEditable(){
 		companyNameTextbox.sendKeys("Infobeans");
@@ -33,6 +42,14 @@ public class ApplicationPage {
 		log.info("Verified that signer email text box is non editable");
 	}
 
+	@Step("Verify Delete Application...")
+	public static void deleteApplication(){
+		Assert.assertTrue(draftApplicationElement.isDisplayed());
+		deleteApplicationFromDraft.click();
+		log.info("clicked on delete application link");
+		SeleniumUtils.acceptPopup();
+		log.info("Popup Accepted");
+	}
 }
 
 
