@@ -2,11 +2,7 @@ package com.es.util;
 
 import java.util.Iterator;
 import java.util.Set;
-
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.testng.Assert;
-
 import com.es.pom.YopmailPage;
 
 public class Yopmail {
@@ -194,7 +190,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify New Account Registration mail body(Contents).
 	 * @param email
@@ -216,7 +212,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify New Account Approved by staff mail body(Contents).
 	 * @param email
@@ -238,7 +234,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify PMG Application mail body(Contents).
 	 * @param email
@@ -260,7 +256,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify ESR Application mail body(Contents).
 	 * @param email
@@ -282,7 +278,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify Quotation Submit by customer mail body(Contents).
 	 * @param email---iasinfobeans@yopmail.com
@@ -304,7 +300,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify Quotation Received By Staff -  mail body(Contents).
 	 * @param email -- esportal@yopmail.com
@@ -326,7 +322,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verified approved or decline profile changes mail body in customer inbox.
 	 * @param email -- iasinfobeans@yopmail.com
@@ -348,7 +344,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verified new quotation available mail in customer inbox.
 	 * @param email  -- iasinfobeans@yopmail.com
@@ -370,7 +366,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify email for received payment in customer inbox.
 	 * @param email  -- iasinfobeans@yopmail.com
@@ -392,7 +388,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify email for received payment in Staff inbox.
 	 * @param email  -- esportal@yopmail.com
@@ -414,7 +410,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify new renewal file mail body in Staff inbox.
 	 * @param email  -- esportal@yopmail.com
@@ -436,7 +432,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify payment for invoice mail body in cutomer inbox.
 	 * @param email  -- iasinfobeans@yopmail.com
@@ -458,7 +454,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify payment received for invoice mail body in Staff inbox.
 	 * @param email  -- esportal@yopmail.com
@@ -480,7 +476,7 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
-	
+
 	/**
 	 * This method will verify PMG Application Submit By Non-Approved User in customer inbox.
 	 * @param email  -- ecinfobeans@yopmail.com
@@ -495,6 +491,50 @@ public class Yopmail {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openPMGApplicationSubmitByNonApprovedUserMail();
 			YopmailPage.verifyPMGApplicationSubmitByNonApprovedUserMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+
+	/**
+	 * This method will verify SOW uploaded mail in customer inbox and move to the SOW page.
+	 * @param email  -- iasinfobeans@yopmail.com
+	 */
+	public static void verifySOWUploadeMailToTechnicalRepresentative(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openSOWUploadeMailInCustomerInbox();
+			YopmailPage.verifySOWUploadeMailBodyInCustomerInbox();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+
+	/**
+	 * This method will verify SOW uploaded mail in customer inbox and move to the SOW page.
+	 * @param email  -- rachelzane@yopmail.com
+	 */
+	public static void verifySOWUploadedMailToAuthorizedSignatory(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openSOWUploadeMailInCustomerInbox();
+			YopmailPage.verifySOWUploadeMailBodyInCustomerInbox();
 		} catch (Exception e) {
 			throw e;
 		} finally {

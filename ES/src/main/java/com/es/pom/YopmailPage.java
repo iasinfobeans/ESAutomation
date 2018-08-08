@@ -47,9 +47,9 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
-			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
-			quatReqRecMailLine1, approvedOrDeclineProfileChange1, newQuotationAvailableMail1, paymentReceivedLine1,newRenewalLine1,
-			paymentReceivedToStaffLine1,invoicePaymentReceivedMailLine1,invoicePaymentReceivedToStaffMailLine1,PMGApplicationSubmitByNonApprovedUserMailLine1;
+	profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
+	quatReqRecMailLine1, approvedOrDeclineProfileChange1, newQuotationAvailableMail1, paymentReceivedLine1,newRenewalLine1,
+	paymentReceivedToStaffLine1,invoicePaymentReceivedMailLine1,invoicePaymentReceivedToStaffMailLine1,PMGApplicationSubmitByNonApprovedUserMailLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -62,9 +62,9 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
-			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
-			quatReqRecMailLine4, approvedOrDeclineProfileChange5, newQuotationAvailableMail5, paymentReceivedLine5,
-			paymentReceivedToStaffLine5,newRenewalLine5,invoicePaymentReceivedMailLine5,invoicePaymentReceivedToStaffMailLine5,PMGApplicationSubmitByNonApprovedUserMailLine4;
+	profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
+	quatReqRecMailLine4, approvedOrDeclineProfileChange5, newQuotationAvailableMail5, paymentReceivedLine5,
+	paymentReceivedToStaffLine5,newRenewalLine5,invoicePaymentReceivedMailLine5,invoicePaymentReceivedToStaffMailLine5,PMGApplicationSubmitByNonApprovedUserMailLine4;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -218,7 +218,7 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[contains(text(),'renewal application form has been uploaded')]")
 	static WebElement openNewRenewalFileMail;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'renewal application form for Report')]")
 	static WebElement newRenewalLine2;
 
@@ -227,10 +227,10 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details, please ')]")
 	static WebElement newRenewalLine4;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Invoice')]")
 	static WebElement openInvoicePaymentReceivedMail;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through') and contains(text(),'for invoice')]")
 	static WebElement invoicePaymentReceivedMailLine2;
 
@@ -239,10 +239,10 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the Transaction History, please ')]")
 	static WebElement invoicePaymentReceivedMailLine4;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'Payment Received')]")
 	static WebElement openInvoicePaymentReceivedToStaffMail;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'has been received through') and contains(text(),'for invoice')]")
 	static WebElement invoicePaymentReceivedToStaffMailLine2;
 
@@ -251,15 +251,27 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the Transaction History, please ')]")
 	static WebElement invoicePaymentReceivedToStaffMailLine4;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'ICC-ES: Application PMG')]")
 	static WebElement openPMGApplicationSubmitByNonApprovedUserMail;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'for PMG application has been submitted successfully')]")
 	static WebElement PMGApplicationSubmitByNonApprovedUserMailLine2;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Once your account is approved,')]")
 	static WebElement PMGApplicationSubmitByNonApprovedUserMailLine3;
+
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: SOW has been uploaded for Project')]")
+	static WebElement openSOWUploadeMailInCustomerInbox;
+
+	@FindBy(linkText = "click here")
+	static WebElement sowUploadLink;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'SOW has been uploaded for Project')]")
+	static WebElement SOWUploadeMailInCustomerInboxMailLine2;
+
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details, please ')]")
+	static WebElement SOWUploadeMailInCustomerInboxMailLine3;
 
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
@@ -470,7 +482,7 @@ public class YopmailPage {
 
 		Assert.assertEquals(
 				secondRgistrationLine
-						.contains("An ICC-ES staff representative will review the changes and get in touch with you."),
+				.contains("An ICC-ES staff representative will review the changes and get in touch with you."),
 				true, "Text is not contain in email body");
 
 		Assert.assertEquals(
@@ -1147,8 +1159,31 @@ public class YopmailPage {
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
+		sowUploadLink.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified PMG Application Submit By Non-Approved User mail body in customer inbox.");
 	}
 
+	@Step("Opening SOW uploaded mail in customer inbox.")
+	public static void openSOWUploadeMailInCustomerInbox() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openSOWUploadeMailInCustomerInbox.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openSOWUploadeMailInCustomerInbox.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened SOW uploaded mail in customer inbox.");
+	}
+
+	@Step("Verifying SOW uploaded mail body in customer inbox.")
+	public static void verifySOWUploadeMailBodyInCustomerInbox() {
+		SeleniumUtils.switchToIframeById("ifmail");
+		sowUploadLink.click();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified SOW uploaded mail body in customer inbox.");
+	}
 }
