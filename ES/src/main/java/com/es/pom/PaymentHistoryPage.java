@@ -16,9 +16,7 @@ public class PaymentHistoryPage {
 	@FindBy(xpath="//span[@class='message success alert']//ul//li")
 	static WebElement paymentSuccessMessege;
 
-	@FindBy(xpath="//*[@id='paymentListTable']/tbody/tr[1]/td[5]")
-	//@FindBy(xpath="//*[@id='paymentListTable']//tr[./td[.='iasinfobeans@yopmail.com']][./td[.='Report']]/td[.='PMG-1004']\")")
-	//div[@class='col-md-6 col-xs-6 padding-left-0 pay_details' ]//label/following-sibling:://div[@class='col-md-6 col-xs-6 padding-right-0  pay_details  pull-right']
+	@FindBy(xpath="//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']/../following-sibling::div/span")
 	static WebElement newApplication;
 
 	@Step("Verify that the payment was successful.")
