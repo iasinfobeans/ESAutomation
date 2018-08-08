@@ -237,7 +237,7 @@ public class Yopmail {
 
 	/**
 	 * This method will verify PMG Application mail body(Contents).
-	 * @param email
+	 * @param email (For test case no 33)
 	 */	
 	public static void verifyPMGApplicationMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -479,7 +479,7 @@ public class Yopmail {
 
 	/**
 	 * This method will verify PMG Application Submit By Non-Approved User in customer inbox.
-	 * @param email  -- ecinfobeans@yopmail.com
+	 * @param email  -- ecinfobeans@yopmail.com (For Test case no 21)
 	 */
 	public static void verifyPMGApplicationSubmitByNonApprovedUser(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -535,6 +535,95 @@ public class Yopmail {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openSOWUploadeMailInCustomerInbox();
 			YopmailPage.verifySOWUploadeMailBodyInCustomerInbox();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+
+	/**
+	 * This method will verify SOW file removed mail.
+	 * @param email  -- rachelzane@yopmail.com
+	 */
+	public static void verifySOWFileRemoveMailToAuthorizedSignatory(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openSOWFileRemovedMail();
+			YopmailPage.verifySOWFileRemovedMailBody();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+
+	/**
+	 * This method will verify PMG application submitted by Non-approved user..
+	 * @param email  -- ecinfobeans@yopmail.com (For Test case no 23)
+	 */
+	public static void verifyPMGApplicationSubmittedByNonApprovedUser(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPMGApplicationSubmitByNonApprovedUserMail();
+			YopmailPage.verifyPMGApplicationSubmittedByNonApprovedUserMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+
+	/**
+	 * This method will verify PMG Application mail body in staff mail(Contents).
+	 * @param email (For test case no 31)
+	 */	
+	public static void verifyPMGApplicationMailInStaffInbox(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPMGApplicationEmail();
+			YopmailPage.verifyPMGApplicationEmailBody();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+
+
+	/**
+	 * This method will verify PMG Application mail body in customer mail(Contents).
+	 * @param email (For test case no 31)
+	 */	
+	public static void verifyPMGApplicationMailInCustomerInbox(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openPMGApplicationEmailInCustomerInbox();
+			YopmailPage.verifyPMGApplicationEmailBodyInCustomerInbox();
 		} catch (Exception e) {
 			throw e;
 		} finally {
