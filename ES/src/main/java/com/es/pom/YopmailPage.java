@@ -273,6 +273,12 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details, please ')]")
 	static WebElement SOWUploadeMailInCustomerInboxMailLine3;
 
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: SOW has been removed for Project')]")
+	static WebElement openSOWFileRemovedMail;
+
+	@FindBy(linkText = "click here")
+	static WebElement sowFileRemovedLink;
+
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
 		emailTextBox.clear();
@@ -1185,5 +1191,28 @@ public class YopmailPage {
 		sowUploadLink.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified SOW uploaded mail body in customer inbox.");
+	}
+
+	@Step("Opening SOW file removed mail.")
+	public static void openSOWFileRemovedMail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			openSOWFileRemovedMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openSOWFileRemovedMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened SOW file removed mail.");
+	}
+
+	@Step("Verifying SOW file removed mail body.")
+	public static void verifySOWFileRemovedMailBody() {
+		SeleniumUtils.switchToIframeById("ifmail");
+		sowFileRemovedLink.click();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified SOW file removed mail body.");
 	}
 }
