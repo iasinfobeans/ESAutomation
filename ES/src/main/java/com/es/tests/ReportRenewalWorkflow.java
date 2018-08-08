@@ -99,7 +99,7 @@ public class ReportRenewalWorkflow extends Setup{
 	@Description("Verify that the Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval)")
 	public void verifyTechnicalContactAssociatedWithReport() throws InterruptedException {
 		try{
-			SignInPage.login(Prop.getTestData("technicalContactAssociatedUsername"),Prop.getTestData("technicalContactAssociatedPassword"),"Customer");
+			SignInPage.login(Prop.getTestData("technicalContactAssociatedUsername"),Prop.getTestData("Password"),"Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.technicalContactAssociatedWithReport();
 		}catch(Exception e){
@@ -291,7 +291,7 @@ public class ReportRenewalWorkflow extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke" })  
+	@Test(groups = { "" })  
 	@Description("Verify that on successful renewal payment for any application, a new application is created on the portal of the same program type.")
 	public void verifyNewApplicationOnPortal()  throws InterruptedException {
 		try{
@@ -309,7 +309,7 @@ public class ReportRenewalWorkflow extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke" })  
+	@Test(groups = { "" })  
 	@Description("Verify that on newly created applications, user should not be able to perform predefined operations like edit/view/delete/recall")
 	public void verifyUserUnablePerformPredefinedOperations()  throws InterruptedException {
 		try{
