@@ -542,4 +542,26 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
+
+	/**
+	 * This method will verify SOW file removed mail.
+	 * @param email  -- rachelzane@yopmail.com
+	 */
+	public static void verifySOWFileRemoveMailToAuthorizedSignatory(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openSOWFileRemovedMail();
+			YopmailPage.verifySOWFileRemovedMailBody();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
 }
