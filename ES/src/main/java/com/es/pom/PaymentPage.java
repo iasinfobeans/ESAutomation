@@ -183,14 +183,17 @@ public class PaymentPage {
 		payAmountBox.clear();
 		payAmountBox.sendKeys(payAmount);
 		log.info("Enter pay Amount ");
+		
 		uploadElement.click();
 		log.info("Enter upload pdf ");
 		String uploadfilePath = System.getProperty("user.dir")+"\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
 		RobotUtils.uploadFile(uploadfilePath);
 		log.info("upload pdf from drive ");
+		
 		billingAddressBox.clear();
 		billingAddressBox.sendKeys(billingAddress);
 		log.info("Enter billing Address For Renewal of Report ");
+		
 		cityBox.clear();
 		cityBox.sendKeys(city);
 		log.info("Enter your city");
