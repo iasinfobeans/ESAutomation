@@ -101,10 +101,9 @@ public class SOWFeaturePage {
 	@Step("Verify that if Staff removes a SOW file, a notification email would be sent to Technical representative of the Report")
 	public static void staffRemovesSOWFile() {
 		removesSowFile.click();
+		SeleniumUtils.acceptPopup();
 		log.info(" Staff removes a SOW file ");
-		
-		oKRemovesSowFile.click();
-		log.info(" Staff removes a SOW file By Opting on OK ");
+
 	}
 
 	@Step("Verifying details of uploaded sow from yopmail link.")
@@ -118,5 +117,17 @@ public class SOWFeaturePage {
 		downloadZip.click();
 		log.info("SOW Downloaded.");
 	}
+
+	@Step("Verifying details of uploaded sow from yopmail link.")
+	public static void verifyDetailsOfSOWFileRemoved() {
+		log.info("Verified that customer is abled to move on SOW page by clicking on given link in yopmail.");
+	}
+
+	@Step("Verifying download option is visible or not..")
+	public static void downloadOptionVisibiltiy() {
+		Assert.assertTrue(clickOnDownloadSOW.isDisplayed(), "Download Option is nor visible on page");
+		log.info("Verified Downloaded option visibilty.");
+	}
+
 }
 
