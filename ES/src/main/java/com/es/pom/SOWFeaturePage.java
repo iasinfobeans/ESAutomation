@@ -34,6 +34,9 @@ public class SOWFeaturePage {
 
 	@FindBy(linkText="Download as zip")
 	static WebElement downloadZip;
+	
+	@FindBy(id="allowDelete_sow-documents")
+	static WebElement oKRemovesSowFile;
 
 	@Step("click on the upload SOW option button")
 	public static void clickOnUploadSOWOption() {
@@ -99,7 +102,9 @@ public class SOWFeaturePage {
 	public static void staffRemovesSOWFile() {
 		removesSowFile.click();
 		log.info(" Staff removes a SOW file ");
-
+		
+		oKRemovesSowFile.click();
+		log.info(" Staff removes a SOW file By Opting on OK ");
 	}
 
 	@Step("Verifying details of uploaded sow from yopmail link.")
