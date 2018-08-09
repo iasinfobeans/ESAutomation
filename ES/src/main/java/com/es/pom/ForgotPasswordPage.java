@@ -14,7 +14,7 @@ public class ForgotPasswordPage {
 	@FindBy(id="user_forget_pass")
 	static WebElement enterEmailPlaceholder;
 
-	@FindBy(xpath="//input[@value='SEND RESET PASSWORD LINK']")
+	@FindBy(xpath="//input[@value='Send Reset Password Link']")
 	static WebElement passwordResetLink;
 
 	@FindBy(xpath="//span[@class='message success alert']/ul/li")
