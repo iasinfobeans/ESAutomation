@@ -14,7 +14,7 @@ import io.qameta.allure.Description;
 
 public class ForgotPassword extends Setup {
 
-	@Test(groups = {"smoke"})
+	@Test(groups = {"smoke", "ForgotPassword" })
 	@Description("Verify that customer is able to reset the password using the forgot password functionality")
 	public static void verifyForgotPasswordFlow() throws IOException, InterruptedException {
 		try{
@@ -27,7 +27,7 @@ public class ForgotPassword extends Setup {
 		}
 	}
 	
-	@Test(groups = {"smoke"})
+	@Test(groups = {"smoke", "ForgotPassword" })
 	@Description("Verify that an email with password reset link is sent to the customer")
 	public static void verifyPasswordResetMailisSent() throws IOException, InterruptedException {
 		try{
@@ -41,7 +41,7 @@ public class ForgotPassword extends Setup {
 		}
 	}
 
-	@Test(groups = {"smoke"})
+	@Test(groups = {"smoke", "ForgotPassword" })
 	@Description("Verify that customer is able to reset the password after clicking the link in the email")
 	public static void verifydResetPasswordFromMail() throws IOException, InterruptedException {
 		try{
