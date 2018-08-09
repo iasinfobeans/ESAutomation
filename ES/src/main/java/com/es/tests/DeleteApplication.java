@@ -4,6 +4,7 @@ import java.io.IOException;
 import org.testng.annotations.Test;
 import com.es.pom.ApplicationPage;
 import com.es.pom.DashboardPage;
+import com.es.pom.OverlayPage;
 import com.es.pom.PMGApplicationFormPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
@@ -13,7 +14,7 @@ import io.qameta.allure.Description;
 
 public class DeleteApplication extends Setup {
 
-	@Test(groups = {"smoke"})
+	@Test(groups = {"smoke","DeleteApplication"})
 	@Description("Verify the Delete Application functionality for Unapproved user.")
 	public static void verifyApplicationDelete_UnapprovedUser() throws IOException, InterruptedException {
 		try{
@@ -29,8 +30,8 @@ public class DeleteApplication extends Setup {
 		}
 	}
 	
-	@Test(groups = {"smoke"})
-	@Description("Verify the Delete Application functionality for Unapproved user.")
+	@Test(groups = {"smoke","DeleteApplication"})
+	@Description("Verify the Delete Application functionality for Aapproved user.")
 	public static void verifyApplicationDelete_AprovedUser() throws IOException, InterruptedException {
 		try{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
