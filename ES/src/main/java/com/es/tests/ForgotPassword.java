@@ -35,7 +35,7 @@ public class ForgotPassword extends Setup {
 			ForgotPasswordPage.resetPassword(Prop.getTestData("username"));
 			Yopmail.verifyPasswordResetEmailBody(Prop.getTestData("username"));
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyForgotPasswordFlow");
+			SeleniumUtils.captureScreenshot("verifyPasswordResetMailisSent");
 			e.getStackTrace();
 			throw e;
 		}
@@ -50,7 +50,7 @@ public class ForgotPassword extends Setup {
 			String resetPasswordLink = Yopmail.getPasswordResetLink(Prop.getTestData("username"));
 			ResetPasswordPage.changePassword(resetPasswordLink);
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifyForgotPasswordFlow");
+			SeleniumUtils.captureScreenshot("verifydResetPasswordFromMail");
 			e.getStackTrace();
 			throw e;
 		}
