@@ -14,7 +14,7 @@ import io.qameta.allure.Description;
 
 public class Login extends Setup {
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "Login" })
 	@Description("Verify that a customer is able to login into the portal")
 	public static void verifyLoginAsCustomer() throws IOException, InterruptedException {
 		try{
@@ -27,7 +27,7 @@ public class Login extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "Login" })
 	@Description("Verify that a ES Staff member is able to login into the portal")
 	public static void verifyLoginAsStaff() throws IOException, InterruptedException {
 		try{

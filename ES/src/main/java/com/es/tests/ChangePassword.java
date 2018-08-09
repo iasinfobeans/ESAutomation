@@ -13,7 +13,7 @@ import io.qameta.allure.Description;
 
 public class ChangePassword extends Setup {
 
-	@Test(groups = {"smoke"})
+	@Test(groups = { "smoke", "ChangePassword" })
 	@Description("Verify that customer is able to reset the password using the forgot password functionality")
 	public static void verifyChangePasswordFlow() throws IOException, InterruptedException {
 		try{
