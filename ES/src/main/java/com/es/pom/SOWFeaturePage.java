@@ -24,17 +24,21 @@ public class SOWFeaturePage {
 	static WebElement saveButton;
 
 	@FindBy(xpath="//span[@class='message success alert']//ul//li")
-	static WebElement sOWUpatedSuccessfullyMessege;
+	static WebElement sOWUpatedSuccessfullyMessage, projectMustHaveAtleastOneSOWAssociatedMessage;
 
 	@FindBy(xpath="//a[@class='fa fa-trash-o icon-app-delete deleteAppDoc']")
 	static WebElement removesSowFile;
 
 	@FindBy(xpath="//*[@id='sowdocuments']/tbody/tr/td/div/a")
-	static WebElement clickOnDownloadSOW;
+	static WebElement downloadSOW;
+
+
+	@FindBy(xpath="//*[@class='fa fa-trash-o icon-app-delete deleteSowFromTooltip']")
+	static WebElement deleteSOWFile;
 
 	@FindBy(linkText="Download as zip")
 	static WebElement downloadZip;
-	
+
 	@FindBy(id="allowDelete_sow-documents")
 	static WebElement oKRemovesSowFile;
 
@@ -94,16 +98,17 @@ public class SOWFeaturePage {
 	}
 	@Step("SOW should be uploaded and a confirmation message should be displayed on the screen...")
 	public static void verifyConfirmationMessageDisplayedScreen() {
-		Assert.assertTrue(sOWUpatedSuccessfullyMessege.isDisplayed());
+		Assert.assertTrue(sOWUpatedSuccessfullyMessage.isDisplayed());
 		log.info(" confirmation message is displayed on the screen");
 
 	}
 	@Step("Verify that if Staff removes a SOW file, a notification email would be sent to Technical representative of the Report")
 	public static void staffRemovesSOWFile() {
 		removesSowFile.click();
-		SeleniumUtils.acceptPopup();
 		log.info(" Staff removes a SOW file ");
 
+		SeleniumUtils.acceptPopup();
+		log.info(" Staff removes a SOW file By Opting on OK ");
 	}
 
 	@Step("Verifying details of uploaded sow from yopmail link.")
@@ -113,7 +118,7 @@ public class SOWFeaturePage {
 
 	@Step("Downloading sow..")
 	public static void downloadSOW() {
-		clickOnDownloadSOW.click();
+		downloadSOW.click();
 		downloadZip.click();
 		log.info("SOW Downloaded.");
 	}
@@ -125,9 +130,20 @@ public class SOWFeaturePage {
 
 	@Step("Verifying download option is visible or not..")
 	public static void downloadOptionVisibiltiy() {
-		Assert.assertTrue(clickOnDownloadSOW.isDisplayed(), "Download Option is nor visible on page");
+		Assert.assertTrue(downloadSOW.isDisplayed(), "Download Option is nor visible on page");
 		log.info("Verified Downloaded option visibilty.");
 	}
 
+	@Step("The staff user should NOT be able to delete ALL the files attached as SOW")
+	public static void verifyStaffUserUnableDeleteAllFilesSOW() throws InterruptedException {
+
+		downloadSOW.click();
+		Thread.sleep(1000);
+		deleteSOWFile.click();
+		log.info("delete SOW File.");
+		Thread.sleep(1000);
+		Assert.assertTrue(projectMustHaveAtleastOneSOWAssociatedMessage.isDisplayed());
+		log.info(" project Must Have At least One SOW Associated Message message is displayed on the screen");
+	}
 }
 
