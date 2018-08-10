@@ -235,7 +235,7 @@ public class PaymentPage {
 	@Step("presence of an additional field 'Renewal Form' on the payment screen for Application Renewal payment")
 	public static void additionalCustomerFieldRenewalForm() {
 		Assert.assertTrue(renewaFormOption.isDisplayed());
-		log.info("renewa Form option displayed");
+		log.info("renewal Form option displayed");
 	}
 
 	@Step("Fill Payment Page Form...")
@@ -360,5 +360,12 @@ public class PaymentPage {
 		log.info("Go Back link displayed");
 		Assert.assertTrue(payLink.isDisplayed());
 		log.info("Pay Link displayed");
+	}
+	
+	@Step("Verify payment page elements for ReportRenewal...")
+	public static void verifyPaymentPageElementsForReportRenewal() {
+		Assert.assertTrue(paymentElement.isDisplayed());
+		log.info("Payment Element displayed");
+		 
 	}
 }
