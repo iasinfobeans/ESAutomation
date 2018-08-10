@@ -12,7 +12,7 @@ import io.qameta.allure.Description;
 
 public class ApplyForCustomer extends Setup{
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "ApplyForCustomer" })
 	@Description("Verify that user is able to register on the portal using the Apply Link from one of the program on to the home page.")
 	public void verifyApplyWorkflow() throws InterruptedException {
 		try{
@@ -25,7 +25,7 @@ public class ApplyForCustomer extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke"})
+	@Test(groups = { "smoke", "ApplyForCustomer" })
 	@Description("Verify the email for OTP..")
 	public void verifyEmailForOTPApplyWorkflow()throws InterruptedException {
 		try{
@@ -38,7 +38,7 @@ public class ApplyForCustomer extends Setup{
 			}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "ApplyForCustomer" })
 	@Description("Verify the registration process once correct OTP and other fields are entered.")
 	public void verifyRegistrationFromApplyWorkflow() throws InterruptedException {
 		try{	
@@ -53,7 +53,7 @@ public class ApplyForCustomer extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke"})
+	@Test(groups = { "smoke", "ApplyForCustomer" })
 	@Description("Verify the registration process once correct OTP and other fields are entered.")
 	public void verifyEmailNotificationsToCustomerForApplyWorkFlow() throws InterruptedException {
 		try{	
@@ -68,7 +68,7 @@ public class ApplyForCustomer extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke"})
+	@Test(groups = { "smoke", "ApplyForCustomer" })
 	@Description("Verify the email notifications sent to the Staff upon successful registration.")
 	public void verifynEmailNotificationsToStaffForER() throws InterruptedException {
 		try{	
@@ -83,7 +83,7 @@ public class ApplyForCustomer extends Setup{
 		}
 	}
 
-	@Test(groups = {"smoke"})
+	@Test(groups = { "smoke", "ApplyForCustomer" })
 	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
 	public void verifyESStaffQualifyLeadinCRMForER()throws InterruptedException {
 		try{
