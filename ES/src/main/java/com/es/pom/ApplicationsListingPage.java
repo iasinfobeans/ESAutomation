@@ -29,7 +29,7 @@ public class  ApplicationsListingPage {
 	@FindBy(linkText="Edit")
 	static WebElement editApplicationLink;
 
-	@FindBy(xpath="//*[@id='app-list-dataTable']//tr[./td[.='PMG-2018-0122']][./td[.='Renewal']]/td[.=' Download ']")
+	@FindBy(xpath="//*[@id='app-list-dataTable']//tr[./td[.='PMG']][./td[.='Renewal']]/td[.=' Download ']")
 	static WebElement downloadOption;
 
 
