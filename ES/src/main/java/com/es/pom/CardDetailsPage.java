@@ -31,6 +31,9 @@ public class CardDetailsPage {
 	@FindBy(id="cv_data")
 	static WebElement cVCNumberElement;
 
+	@FindBy(xpath="//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']/../following-sibling::div/span")
+	static WebElement oderIdReport;
+
 	@FindBy(id="submitButton")
 	static WebElement submitButton;
 
@@ -79,5 +82,12 @@ public class CardDetailsPage {
 		log.info("Dashboard Option is displayed");
 	}
 
+	@Step("A new oderId should be created on the portal of the same program type....")
+	public static String verifyOderIdNewApplicationCreated()
+	{
+		String orderId = oderIdReport.getText();
+		log.info("Oder Id for Report "+orderId);
+		return orderId;
+	}
 }
 
