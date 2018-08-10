@@ -51,7 +51,7 @@ public class Register extends Setup{
 	}*/
 
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "Register" })
 	@Description("Verify that the user is able to initiate the registration process by clicking on the register link present on the home page.")
 	public void verifyRegistrationFromPortal() throws InterruptedException {
 		try{
@@ -64,7 +64,7 @@ public class Register extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke"})
+	@Test(groups = { "smoke", "Register" })
 	@Description("Verify the email for OTP.")
 	public void verifyEmailForOTP() throws InterruptedException {
 		try{
@@ -78,7 +78,7 @@ public class Register extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "Register"})
 	@Description("Verify the registration process once correct OTP and other fields are entered.")
 	public void verifyRegistrationWithCorrectOTP() throws InterruptedException {
 		try{
@@ -93,7 +93,7 @@ public class Register extends Setup{
 		}
 	}
 
-	@Test(groups = {"smoke"})
+	@Test(groups = { "smoke", "Register" })
 	@Description("Verify the email notifications sent to the Customer upon successful registration.")
 	public void verifySuccessfulRegistrationEmailNotificationsToCustomer() throws InterruptedException {
 		try{
@@ -106,9 +106,9 @@ public class Register extends Setup{
 			e.getStackTrace();
 			throw e;
 		}
-	}   // 5,6 and 7 are CRM Based 
+	}   
 
-	@Test(groups = {"smoke"})
+	@Test(groups = { "smoke", "Register" })
 	@Description("Verify the email notifications sent to the Staff upon successful registration.")
 	public void verifyEmailNotificationsToStaff() throws InterruptedException {
 		try{
@@ -123,7 +123,7 @@ public class Register extends Setup{
 		}
 	}
 
-	@Test(groups = {"smoke"})
+	@Test(groups = { "smoke", "Register" })
 	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
 	public void verifyESStaffQualifyLeadinCRM() throws InterruptedException {
 		try{
@@ -138,7 +138,7 @@ public class Register extends Setup{
 		}
 	}
 
-	@Test(groups = {"smoke"})
+	@Test(groups = { "smoke", "Register" })
 	@Description("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.")
 	public void verifyConfirmationEmailToCustomerCRMQualifying() throws InterruptedException {
 		try{
@@ -155,7 +155,7 @@ public class Register extends Setup{
 	}   // Qualifying to User Mail is send after 10-15 minutes to the customer,so we need to wait for that time. Please see what can be done.
 	//currently for checking functioning of this method i have used a hardcoded data which is a qualified User.
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "Register" })
 	@Description("Verify that the user is qualified and all the portal options get available to user.")
 	public void verifyUserIsQualified() throws InterruptedException {
 		try{	
