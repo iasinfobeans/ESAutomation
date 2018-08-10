@@ -325,9 +325,7 @@ public class DashboardPage {
 		log.info("clicked on logout Link");
 
 	}
-
-
-
+	
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport(){
 		SeleniumUtils.waitForElementToBeInvisible(loadingIcon);
