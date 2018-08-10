@@ -11,9 +11,18 @@ public class ReportsPage {
 	@FindBy(xpath="//div[@class='ehading']")
 	static WebElement reportsElement;
 
+	@FindBy(xpath="//*[@id='programReportsTable']/tbody/tr/td/a/parent::td/following-sibling::td/a")
+	static WebElement viewReportOption;
+
 	@Step("Dashboard to have an additional head titled 'Reports.")
 	public static void verifyTitleReport(){
 		Assert.assertTrue(reportsElement.isDisplayed());
 		log.info("Reports is displayed on Dashboard");
 	}	
+
+	@Step(" Navigate to Project listing page")
+	public static void navigateToProjectListingPage() {
+		viewReportOption.click();
+		log.info(" Navigate to Project listing page");
+	}
 }
