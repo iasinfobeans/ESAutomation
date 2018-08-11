@@ -64,7 +64,7 @@ public class Register extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke", "Register","tushar" })
+	@Test(groups = { "smoke", "Register"})
 	@Description("Verify the email for OTP.")
 	public void verifyEmailForOTP() throws InterruptedException {
 		try{
