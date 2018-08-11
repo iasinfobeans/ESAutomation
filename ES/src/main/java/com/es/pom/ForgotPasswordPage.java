@@ -11,18 +11,17 @@ public class ForgotPasswordPage {
 
 	private static Logger log = Logger.getLogger(ForgotPasswordPage.class.getName());
 
-	@FindBy(id="user_forget_pass")
+	@FindBy(id = "user_forget_pass")
 	static WebElement enterEmailPlaceholder;
 
-	@FindBy(xpath="//input[@value='Send Reset Password Link']")
+	@FindBy(xpath = "//input[@value='Send Reset Password Link']")
 	static WebElement passwordResetLink;
 
-	@FindBy(xpath="//span[@class='message success alert']/ul/li")
+	@FindBy(xpath = "//span[@class='message success alert']/ul/li")
 	static WebElement resetPasswordSucessMessage;
 
 	@Step("Reset Password")
-	public static void resetPassword(String email)
-	{
+	public static void resetPassword(String email) {
 		enterEmailPlaceholder.sendKeys(email);
 		log.info("entered email");
 
@@ -31,6 +30,5 @@ public class ForgotPasswordPage {
 
 		Assert.assertEquals(Prop.getTestData("resetPasswordSuccess"), resetPasswordSucessMessage.getText());
 	}
-
 
 }

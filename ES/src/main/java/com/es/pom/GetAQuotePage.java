@@ -1,4 +1,5 @@
 package com.es.pom;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,17 +13,17 @@ public class GetAQuotePage {
 
 	private static Logger log = Logger.getLogger(GetAQuotePage.class.getName());
 
-	@FindBy(xpath="//textarea[@class='producttype-textarea requiredField']")
+	@FindBy(xpath = "//textarea[@class='producttype-textarea requiredField']")
 	static WebElement productTypeBox;
 
-	@FindBy(xpath="//textarea[@class='productdec-textarea requiredField']")
+	@FindBy(xpath = "//textarea[@class='productdec-textarea requiredField']")
 	static WebElement productDescriptionBox;
 
-	@FindBy(id="quote_submit")
+	@FindBy(id = "quote_submit")
 	static WebElement submitButton;
 
 	@Step("Verify The Get a Quote screen to have the following fields:ProductType,Description and submit...")
-	public static void verifyGetAQuoteButton(){
+	public static void verifyGetAQuoteButton() {
 		SeleniumUtils.waitForElementToBeVisible(productTypeBox);
 
 		Assert.assertTrue(productTypeBox.isDisplayed());
@@ -34,10 +35,10 @@ public class GetAQuotePage {
 		Assert.assertTrue(submitButton.isDisplayed());
 		log.info("Submit Button is displayed");
 
-	}	
+	}
 
 	@Step("Verify that the customer is able to request for a quote")
-	public static void verifyCustomerRequestforQuote(String productType,String productDescription) {
+	public static void verifyCustomerRequestforQuote(String productType, String productDescription) {
 		SeleniumUtils.waitForElementToBeVisible(productTypeBox);
 
 		productTypeBox.clear();

@@ -6,25 +6,26 @@ import org.openqa.selenium.support.FindBy;
 import com.es.util.SeleniumUtils;
 
 import io.qameta.allure.Step;
+
 public class UserListingsPage {
 
-private static Logger log = Logger.getLogger(UserListingsPage.class.getName());
-	
+	private static Logger log = Logger.getLogger(UserListingsPage.class.getName());
+
 	@FindBy(xpath = "//a[@class='tbl-icon-gear dropdown-toggle']")
 	static WebElement buttonForMoreOptions;
-	
-	@FindBy(linkText ="View Profile")
+
+	@FindBy(linkText = "View Profile")
 	static WebElement viewProfileOption;
-	
+
 	@FindBy(xpath = "//div[@class='ehading']")
 	static WebElement viewProfileVerifyElement;
-	
-	@FindBy(linkText ="Approve")
+
+	@FindBy(linkText = "Approve")
 	static WebElement approveOption;
-	
-	@FindBy(linkText ="Decline")
+
+	@FindBy(linkText = "Decline")
 	static WebElement declineOption;
-	
+
 	@Step("Verify view profile from user listings")
 	public static void checkViewProfileOption() {
 		buttonForMoreOptions.click();
@@ -34,7 +35,7 @@ private static Logger log = Logger.getLogger(UserListingsPage.class.getName());
 		viewProfileVerifyElement.isDisplayed();
 		log.info("View Profile page verified");
 	}
-	
+
 	@Step("Verify approve and decline requests visibility for updation from user listings")
 	public static void checkApproveAndDeclineOption() {
 		buttonForMoreOptions.click();
@@ -44,11 +45,10 @@ private static Logger log = Logger.getLogger(UserListingsPage.class.getName());
 		declineOption.isDisplayed();
 		log.info("Decline request option available");
 	}
-	
+
 	@Step("Verify approve requests for updation from user listings")
 	public static void approveProfileUpdateRequest() {
-		if(buttonForMoreOptions.isDisplayed())
-		{
+		if (buttonForMoreOptions.isDisplayed()) {
 			buttonForMoreOptions.click();
 			log.info("more options available");
 			approveOption.click();
@@ -57,11 +57,10 @@ private static Logger log = Logger.getLogger(UserListingsPage.class.getName());
 			log.info("final Request approved popup clicked");
 		}
 	}
-	
+
 	@Step("Verify decline requests for updation from user listings")
 	public static void declineProfileUpdateRequest() {
-		if(buttonForMoreOptions.isDisplayed())
-		{
+		if (buttonForMoreOptions.isDisplayed()) {
 			buttonForMoreOptions.click();
 			log.info("more options available");
 			declineOption.click();
@@ -70,6 +69,5 @@ private static Logger log = Logger.getLogger(UserListingsPage.class.getName());
 			log.info("final Request denied popup clicked");
 		}
 	}
-	
+
 }
-//

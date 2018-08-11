@@ -13,29 +13,29 @@ import io.qameta.allure.Description;
 
 public class ApplicationEditForStaff extends Setup {
 
-	@Test(groups = {"smoke"})
+	@Test(groups = { "smoke", "ApplicationEditForStaff" })
 	@Description("Verify that the staff has an option to edit the Applications that are in 'Pending Review' status")
 	public static void verifyEditOptionForPendingReview() throws IOException, InterruptedException {
-		try{
-			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+		try {
+			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.navigateToApplicationListingPage();
 			ApplicationsListingPage.checkEditOptionInPendingReviewApp();
-		}catch(Exception e){
+		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyEditOptionForPendingReview");
 			e.getStackTrace();
 			throw e;
 		}
 	}
 
-	@Test(groups = {"smoke"})
+	@Test(groups = { "smoke", "ApplicationEditForStaff" })
 	@Description("Verify that the staff is able to edit all the sections except for the signatory information")
 	public static void verifyEditOptionForSignatoryInformation() throws IOException, InterruptedException {
-		try{
-			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+		try {
+			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.navigateToApplicationListingPage();
 			ApplicationsListingPage.navigateToEditApplicationPage();
 			ApplicationPage.verifySignatoryInfoIsNotEditable();
-		}catch(Exception e){
+		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyEditOptionForSignatoryInformation");
 			e.getStackTrace();
 			throw e;

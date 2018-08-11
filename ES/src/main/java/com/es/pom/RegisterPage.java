@@ -1,4 +1,5 @@
 package com.es.pom;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,51 +14,50 @@ public class RegisterPage {
 
 	private static Logger log = Logger.getLogger(RegisterPage.class.getName());
 	private static String email = null;
-	
-	@FindBy(id="emailaddress")
+
+	@FindBy(id = "emailaddress")
 	static WebElement emailTextBox;
 
-	@FindBy(xpath="//input[@id='apply']/parent::div[@class='pop-btn-wp']")
+	@FindBy(xpath = "//input[@id='apply']/parent::div[@class='pop-btn-wp']")
 	static WebElement submitButton;
 
-	@FindBy(xpath="//a[contains(text(),'Title')]")
-	static WebElement dropDownMenu;    
-                                           
-	@FindBy(linkText="Miss")
-	static WebElement optionTitle;           
+	@FindBy(xpath = "//a[contains(text(),'Title')]")
+	static WebElement dropDownMenu;
 
-	@FindBy(id="firstname")
+	@FindBy(linkText = "Miss")
+	static WebElement optionTitle;
+
+	@FindBy(id = "firstname")
 	static WebElement firstNameTextBox;
 
-	@FindBy(id="lastname")
+	@FindBy(id = "lastname")
 	static WebElement lastNameTextBox;
 
-	@FindBy(id="companyname")
+	@FindBy(id = "companyname")
 	static WebElement companyNameTextBox;
 
-	@FindBy(id="phone")
+	@FindBy(id = "phone")
 	static WebElement phoneTextBox;
 
-	@FindBy(id="newpassword")
+	@FindBy(id = "newpassword")
 	static WebElement newPasswordTextBox;
 
-	@FindBy(id="confirmpassword")
+	@FindBy(id = "confirmpassword")
 	static WebElement confirmPasswordTextBox;
-	
-	@FindBy(id="onetimepassword")
+
+	@FindBy(id = "onetimepassword")
 	static WebElement oneTimePassword;
 
-	@FindBy(id="proceed")
+	@FindBy(id = "proceed")
 	static WebElement proceedButton;
 
-	
 	@Step("Enter User Details for Registration step...")
-	public static String  enterEmailInRegistration(){
-		email= CommonUtils.getRandomYopMailId();
+	public static String enterEmailInRegistration() {
+		email = CommonUtils.getRandomYopMailId();
 		SeleniumUtils.waitForElementToBeVisible(emailTextBox);
 		emailTextBox.clear();
 		emailTextBox.sendKeys(email);
-		log.info("Enter new email Address: "+email);
+		log.info("Enter new email Address: " + email);
 
 		try {
 			Thread.sleep(10000);
@@ -70,7 +70,8 @@ public class RegisterPage {
 	}
 
 	@Step("Enter User Details for Registration step...")
-	public static void enterPersonalInfoInRegistration(String firstName,String lastName,String companyName,String phone,String newPassword,String confirmPassword) {
+	public static void enterPersonalInfoInRegistration(String firstName, String lastName, String companyName,
+			String phone, String newPassword, String confirmPassword) {
 
 		dropDownMenu.isEnabled();
 		dropDownMenu.click();
@@ -92,7 +93,7 @@ public class RegisterPage {
 		log.info("Enter your companyname");
 
 		phoneTextBox.clear();
-		phoneTextBox.sendKeys(phone); 
+		phoneTextBox.sendKeys(phone);
 		log.info("Enter your Phone Number");
 
 		newPasswordTextBox.clear();
@@ -108,8 +109,5 @@ public class RegisterPage {
 		proceedButton.click();
 		log.info("Submit your Details");
 
-	}     
+	}
 }
-
-
-

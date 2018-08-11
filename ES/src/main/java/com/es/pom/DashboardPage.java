@@ -1,89 +1,86 @@
 package com.es.pom;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
+import com.es.util.RobotUtils;
 import com.es.util.SeleniumUtils;
+
 import io.qameta.allure.Step;
 
 public class DashboardPage {
 
 	private static Logger log = Logger.getLogger(DashboardPage.class.getName());
 
-	@FindBy(xpath="//div[@class='ehading']")
+	@FindBy(xpath = "//div[@class='ehading']")
 	static WebElement dashboardElement;
 
-	@FindBy(linkText="Change Password")
+	@FindBy(linkText = "Change Password")
 	static WebElement changePasswordLink;
 
-	@FindBy(xpath="//a[contains(@title, 'Dashboard')]")
+	@FindBy(xpath = "//a[contains(@title, 'Dashboard')]")
 	static WebElement dashboardOptionElement;
 
-	@FindBy(xpath="//a[contains(@title,'Application')]")
+	@FindBy(xpath = "//a[contains(@title,'Application')]")
 	static WebElement applicationOptionElement;
 
-	@FindBy(xpath="//a[contains(@title,'Payments')]")
+	@FindBy(xpath = "//a[contains(@title,'Payments')]")
 	static WebElement paymentsOptionElement;
 
-	@FindBy(xpath="//a[contains(@title, 'Contact Us')]")
+	@FindBy(xpath = "//a[contains(@title, 'Contact Us')]")
 	static WebElement contactUsOptionElement;
 
-	@FindBy(xpath="//div[@class='enjoyhint_close_btn']")
+	@FindBy(xpath = "//div[@class='enjoyhint_close_btn']")
 	static WebElement popupWindow;
 
-	@FindBy(linkText="Edit Profile")
+	@FindBy(linkText = "Edit Profile")
 	static WebElement editProfileLink;
 
-	@FindBy(xpath="//span[@class='dropdown-menu-user-name']")
+	@FindBy(xpath = "//span[@class='dropdown-menu-user-name']")
 	static WebElement myAccountDropdown;
 
-	@FindBy(xpath="//*[@title='Quotations']")
+	@FindBy(xpath = "//*[@title='Quotations']")
 	static WebElement quotationOption;
 
-	@FindBy(xpath="//*[@title='Reports']")
+	@FindBy(xpath = "//*[@title='Reports']")
 	static WebElement reportOption;
 
-	@FindBy(xpath="//*[@title='Invoices']")
+	@FindBy(xpath = "//*[@title='Invoices']")
 	static WebElement invoicesOption;
 
-	@FindBy(xpath="//a[@title='Applications']")
+	@FindBy(xpath = "//a[@title='Applications']")
 	static WebElement applicationListingPageLink;
 
-	@FindBy(linkText="PMG Listing Program")
-	static WebElement PMGListingProgramLinkApprovedUser;
+	@FindBy(linkText = "PMG Listing Program")
+	static WebElement pmgListingProgramLinkApprovedUser;
 
-	@FindBy(xpath="//a[@programslug='pmg']")
-	static WebElement PMGListingLinkForUnapprovedUser;
+	@FindBy(xpath = "//a[@programslug='pmg']")
+	static WebElement pmgListingLinkForUnapprovedUser;
 
-	@FindBy(linkText="Update Profile Requests")
+	@FindBy(linkText = "Update Profile Requests")
 	static WebElement updateProfileRequestsLink;
 
-	@FindBy(xpath="//div[@class='ehading']")
+	@FindBy(xpath = "//div[@class='ehading']")
 	static WebElement userListingsPageElement;
 
-	@FindBy(xpath="//div[contains(@class,'hide-user-menu-moblie')]//span[text()='My Account']")
+	@FindBy(xpath = "//div[contains(@class,'hide-user-menu-moblie')]//span[text()='My Account']")
 	static WebElement myAccountText;
 
-	@FindBy(linkText="Logout")
+	@FindBy(linkText = "Logout")
 	static WebElement logoutLink;
 
-	@FindBy(xpath="//span[@class='report-name']")
+	@FindBy(xpath = "//span[@class='report-name']")
 	static WebElement reportName;
 
 	@FindBy(xpath = "//div[@class='report_renewal_btn']//a[text()='Pay']")
 	static WebElement payForReportButton;
 
-	@FindBy(xpath="//a[contains(text(),'View Projects')]")
+	@FindBy(xpath = "//a[contains(text(),'View Projects')]")
 	static WebElement viewProjectsForReportButton;
 
-	@FindBy(xpath="//a[contains(text(),'View Invoices')]")
+	@FindBy(xpath = "//a[contains(text(),'View Invoices')]")
 	static WebElement viewInvoicesForReportButton;
 
 	@FindBy(linkText = "View")
@@ -132,7 +129,7 @@ public class DashboardPage {
 	static WebElement upload;
 
 	@FindBy(xpath = "//*[contains(text(),'Send Quotation for ')]")
-	static WebElement sendQuotation;	 
+	static WebElement sendQuotation;
 
 	@FindBy(xpath = "//*[@name='program_type']/following-sibling::div")
 	static WebElement dropDownInUploadQuotation;
@@ -170,20 +167,17 @@ public class DashboardPage {
 	@FindBy(linkText = "Invoices")
 	static WebElement invoicePageLink;
 
-	@FindBy(xpath="//a[@title='SOW']")
-	static WebElement sowSection; 
-
+	@FindBy(xpath = "//a[@title='SOW']")
+	static WebElement sowSection;
 
 	@Step("verify dashboard page Step...")
-	public static void verifyDashboardPage()
-	{
+	public static void verifyDashboardPage() {
 		Assert.assertTrue(dashboardElement.isDisplayed());
 		log.info("Dashboard displayed");
 	}
 
 	@Step("Verify the registration process once correct OTP and other fields are entered Step...")
-	public static void verifyRegistrationProcessAfterEnteringCorrectOTP()
-	{
+	public static void verifyRegistrationProcessAfterEnteringCorrectOTP() {
 		Assert.assertTrue(dashboardOptionElement.isDisplayed());
 		log.info("Dashboard Option is displayed");
 
@@ -198,37 +192,34 @@ public class DashboardPage {
 	}
 
 	@Step("Redirecting to password change page...")
-	public static void navigateToChangePasswordPage()
-	{
+	public static void navigateToChangePasswordPage() {
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
 		log.info("popup closed");
 		SeleniumUtils.scrollToBottom();
-		SeleniumUtils.refreshPage();   
+		SeleniumUtils.refreshPage();
 		SeleniumUtils.waitForElementToBeVisible(changePasswordLink);
 		changePasswordLink.click();
 		log.info("Clicked on change password link");
 	}
 
 	@Step("Redirecting to Edit Profile page...")
-	public static void navigateToEditProfilePage()
-	{
+	public static void navigateToEditProfilePage() {
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
 		log.info("popup closed");
 		SeleniumUtils.scrollToBottom();
-		SeleniumUtils.refreshPage();   
+		SeleniumUtils.refreshPage();
 		editProfileLink.click();
 		log.info("Navigated to edit profile page");
 	}
 
 	@Step("redirecting to Edit Profile page again...")
-	public static void navigateToEditProfilePageAgain()
-	{
+	public static void navigateToEditProfilePageAgain() {
 		SeleniumUtils.scrollToBottom();
-		SeleniumUtils.refreshPage();   
+		SeleniumUtils.refreshPage();
 		editProfileLink.click();
 		log.info("Navigated to edit profile page");
 	}
@@ -247,34 +238,31 @@ public class DashboardPage {
 	}
 
 	@Step("redirecting to Application Listing page...")
-	public static void navigateToApplicationListingPage()
-	{
+	public static void navigateToApplicationListingPage() {
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
 		log.info("popup closed");
-		SeleniumUtils.refreshPage();   
+		SeleniumUtils.refreshPage();
 		applicationListingPageLink.click();
 		log.info("Navigated to application page");
 	}
 
 	@Step("redirecting to Application page when already logged in...")
-	public static void navigateToApplicationPageWhenLoggedIn()
-	{
-		SeleniumUtils.refreshPage();   
+	public static void navigateToApplicationPageWhenLoggedIn() {
+		SeleniumUtils.refreshPage();
 		applicationListingPageLink.click();
 		log.info("Navigated to application page");
 	}
 
 	@Step("redirecting to PMG Application Form...")
-	public static void navigateToPMGApplicationProgramApprovedUser()
-	{
+	public static void navigateToPMGApplicationProgramApprovedUser() {
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
 		log.info("popup closed");
-		SeleniumUtils.refreshPage();   
-		PMGListingProgramLinkApprovedUser.click();
+		SeleniumUtils.refreshPage();
+		pmgListingProgramLinkApprovedUser.click();
 		log.info("Navigated to PMG Application Form");
 	}
 
@@ -285,21 +273,19 @@ public class DashboardPage {
 	}
 
 	@Step("redirecting to PMG Application Form...")
-	public static void navigateToPMGApplicationProgram()
-	{
+	public static void navigateToPMGApplicationProgram() {
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
 		log.info("popup closed");
-		SeleniumUtils.refreshPage();   
-		SeleniumUtils.waitForElementToBeVisible(PMGListingLinkForUnapprovedUser);
-		PMGListingLinkForUnapprovedUser.click();
+		SeleniumUtils.refreshPage();
+		SeleniumUtils.waitForElementToBeVisible(pmgListingLinkForUnapprovedUser);
+		pmgListingLinkForUnapprovedUser.click();
 		log.info("Navigated to PMG Application Form");
 	}
 
 	@Step("redirecting to modified users listing page...")
-	public static void navigateToModifiedUsersList()
-	{
+	public static void navigateToModifiedUsersList() {
 		updateProfileRequestsLink.isDisplayed();
 		log.info("Update request link present");
 		updateProfileRequestsLink.click();
@@ -309,25 +295,22 @@ public class DashboardPage {
 	}
 
 	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
-	public static void verifyTitleReports(){
+	public static void verifyTitleReports() {
 		reportOption.click();
 		log.info("Verify Reports Option displayed");
 	}
 
-
 	@Step("Logging out from account...")
 	public static void logout() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", myAccountText);
-		//		myAccountText.click();
 		log.info("clicked on main menu");
 		SeleniumUtils.executeJavaScript("arguments[0].click();", logoutLink);
-		//		logoutLink.click();
 		log.info("clicked on logout Link");
 
 	}
-	
+
 	@Step("actions available on hovering over any report...")
-	public static void hoveringOverAnyReport(){
+	public static void hoveringOverAnyReport() {
 		SeleniumUtils.waitForElementToBeInvisible(loadingIcon);
 		SeleniumUtils.waitForElementToBeVisible(reportName);
 		SeleniumUtils.mouseHover(reportName);
@@ -335,8 +318,7 @@ public class DashboardPage {
 	}
 
 	@Step("Verify the actions available on hovering over any report...")
-	public static void actionsAvailableHoveringOverAnyReport()
-	{
+	public static void actionsAvailableHoveringOverAnyReport() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
 
 		Assert.assertTrue(payForReportButton.isDisplayed());
@@ -349,25 +331,23 @@ public class DashboardPage {
 		log.info("view Invoices For Report  Button is displayed");
 
 	}
+
 	@Step("action on clicking the 'Pay' button...")
-	public static void clickActionOnPayButton()
-	{
+	public static void clickActionOnPayButton() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
 		payForReportButton.click();
 		log.info("pay For Report Button is clicked");
 	}
 
 	@Step("action on clicking the view Projects button...")
-	public static void clickActionOnViewProjectsButton()
-	{
+	public static void clickActionOnViewProjectsButton() {
 		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
 		viewProjectsForReportButton.click();
 		log.info("view Projects button is clicked");
 	}
 
 	@Step("action on clicking the view Projects button...")
-	public static void clickActionOnViewInvoicesButton()
-	{
+	public static void clickActionOnViewInvoicesButton() {
 		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
 		viewInvoicesForReportButton.click();
 		log.info("view Invoices button is clicked");
@@ -446,26 +426,11 @@ public class DashboardPage {
 
 		amountTextBox.sendKeys(amount);
 		uploadButton.click();
-		uploadFilePath = uploadFilePath.replace("/", "\\");
-		StringSelection ss = new StringSelection(uploadFilePath);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-		try {
-			Robot robot = new Robot();
-			robot.delay(250);
-			robot.keyPress(KeyEvent.VK_ENTER);
-			robot.keyRelease(KeyEvent.VK_ENTER);
-			robot.keyPress(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_ENTER);
-			robot.delay(50);
-			robot.keyRelease(KeyEvent.VK_ENTER);
-		} catch (AWTException e) {
-			log.error("Error while uploading file is: "+e);
-			e.printStackTrace();
-		}
-
+		log.info("Enter upload pdf ");
+		String uploadfilePath = System.getProperty("user.dir")
+				+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
+		RobotUtils.uploadFile(uploadfilePath);
+		log.info("upload pdf from drive ");
 		log.info("Given input while uploading Quotation.");
 	}
 
@@ -475,7 +440,7 @@ public class DashboardPage {
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
 		log.info("popup closed");
-		SeleniumUtils.refreshPage(); 
+		SeleniumUtils.refreshPage();
 		SeleniumUtils.waitForElementToBeVisible(invoicePageLink);
 		invoicePageLink.click();
 		log.info("Nvaigating to my invoices page");
@@ -483,7 +448,7 @@ public class DashboardPage {
 
 	@Step("Navigating to invoice page when already logged in...")
 	public static void navigatingToMyInvoicesWhenLoggedInAlready() {
-		SeleniumUtils.refreshPage(); 
+		SeleniumUtils.refreshPage();
 		SeleniumUtils.waitForElementToBeVisible(invoicePageLink);
 		invoicePageLink.click();
 		log.info("Nvaigating to my invoices page");

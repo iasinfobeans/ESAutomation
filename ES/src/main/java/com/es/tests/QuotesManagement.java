@@ -52,7 +52,8 @@ public class QuotesManagement extends Setup {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.customerClickOnGetAQuoteButton();
-			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),Prop.getTestData("productDescription"));
+			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
+					Prop.getTestData("productDescription"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCustomerReportforQuote");
 			e.getStackTrace();
@@ -67,10 +68,11 @@ public class QuotesManagement extends Setup {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.customerClickOnGetAQuoteButton();
-			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),Prop.getTestData("productDescription"));
+			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
+					Prop.getTestData("productDescription"));
 			Yopmail.verifyQuotationReceivedByStaff(Prop.getTestData("EmailId"));
 		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyStaffNotifiedforQuote");
+			SeleniumUtils.captureScreenshot("verifyStaffNotifiedForQuote");
 			e.getStackTrace();
 			throw e;
 		}
@@ -83,7 +85,8 @@ public class QuotesManagement extends Setup {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.customerClickOnGetAQuoteButton();
-			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),Prop.getTestData("productDescription"));
+			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
+					Prop.getTestData("productDescription"));
 			Yopmail.verifyQuotationSubmitByCustomer(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCustomerNotifiedForQuote");
@@ -91,8 +94,6 @@ public class QuotesManagement extends Setup {
 			throw e;
 		}
 	}
-
-	// 167-185 CRM based
 
 	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify the different statuses of the quotation request.")
@@ -212,7 +213,8 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyQuotationOption();
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
-			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),Prop.getTestData("uploadFilePath"));
+			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),
+					Prop.getTestData("uploadFilePath"));
 			Thread.sleep(30000);
 			DashboardPage.clickSendWhileUploadingQuotation();
 		} catch (Exception e) {
@@ -230,7 +232,8 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyQuotationOption();
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
-			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),Prop.getTestData("uploadFilePath"));
+			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),
+					Prop.getTestData("uploadFilePath"));
 			Thread.sleep(30000);
 			DashboardPage.clickSendWhileUploadingQuotation();
 			Yopmail.verifyNewQuotationAvailableMail(Prop.getTestData("username"));
@@ -250,7 +253,7 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
 			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),
-			Prop.getTestData("uploadFilePath"));
+					Prop.getTestData("uploadFilePath"));
 			Thread.sleep(30000);
 			DashboardPage.clickSendWhileUploadingQuotation();
 			QuotationListingPage.viewQuotesOptions();
@@ -262,7 +265,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement"})
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the staff person, on receiving the quotation request, will have an option to upload a quote.")
 	public void verifyUploadOptionForStaffOnQuotationRequest() throws Exception {
 		try {

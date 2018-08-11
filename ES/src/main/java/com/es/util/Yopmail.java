@@ -2,7 +2,9 @@ package com.es.util;
 
 import java.util.Iterator;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
+
 import com.es.pom.YopmailPage;
 
 public class Yopmail {
@@ -37,6 +39,7 @@ public class Yopmail {
 
 	/**
 	 * This method will verify Otp mail body(Contents).
+	 * 
 	 * @param email
 	 */
 	public static void verifyOTPEmailBody(String email) {
@@ -59,6 +62,7 @@ public class Yopmail {
 
 	/**
 	 * This method will verify Registration mail body(Contents).
+	 * 
 	 * @param email
 	 */
 	public static void verifyRegistrationEmailBody(String email) {
@@ -81,6 +85,7 @@ public class Yopmail {
 
 	/**
 	 * This method will verify New Account Registration mail body(Contents).
+	 * 
 	 * @param email
 	 */
 	public static void verifyNewAccountRegistrationEmailBody(String email) {
@@ -103,6 +108,7 @@ public class Yopmail {
 
 	/**
 	 * This method will verify Password reset mail body(Contents).
+	 * 
 	 * @param email
 	 */
 	public static void verifyPasswordResetEmailBody(String email) {
@@ -125,6 +131,7 @@ public class Yopmail {
 
 	/**
 	 * This method will return Password reset Link.
+	 * 
 	 * @param email
 	 */
 	public static String getPasswordResetLink(String email) {
@@ -149,6 +156,7 @@ public class Yopmail {
 
 	/**
 	 * This method will verify Request For Profile Update mail body(Contents).
+	 * 
 	 * @param email
 	 */
 	public static void verifyRequestForProfileUpdate(String email) {
@@ -171,8 +179,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify Profile Updated mail body(Contents).
+	 * 
 	 * @param email
-	 */	
+	 */
 	public static void verifyProfileUpdatedMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -193,8 +202,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify New Account Registration mail body(Contents).
+	 * 
 	 * @param email
-	 */	
+	 */
 	public static void verifyNewAccountRegistrationBody(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -214,9 +224,11 @@ public class Yopmail {
 	}
 
 	/**
-	 * This method will verify New Account Approved by staff mail body(Contents).
+	 * This method will verify New Account Approved by staff mail
+	 * body(Contents).
+	 * 
 	 * @param email
-	 */	
+	 */
 	public static void verifyNewAccountApprovedBody(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -237,8 +249,10 @@ public class Yopmail {
 
 	/**
 	 * This method will verify PMG Application mail body(Contents).
-	 * @param email (For test case no 33)
-	 */	
+	 * 
+	 * @param email
+	 *            (For test case no 33)
+	 */
 	public static void verifyPMGApplicationMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -259,8 +273,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify ESR Application mail body(Contents).
+	 * 
 	 * @param email
-	 */	
+	 */
 	public static void verifyESRApplicationMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -281,8 +296,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify Quotation Submit by customer mail body(Contents).
+	 * 
 	 * @param email---iasinfobeans@yopmail.com
-	 */	
+	 */
 	public static void verifyQuotationSubmitByCustomer(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -302,9 +318,12 @@ public class Yopmail {
 	}
 
 	/**
-	 * This method will verify Quotation Received By Staff -  mail body(Contents).
-	 * @param email -- esportal@yopmail.com
-	 */	
+	 * This method will verify Quotation Received By Staff - mail
+	 * body(Contents).
+	 * 
+	 * @param email
+	 *            -- esportal@yopmail.com
+	 */
 	public static void verifyQuotationReceivedByStaff(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -324,8 +343,11 @@ public class Yopmail {
 	}
 
 	/**
-	 * This method will verified approved or decline profile changes mail body in customer inbox.
-	 * @param email -- iasinfobeans@yopmail.com
+	 * This method will verified approved or decline profile changes mail body
+	 * in customer inbox.
+	 * 
+	 * @param email
+	 *            -- iasinfobeans@yopmail.com
 	 */
 	public static void verifyApprovedOrDeclineProfileChanges(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -347,7 +369,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verified new quotation available mail in customer inbox.
-	 * @param email  -- iasinfobeans@yopmail.com
+	 * 
+	 * @param email
+	 *            -- iasinfobeans@yopmail.com
 	 */
 	public static void verifyNewQuotationAvailableMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -369,7 +393,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify email for received payment in customer inbox.
-	 * @param email  -- iasinfobeans@yopmail.com
+	 * 
+	 * @param email
+	 *            -- iasinfobeans@yopmail.com
 	 */
 	public static void verifyMailReceivedByCustomerForPayment(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -391,7 +417,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify email for received payment in Staff inbox.
-	 * @param email  -- esportal@yopmail.com
+	 * 
+	 * @param email
+	 *            -- esportal@yopmail.com
 	 */
 	public static void verifyMailReceivedToStaffForPayment(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -413,7 +441,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify new renewal file mail body in Staff inbox.
-	 * @param email  -- esportal@yopmail.com
+	 * 
+	 * @param email
+	 *            -- esportal@yopmail.com
 	 */
 	public static void verifyNewRenewalFile(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -435,7 +465,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify payment for invoice mail body in cutomer inbox.
-	 * @param email  -- iasinfobeans@yopmail.com
+	 * 
+	 * @param email
+	 *            -- iasinfobeans@yopmail.com
 	 */
 	public static void verifyPaymentForInvoiceMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -456,8 +488,11 @@ public class Yopmail {
 	}
 
 	/**
-	 * This method will verify payment received for invoice mail body in Staff inbox.
-	 * @param email  -- esportal@yopmail.com
+	 * This method will verify payment received for invoice mail body in Staff
+	 * inbox.
+	 * 
+	 * @param email
+	 *            -- esportal@yopmail.com
 	 */
 	public static void verifyPaymentForInvoiceReceivedMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -478,8 +513,11 @@ public class Yopmail {
 	}
 
 	/**
-	 * This method will verify PMG Application Submit By Non-Approved User in customer inbox.
-	 * @param email  -- ecinfobeans@yopmail.com (For Test case no 21)
+	 * This method will verify PMG Application Submit By Non-Approved User in
+	 * customer inbox.
+	 * 
+	 * @param email
+	 *            -- ecinfobeans@yopmail.com (For Test case no 21)
 	 */
 	public static void verifyPMGApplicationSubmitByNonApprovedUser(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -500,8 +538,11 @@ public class Yopmail {
 	}
 
 	/**
-	 * This method will verify SOW uploaded mail in customer inbox and move to the SOW page.
-	 * @param email  -- iasinfobeans@yopmail.com
+	 * This method will verify SOW uploaded mail in customer inbox and move to
+	 * the SOW page.
+	 * 
+	 * @param email
+	 *            -- iasinfobeans@yopmail.com
 	 */
 	public static void verifySOWUploadeMailToTechnicalRepresentative(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -522,8 +563,11 @@ public class Yopmail {
 	}
 
 	/**
-	 * This method will verify SOW uploaded mail in customer inbox and move to the SOW page.
-	 * @param email  -- rachelzane@yopmail.com
+	 * This method will verify SOW uploaded mail in customer inbox and move to
+	 * the SOW page.
+	 * 
+	 * @param email
+	 *            -- rachelzane@yopmail.com
 	 */
 	public static void verifySOWUploadedMailToAuthorizedSignatory(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -545,7 +589,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify SOW file removed mail.
-	 * @param email  -- rachelzane@yopmail.com
+	 * 
+	 * @param email
+	 *            -- rachelzane@yopmail.com
 	 */
 	public static void verifySOWFileRemoveMailToAuthorizedSignatory(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -567,7 +613,9 @@ public class Yopmail {
 
 	/**
 	 * This method will verify PMG application submitted by Non-approved user..
-	 * @param email  -- ecinfobeans@yopmail.com (For Test case no 23)
+	 * 
+	 * @param email
+	 *            -- ecinfobeans@yopmail.com (For Test case no 23)
 	 */
 	public static void verifyPMGApplicationSubmittedByNonApprovedUser(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -588,9 +636,12 @@ public class Yopmail {
 	}
 
 	/**
-	 * This method will verify PMG Application mail body in staff mail(Contents).
-	 * @param email (For test case no 31)
-	 */	
+	 * This method will verify PMG Application mail body in staff
+	 * mail(Contents).
+	 * 
+	 * @param email
+	 *            (For test case no 31)
+	 */
 	public static void verifyPMGApplicationMailInStaffInbox(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
@@ -609,11 +660,13 @@ public class Yopmail {
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
 
-
 	/**
-	 * This method will verify PMG Application mail body in customer mail(Contents).
-	 * @param email (For test case no 31)
-	 */	
+	 * This method will verify PMG Application mail body in customer
+	 * mail(Contents).
+	 * 
+	 * @param email
+	 *            (For test case no 31)
+	 */
 	public static void verifyPMGApplicationMailInCustomerInbox(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();

@@ -1,4 +1,5 @@
 package com.es.pom;
+
 import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -12,26 +13,25 @@ public class ChangePasswordPage {
 
 	private static Logger log = Logger.getLogger(Driver.class.getName());
 
-	@FindBy(xpath="//input[@name='currentpassword']")
+	@FindBy(xpath = "//input[@name='currentpassword']")
 	static WebElement currentPasswordTextbox;
 
-	@FindBy(id="password1")
+	@FindBy(id = "password1")
 	static WebElement newPassword;
 
-	@FindBy(id="password2")
+	@FindBy(id = "password2")
 	static WebElement reenterNewPassword;
 
-	@FindBy(id="submit")
+	@FindBy(id = "submit")
 	static WebElement submitButton;
 
-	@FindBy(xpath="//span[@class='message success alert']")
+	@FindBy(xpath = "//span[@class='message success alert']")
 	static WebElement successMessage;
-	
+
 	static String storePassword;
-	
+
 	@Step("Change password for user account...")
-	public static void changePassword() throws IOException
-	{
+	public static void changePassword() throws IOException {
 		currentPasswordTextbox.sendKeys(Prop.getTestData("password"));
 		log.info("entered current password");
 		newPassword.sendKeys(Prop.getTestData("password"));

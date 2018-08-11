@@ -1,7 +1,6 @@
 package com.es.pom;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -47,9 +46,10 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p")
 	static WebElement registrationMailBodyLine1, newAccRegMailBodyLine1, passResetMailBodyLine1, reqProfileUpdateLine1,
-	profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
-	quatReqRecMailLine1, approvedOrDeclineProfileChange1, newQuotationAvailableMail1, paymentReceivedLine1,newRenewalLine1,
-	paymentReceivedToStaffLine1,invoicePaymentReceivedMailLine1,invoicePaymentReceivedToStaffMailLine1,PMGApplicationSubmitByNonApprovedUserMailLine1;
+			profileUpdatedLine1, newAccRegMailLine1, newAccRegApprovedLine1, pmgMailLine1, esrMailLine1, quatMailLine1,
+			quatReqRecMailLine1, approvedOrDeclineProfileChange1, newQuotationAvailableMail1, paymentReceivedLine1,
+			newRenewalLine1, paymentReceivedToStaffLine1, invoicePaymentReceivedMailLine1,
+			invoicePaymentReceivedToStaffMailLine1, pmgApplicationSubmitByNonApprovedUserMailLine1;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you for your interest')]")
 	static WebElement registrationMailBodyLine2;
@@ -62,9 +62,10 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Thank you,')]")
 	static WebElement registrationMailBodyLine5, newAccRegMailBodyLine4, passResetMailBodyLine5, reqProfileUpdateLine5,
-	profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
-	quatReqRecMailLine4, approvedOrDeclineProfileChange5, newQuotationAvailableMail5, paymentReceivedLine5,
-	paymentReceivedToStaffLine5,newRenewalLine5,invoicePaymentReceivedMailLine5,invoicePaymentReceivedToStaffMailLine5,PMGApplicationSubmitByNonApprovedUserMailLine4;
+			profileUpdatedLine4, newAccRegMailLine4, newAccRegApprovedLine4, pmgMailLine5, esrMailLine5, quatMailLine4,
+			quatReqRecMailLine4, approvedOrDeclineProfileChange5, newQuotationAvailableMail5, paymentReceivedLine5,
+			paymentReceivedToStaffLine5, newRenewalLine5, invoicePaymentReceivedMailLine5,
+			invoicePaymentReceivedToStaffMailLine5, pmgApplicationSubmitByNonApprovedUserMailLine4;
 
 	@FindBy(xpath = "//*[text()='ICC-ES: New Account Registration']")
 	static WebElement openNewAccRegistrationMail;
@@ -256,10 +257,10 @@ public class YopmailPage {
 	static WebElement openPMGApplicationSubmitByNonApprovedUserMail;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'for PMG application has been submitted successfully')]")
-	static WebElement PMGApplicationSubmitByNonApprovedUserMailLine2;
+	static WebElement pmgApplicationSubmitByNonApprovedUserMailLine2;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Once your account is approved,')]")
-	static WebElement PMGApplicationSubmitByNonApprovedUserMailLine3;
+	static WebElement pmgApplicationSubmitByNonApprovedUserMailLine3;
 
 	@FindBy(xpath = "//*[contains(text(),'ICC-ES: SOW has been uploaded for Project')]")
 	static WebElement openSOWUploadeMailInCustomerInbox;
@@ -268,10 +269,10 @@ public class YopmailPage {
 	static WebElement sowUploadLink;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'SOW has been uploaded for Project')]")
-	static WebElement SOWUploadeMailInCustomerInboxMailLine2;
+	static WebElement sowUploadeMailInCustomerInboxMailLine2;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details, please ')]")
-	static WebElement SOWUploadeMailInCustomerInboxMailLine3;
+	static WebElement sowUploadeMailInCustomerInboxMailLine3;
 
 	@FindBy(xpath = "//*[contains(text(),'ICC-ES: SOW has been removed for Project')]")
 	static WebElement openSOWFileRemovedMail;
@@ -280,10 +281,10 @@ public class YopmailPage {
 	static WebElement sowFileRemovedLink;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'for PMG application has been submitted successfully')]")
-	static WebElement PMGApplicationSubmittedByNonApprovedUserMailLine2;
+	static WebElement pmgApplicationSubmittedByNonApprovedUserMailLine2;
 
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[(text()='The application would be forwarded to ICC-ES staff once your account is approved.')]")
-	static WebElement PMGApplicationSubmittedByNonApprovedUserMailLine3;
+	static WebElement pmgApplicationSubmittedByNonApprovedUserMailLine3;
 
 	@FindBy(xpath = "//*[contains(text(),'ICC-ES: PMG Application (New Report) submitted by')]")
 	static WebElement openPMGApplicationMail;
@@ -518,7 +519,7 @@ public class YopmailPage {
 
 		Assert.assertEquals(
 				secondRgistrationLine
-				.contains("An ICC-ES staff representative will review the changes and get in touch with you."),
+						.contains("An ICC-ES staff representative will review the changes and get in touch with you."),
 				true, "Text is not contain in email body");
 
 		Assert.assertEquals(
@@ -1176,10 +1177,10 @@ public class YopmailPage {
 	public static void verifyPMGApplicationSubmitByNonApprovedUserMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
 
-		String hi = PMGApplicationSubmitByNonApprovedUserMailLine1.getText();
-		String firstRgistrationLine = PMGApplicationSubmitByNonApprovedUserMailLine2.getText();
-		String secondRgistrationLine = PMGApplicationSubmitByNonApprovedUserMailLine3.getText();
-		String forthRgistrationLine = PMGApplicationSubmitByNonApprovedUserMailLine4.getText();
+		String hi = pmgApplicationSubmitByNonApprovedUserMailLine1.getText();
+		String firstRgistrationLine = pmgApplicationSubmitByNonApprovedUserMailLine2.getText();
+		String secondRgistrationLine = pmgApplicationSubmitByNonApprovedUserMailLine3.getText();
+		String forthRgistrationLine = pmgApplicationSubmitByNonApprovedUserMailLine4.getText();
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
 
@@ -1249,18 +1250,20 @@ public class YopmailPage {
 	public static void verifyPMGApplicationSubmittedByNonApprovedUserMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
 
-		String hi = PMGApplicationSubmitByNonApprovedUserMailLine1.getText();
-		String firstRgistrationLine = PMGApplicationSubmittedByNonApprovedUserMailLine2.getText();
-		String secondRgistrationLine = PMGApplicationSubmittedByNonApprovedUserMailLine3.getText();
-		String forthRgistrationLine = PMGApplicationSubmitByNonApprovedUserMailLine4.getText();
+		String hi = pmgApplicationSubmitByNonApprovedUserMailLine1.getText();
+		String firstRgistrationLine = pmgApplicationSubmittedByNonApprovedUserMailLine2.getText();
+		String secondRgistrationLine = pmgApplicationSubmittedByNonApprovedUserMailLine3.getText();
+		String forthRgistrationLine = pmgApplicationSubmitByNonApprovedUserMailLine4.getText();
 
 		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
 
 		Assert.assertEquals(firstRgistrationLine.contains("for PMG application has been submitted successfully"), true,
 				"Text is not contain in email body");
 
-		Assert.assertEquals(secondRgistrationLine.contains("The application would be forwarded to ICC-ES staff once your account is approved."), true,
-				"Text is not contain in email body");
+		Assert.assertEquals(
+				secondRgistrationLine
+						.contains("The application would be forwarded to ICC-ES staff once your account is approved."),
+				true, "Text is not contain in email body");
 
 		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
 				"Text 'Thank you,' is not contain in email body");
@@ -1345,8 +1348,8 @@ public class YopmailPage {
 		Assert.assertEquals(firstLine.contains("for PMG application has been submitted successfully"), true,
 				"Text is not contain in email body");
 
-		Assert.assertEquals(secondLine.contains("This application has been forwarded to ICC-ES staff for processing."), true,
-				"Text is not contain in email body");
+		Assert.assertEquals(secondLine.contains("This application has been forwarded to ICC-ES staff for processing."),
+				true, "Text is not contain in email body");
 
 		Assert.assertEquals(thirdLine.contains("If you have not made the payment"), true,
 				"Text is not contain in email body");
@@ -1354,8 +1357,7 @@ public class YopmailPage {
 		Assert.assertEquals(fourthLine.contains("To view the details, please "), true,
 				"Text is not contain in email body");
 
-		Assert.assertEquals(fifthLine.contains("Thank you,"), true,
-				"Text 'Thank you,' is not contain in email body");
+		Assert.assertEquals(fifthLine.contains("Thank you,"), true, "Text 'Thank you,' is not contain in email body");
 
 		Assert.assertEquals(fifthLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");

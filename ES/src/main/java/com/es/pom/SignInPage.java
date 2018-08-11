@@ -9,40 +9,40 @@ public class SignInPage {
 
 	private static Logger log = Logger.getLogger(SignInPage.class.getName());
 
-	@FindBy(id="user-login")
+	@FindBy(id = "user-login")
 	static WebElement usernameplaceholder;
 
-	@FindBy(id="user_password")
+	@FindBy(id = "user_password")
 	static WebElement userpassword;
 
-	@FindBy(id="customer")
+	@FindBy(id = "customer")
 	static WebElement customerRadioButton;
 
-	@FindBy(id="staff")
+	@FindBy(id = "staff")
 	static WebElement staffRadioButton;
 
-	@FindBy(id="lwa_wp-submit")
+	@FindBy(id = "lwa_wp-submit")
 	static WebElement loginButton;
 
-	@FindBy(xpath="//h1[@class='entry-title post-title']")
+	@FindBy(xpath = "//h1[@class='entry-title post-title']")
 	static WebElement dashboardElement;
 
-	@FindBy(xpath="//a[@title='Forgot Password']")    			    
+	@FindBy(xpath = "//a[@title='Forgot Password']")
 	static WebElement forgotPasswordLink;
 
-	@FindBy(linkText="Register")
+	@FindBy(linkText = "Register")
 	static WebElement registrationLink;
 
-	@FindBy(linkText="Register")
+	@FindBy(linkText = "Register")
 	static WebElement newUserLink;
 
-	@FindBy(xpath="//div[contains(@class,'col-md')]/a[contains(@href,'esr')]")
+	@FindBy(xpath = "//div[contains(@class,'col-md')]/a[contains(@href,'esr')]")
 	static WebElement applyERLink;
 
-	@FindBy(xpath="//div[contains(@class,'col-md')]/a[contains(@href,'pmg')]")
+	@FindBy(xpath = "//div[contains(@class,'col-md')]/a[contains(@href,'pmg')]")
 	static WebElement applyPMGLink;
 
-	@FindBy(xpath="//div[contains(@class,'col-md')]/a[contains(@href,'esl')]")
+	@FindBy(xpath = "//div[contains(@class,'col-md')]/a[contains(@href,'esl')]")
 	static WebElement applyBuldingProgramLink;
 
 	/**
@@ -53,16 +53,14 @@ public class SignInPage {
 	 */
 
 	@Step("Perform login based on account type")
-	public static void login(String username, String password, String accountType)
-	{
-		System.out.println("user-"+username+"place--"+usernameplaceholder.getAttribute("id"));
+	public static void login(String username, String password, String accountType) {
+		System.out.println("user-" + username + "place--" + usernameplaceholder.getAttribute("id"));
 		usernameplaceholder.sendKeys(username);
 		log.info("entered username");
 		userpassword.sendKeys(password);
 		log.info("entered password");
 
-		switch(accountType) 
-		{
+		switch (accountType) {
 		case "Customer":
 			log.info("selecting customer account");
 			customerRadioButton.click();
@@ -77,14 +75,13 @@ public class SignInPage {
 			loginButton.click();
 			log.info("Logged in as Staff");
 			break;
-		default: 
+		default:
 			log.info("Please enter user type");
 		}
 	}
 
 	@Step("Navigate to forgot password...")
-	public static void navigateToForgotPassword()
-	{
+	public static void navigateToForgotPassword() {
 		forgotPasswordLink.click();
 		log.info("navigated to forgot password page");
 
@@ -116,5 +113,3 @@ public class SignInPage {
 
 	}
 }
-
-

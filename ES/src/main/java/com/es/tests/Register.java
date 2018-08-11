@@ -64,7 +64,7 @@ public class Register extends Setup{
 		}
 	}
 
-	@Test(groups = { "smoke", "Register" })
+	@Test(groups = { "smoke", "Register","tushar" })
 	@Description("Verify the email for OTP.")
 	public void verifyEmailForOTP() throws InterruptedException {
 		try{
@@ -117,7 +117,7 @@ public class Register extends Setup{
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword"));
 			Yopmail.verifyNewAccountRegistrationEmailBody(Prop.getTestData("EmailId"));
 		}catch(Exception e){
-			SeleniumUtils.captureScreenshot("verifynEmailNotificationsToStaff");
+			SeleniumUtils.captureScreenshot("verifyEmailNotificationsToStaff");
 			e.getStackTrace();
 			throw e;
 		}

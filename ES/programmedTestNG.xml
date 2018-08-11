@@ -8,7 +8,7 @@
     <parameter name="testName" value="chrome"/>
     <groups>
       <run>
-        <include name="pankaj"/>
+        <include name="tushar"/>
       </run>
     </groups>
     <packages>

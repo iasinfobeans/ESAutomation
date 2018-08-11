@@ -1,4 +1,5 @@
 package com.es.pom;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,32 +15,31 @@ public class SOWFeaturePage {
 	@FindBy(xpath = "//a[contains(text(),'Upload SOW')]")
 	static WebElement uploadSOWOption;
 
-	@FindBy(xpath="//input[@id='project_number']")
+	@FindBy(xpath = "//input[@id='project_number']")
 	static WebElement projectNumberTextbox;
 
-	@FindBy(id="upload-documents-document")
+	@FindBy(id = "upload-documents-document")
 	static WebElement uploadOption;
 
-	@FindBy(id="save_sow")
+	@FindBy(id = "save_sow")
 	static WebElement saveButton;
 
-	@FindBy(xpath="//span[@class='message success alert']//ul//li")
+	@FindBy(xpath = "//span[@class='message success alert']//ul//li")
 	static WebElement sOWUpatedSuccessfullyMessage, projectMustHaveAtleastOneSOWAssociatedMessage;
 
-	@FindBy(xpath="//a[@class='fa fa-trash-o icon-app-delete deleteAppDoc']")
+	@FindBy(xpath = "//a[@class='fa fa-trash-o icon-app-delete deleteAppDoc']")
 	static WebElement removesSowFile;
 
-	@FindBy(xpath="//*[@id='sowdocuments']/tbody/tr/td/div/a")
+	@FindBy(xpath = "//*[@id='sowdocuments']/tbody/tr/td/div/a")
 	static WebElement downloadSOW;
 
-
-	@FindBy(xpath="//*[@class='fa fa-trash-o icon-app-delete deleteSowFromTooltip']")
+	@FindBy(xpath = "//*[@class='fa fa-trash-o icon-app-delete deleteSowFromTooltip']")
 	static WebElement deleteSOWFile;
 
-	@FindBy(linkText="Download as zip")
+	@FindBy(linkText = "Download as zip")
 	static WebElement downloadZip;
 
-	@FindBy(id="allowDelete_sow-documents")
+	@FindBy(id = "allowDelete_sow-documents")
 	static WebElement oKRemovesSowFile;
 
 	@Step("click on the upload SOW option button")
@@ -69,14 +69,15 @@ public class SOWFeaturePage {
 
 	@Step("click on the upload SOW option button")
 	public static void uploadPdfFileInSOW(int fileCount) {
-		for(int i=1;i<=fileCount; i++){
-			log.info("fileCount start loop: "+fileCount);
-			log.info("i: "+i);
+		for (int i = 1; i <= fileCount; i++) {
+			log.info("fileCount start loop: " + fileCount);
+			log.info("i: " + i);
 			SeleniumUtils.waitForElementToBeVisible(uploadOption);
 			uploadOption.click();
 			log.info("Enter upload pdf ");
 
-			String uploadfilePath = System.getProperty("user.dir")+"\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
+			String uploadfilePath = System.getProperty("user.dir")
+					+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
 			RobotUtils.uploadFile(uploadfilePath);
 			try {
 				Thread.sleep(5000);
@@ -85,8 +86,8 @@ public class SOWFeaturePage {
 				e.printStackTrace();
 			}
 			log.info("upload pdf from drive ");
-			log.info("fileCount end loop: "+fileCount);
-			log.info("i: "+i);
+			log.info("fileCount end loop: " + fileCount);
+			log.info("i: " + i);
 		}
 	}
 
@@ -96,12 +97,14 @@ public class SOWFeaturePage {
 		log.info("Enter upload pdf ");
 
 	}
+
 	@Step("SOW should be uploaded and a confirmation message should be displayed on the screen...")
 	public static void verifyConfirmationMessageDisplayedScreen() {
 		Assert.assertTrue(sOWUpatedSuccessfullyMessage.isDisplayed());
 		log.info(" confirmation message is displayed on the screen");
 
 	}
+
 	@Step("Verify that if Staff removes a SOW file, a notification email would be sent to Technical representative of the Report")
 	public static void staffRemovesSOWFile() {
 		removesSowFile.click();
@@ -146,4 +149,3 @@ public class SOWFeaturePage {
 		log.info(" project Must Have At least One SOW Associated Message message is displayed on the screen");
 	}
 }
-

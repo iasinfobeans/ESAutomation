@@ -1,7 +1,6 @@
 package com.es.pom;
 
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,6 +10,7 @@ import org.testng.Assert;
 
 import com.es.setup.Setup;
 import com.es.util.SeleniumUtils;
+
 import io.qameta.allure.Step;
 
 public class QuotationListingPage {
@@ -57,19 +57,19 @@ public class QuotationListingPage {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForStaff);
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
 	}
-	
+
 	@Step("Click on 'View Quotes' options by Customer ...")
 	public static void viewQuotesTab() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		log.info("Verify Customer is able to Click on 'View Quotes' options");
-		}
+	}
 
 	@Step("Click on delete quote by Staff ...")
 	public static void deleteQuoteByStaff() {
 		try {
 			SeleniumUtils.executeJavaScript("arguments[0].click();", deleteQuote);
-			//deleteQuote.click();
+			// deleteQuote.click();
 		} catch (Exception e) {
 			SeleniumUtils.acceptPopup();
 			log.info("Verify Staff is able to delete Quote.");
@@ -84,7 +84,6 @@ public class QuotationListingPage {
 		productTypeTextBox.sendKeys(prodType);
 		log.info("Input given for Product Type.");
 	}
-
 
 	@Step("Input for Product Description for get Quotation ...")
 	public static void inputForProductDescription(String prodDescription) {
@@ -104,12 +103,12 @@ public class QuotationListingPage {
 	@Step("Verifying status in Status column...")
 	public static void verifyDifferentStatus() {
 		List<WebElement> rows = Setup.driver.findElements(By.cssSelector("tbody > tr"));
-	    for(WebElement row : rows){
-	        if(row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Active")  ){
-	            log.info("'Active' Status of Quotes found in Status Coloumn.");
-	        }else if(row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Expired")) {
-	        	log.info("'Expired' Status of Quotes found in Status Coloumn.");
-	        }
-	    }
+		for (WebElement row : rows) {
+			if (row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Active")) {
+				log.info("'Active' Status of Quotes found in Status Coloumn.");
+			} else if (row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Expired")) {
+				log.info("'Expired' Status of Quotes found in Status Coloumn.");
+			}
+		}
 	}
 }

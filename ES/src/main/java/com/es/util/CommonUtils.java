@@ -13,9 +13,10 @@ import org.apache.log4j.Logger;
 public class CommonUtils {
 
 	private static Logger log = Logger.getLogger(CommonUtils.class.getName());
-	
+
 	/**
-	 * @description This method returns application url based on execution environment.
+	 * @description This method returns application url based on execution
+	 *              environment.
 	 * @return String
 	 * @param void
 	 */
@@ -30,24 +31,28 @@ public class CommonUtils {
 		}
 		return url;
 	}
-	
+
 	/**
-	 * @description This method returns Chrome driver path based on execution operating system.
+	 * @description This method returns Chrome driver path based on execution
+	 *              operating system.
 	 * @return String
 	 * @param void
 	 */
-	public static String getChromeDriverPath(){
+	public static String getChromeDriverPath() {
 		Path chromeDriverPath;
-		if(System.getProperty("os.name").startsWith("Mac")){
-			chromeDriverPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "driver", "chromedriver");
-		}else{
-			chromeDriverPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "driver", "chromedriver.exe");
+		if (System.getProperty("os.name").startsWith("Mac")) {
+			chromeDriverPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "driver",
+					"chromedriver");
+		} else {
+			chromeDriverPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "driver",
+					"chromedriver.exe");
 		}
 		return chromeDriverPath.toString();
 	}
-	
+
 	/**
-	 * @description This method returns current time in dd_MMM_yyyy_hh-mm-ss_aaa(zzz) format.
+	 * @description This method returns current time in
+	 *              dd_MMM_yyyy_hh-mm-ss_aaa(zzz) format.
 	 * @return String
 	 * @param void
 	 */
@@ -58,16 +63,19 @@ public class CommonUtils {
 		String strActDate = strDate.toString();
 		return strActDate;
 	}
-	
+
 	/**
-	 * This method deletes all the files of a directory or create a directory if it doesn't exist.
+	 * This method deletes all the files of a directory or create a directory if
+	 * it doesn't exist.
+	 * 
 	 * @return void
-	 * @param directoy Path
+	 * @param directoy
+	 *            Path
 	 */
 	public static void cleanOrCreateDirectory(String dirPath) {
 		try {
 			FileUtils.cleanDirectory(new File(dirPath));
-			log.info("empty "+dirPath+" directory");
+			log.info("empty " + dirPath + " directory");
 		} catch (java.lang.IllegalArgumentException e) {
 			log.info(dirPath + "  directory is not exist, created it");
 			File directory = new File(dirPath);
@@ -75,18 +83,20 @@ public class CommonUtils {
 				directory.mkdir();
 			}
 		} catch (IOException e) {
-			log.info("invalid path: "+dirPath);
+			log.info("invalid path: " + dirPath);
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * This method generate random yopmail id i.e. TestESApp.yyyyMMdd-HHmmss@yopmail.com
+	 * This method generate random yopmail id i.e.
+	 * TestESApp.yyyyMMdd-HHmmss@yopmail.com
+	 * 
 	 * @return String
 	 * @param void
 	 */
 	public static String getRandomYopMailId() {
-		return "TestESApp."+new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date())+"@yopmail.com";
+		return "TestESApp." + new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()) + "@yopmail.com";
 	}
 
 }

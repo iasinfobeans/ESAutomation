@@ -13,28 +13,28 @@ public class CardDetailsPage {
 
 	private static Logger log = Logger.getLogger(CardDetailsPage.class.getName());
 
-	@FindBy(id="name")
+	@FindBy(id = "name")
 	static WebElement cardHolderName;
 
-	@FindBy(id="card_type")
+	@FindBy(id = "card_type")
 	static WebElement creditCardType;
 
-	@FindBy(id="PAN")
+	@FindBy(id = "PAN")
 	static WebElement creditCardNumberElement;
 
-	@FindBy(xpath="//select[@name='cresecure_cc_expires_year']")
+	@FindBy(xpath = "//select[@name='cresecure_cc_expires_year']")
 	static WebElement expirationDate;
 
-	@FindBy(xpath="//select[@name='cresecure_cc_expires_year']//option[@value='25']")
+	@FindBy(xpath = "//select[@name='cresecure_cc_expires_year']//option[@value='25']")
 	static WebElement expirationYear;
 
-	@FindBy(id="cv_data")
+	@FindBy(id = "cv_data")
 	static WebElement cVCNumberElement;
 
-	@FindBy(xpath="//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']/../following-sibling::div/span")
+	@FindBy(xpath = "//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']/../following-sibling::div/span")
 	static WebElement oderIdReport;
 
-	@FindBy(id="submitButton")
+	@FindBy(id = "submitButton")
 	static WebElement submitButton;
 
 	@Step("Verify Payment Gateway Page..")
@@ -45,7 +45,7 @@ public class CardDetailsPage {
 	}
 
 	@Step("customer to pay any amount greater than zero for renewal..")
-	public static void customerPayForRenewal(String name,String creditCardNumber,String cVCNumber){
+	public static void customerPayForRenewal(String name, String creditCardNumber, String cVCNumber) {
 
 		SeleniumUtils.waitForElementToBeClickable(cardHolderName);
 		cardHolderName.clear();
@@ -75,19 +75,16 @@ public class CardDetailsPage {
 	}
 
 	@Step("User should be navigated to the payment gateway....")
-	public static void verifyUserNavigatedPaymentGateway()
-	{
+	public static void verifyUserNavigatedPaymentGateway() {
 		SeleniumUtils.waitForElementToBeClickable(cardHolderName);
 		Assert.assertTrue(cardHolderName.isDisplayed());
 		log.info("Dashboard Option is displayed");
 	}
 
 	@Step("A new oderId should be created on the portal of the same program type....")
-	public static String verifyOderIdNewApplicationCreated()
-	{
+	public static String verifyOderIdNewApplicationCreated() {
 		String orderId = oderIdReport.getText();
-		log.info("Oder Id for Report "+orderId);
+		log.info("Oder Id for Report " + orderId);
 		return orderId;
 	}
 }
-

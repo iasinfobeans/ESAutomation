@@ -1,4 +1,5 @@
 package com.es.pom;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -7,12 +8,11 @@ import com.es.util.SeleniumUtils;
 
 import io.qameta.allure.Step;
 
-
 public class OverlayPage {
 
 	private static Logger log = Logger.getLogger(OverlayPage.class.getName());
 
-	@FindBy(xpath="//div[contains(@class,'enjoyhint_skip_btn') and text()='Skip']")
+	@FindBy(xpath = "//div[contains(@class,'enjoyhint_skip_btn') and text()='Skip']")
 	static WebElement skipButtonMessage;
 
 	@Step("Overlay Page is dispayed whwn User Completed Registration...")
@@ -31,8 +31,8 @@ public class OverlayPage {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}catch(NoSuchElementException e) {
-			log.info("Overlay Page is not displayed");		
+		} catch (NoSuchElementException e) {
+			log.info("Overlay Page is not displayed");
 		}
 	}
 }

@@ -17,10 +17,10 @@ public class Login extends Setup {
 	@Test(groups = { "smoke", "Login" })
 	@Description("Verify that a customer is able to login into the portal")
 	public static void verifyLoginAsCustomer() throws IOException, InterruptedException {
-		try{
-			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyDashboardPage();
-		}catch(Exception e){
+		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyLoginAsCustomer");
 			e.getStackTrace();
 			throw e;
@@ -30,10 +30,10 @@ public class Login extends Setup {
 	@Test(groups = { "smoke", "Login" })
 	@Description("Verify that a ES Staff member is able to login into the portal")
 	public static void verifyLoginAsStaff() throws IOException, InterruptedException {
-		try{
-			SignInPage.login(Prop.getTestData("Staffuser"),Prop.getTestData("Staffpassword"), "Staff");
+		try {
+			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyDashboardPage();
-		}catch(Exception e){
+		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyLoginAsStaff");
 			e.getStackTrace();
 			throw e;
