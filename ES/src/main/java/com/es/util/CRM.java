@@ -11,8 +11,8 @@ public class CRM {
 
 	/**
 	 * This method will Login into CRM .
-	 * 
 	 * @param username,Password
+	 * @return void
 	 */
 	public static void crmLogin(String username, String Password) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(crmPortalUrl);
@@ -37,6 +37,7 @@ public class CRM {
 	 * @param password
 	 * @param name
 	 * @param email
+	 * @return void
 	 */
 	public static void qualifyLeadInCRM(String username, String password, String name, String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(crmPortalUrl);
