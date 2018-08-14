@@ -282,7 +282,7 @@ public class DashboardPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("verify Quotation Option is present on Dashboard.")
+	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
 	public static void verifyQuotationOption() {
 		quotationOption.click();
 		log.info("Verify Quotation Option displayed");
@@ -398,7 +398,7 @@ public class DashboardPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("action on clicking the view Invoices button...")
+	@Step("action on clicking the view Projects button...")
 	public static void clickActionOnViewInvoicesButton() {
 		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
 		viewInvoicesForReportButton.click();
@@ -464,7 +464,7 @@ public class DashboardPage {
 	}
 
 	@Step("Input valid values while uploading Quotation..")
-	public static void InputValuesInUploadOption(String progarmType, String amount, String uploadFilePath) {
+	public static void InputValuesInUploadOption(String progarmType, String amount) {
 		dropDownInUploadQuotation.click();
 		if (progarmType.equalsIgnoreCase("ES Core")) {
 			esCore.click();
