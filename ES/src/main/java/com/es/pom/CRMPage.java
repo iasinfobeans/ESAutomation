@@ -12,6 +12,11 @@ import com.es.util.SeleniumUtils;
 
 import io.qameta.allure.Step;
 
+/**
+ * This class is used to define methods which are used in CRM integration.
+ * @author Tushar
+ *
+ */
 public class CRMPage {
 
 	private static Logger log = Logger.getLogger(CRMPage.class.getName());
@@ -61,6 +66,11 @@ public class CRMPage {
 	@FindBy(xpath = "//*[@id='navTabButtonUserInfoSignOutId']")
 	static WebElement signOutOption;
 
+	/**
+	 * This method will login in CRM using given credentials.
+	 * @param username
+	 * @param password
+	 */
 	@Step("Signing in CRM..")
 	public static void login(String username, String password) {
 		try {
@@ -77,6 +87,11 @@ public class CRMPage {
 		}
 	}
 
+	/**
+	 * This method will used to qualify to particular customer in CRM .
+	 * @param name - name of customer to be qualified.
+	 * @param email - email of customer to be qualified.
+	 */
 	@Step("qualifying lead in CRM..")
 	public static void qualifyLeadInCRMPage(String name, String email) {
 		try {
@@ -106,6 +121,9 @@ public class CRMPage {
 		log.info("Qualified lead in CRM for " + name + "and for email id :" + email);
 	}
 
+	/**
+	 * This method will logout crm user.
+	 */
 	@Step("Signing Out From CRM..")
 	public static void logout() {
 		SeleniumUtils.switchToDefaultIframe();
