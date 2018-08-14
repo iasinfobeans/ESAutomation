@@ -9,6 +9,13 @@ import com.es.util.SeleniumUtils;
 
 import io.qameta.allure.Step;
 
+/**
+ * This class is used to call Yopmail related methods and verify the contents of
+ * mail.
+ * 
+ * @author Tushar
+ *
+ */
 public class YopmailPage {
 
 	private static Logger log = Logger.getLogger(YopmailPage.class.getName());
@@ -310,6 +317,11 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the details, please ')]")
 	static WebElement pmgApplicationInCustomerMail5;
 
+	/**
+	 * This method will navigate to yopmail inbox of given email id.
+	 * 
+	 * @param email
+	 */
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
 		emailTextBox.clear();
@@ -319,6 +331,9 @@ public class YopmailPage {
 		log.info("Navigate to " + email + " inbox");
 	}
 
+	/**
+	 * This method will open a mail in which we are getting OTP.
+	 */
 	@Step("Opening Otp mail..")
 	public static void openOTPmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -327,6 +342,11 @@ public class YopmailPage {
 		log.info("Opened OTP email");
 	}
 
+	/**
+	 * This method will return otp from mail body.
+	 * @param void
+	 * @return otp
+	 */
 	@Step("Getting OTP from mail..")
 	public static String getOTPfromMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -336,6 +356,11 @@ public class YopmailPage {
 		return otp;
 	}
 
+	/**
+	 * This method will verify otp mail body.
+	 * @param void
+	 * @return void
+	 */
 	@Step("Verifying otp mail body..")
 	public static void verifyOTPmailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -366,6 +391,11 @@ public class YopmailPage {
 		log.info("Verified OTP mail body");
 	}
 
+	/**
+	 * This method will open registration mail.
+	 * @param void
+	 * @return void
+	 */
 	@Step("Opening registraion succesful mail..")
 	public static void openRegistrationMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -374,6 +404,11 @@ public class YopmailPage {
 		log.info("Opened Registration email");
 	}
 
+	/**
+	 * This method will verify Registration mail body.
+	 * @param void
+	 * @return void
+	 */
 	@Step("Verifying Registration mail body..")
 	public static void verifyRegistrationMailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -407,6 +442,11 @@ public class YopmailPage {
 		log.info("Verified Registration email body");
 	}
 
+	/**
+	 * This method will open New account registration mail.
+	 * @param void
+	 * @return void
+	 */
 	@Step("Opening New account registration mail..")
 	public static void openNewAccRegMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -415,6 +455,11 @@ public class YopmailPage {
 		log.info("Opened New account registration mail");
 	}
 
+	/**
+	 * This method will verify New account registration mail body.
+	 * @param void
+	 * @return void
+	 */
 	@Step("Verifying New account registration mail body..")
 	public static void verifyNewAccRegMailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -443,6 +488,11 @@ public class YopmailPage {
 		log.info("Verified New account registration body");
 	}
 
+	/**
+	 * This method will open password reset mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening password reset mail..")
 	public static void openPassResetMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -451,6 +501,11 @@ public class YopmailPage {
 		log.info("Opened password reset mail body");
 	}
 
+	/**
+	 * This method will verify password reset mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying password reset mail body..")
 	public static void verifyPassResetMailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -483,6 +538,11 @@ public class YopmailPage {
 		log.info("Verified Password reset mail body");
 	}
 
+	/**
+	 * This method will return password reset link.
+	 * @return resetPassLink
+	 * @param void
+	 */
 	@Step("Returning password reset link in string format..")
 	public static String getResetLinkFromMail() {
 		String resetPassLink = null;
@@ -493,6 +553,11 @@ public class YopmailPage {
 		return resetPassLink;
 	}
 
+	/**
+	 * This method will open Profile update request mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening Profile update request mail..")
 	public static void openProfileReqEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -501,6 +566,11 @@ public class YopmailPage {
 		log.info("Opened Profile update request mail");
 	}
 
+	/**
+	 * This method will verify Profile update request mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying Profile update request mail body..")
 	public static void verifyReqForProfileUpdateBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -536,6 +606,11 @@ public class YopmailPage {
 		log.info("Verified Profile update request mail body");
 	}
 
+	/**
+	 * This method will open Profile updated mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening Profile updated mail..")
 	public static void openProfileUpdatedEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -544,6 +619,11 @@ public class YopmailPage {
 		log.info("Opened Profile updated mail");
 	}
 
+	/**
+	 * This method will verify Profile updated mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying Profile updated mail body..")
 	public static void verifyProfileUpdatedEmailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -571,6 +651,11 @@ public class YopmailPage {
 		log.info("Verified Profile updated mail body");
 	}
 
+	/**
+	 * This method will open New Account Registration mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening New Account Registration mail..")
 	public static void openNewAccRegEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -586,6 +671,11 @@ public class YopmailPage {
 		log.info("Opened New Account Registration mail");
 	}
 
+	/**
+	 * This method will verify New Account Registration mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying New Account Registration mail body..")
 	public static void verifyNewAccRegEmailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -615,6 +705,11 @@ public class YopmailPage {
 		log.info("Verified New Account Registration mail body");
 	}
 
+	/**
+	 * This method will open New Account Approved mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening New Account Approved mail..")
 	public static void openNewAccApprovedEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -630,6 +725,11 @@ public class YopmailPage {
 		log.info("Opened New Account Approved mail");
 	}
 
+	/**
+	 * This method will verify New Account Approved mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying New Account Approved mail body..")
 	public static void verifyNewAccApprovedEmailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -659,6 +759,11 @@ public class YopmailPage {
 		log.info("Verified New Account Registration mail body");
 	}
 
+	/**
+	 * This method will open PMG Application mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening PMG Application mail..")
 	public static void openPMGApplEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -674,6 +779,11 @@ public class YopmailPage {
 		log.info("Opened PMG Application mail");
 	}
 
+	/**
+	 * This method will verify PMG Application mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying PMG Application mail body..")
 	public static void verifyPMGApplEmailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -705,6 +815,11 @@ public class YopmailPage {
 		log.info("Verified PMG Application mail body");
 	}
 
+	/**
+	 * This method will open ESR Application mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening ESR Application mail..")
 	public static void openESRApplEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -720,6 +835,11 @@ public class YopmailPage {
 		log.info("Opened ESR Application mail");
 	}
 
+	/**
+	 * This method will verify ESR Application mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying ESR Application mail body..")
 	public static void verifyESRApplEmailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -751,6 +871,11 @@ public class YopmailPage {
 		log.info("Verified ESR Application mail body");
 	}
 
+	/**
+	 * This method will open Quatation Request Submit mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening Quatation Request Submit mail..")
 	public static void openQuotationEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -766,6 +891,11 @@ public class YopmailPage {
 		log.info("Opened Quatation Request Submit mail");
 	}
 
+	/**
+	 * This method will verify Quatation Request Submit mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying Quatation Request Submit mail body..")
 	public static void verifyQuotationBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -793,6 +923,11 @@ public class YopmailPage {
 		log.info("Verified Quatation Request Submit mail body");
 	}
 
+	/**
+	 * This method will open Quatation Request Received mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening Quatation Request Received mail..")
 	public static void openQuotationReqRecEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -808,6 +943,11 @@ public class YopmailPage {
 		log.info("Opened Quatation Request Received mail");
 	}
 
+	/**
+	 * This method will verify Quatation Request Received mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying Quatation Request Received mail body..")
 	public static void verifyQuotationReqRecBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -835,6 +975,11 @@ public class YopmailPage {
 		log.info("Verified Quatation Request Received mail body");
 	}
 
+	/**
+	 * This method will open Approved Or Decline Profile Changes mail.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening Approved Or Decline Profile Changes mail..")
 	public static void openApprovedOrDeclineProfileChangesEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -850,6 +995,11 @@ public class YopmailPage {
 		log.info("Opened Approved Or Decline Profile Changes mail");
 	}
 
+	/**
+	 * This method will verify Approved Or Decline Profile Changes mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying Approved Or Decline Profile Changes mail body..")
 	public static void verifyApprovedOrDeclineProfileChangesEmail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -882,6 +1032,11 @@ public class YopmailPage {
 		log.info("Verified Approved Or Decline Profile Changes mail body");
 	}
 
+	/**
+	 * This method will open New Quotation Available in mail for customer.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening New Quotation Available in mail for customer..")
 	public static void openNewQuotationAvailableMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -897,6 +1052,11 @@ public class YopmailPage {
 		log.info("Opened New Quotation Available in mail for customer");
 	}
 
+	/**
+	 * This method will verify New Quotation Available mail body.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying New Quotation Available mail body..")
 	public static void verifyNewQuotationAvailableMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -928,6 +1088,11 @@ public class YopmailPage {
 		log.info("Verified New Quotation Available Mail body");
 	}
 
+	/**
+	 * This method will open payment received mail customer inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening payment received mail customer inbox..")
 	public static void openPaymentReceivedMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -943,6 +1108,11 @@ public class YopmailPage {
 		log.info("Opened payment received mail customer inbox");
 	}
 
+	/**
+	 * This method will verify payment recieved mail body in customer inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying payment recieved mail body in customer inbox..")
 	public static void verifyPaymentReceivedMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -974,6 +1144,11 @@ public class YopmailPage {
 		log.info("Verified payment recieved mail body in customer inbox.");
 	}
 
+	/**
+	 * This method will open payment received mail in Staff inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening payment received mail in Staff inbox..")
 	public static void openPaymentReceivedToStaffMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -989,6 +1164,11 @@ public class YopmailPage {
 		log.info("Opened payment received mail in Staff inbox.");
 	}
 
+	/**
+	 * This method will verify payment recieved mail body in Staff inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying payment recieved mail body in Staff inbox.")
 	public static void verifyPaymentReceivedToStaffMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1020,6 +1200,11 @@ public class YopmailPage {
 		log.info("Verified payment recieved mail body in Staff inbox.");
 	}
 
+	/**
+	 * This method will open new renewal file mail in Staff inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening new renewal file mail in Staff inbox..")
 	public static void openNewRenewalFileMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -1035,6 +1220,11 @@ public class YopmailPage {
 		log.info("Opened new renewal file mail in Staff inbox.");
 	}
 
+	/**
+	 * This method will verify new report renewal file mail body in Staff inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying new report renewal file mail body in Staff inbox.")
 	public static void verifyNewRenewalFileMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1066,6 +1256,11 @@ public class YopmailPage {
 		log.info("Verified new report renewal file mail body in Staff inbox.");
 	}
 
+	/**
+	 * This method will open payment for invoice mail in customer inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening payment for invoice mail in customer inbox..")
 	public static void openPaymentForInvoiceMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -1081,6 +1276,11 @@ public class YopmailPage {
 		log.info("Opened payment for invoice mail in customer inbox.");
 	}
 
+	/**
+	 * This method will verify payment for invoice mail body in customer inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying payment for invoice mail body in customer inbox.")
 	public static void verifyPaymentForInvoiceMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1112,6 +1312,11 @@ public class YopmailPage {
 		log.info("Verified payment for invoice mail body in customer inbox.");
 	}
 
+	/**
+	 * This method will open payment received for invoice mail in staff inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening payment received for invoice mail in staff inbox..")
 	public static void openPaymentForInvoiceReceivedMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -1127,6 +1332,12 @@ public class YopmailPage {
 		log.info("Opened payment received for invoice mail in staff inbox.");
 	}
 
+	/**
+	 * This method will verify payment received for invoice mail body in staff
+	 * inbox.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying payment received for invoice mail body in staff inbox.")
 	public static void verifyPaymentForInvoiceReceivedMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1158,6 +1369,13 @@ public class YopmailPage {
 		log.info("Verified payment received for invoice mail body in staff inbox.");
 	}
 
+	/**
+	 * This method will open PMG Application Submit By Non-Approved User mail in
+	 * customer inbox.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening PMG Application Submit By Non-Approved User mail in customer inbox.")
 	public static void openPMGApplicationSubmitByNonApprovedUserMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -1173,6 +1391,13 @@ public class YopmailPage {
 		log.info("Opened PMG Application Submit By Non-Approved User mail in customer inbox.");
 	}
 
+	/**
+	 * This method will Verify PMG Application Submit By Non-Approved User mail
+	 * in customer inbox. SOW uploaded mail in customer inbox.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying PMG Application Submit By Non-Approved User mail body in customer inbox.")
 	public static void verifyPMGApplicationSubmitByNonApprovedUserMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1200,6 +1425,12 @@ public class YopmailPage {
 		log.info("Verified PMG Application Submit By Non-Approved User mail body in customer inbox.");
 	}
 
+	/**
+	 * This method will open SOW uploaded mail in customer inbox.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening SOW uploaded mail in customer inbox.")
 	public static void openSOWUploadeMailInCustomerInbox() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -1215,6 +1446,12 @@ public class YopmailPage {
 		log.info("Opened SOW uploaded mail in customer inbox.");
 	}
 
+	/**
+	 * This method will verify SOW uploaded mail body in customer inbox.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying SOW uploaded mail body in customer inbox.")
 	public static void verifySOWUploadeMailBodyInCustomerInbox() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1223,6 +1460,12 @@ public class YopmailPage {
 		log.info("Verified SOW uploaded mail body in customer inbox.");
 	}
 
+	/**
+	 * This method will open SOW file removed mail.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening SOW file removed mail.")
 	public static void openSOWFileRemovedMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -1238,6 +1481,12 @@ public class YopmailPage {
 		log.info("Opened SOW file removed mail.");
 	}
 
+	/**
+	 * This method will verify SOW file removed mail body.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying SOW file removed mail body.")
 	public static void verifySOWFileRemovedMailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1246,6 +1495,13 @@ public class YopmailPage {
 		log.info("Verified SOW file removed mail body.");
 	}
 
+	/**
+	 * This method will verify PMG Application Submit By Non-Approved User mail
+	 * body in customer inbox.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying PMG Application Submit By Non-Approved User mail body in customer inbox.")
 	public static void verifyPMGApplicationSubmittedByNonApprovedUserMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1275,6 +1531,12 @@ public class YopmailPage {
 		log.info("Verified PMG Application Submit By Non-Approved User mail body in customer inbox.");
 	}
 
+	/**
+	 * This method will open PMG Application mail
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening PMG Application mail..")
 	public static void openPMGApplicationEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -1290,6 +1552,12 @@ public class YopmailPage {
 		log.info("Opened PMG Application mail");
 	}
 
+	/**
+	 * This method will verify PMG Application mail body.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying PMG Application mail body..")
 	public static void verifyPMGApplicationEmailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
@@ -1317,6 +1585,12 @@ public class YopmailPage {
 		log.info("Verified PMG Application mail body");
 	}
 
+	/**
+	 * This method will open PMG Application mail.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Opening PMG Application mail..")
 	public static void openPMGApplicationEmailInCustomerInbox() {
 		SeleniumUtils.switchToIframeById("ifinbox");
@@ -1332,6 +1606,12 @@ public class YopmailPage {
 		log.info("Opened PMG Application mail");
 	}
 
+	/**
+	 * This method will Verify PMG Application mail body in customer inbox.
+	 * 
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying PMG Application mail body in customer inbox..")
 	public static void verifyPMGApplicationEmailBodyInCustomerInbox() {
 		SeleniumUtils.switchToIframeById("ifmail");
