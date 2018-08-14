@@ -40,15 +40,15 @@ public class ApplyForCustomer extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "ApplyForCustomer" })
+	@Test(groups = { "smoke", "ApplyForCustomer"})
 	@Description("Verify the registration process once correct OTP and other fields are entered.")
 	public void verifyRegistrationFromApplyWorkflow() throws InterruptedException {
 		try {
 			SignInPage.navigateToPMG();
-			RegisterPage.enterEmailInRegistration();
+			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
-					Prop.getTestData("confirmPassword"));
+					Prop.getTestData("confirmPassword"),email);
 			ApplicationsListingPage.verifyApplicationPageForPMG();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyRegistrationFromApplyWorkflow");
@@ -65,7 +65,7 @@ public class ApplyForCustomer extends Setup {
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
-					Prop.getTestData("confirmPassword"));
+					Prop.getTestData("confirmPassword"),email);
 			Yopmail.verifyRegistrationEmailBody(email);
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyEmailNotificationsToCustomerForApplyWorkFlow");
@@ -79,10 +79,10 @@ public class ApplyForCustomer extends Setup {
 	public void verifynEmailNotificationsToStaffForER() throws InterruptedException {
 		try {
 			SignInPage.navigateToER();
-			RegisterPage.enterEmailInRegistration();
+			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
-					Prop.getTestData("confirmPassword"));
+					Prop.getTestData("confirmPassword"),email);
 			Yopmail.verifyNewAccountRegistrationEmailBody(Prop.getTestData("EmailId"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifynEmailNotificationsToStaffForER");
@@ -91,7 +91,7 @@ public class ApplyForCustomer extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "ApplyForCustomer" })
+	@Test(groups = { "smoke", "ApplyForCustomer"})
 	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
 	public void verifyESStaffQualifyLeadinCRMForER() throws InterruptedException {
 		try {
@@ -99,7 +99,7 @@ public class ApplyForCustomer extends Setup {
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
-					Prop.getTestData("confirmPassword"));
+					Prop.getTestData("confirmPassword"), email);
 			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"),
 					Prop.getTestData("Name"), email);
 		} catch (Exception e) {
