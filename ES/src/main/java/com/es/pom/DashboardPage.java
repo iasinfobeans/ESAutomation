@@ -175,7 +175,12 @@ public class DashboardPage {
 		Assert.assertTrue(dashboardElement.isDisplayed());
 		log.info("Dashboard displayed");
 	}
-
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will Verify the registration process once correct OTP and other fields are entered and User is on DashboardPage .
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify the registration process once correct OTP and other fields are entered Step...")
 	public static void verifyRegistrationProcessAfterEnteringCorrectOTP() {
 		Assert.assertTrue(dashboardOptionElement.isDisplayed());
@@ -223,7 +228,12 @@ public class DashboardPage {
 		editProfileLink.click();
 		log.info("Navigated to edit profile page");
 	}
-
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will Verify User is qualified and all the portal options get available to user.
+	 * @return void
+	 * @param void
+	 */
 	@Step("User is qualified and all the portal options get available to user.")
 	public static void verifyPortalOptionForQualifiedUser() {
 
@@ -265,8 +275,14 @@ public class DashboardPage {
 		pmgListingProgramLinkApprovedUser.click();
 		log.info("Navigated to PMG Application Form");
 	}
-
-	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
+	
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will verify Quotation Option is present on Dash-board.
+	 * @return void
+	 * @param void
+	 */
+	@Step("verify Quotation Option is present on Dashboard.")
 	public static void verifyQuotationOption() {
 		quotationOption.click();
 		log.info("Verify Quotation Option displayed");
@@ -294,6 +310,12 @@ public class DashboardPage {
 		log.info("Verified navigation");
 	}
 
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will verify customer Dash-board to have an additional head titled 'Reports.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
 	public static void verifyTitleReports() {
 		reportOption.click();
@@ -309,6 +331,12 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will verify the actions available on hovering over any report.
+	 * @return void
+	 * @param void
+	 */
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport() {
 		SeleniumUtils.waitForElementToBeInvisible(loadingIcon);
@@ -316,7 +344,12 @@ public class DashboardPage {
 		SeleniumUtils.mouseHover(reportName);
 		log.info("Hover on Report Name");
 	}
-
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will verify hovering over any report.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify the actions available on hovering over any report...")
 	public static void actionsAvailableHoveringOverAnyReport() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
@@ -332,13 +365,26 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will verify the action on clicking the 'Pay' button.
+	 * @return void
+	 * @param void
+	 */
 	@Step("action on clicking the 'Pay' button...")
 	public static void clickActionOnPayButton() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
 		payForReportButton.click();
 		log.info("pay For Report Button is clicked");
 	}
-
+	
+	
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will verify the action on clicking the 'view Projects' button.
+	 * @return void
+	 * @param void
+	 */
 	@Step("action on clicking the view Projects button...")
 	public static void clickActionOnViewProjectsButton() {
 		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
@@ -346,7 +392,13 @@ public class DashboardPage {
 		log.info("view Projects button is clicked");
 	}
 
-	@Step("action on clicking the view Projects button...")
+	/**
+	 * @author Shefali.Garg
+	 * @description This method will verify the action on clicking the 'view Invoices' button.
+	 * @return void
+	 * @param void
+	 */
+	@Step("action on clicking the view Invoices button...")
 	public static void clickActionOnViewInvoicesButton() {
 		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
 		viewInvoicesForReportButton.click();
