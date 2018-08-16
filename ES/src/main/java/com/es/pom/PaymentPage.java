@@ -36,8 +36,10 @@ public class PaymentPage {
 	@FindBy(xpath = "//a[@class='sbSelector' and contains(text(),'Select State')]")
 	static WebElement stateBox;
 
-	@FindBy(xpath = "//a[contains(text(),'Alabama')]")
+	@FindBy(linkText = "Alabama")
 	static WebElement state;
+//	@FindBy(xpath = "//a[contains(text(),'Alabama')]")
+	
 
 	@FindBy(id = "zip")
 	static WebElement zipBox;

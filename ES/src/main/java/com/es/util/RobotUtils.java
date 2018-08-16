@@ -27,7 +27,9 @@ public class RobotUtils {
 		}
 		robot.delay(250);
 		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.delay(250);
 		robot.keyPress(KeyEvent.VK_V);
+		robot.delay(250);
 		robot.keyPress(KeyEvent.VK_ENTER);
 	}
 }

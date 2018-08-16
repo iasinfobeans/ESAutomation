@@ -324,6 +324,8 @@ public class YopmailPage {
 	 */
 	@Step("Navigate to inbox..")
 	public static void navigateToInbox(String email) {
+		Assert.assertTrue(emailTextBox.isDisplayed());
+		log.info("Email TextBox is displayed.");
 		emailTextBox.clear();
 		emailTextBox.sendKeys(email);
 		submitEmail.click();
@@ -337,6 +339,7 @@ public class YopmailPage {
 	@Step("Opening Otp mail..")
 	public static void openOTPmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
+		Assert.assertTrue(openMail.isDisplayed());
 		openMail.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Opened OTP email");
@@ -344,12 +347,14 @@ public class YopmailPage {
 
 	/**
 	 * This method will return otp from mail body.
+	 * 
 	 * @param void
 	 * @return otp
 	 */
 	@Step("Getting OTP from mail..")
 	public static String getOTPfromMail() {
 		SeleniumUtils.switchToIframeById("ifmail");
+		Assert.assertTrue(readOtp.isDisplayed());
 		otp = readOtp.getText();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Got OTP: " + otp);
@@ -358,6 +363,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify otp mail body.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -393,12 +399,14 @@ public class YopmailPage {
 
 	/**
 	 * This method will open registration mail.
+	 * 
 	 * @param void
 	 * @return void
 	 */
 	@Step("Opening registraion succesful mail..")
 	public static void openRegistrationMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
+		Assert.assertTrue(openRegistrationMail.isDisplayed());
 		openRegistrationMail.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Opened Registration email");
@@ -406,6 +414,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify Registration mail body.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -444,12 +453,14 @@ public class YopmailPage {
 
 	/**
 	 * This method will open New account registration mail.
+	 * 
 	 * @param void
 	 * @return void
 	 */
 	@Step("Opening New account registration mail..")
 	public static void openNewAccRegMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
+		Assert.assertTrue(openNewAccRegistrationMail.isDisplayed());
 		openNewAccRegistrationMail.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Opened New account registration mail");
@@ -457,6 +468,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify New account registration mail body.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -490,12 +502,14 @@ public class YopmailPage {
 
 	/**
 	 * This method will open password reset mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
 	@Step("Opening password reset mail..")
 	public static void openPassResetMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
+		Assert.assertTrue(openPassResetMail.isDisplayed());
 		openPassResetMail.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Opened password reset mail body");
@@ -503,6 +517,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify password reset mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -540,6 +555,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will return password reset link.
+	 * 
 	 * @return resetPassLink
 	 * @param void
 	 */
@@ -547,6 +563,7 @@ public class YopmailPage {
 	public static String getResetLinkFromMail() {
 		String resetPassLink = null;
 		SeleniumUtils.switchToIframeById("ifmail");
+		Assert.assertTrue(passResetLink.isDisplayed());
 		resetPassLink = passResetLink.getAttribute("href");
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Got password reset link: " + resetPassLink);
@@ -555,12 +572,14 @@ public class YopmailPage {
 
 	/**
 	 * This method will open Profile update request mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
 	@Step("Opening Profile update request mail..")
 	public static void openProfileReqEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
+		Assert.assertTrue(openProfileUpdateReqMail.isDisplayed());
 		openProfileUpdateReqMail.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Opened Profile update request mail");
@@ -568,6 +587,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify Profile update request mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -608,12 +628,14 @@ public class YopmailPage {
 
 	/**
 	 * This method will open Profile updated mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
 	@Step("Opening Profile updated mail..")
 	public static void openProfileUpdatedEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
+		Assert.assertTrue(openProfileUpdatedMail.isDisplayed());
 		openProfileUpdatedMail.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Opened Profile updated mail");
@@ -621,6 +643,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify Profile updated mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -653,6 +676,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open New Account Registration mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -660,6 +684,7 @@ public class YopmailPage {
 	public static void openNewAccRegEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openNewAccRegMail.isDisplayed());
 			openNewAccRegMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -673,6 +698,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify New Account Registration mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -707,6 +733,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open New Account Approved mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -714,6 +741,7 @@ public class YopmailPage {
 	public static void openNewAccApprovedEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openNewAccApprovedMail.isDisplayed());
 			openNewAccApprovedMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -727,6 +755,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify New Account Approved mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -761,6 +790,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open PMG Application mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -768,6 +798,7 @@ public class YopmailPage {
 	public static void openPMGApplEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openPMGApplMail.isDisplayed());
 			openPMGApplMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -781,6 +812,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify PMG Application mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -817,6 +849,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open ESR Application mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -824,6 +857,7 @@ public class YopmailPage {
 	public static void openESRApplEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openESRApplMail.isDisplayed());
 			openESRApplMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -837,6 +871,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify ESR Application mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -873,6 +908,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open Quatation Request Submit mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -880,6 +916,7 @@ public class YopmailPage {
 	public static void openQuotationEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openQuatReqSubMail.isDisplayed());
 			openQuatReqSubMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -893,6 +930,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify Quatation Request Submit mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -925,6 +963,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open Quatation Request Received mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -932,6 +971,7 @@ public class YopmailPage {
 	public static void openQuotationReqRecEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openQuatReqRecMail.isDisplayed());
 			openQuatReqRecMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -945,6 +985,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify Quatation Request Received mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -977,6 +1018,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open Approved Or Decline Profile Changes mail.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -984,6 +1026,7 @@ public class YopmailPage {
 	public static void openApprovedOrDeclineProfileChangesEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openApprovedOrDeclinedProfChangesMail.isDisplayed());
 			openApprovedOrDeclinedProfChangesMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -997,6 +1040,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify Approved Or Decline Profile Changes mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1034,6 +1078,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open New Quotation Available in mail for customer.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1041,6 +1086,7 @@ public class YopmailPage {
 	public static void openNewQuotationAvailableMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openNewQuotationAvailableMail.isDisplayed());
 			openNewQuotationAvailableMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1054,6 +1100,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify New Quotation Available mail body.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1090,6 +1137,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open payment received mail customer inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1097,6 +1145,7 @@ public class YopmailPage {
 	public static void openPaymentReceivedMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openPaymentReceivedMail.isDisplayed());
 			openPaymentReceivedMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1110,6 +1159,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify payment recieved mail body in customer inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1146,6 +1196,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open payment received mail in Staff inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1153,6 +1204,7 @@ public class YopmailPage {
 	public static void openPaymentReceivedToStaffMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openPaymentReceivedToStaffMail.isDisplayed());
 			openPaymentReceivedToStaffMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1166,6 +1218,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify payment recieved mail body in Staff inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1202,6 +1255,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open new renewal file mail in Staff inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1209,6 +1263,7 @@ public class YopmailPage {
 	public static void openNewRenewalFileMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openNewRenewalFileMail.isDisplayed());
 			openNewRenewalFileMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1222,6 +1277,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify new report renewal file mail body in Staff inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1258,6 +1314,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open payment for invoice mail in customer inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1265,6 +1322,7 @@ public class YopmailPage {
 	public static void openPaymentForInvoiceMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openInvoicePaymentReceivedMail.isDisplayed());
 			openInvoicePaymentReceivedMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1278,6 +1336,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will verify payment for invoice mail body in customer inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1314,6 +1373,7 @@ public class YopmailPage {
 
 	/**
 	 * This method will open payment received for invoice mail in staff inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1321,6 +1381,7 @@ public class YopmailPage {
 	public static void openPaymentForInvoiceReceivedMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openInvoicePaymentReceivedToStaffMail.isDisplayed());
 			openInvoicePaymentReceivedToStaffMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1335,6 +1396,7 @@ public class YopmailPage {
 	/**
 	 * This method will verify payment received for invoice mail body in staff
 	 * inbox.
+	 * 
 	 * @return void
 	 * @param void
 	 */
@@ -1380,6 +1442,7 @@ public class YopmailPage {
 	public static void openPMGApplicationSubmitByNonApprovedUserMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openPMGApplicationSubmitByNonApprovedUserMail.isDisplayed());
 			openPMGApplicationSubmitByNonApprovedUserMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1435,6 +1498,7 @@ public class YopmailPage {
 	public static void openSOWUploadeMailInCustomerInbox() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openSOWUploadeMailInCustomerInbox.isDisplayed());
 			openSOWUploadeMailInCustomerInbox.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1470,6 +1534,7 @@ public class YopmailPage {
 	public static void openSOWFileRemovedMail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openSOWFileRemovedMail.isDisplayed());
 			openSOWFileRemovedMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1490,6 +1555,7 @@ public class YopmailPage {
 	@Step("Verifying SOW file removed mail body.")
 	public static void verifySOWFileRemovedMailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
+		Assert.assertTrue(sowFileRemovedLink.isDisplayed());
 		sowFileRemovedLink.click();
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified SOW file removed mail body.");
@@ -1541,6 +1607,7 @@ public class YopmailPage {
 	public static void openPMGApplicationEmail() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openPMGApplicationMail.isDisplayed());
 			openPMGApplicationMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1595,6 +1662,7 @@ public class YopmailPage {
 	public static void openPMGApplicationEmailInCustomerInbox() {
 		SeleniumUtils.switchToIframeById("ifinbox");
 		try {
+			Assert.assertTrue(openPMGApplicationInCustomerMail.isDisplayed());
 			openPMGApplicationInCustomerMail.click();
 		} catch (Exception e) {
 			e.printStackTrace();

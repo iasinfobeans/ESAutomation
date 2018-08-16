@@ -6,7 +6,6 @@ import com.es.pom.ApplicationPageForQuotation;
 import com.es.pom.AvaliableQuotesPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.GetAQuotePage;
-import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
@@ -96,7 +95,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement"})
 	@Description("Verify the different statuses of the quotation request.")
 	public void verifyStatusesOfQuotationRequest() throws InterruptedException {
 		try {
@@ -111,7 +110,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that once the quote is submitted, the staff is notified about the same..")
 	public void verifyStatusesOfQuotationRequestApplicationSaved() throws InterruptedException {
 		try {
@@ -188,7 +187,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that the Expiry date is a mandatory field & it  is defaulted with a date 30 days ahead from the current date.")
 	public void verifyExpiryDateDefaultedWithThirtyDaysAhead() throws InterruptedException {
 		try {
@@ -196,7 +195,7 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyQuotationOption();
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
-			DashboardPage.clickSendWhileUploadingQuotation();
+			DashboardPage.checkExpiryDate();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyExpiryDateDefaultedWithThirtyDaysAhead");
 			e.getStackTrace();
@@ -213,8 +212,9 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
 			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"));
-			Thread.sleep(10000);
+			QuotationListingPage.verifyFileUploadedOrNot();
 			DashboardPage.clickSendWhileUploadingQuotation();
+			QuotationListingPage.verifyQuotationUploaded();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyAfterGivenInputInUploadOption");
 			e.getStackTrace();
@@ -231,8 +231,9 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
 			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"));
-			Thread.sleep(20000);
+			QuotationListingPage.verifyFileUploadedOrNot();
 			DashboardPage.clickSendWhileUploadingQuotation();
+			QuotationListingPage.verifyQuotationUploaded();
 			Yopmail.verifyNewQuotationAvailableMail(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCustomerMailAfterGivenInputInUploadOption");
@@ -250,8 +251,10 @@ public class QuotesManagement extends Setup {
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
 			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"));
-			Thread.sleep(20000);
+			QuotationListingPage.verifyFileUploadedOrNot();
 			DashboardPage.clickSendWhileUploadingQuotation();
+			QuotationListingPage.verifyQuotationUploaded();
+			Thread.sleep(10000);
 			QuotationListingPage.viewQuotesOptions();
 			QuotationListingPage.deleteQuoteByStaff();
 		} catch (Exception e) {
@@ -309,16 +312,17 @@ public class QuotesManagement extends Setup {
 			QuotationListingPage.inputForProductType(Prop.getTestData("productType"));
 			QuotationListingPage.inputForProductDescription(Prop.getTestData("productDescription"));
 			QuotationListingPage.submitQuotationRequest();
-			Thread.sleep(20000);
+			Thread.sleep(10000);
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyQuotationOption();
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
 			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"));
-			Thread.sleep(20000);
+			QuotationListingPage.verifyFileUploadedOrNot();
 			DashboardPage.clickSendWhileUploadingQuotation();
-			Thread.sleep(20000);
+			QuotationListingPage.verifyQuotationUploaded();
+			Thread.sleep(10000);
 			DashboardPage.logout();
 			//Actual test case steps
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
@@ -348,16 +352,17 @@ public class QuotesManagement extends Setup {
 			QuotationListingPage.inputForProductType(Prop.getTestData("productType"));
 			QuotationListingPage.inputForProductDescription(Prop.getTestData("productDescription"));
 			QuotationListingPage.submitQuotationRequest();
-			Thread.sleep(20000);
+			Thread.sleep(10000);
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyQuotationOption();
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
 			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"));
-			Thread.sleep(20000);
+			QuotationListingPage.verifyFileUploadedOrNot();
 			DashboardPage.clickSendWhileUploadingQuotation();
-			Thread.sleep(20000);
+			QuotationListingPage.verifyQuotationUploaded();
+			Thread.sleep(10000);
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();
@@ -395,16 +400,17 @@ public class QuotesManagement extends Setup {
 			QuotationListingPage.inputForProductType(Prop.getTestData("productType"));
 			QuotationListingPage.inputForProductDescription(Prop.getTestData("productDescription"));
 			QuotationListingPage.submitQuotationRequest();
-			Thread.sleep(20000);
+			Thread.sleep(10000);
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyQuotationOption();
 			DashboardPage.verifyUploadOption();
 			DashboardPage.verifyPopUpWindowForUpload();
 			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"));
-			Thread.sleep(20000);
+			QuotationListingPage.verifyFileUploadedOrNot();
 			DashboardPage.clickSendWhileUploadingQuotation();
-			Thread.sleep(20000);
+			QuotationListingPage.verifyQuotationUploaded();
+			Thread.sleep(10000);
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyQuotationOption();

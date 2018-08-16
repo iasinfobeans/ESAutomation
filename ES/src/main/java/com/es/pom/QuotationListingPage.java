@@ -25,7 +25,12 @@ public class QuotationListingPage {
 
 	@FindBy(xpath = "//strong[text()='Active']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
 	static WebElement viewQuotesBoxForStaff;
+	
+	//*[@id='quotation-list-dataTable']/tbody/tr/td/a
 
+	@FindBy(xpath = "//*[@class='odd parent']/td[@class='sorting_1']")
+	static WebElement clickonQuoteForDelete;
+	
 	@FindBy(xpath = "//*[@class='tbl-icon-delete del-quote']")
 	static WebElement deleteQuote;
 
@@ -37,6 +42,12 @@ public class QuotationListingPage {
 
 	@FindBy(xpath = "//*[@id='quote_submit']")
 	static WebElement submitQuotationRequest;
+	
+	@FindBy(xpath = "//*[@id='doc_cat_quotes']/table/tbody")
+	static WebElement fileUploaded;
+	
+	@FindBy(xpath = "//*[@id='quotation-span-msg']/span/ul/li")
+	static WebElement quotationUploaded;
 
 	@Step("Verify that a 'Get a Quote' button is present on the Quotation Listing page for the customer...")
 	public static void verifyGetAQuoteButton() {
@@ -58,23 +69,21 @@ public class QuotationListingPage {
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
 	}
 
-	@Step("Click on 'View Quotes' options by Customer ...")
+	/*@Step("Click on 'View Quotes' options by Customer ...")
 	public static void viewQuotesTab() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		log.info("Verify Customer is able to Click on 'View Quotes' options");
-	}
+	}*/
 
 	@Step("Click on delete quote by Staff ...")
 	public static void deleteQuoteByStaff() {
-		try {
-			SeleniumUtils.executeJavaScript("arguments[0].click();", deleteQuote);
-			// deleteQuote.click();
-		} catch (Exception e) {
-			SeleniumUtils.acceptPopup();
-			log.info("Verify Staff is able to delete Quote.");
-		}
 
+		// SeleniumUtils.executeJavaScript("arguments[0].click();",
+		// clickonQuoteForDelete);
+		SeleniumUtils.executeJavaScript("arguments[0].click();", deleteQuote);
+		SeleniumUtils.acceptPopup();
+		log.info("Verify Staff is able to delete Quote.");
 	}
 
 	@Step("Input for Product Type ...")
@@ -100,6 +109,9 @@ public class QuotationListingPage {
 		log.info("Submitted Quotation Request.");
 	}
 
+	/**
+	 * This method will verify statuses in Status column.
+	 */
 	@Step("Verifying status in Status column...")
 	public static void verifyDifferentStatus() {
 		List<WebElement> rows = Setup.driver.findElements(By.cssSelector("tbody > tr"));
@@ -110,5 +122,25 @@ public class QuotationListingPage {
 				log.info("'Expired' Status of Quotes found in Status Coloumn.");
 			}
 		}
+	}
+
+	/**
+	 * This method will verify whether file is uploaded or not.
+	 */
+	@Step("Verifying whether file is uploaded or not...")
+	public static void verifyFileUploadedOrNot() {
+		SeleniumUtils.waitForElementToBeVisible(fileUploaded);
+		Assert.assertTrue(fileUploaded.isDisplayed());
+		log.info("File uploaded successfully.");
+	}
+
+	/**
+	 * This method will verify whether Quotation is uploaded or not.
+	 */
+	@Step("Verifying whether Quotation is uploaded or not...")
+	public static void verifyQuotationUploaded() {
+		SeleniumUtils.waitForElementToBeVisible(quotationUploaded);
+		Assert.assertTrue(quotationUploaded.isDisplayed());
+		log.info("Quotation uploaded successfully.");
 	}
 }
