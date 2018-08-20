@@ -28,8 +28,13 @@ public class InvoiceListingPage {
 
 	@FindBy(xpath = "//div[@class='ehading']")
 	static WebElement invoicessElement;
-
-	@Step("Dashboard to have an additional head titled 'Reports.")
+	
+	/**
+	 * This method will verify Dashboard to have an additional head titled 'Invoices.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Dashboard to have an additional head titled 'Invoices.")
 	public static void verifyViewInvoicesPage() {
 		Assert.assertTrue(invoicessElement.isDisplayed());
 		log.info("verify View Invoices Page");
