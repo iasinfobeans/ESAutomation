@@ -333,7 +333,7 @@ public class ReportRenewalWorkflow extends Setup {
 			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"),
 					Prop.getTestData("cVCNumber"));
 			DashboardPage.verifyDashboardPage();
-			DashboardPage.navigateToApplicationPageWhenLoggedIn();
+			DashboardPage.navigateToApplicationListingPageWhenLoggedIn();
 			ApplicationsListingPage.verifyUserUnablePerformPredefinedOperations();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyUserUnablePerformPredefinedOperations");
@@ -349,7 +349,7 @@ public class ReportRenewalWorkflow extends Setup {
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyDashboardPage();
-			DashboardPage.navigateToApplicationPageWhenLoggedIn();
+			DashboardPage.navigateToApplicationListingPageWhenLoggedIn();
 			ApplicationsListingPage.verifyUserUnablePerformPredefinedOperations();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyStaffUserUnablePerformPredefinedOperations");
@@ -372,8 +372,8 @@ public class ReportRenewalWorkflow extends Setup {
 			CardDetailsPage.customerPayForRenewal(Prop.getTestData("name"), Prop.getTestData("creditCardNumber"),
 					Prop.getTestData("cVCNumber"));
 			DashboardPage.verifyDashboardPage();
-			DashboardPage.navigateToApplicationPageWhenLoggedIn();
-			ApplicationsListingPage.downloadRenewalApplicationDocument();
+			DashboardPage.navigateToApplicationListingPageWhenLoggedIn();
+			ApplicationsListingPage.customerDownloadRenewalApplicationDocument();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCustomerDownloadRenewalApplicationDocument");
 			e.getStackTrace();
@@ -387,8 +387,8 @@ public class ReportRenewalWorkflow extends Setup {
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyDashboardPage();
-			DashboardPage.navigateToApplicationPageWhenLoggedIn();
-			ApplicationsListingPage.downloadRenewalApplicationDocument();
+			DashboardPage.navigateToApplicationListingPageWhenLoggedIn();
+			ApplicationsListingPage.customerDownloadRenewalApplicationDocument();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyStaffDownloadRenewalApplicationDocument");
 			e.getStackTrace();
