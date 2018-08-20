@@ -16,12 +16,12 @@ public class ChangePassword extends Setup {
 	@Test(groups = { "smoke", "ChangePassword" })
 	@Description("Verify that customer is able to reset the password using the forgot password functionality")
 	public static void verifyChangePasswordFlow() throws IOException, InterruptedException {
-		try{
-			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyDashboardPage();
 			DashboardPage.navigateToChangePasswordPage();
 			ChangePasswordPage.changePassword();
-		}catch(Exception e){
+		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyChangePasswordFlow");
 			e.getStackTrace();
 			throw e;

@@ -13,54 +13,53 @@ import io.qameta.allure.Step;
 public class UpdateProfilePage {
 	private static Logger log = Logger.getLogger(UpdateProfilePage.class.getName());
 
-	@FindBy(id="city")
+	@FindBy(id = "city")
 	static WebElement textboxToEnterCity;
 
-	@FindBy(id="updateProfile")
+	@FindBy(id = "updateProfile")
 	static WebElement updateProfileButton;
 
-	@FindBy(id="jobtitle")
+	@FindBy(id = "jobtitle")
 	static WebElement jobtitleTextbox;
 
-	@FindBy(id="street")
+	@FindBy(id = "street")
 	static WebElement mailingAddressTextbox;
 
-	@FindBy(xpath="//div[@tabindex='11']")
+	@FindBy(xpath = "//div[@tabindex='11']")
 	static WebElement stateTextbox;
 
-	@FindBy(xpath="//label[contains(text(),'State')]/../div[@class='sbHolder']/ul/li/a")
+	@FindBy(xpath = "//label[contains(text(),'State')]/../div[@class='sbHolder']/ul/li/a")
 	static List<WebElement> stateList;
 
-	@FindBy(xpath="//div[@tabindex='13']")
+	@FindBy(xpath = "//div[@tabindex='13']")
 	static WebElement countryDropdown;
 
-	@FindBy(xpath="//label[contains(text(),'Country')]/../div[@class='sbHolder']/ul/li/a")
+	@FindBy(xpath = "//label[contains(text(),'Country')]/../div[@class='sbHolder']/ul/li/a")
 	static List<WebElement> countryList;
-	
-	@FindBy(id="zipcode")
+
+	@FindBy(id = "zipcode")
 	static WebElement zipcodeTextbox;
-	
-	@FindBy(xpath="//span[@class='message success alert']//ul//li")
+
+	@FindBy(xpath = "//span[@class='message success alert']//ul//li")
 	static WebElement successfullUpdateMessage;
 
-	@FindBy(id="profile_emailaddress")
+	@FindBy(id = "profile_emailaddress")
 	static WebElement emailTextbox;
 
-	@FindBy(id="company_name")
+	@FindBy(id = "company_name")
 	static WebElement companyTextbox;
 
-	@FindBy(xpath="//input[@value='Developer']")
+	@FindBy(xpath = "//input[@value='Developer']")
 	static WebElement jobTitleVerifyElement;
-	
-	@FindBy(xpath="//input[@value='developer@yopmail.com']")
+
+	@FindBy(xpath = "//input[@value='developer@yopmail.com']")
 	static WebElement mailingAddressVerifyElement;
-	
-	@FindBy(xpath="//input[@value='Pune']")
+
+	@FindBy(xpath = "//input[@value='Pune']")
 	static WebElement cityVerifyElement;
-	
+
 	@Step("Updating a customer account steps...")
-	public static void updateProfile()
-	{
+	public static void updateProfile() {
 		jobtitleTextbox.clear();
 		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle"));
 		log.info("job tile entered");
@@ -86,11 +85,11 @@ public class UpdateProfilePage {
 		updateProfileButton.click();
 		log.info("updated profile");
 		successfullUpdateMessage.isDisplayed();
-		log.info( successfullUpdateMessage.getText());
+		log.info(successfullUpdateMessage.getText());
 	}
 
-	public static void updateProfileAgain()
-	{
+	@Step("Updating a profile again...")
+	public static void updateProfileAgain() {
 		jobtitleTextbox.clear();
 		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle2"));
 		log.info("job tile entered");
@@ -116,37 +115,35 @@ public class UpdateProfilePage {
 		updateProfileButton.click();
 		log.info("updated profile");
 		successfullUpdateMessage.isDisplayed();
-		log.info( successfullUpdateMessage.getText());
+		log.info(successfullUpdateMessage.getText());
 	}
-	
+
 	@Step("Restrictions on updating profile verification steps...")
-	public static void updateRestriction()
-	{
+	public static void updateRestriction() {
 		String readonly = emailTextbox.getAttribute("readonly");
 		Assert.assertNotNull(readonly);
 		log.info("Verified that email text box is non editable");
-		String readonlyCompany= companyTextbox.getAttribute("readonly");
+		String readonlyCompany = companyTextbox.getAttribute("readonly");
 		Assert.assertNotNull(readonlyCompany);
 		log.info("Verified that company text box is non editable");
 	}
 
 	@Step("Verify if only the recent changes are visible...")
-	public static void verifyChanges()
-	{
-		if(jobTitleVerifyElement.getAttribute("value").equals(Prop.getTestData("jobtitle2"))){
+	public static void verifyChanges() {
+		if (jobTitleVerifyElement.getAttribute("value").equals(Prop.getTestData("jobtitle2"))) {
 			log.info("Recent Change is only getting displayed in job title");
-		}else {
+		} else {
 			log.info("Recent Change not getting displayed in job title");
-			}
-		if(mailingAddressVerifyElement.getAttribute("value").equals(Prop.getTestData("MailingAddress2"))){
+		}
+		if (mailingAddressVerifyElement.getAttribute("value").equals(Prop.getTestData("MailingAddress2"))) {
 			log.info("Recent Change is only getting displayed in Mailing textbox");
-		}else {
+		} else {
 			log.info("Recent Change not getting displayed in Mailing textbox");
-			}
-		if(cityVerifyElement.getAttribute("value").equals(Prop.getTestData("city2"))){
+		}
+		if (cityVerifyElement.getAttribute("value").equals(Prop.getTestData("city2"))) {
 			log.info("Recent Change is only getting displayed in City textbox");
-		}else {
+		} else {
 			log.info("Recent Change not getting displayed in City textbox");
-			}
+		}
 	}
 }

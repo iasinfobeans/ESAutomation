@@ -13,25 +13,31 @@ public class CardDetailsPage {
 
 	private static Logger log = Logger.getLogger(CardDetailsPage.class.getName());
 
-	@FindBy(id="name")
+	@FindBy(id = "name")
 	static WebElement cardHolderName;
 
-	@FindBy(id="card_type")
+	@FindBy(id = "card_type")
 	static WebElement creditCardType;
 
-	@FindBy(id="PAN")
+	@FindBy(id = "PAN")
 	static WebElement creditCardNumberElement;
 
-	@FindBy(xpath="//select[@name='cresecure_cc_expires_year']")
+	@FindBy(xpath = "//select[@name='cresecure_cc_expires_year']")
 	static WebElement expirationDate;
 
-	@FindBy(xpath="//select[@name='cresecure_cc_expires_year']//option[@value='25']")
+	@FindBy(xpath = "//select[@name='cresecure_cc_expires_year']//option[@value='25']")
 	static WebElement expirationYear;
 
-	@FindBy(id="cv_data")
+	@FindBy(id = "cv_data")
 	static WebElement cVCNumberElement;
+	
+	@FindBy(xpath = "//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']")
+	static WebElement oderId;
 
-	@FindBy(id="submitButton")
+	@FindBy(xpath = "//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']/../following-sibling::div/span")
+	static WebElement oderIdReport;
+
+	@FindBy(id = "submitButton")
 	static WebElement submitButton;
 
 	@Step("Verify Payment Gateway Page..")
@@ -40,9 +46,13 @@ public class CardDetailsPage {
 		Assert.assertTrue(submitButton.isDisplayed());
 		log.info("Payment Gateway Page displayed");
 	}
-
+	/**
+	 *This method will verify customer to pay any amount greater than zero for renewal.
+	 * @return void
+	 * @param String name, String creditCardNumber, String cVCNumber
+	 */
 	@Step("customer to pay any amount greater than zero for renewal..")
-	public static void customerPayForRenewal(String name,String creditCardNumber,String cVCNumber){
+	public static void customerPayForRenewal(String name, String creditCardNumber, String cVCNumber) {
 
 		SeleniumUtils.waitForElementToBeClickable(cardHolderName);
 		cardHolderName.clear();
@@ -66,18 +76,37 @@ public class CardDetailsPage {
 		expirationYear.click();
 		log.info("expiration year for payment");
 
+		Assert.assertTrue(submitButton.isDisplayed());
 		submitButton.click();
 		log.info("Sumbit payment Details");
 
 	}
-
-	@Step("User should be navigated to the payment gateway....")
-	public static void verifyUserNavigatedPaymentGateway()
-	{
+	
+	/**
+	 *This method will verify User should be navigated to the payment gateway.
+	 * @return void
+	 * @param void
+	 */
+    @Step("User should be navigated to the payment gateway.")
+	public static void verifyUserNavigatedPaymentGateway() {
 		SeleniumUtils.waitForElementToBeClickable(cardHolderName);
 		Assert.assertTrue(cardHolderName.isDisplayed());
-		log.info("Dashboard Option is displayed");
+		log.info(" Card Holder Name is displayed");
 	}
-
+    
+    
+    /**
+	 *This method will verify A new oderId should be created on the portal of the same program type.
+	 * @return void
+	 * @param void
+	 */
+	@Step("A new oderId should be created on the portal of the same program type.")
+	public static String verifyOderIdNewApplicationCreated() {
+		Assert.assertTrue(oderId.isDisplayed());
+		log.info("OderId is displayed");
+		
+		String orderId = oderIdReport.getText();
+		log.info("Oder Id for Report " + orderId);
+		return orderId;
+	}
 }
-

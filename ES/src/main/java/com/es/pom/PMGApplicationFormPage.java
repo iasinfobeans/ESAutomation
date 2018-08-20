@@ -13,86 +13,86 @@ public class PMGApplicationFormPage {
 
 	private static Logger log = Logger.getLogger(PMGApplicationFormPage.class.getName());
 
-	@FindBy(id="appcompanyname")
+	@FindBy(id = "appcompanyname")
 	static WebElement companyNameTextbox;
 
-	@FindBy(id="mailingaddress")
+	@FindBy(id = "mailingaddress")
 	static WebElement applicantEmailTextbox;
 
-	@FindBy(id="city")
-	static  WebElement cityTextbox;
+	@FindBy(id = "city")
+	static WebElement cityTextbox;
 
-	@FindBy(id="state")
-	static  WebElement stateTextbox;
+	@FindBy(id = "state")
+	static WebElement stateTextbox;
 
-	@FindBy(id="zip")
-	static  WebElement zipTextbox;
+	@FindBy(id = "zip")
+	static WebElement zipTextbox;
 
-	@FindBy(id="country")
-	static  WebElement countryTextbox;
+	@FindBy(id = "country")
+	static WebElement countryTextbox;
 
-	@FindBy(id="emailaddress")
-	static  WebElement emailTextbox;
+	@FindBy(id = "emailaddress")
+	static WebElement emailTextbox;
 
-	@FindBy(id="product_descriptions")
-	static  WebElement productDescriptionTextbox;
+	@FindBy(id = "product_descriptions")
+	static WebElement productDescriptionTextbox;
 
-	@FindBy(id="product_name")
-	static  WebElement productNameModelTextbox;
+	@FindBy(id = "product_name")
+	static WebElement productNameModelTextbox;
 
-	@FindBy(id="product_check")
-	static  WebElement productTypeCheckbox;
+	@FindBy(id = "product_check")
+	static WebElement productTypeCheckbox;
 
-	@FindBy(id="english_language_yes")
-	static  WebElement englishLanguageCheckbox;
+	@FindBy(id = "english_language_yes")
+	static WebElement englishLanguageCheckbox;
 
-	@FindBy(id="tech_rep_name")
-	static  WebElement technicalRepresentativeTextbox;
+	@FindBy(id = "tech_rep_name")
+	static WebElement technicalRepresentativeTextbox;
 
-	@FindBy(id="tech_rep_title")
-	static  WebElement trTitleTextbox;
+	@FindBy(id = "tech_rep_title")
+	static WebElement trTitleTextbox;
 
-	@FindBy(id="legal_rep_name_title")
-	static  WebElement legalRepresentativeTextbox;
-	
-	@FindBy(id="legal_rep_title")
-	static  WebElement lrTitleTextbox;
-	
-	@FindBy(id="legal_rep_phone")
-	static  WebElement lrPhoneTextbox;
-	
-	@FindBy(id="legal_rep_email")
-	static  WebElement lrEmailTextbox;
-	
-	@FindBy(id="tech_rep_phone")
-	static  WebElement trPhoneTextbox;
+	@FindBy(id = "legal_rep_name_title")
+	static WebElement legalRepresentativeTextbox;
 
-	@FindBy(id="tech_rep_email")
-	static  WebElement trEmailTextbox;
+	@FindBy(id = "legal_rep_title")
+	static WebElement lrTitleTextbox;
 
-	@FindBy(id="hazard_situation_yes")
-	static  WebElement hazardSituationCheckbox;
+	@FindBy(id = "legal_rep_phone")
+	static WebElement lrPhoneTextbox;
 
-	@FindBy(id="app_sidebar_submit")
-	static  WebElement submitButton;
+	@FindBy(id = "legal_rep_email")
+	static WebElement lrEmailTextbox;
 
-	@FindBy(xpath="//h1[text()='Disclaimer']")
-	static  WebElement disclaimerPopupTitle;
-	
-	@FindBy(xpath="//div[@id='submit_popup']//ul[@class='radio-frm agreement-checkbox']")
-	static  WebElement agreementCheckbox;
+	@FindBy(id = "tech_rep_phone")
+	static WebElement trPhoneTextbox;
 
-	@FindBy(id="continue_to_submit")
-	static  WebElement continueAndSubmitButton;
-	
-	@FindBy(xpath="//span[@class='message success alert']//ul//li")
-	static  WebElement successMessage;
+	@FindBy(id = "tech_rep_email")
+	static WebElement trEmailTextbox;
 
-	@FindBy(id="app_sidebar_save")
-	static  WebElement saveButton;
-	
+	@FindBy(id = "hazard_situation_yes")
+	static WebElement hazardSituationCheckbox;
+
+	@FindBy(id = "app_sidebar_submit")
+	static WebElement submitButton;
+
+	@FindBy(xpath = "//h1[text()='Disclaimer']")
+	static WebElement disclaimerPopupTitle;
+
+	@FindBy(xpath = "//div[@id='submit_popup']//ul[@class='radio-frm agreement-checkbox']")
+	static WebElement agreementCheckbox;
+
+	@FindBy(id = "continue_to_submit")
+	static WebElement continueAndSubmitButton;
+
+	@FindBy(xpath = "//span[@class='message success alert']//ul//li")
+	static WebElement successMessage;
+
+	@FindBy(id = "app_sidebar_save")
+	static WebElement saveButton;
+
 	@Step("PMG Listing application form...")
-	public static void PmgApplicationFormFill(){
+	public static void PmgApplicationFormFill() {
 		SeleniumUtils.waitForElementToBeVisible(companyNameTextbox);
 		companyNameTextbox.sendKeys(Prop.getTestData("companyName"));
 		log.info("Entered company name");
@@ -139,7 +139,7 @@ public class PMGApplicationFormPage {
 	}
 
 	@Step("PMG Listing application form submit actions...")
-	public static void PmgApplicationFormSubmit(){
+	public static void PmgApplicationFormSubmit() {
 		submitButton.click();
 		log.info("clicked on submit");
 		SeleniumUtils.waitForElementToBeClickable(disclaimerPopupTitle);
@@ -153,12 +153,10 @@ public class PMGApplicationFormPage {
 	}
 
 	@Step("Saving PMG application...")
-	public static void PmgApplicationSave(){
+	public static void PmgApplicationSave() {
 		saveButton.click();
 		log.info("clicked on save button");
 		successMessage.isDisplayed();
 		log.info(successMessage.getText());
 	}
 }
-
-

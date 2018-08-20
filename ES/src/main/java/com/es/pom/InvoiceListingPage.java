@@ -11,32 +11,37 @@ public class InvoiceListingPage {
 
 	private static Logger log = Logger.getLogger(InvoiceListingPage.class.getName());
 
-	@FindBy(xpath="//span[@class='message notices alert']//ul//li")
+	@FindBy(xpath = "//span[@class='message notices alert']//ul//li")
 	static WebElement messageNoticeAlert;
 
-	@FindBy(xpath="//th[@tabindex='0']")
+	@FindBy(xpath = "//th[@tabindex='0']")
 	static WebElement elementsToWaitForReload;
 
-	@FindBy(linkText="All Status")
+	@FindBy(linkText = "All Status")
 	static WebElement sortingDropdown;
 
-	@FindBy(linkText="Partial")
+	@FindBy(linkText = "Partial")
 	static WebElement partialSort;
 
-	@FindBy(linkText="Pay")
+	@FindBy(linkText = "Pay")
 	static WebElement paymentPageLink;
 
-	@FindBy(xpath="//div[@class='ehading']")
+	@FindBy(xpath = "//div[@class='ehading']")
 	static WebElement invoicessElement;
-
-	@Step("Dashboard to have an additional head titled 'Reports.")
-	public static void verifyViewInvoicesPage(){
+	
+	/**
+	 * This method will verify Dashboard to have an additional head titled 'Invoices.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Dashboard to have an additional head titled 'Invoices.")
+	public static void verifyViewInvoicesPage() {
 		Assert.assertTrue(invoicessElement.isDisplayed());
 		log.info("verify View Invoices Page");
 	}
 
 	@Step("Method to Verify the displayed details on Payment page")
-	public static void navigateToPaymentPage(){
+	public static void navigateToPaymentPage() {
 		SeleniumUtils.refreshPage();
 		SeleniumUtils.waitForElementToBeClickable(sortingDropdown);
 		sortingDropdown.click();
