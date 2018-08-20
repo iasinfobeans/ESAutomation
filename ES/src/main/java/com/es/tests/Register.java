@@ -61,7 +61,7 @@ public class Register extends Setup {
 	@Description("Verify that the user is able to initiate the registration process by clicking on the register link present on the home page.")
 	public void verifyRegistrationFromHomePage() throws InterruptedException {
 		try {
-			SignInPage.navigateToNormalRegistration();
+			SignInPage.navigateToRegistration();
 			RegisterPage.enterEmailInRegistration();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyRegistrationFromHomePage");
@@ -74,7 +74,7 @@ public class Register extends Setup {
 	@Description("Verify the email for OTP.")
 	public void verifyEmailForOTP() throws InterruptedException {
 		try {
-			SignInPage.navigateToNormalRegistration();
+			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			Yopmail.verifyOTPEmailBody(email);
 		} catch (Exception e) {
@@ -88,7 +88,7 @@ public class Register extends Setup {
 	@Description("Verify the registration process once correct OTP and other fields are entered.")
 	public void verifyRegistrationWithCorrectOTP() throws InterruptedException {
 		try {
-			SignInPage.navigateToNormalRegistration();
+			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
@@ -105,7 +105,7 @@ public class Register extends Setup {
 	@Description("Verify the email notifications sent to the Customer upon successful registration.")
 	public void verifySuccessfulRegistrationEmailNotificationsToCustomer() throws InterruptedException {
 		try {
-			SignInPage.navigateToNormalRegistration();
+			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
@@ -122,7 +122,7 @@ public class Register extends Setup {
 	@Description("Verify the email notifications sent to the Staff upon successful registration.")
 	public void verifyEmailNotificationsToStaff() throws InterruptedException {
 		try {
-			SignInPage.navigateToNormalRegistration();
+			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
@@ -137,9 +137,9 @@ public class Register extends Setup {
 
 	@Test(groups = { "smoke", "Register"})
 	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
-	public void verifyESStaffQualifyLeadinCRM() throws InterruptedException {
+	public void verifyEsStaffQualifyLeadinCRM() throws InterruptedException {
 		try {
-			SignInPage.navigateToNormalRegistration();
+			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
@@ -147,17 +147,17 @@ public class Register extends Setup {
 			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"),
 					Prop.getTestData("Name"), email);
 		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyESStaffQualifyLeadinCRM");
+			SeleniumUtils.captureScreenshot("verifyEsStaffQualifyLeadinCRM");
 			e.getStackTrace();
 			throw e;
 		}
 	}
 
-	@Test(groups = { "smoke", "Register" })
+	/*@Test(groups = { "smoke", "Register" })
 	@Description("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.")
 	public void verifyConfirmationEmailToCustomerCRMQualifying() throws InterruptedException {
 		try {
-			/*
+			
 			 * SignInPage.navigateToNormalRegistration(); String email =
 			 * RegisterPage.enterEmailInRegistration();
 			 * RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"),
@@ -165,7 +165,7 @@ public class Register extends Setup {
 			 * ("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword")
 			 * ); CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"),Prop.getTestData(
 			 * "Staffpassword"),Prop.getTestData("Name"),email);
-			 */
+			 
 			Yopmail.verifyNewAccountApprovedBody("testesapp.20180726-164702");
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyConfirmationEmailToCustomerCRMQualifying");
@@ -175,7 +175,7 @@ public class Register extends Setup {
 	} // Qualifying to User Mail is send after 10-15 minutes to the customer,so we
 	// need to wait for that time. Please see what can be done.
 	// currently for checking functioning of this method i have used a hardcoded
-	// data which is a qualified User.
+	// data which is a qualified User.*/
 
 	@Test(groups = { "smoke", "Register" })
 	@Description("Verify that the user is qualified and all the portal options get available to user.")
