@@ -1,5 +1,4 @@
 package com.es.pom;
-
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -44,10 +43,13 @@ public class ApplicationsListingPage {
 
 	@FindBy(linkText = "All Applications")
 	static WebElement sortingDropdown;
-
+	
+	@FindBy(linkText="All Status")
+	static WebElement applicationStatusDropdown;
+	
 	@FindBy(linkText = "New")
 	static WebElement newSort;
-	//
+
 	@FindBy(linkText = "Renewal")
 	static WebElement renewalSort;
 
@@ -56,15 +58,27 @@ public class ApplicationsListingPage {
 
 	@FindBy(xpath = "//th[@tabindex='0']")
 	static WebElement elementsToWaitForReload;
-
-	@FindBy(xpath = "//a[@id='sbToggle_58028408']")
-	static WebElement applicationStatusDropdown;
-
-	@FindBy(linkText = "Pending Signature")
+	
+	//@FindBy(xpath="//a[@id='sbToggle_58028408']")
+	//static WebElement applicationStatusDropdown;
+	
+	@FindBy(linkText="Pending Signature")
 	static WebElement applicationStatusPendingSignature;
-
+	
+	@FindBy(xpath="//th[@aria-label=' Application ID: activate to sort column ascending']")
+	static WebElement applicationIdTableHeading;
+	
+	@FindBy(linkText="Pending Review")
+	static WebElement applicationStatusPendingReview;
+	
+	@FindBy(xpath="//div[@class='sbHolder']//a[contains(text(),'10')]")
+	static WebElement entriesVisibleDropdown;
+	
+	@FindBy(xpath="//li//a[text()='100']")
+	static WebElement entriesVisibleHundred;
+	
 	@Step("verify Application page for ER Step...")
-	public static void verifyApplicationPageForER() {
+	public static void verifyApplicationPageForER(){
 		Assert.assertTrue(verifyRegisterfromER.isDisplayed());
 		log.info("Verify Register from ER displayed");
 	}
@@ -87,63 +101,93 @@ public class ApplicationsListingPage {
 		log.info("Verify Register from ESL displayed");
 	}
 
+	/**
+	 * This Method will verify that "Edit" Option is present
+	 * in applications of status "Pending Review"
+	 * 
+	 * @param void 
+	 * @return void
+	 */
 	@Step("Checking if Edit option is present in pending review")
 	public static void checkEditOptionInPendingReviewApp() {
 		log.info("On application page verifying edit option for pending review");
-		if (pendingReviewExcludeRenewalType.size() == pendingReviewEditActionButtons.size()) {
+		if(pendingReviewExcludeRenewalType.size()==pendingReviewEditActionButtons.size()) {
 			log.info("All Edit Action Buttons are found for Pending Review Status");
-		} else {
+		}else {
 			log.info("All Edit Action Buttons are not found for Pending Review Status");
 		}
 	}
 
+	/**
+	 * This Method will navigate you to the Edit Application
+	 * Page.
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Getting navigated to Edit Application Page")
 	public static void navigateToEditApplicationPage() {
+		SeleniumUtils.waitForElementToBeClickable(applicationStatusDropdown);
+		Assert.assertTrue(applicationStatusDropdown.isDisplayed());
+		applicationStatusDropdown.click();
+		log.info("dropdown for application status");
+		applicationStatusPendingReview.click();
+		entriesVisibleDropdown.click();
+		log.info("entreies dropdown visible");
+		SeleniumUtils.waitForElementToBeVisible(entriesVisibleHundred);
+		entriesVisibleHundred.click();
+		log.info("100 entries selected");
 		editApplicationLink.click();
 		log.info("navigated to edit application page");
-	}
+		}
 
-	/**
-	 *This method will verify On newly created applications, user should not be able to perform predefined operations like edit/view/delete/recall.
-	 * @return void
-	 * @param void
-	 */
-	@Step("On newly created applications, user should not be able to perform predefined operations like edit/view/delete/recall.")
-	public static void verifyUserUnablePerformPredefinedOperations() {
+	@Step("On newly created applications, user should not be able to perform predefined operations like edit/view/delete/recall....")
+	public static void verifyUserUnablePerformPredefinedOperations()
+	{
 		SeleniumUtils.waitForElementToBeClickable(downloadOption);
 		Assert.assertTrue(downloadOption.isDisplayed());
 		log.info("Download Option is displayed");
 	}
 
-	/**
-	 *This method will verify that the Customer is able to download Renewal Application document from application listing.
-	 * @return void
-	 * @param void
-	 */
-	@Step("Customer is able to download Renewal Application document from application listing")
-	public static void downloadRenewalApplicationDocument() {
+	@Step("")
+	public static void customerDownloadRenewalApplicationDocument()
+	{
 		SeleniumUtils.waitForElementToBeClickable(downloadOption);
-		Assert.assertTrue(downloadOption.isDisplayed());
-		log.info("Download Option is displayed");
 		downloadOption.click();
 		log.info("Renewal Application Document is Downloaded ");
 	}
-
+	
+	/**
+	 * This Method will navigate you to the payment page from application listing page.
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Navigate to Payment page")
-	public static void navigateToPaymentPage() {
-		SeleniumUtils.waitForElementToBeVisible(elementsToWaitForReload);
+	public static void navigateToPaymentPage(){
+		SeleniumUtils.waitForElementToBeVisible(applicationIdTableHeading);
 		SeleniumUtils.refreshPage();
+		SeleniumUtils.waitForElementToBeClickable(applicationIdTableHeading);
 		sortingDropdown.click();
 		log.info("Sorting dropdown selected");
-		SeleniumUtils.waitForElementToBeVisible(elementsToWaitForReload);
 		newSort.click();
 		log.info("new sort");
+		Assert.assertTrue(paymentPageLink.isDisplayed());
+		SeleniumUtils.waitForElementToBeClickable(paymentPageLink);
 		paymentPageLink.click();
 		log.info("Payment page");
 	}
-
+	
+	/**
+	 * This Method will click on recall application option and the 
+	 * application will move to draft.
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Click on recall application...")
-	public static void clickOnRecallApplication() {
+	public static void clickOnRecallApplication(){
+		Assert.assertTrue(applicationStatusDropdown.isDisplayed());
 		applicationStatusDropdown.click();
 		log.info("Dropdown to select an application status");
 		applicationStatusPendingSignature.click();
