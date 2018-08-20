@@ -3,6 +3,7 @@ package com.es.pom;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
@@ -45,55 +46,72 @@ public class PMGApplicationFormPage {
 
 	@FindBy(id = "english_language_yes")
 	static WebElement englishLanguageCheckbox;
-
+	
+	@FindBy(id = "learning_center_yes")
+	static WebElement learning_center_yesCheckbox;
+	
 	@FindBy(id = "tech_rep_name")
 	static WebElement technicalRepresentativeTextbox;
 
 	@FindBy(id = "tech_rep_title")
 	static WebElement trTitleTextbox;
 
-	@FindBy(id = "legal_rep_name_title")
-	static WebElement legalRepresentativeTextbox;
+	@FindBy(id="legal_rep_name_title")
+	static  WebElement legalRepresentativeTextbox;
+	
+	@FindBy(id="legal_rep_title")
+	static  WebElement lrTitleTextbox;
+	
+	@FindBy(id="legal_rep_phone")
+	static  WebElement lrPhoneTextbox;
+	
+	@FindBy(id="legal_rep_email")
+	static  WebElement lrEmailTextbox;
+	
+	@FindBy(id="tech_rep_phone")
+	static  WebElement trPhoneTextbox;
 
-	@FindBy(id = "legal_rep_title")
-	static WebElement lrTitleTextbox;
+	@FindBy(id="tech_rep_email")
+	static  WebElement trEmailTextbox;
 
-	@FindBy(id = "legal_rep_phone")
-	static WebElement lrPhoneTextbox;
+	@FindBy(id="hazard_situation_yes")
+	static  WebElement hazardSituationCheckbox;
 
-	@FindBy(id = "legal_rep_email")
-	static WebElement lrEmailTextbox;
+	@FindBy(id="app_sidebar_submit")
+	static  WebElement submitButton;
 
-	@FindBy(id = "tech_rep_phone")
-	static WebElement trPhoneTextbox;
+	@FindBy(xpath="//h1[text()='Disclaimer']")
+	static  WebElement disclaimerPopupTitle;
+	
+	@FindBy(xpath="//div[@id='submit_popup']//ul[@class='radio-frm agreement-checkbox']")
+	static  WebElement agreementPopupCheckbox;
 
-	@FindBy(id = "tech_rep_email")
-	static WebElement trEmailTextbox;
+	@FindBy(id="continue_to_submit")
+	static  WebElement continueAndSubmitButton;
+	
+	@FindBy(xpath="//span[@class='message success alert']//ul//li")
+	static  WebElement successMessage;
 
-	@FindBy(id = "hazard_situation_yes")
-	static WebElement hazardSituationCheckbox;
+	@FindBy(id="app_sidebar_save")
+	static  WebElement saveButton;
+	
+	@FindBy(xpath="//input[@name='agreement[agreement_template][checkbox_signer_label]']")
+	static  WebElement agreementCheckBox;
+	
+	@FindBy(xpath="//div[text()='Please check this box to sign the application']")
+	static WebElement errorMessage;
+	
 
-	@FindBy(id = "app_sidebar_submit")
-	static WebElement submitButton;
-
-	@FindBy(xpath = "//h1[text()='Disclaimer']")
-	static WebElement disclaimerPopupTitle;
-
-	@FindBy(xpath = "//div[@id='submit_popup']//ul[@class='radio-frm agreement-checkbox']")
-	static WebElement agreementCheckbox;
-
-	@FindBy(id = "continue_to_submit")
-	static WebElement continueAndSubmitButton;
-
-	@FindBy(xpath = "//span[@class='message success alert']//ul//li")
-	static WebElement successMessage;
-
-	@FindBy(id = "app_sidebar_save")
-	static WebElement saveButton;
-
+	/**
+	 * This Method will fill the form for PMG application
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("PMG Listing application form...")
-	public static void PmgApplicationFormFill() {
+	public static void PmgApplicationFormFill(String legalRepresentativeMail){
 		SeleniumUtils.waitForElementToBeVisible(companyNameTextbox);
+		Assert.assertTrue(companyNameTextbox.isDisplayed());
 		companyNameTextbox.sendKeys(Prop.getTestData("companyName"));
 		log.info("Entered company name");
 		applicantEmailTextbox.sendKeys(Prop.getTestData("applicantEmail"));
@@ -130,33 +148,91 @@ public class PMGApplicationFormPage {
 		log.info("Entered legal representative title");
 		lrPhoneTextbox.sendKeys(Prop.getTestData("legalRepresentativePhone"));
 		log.info("Entered legal representative phone");
-		lrEmailTextbox.sendKeys(Prop.getTestData("legalRepresentativeMail"));
+		lrEmailTextbox.sendKeys(legalRepresentativeMail);
 		log.info("Entered legal representative mail");
-		englishLanguageCheckbox.click();
+		learning_center_yesCheckbox.click();
 		log.info("check Box ");
 		hazardSituationCheckbox.click();
 		log.info("check Box ");
 	}
 
+
+	/**
+	 * This Method will verify that unapproved user can sign application as authorized signatory
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Verify that a non approved user is able to sign the application")
+	public static void SignAsAuthorizedSignatory(){
+		SeleniumUtils.scrollToBottom();
+		Assert.assertTrue(agreementCheckBox.isDisplayed());
+		agreementCheckBox.click();
+		log.info("Signed the application as authorized signatory");
+	}
+	
+
+	/**
+	 * This Method will submit PMG application after it has been completed
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("PMG Listing application form submit actions...")
-	public static void PmgApplicationFormSubmit() {
+	public static void PmgApplicationFormSubmit(){
+		Assert.assertTrue(submitButton.isDisplayed());
 		submitButton.click();
 		log.info("clicked on submit");
 		SeleniumUtils.waitForElementToBeClickable(disclaimerPopupTitle);
 		log.info("Disclaimer Popup is displayed");
-		agreementCheckbox.click();
+		agreementPopupCheckbox.click();
 		log.info("clicked on checkbox");
 		continueAndSubmitButton.click();
 		log.info("continue and submit");
+	}
+
+
+	/**
+	 * This Method will verify that PMG Application has been successfully submitted
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("PMG application Submitted sucess message...")
+	public static void verifySuccessMessage(){
+		Assert.assertTrue(successMessage.isDisplayed());
+		log.info(successMessage.getText());
+	}
+	
+
+	/**
+	 * This Method will save PMG application and verify that 
+	 * its is successfully saved to drafts
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Saving PMG application...")
+	public static void PmgApplicationSave(){
+		saveButton.click();
+		log.info("clicked on save button");
+		Assert.assertTrue(successMessage.isDisplayed());
 		successMessage.isDisplayed();
 		log.info(successMessage.getText());
 	}
+	
 
-	@Step("Saving PMG application...")
-	public static void PmgApplicationSave() {
-		saveButton.click();
-		log.info("clicked on save button");
-		successMessage.isDisplayed();
-		log.info(successMessage.getText());
+	/**
+	 * This Method will Verify that PMG application
+	 *  cant be submitted if the user is authorized
+	 *  signatory and he has not signed the application
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Verify application cant be saved without signing if submitter is the authorized signatory...")
+	public static void checkIfApplicationNotSubmitted(){
+		Assert.assertTrue(saveButton.isDisplayed());
+		log.info("Application not submitted. User is on the smae page");
 	}
 }
