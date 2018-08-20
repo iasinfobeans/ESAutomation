@@ -93,7 +93,7 @@ public class ApplyForCustomer extends Setup {
 
 	@Test(groups = { "smoke", "ApplyForCustomer"})
 	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
-	public void verifyESStaffQualifyLeadinCRMForER() throws InterruptedException {
+	public void verifyEsStaffQualifyLeadinCRMForER() throws InterruptedException {
 		try {
 			SignInPage.navigateToER();
 			String email = RegisterPage.enterEmailInRegistration();
@@ -103,7 +103,7 @@ public class ApplyForCustomer extends Setup {
 			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"),
 					Prop.getTestData("Name"), email);
 		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyESStaffQualifyLeadinCRMForER");
+			SeleniumUtils.captureScreenshot("verifyEsStaffQualifyLeadinCRMForER");
 			e.getStackTrace();
 			throw e;
 		}
