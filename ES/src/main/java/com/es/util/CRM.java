@@ -5,6 +5,11 @@ import java.util.Set;
 
 import com.es.pom.CRMPage;
 
+/**
+ * This method contains CRM related methods. 
+ * @author Tushar
+ *
+ */
 public class CRM {
 
 	public static String crmPortalUrl = "https://esuat.iccsafe.org/";
