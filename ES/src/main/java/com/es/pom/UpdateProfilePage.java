@@ -57,7 +57,13 @@ public class UpdateProfilePage {
 
 	@FindBy(xpath = "//input[@value='Pune']")
 	static WebElement cityVerifyElement;
-
+	
+	/**
+	 * This method will update Customer profile which is logged in
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Updating a customer account steps...")
 	public static void updateProfile() {
 		jobtitleTextbox.clear();
@@ -88,8 +94,15 @@ public class UpdateProfilePage {
 		log.info(successfullUpdateMessage.getText());
 	}
 
-	@Step("Updating a profile again...")
-	public static void updateProfileAgain() {
+	/**
+	 * This method will update Customer account for the second time.
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	public static void updateProfileAgain()
+	{
+		Assert.assertTrue(jobtitleTextbox.isDisplayed());
 		jobtitleTextbox.clear();
 		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle2"));
 		log.info("job tile entered");
@@ -117,7 +130,14 @@ public class UpdateProfilePage {
 		successfullUpdateMessage.isDisplayed();
 		log.info(successfullUpdateMessage.getText());
 	}
-
+	
+	/**
+	 * This method will verify that there are restriction on updating a profile. 
+	 * Email and Company name cannot be edited. 
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Restrictions on updating profile verification steps...")
 	public static void updateRestriction() {
 		String readonly = emailTextbox.getAttribute("readonly");
@@ -128,22 +148,30 @@ public class UpdateProfilePage {
 		log.info("Verified that company text box is non editable");
 	}
 
+	/**
+	 * This method will verify that only recent changes are visible in profile 
+	 * after multiple times changes has been made.
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Verify if only the recent changes are visible...")
-	public static void verifyChanges() {
-		if (jobTitleVerifyElement.getAttribute("value").equals(Prop.getTestData("jobtitle2"))) {
+	public static void verifyChanges()
+	{
+		Assert.assertTrue(jobTitleVerifyElement.isDisplayed());
+		if(jobTitleVerifyElement.getAttribute("value").equals(Prop.getTestData("jobtitle2"))){
 			log.info("Recent Change is only getting displayed in job title");
-		} else {
+		}else {
 			log.info("Recent Change not getting displayed in job title");
-		}
-		if (mailingAddressVerifyElement.getAttribute("value").equals(Prop.getTestData("MailingAddress2"))) {
+			}
+		if(mailingAddressVerifyElement.getAttribute("value").equals(Prop.getTestData("MailingAddress2"))){
 			log.info("Recent Change is only getting displayed in Mailing textbox");
-		} else {
 			log.info("Recent Change not getting displayed in Mailing textbox");
-		}
-		if (cityVerifyElement.getAttribute("value").equals(Prop.getTestData("city2"))) {
+			}
+		if(cityVerifyElement.getAttribute("value").equals(Prop.getTestData("city2"))){
 			log.info("Recent Change is only getting displayed in City textbox");
-		} else {
+		}else {
 			log.info("Recent Change not getting displayed in City textbox");
-		}
+			}
 	}
 }
