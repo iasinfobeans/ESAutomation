@@ -42,31 +42,37 @@ public class SOWFeaturePage {
 	@FindBy(id = "allowDelete_sow-documents")
 	static WebElement oKRemovesSowFile;
 
+	/**
+	 * This method will click on the upload SOW option button on SOW by Staff.
+	 * @return void
+	 * @param void
+	 */
 	@Step("click on the upload SOW option button")
 	public static void clickOnUploadSOWOption() {
 		SeleniumUtils.waitForElementToBeVisible(uploadSOWOption);
+		Assert.assertTrue(uploadSOWOption.isDisplayed());
 		uploadSOWOption.click();
 		log.info("click on the upload SOW option button");
 	}
 
-	@Step("click on the upload SOW option button")
-	public static void clickOnUploadOption(String projectNumber) {
-		SeleniumUtils.waitForElementToBeVisible(projectNumberTextbox);
-		projectNumberTextbox.clear();
-		projectNumberTextbox.sendKeys(projectNumber);
-		log.info("Input a valid ESR/ESL Project or Project Number in the Project Number field ");
-	}
-
+	/**
+	 * This method will verify input a valid ESR/ESL Project or Project Number in the Project Number field to be upload for SOW.
+	 * @return void
+	 * @param void
+	 */
 	@Step(" Input a valid value in the Project Number field")
 	public static void clickOnValidValuEProjectNumberField(String projectNumber) {
-
 		SeleniumUtils.waitForElementToBeVisible(projectNumberTextbox);
 		projectNumberTextbox.clear();
 		projectNumberTextbox.sendKeys(projectNumber);
 		log.info("Input a valid ESR/ESL Project or Project Number in the Project Number field ");
 
 	}
-
+	/**
+	 *This method will verify input a valid ESR/ESL Project or Project Number in the Project Number field and click on the upload SOW option button.
+	 * @return void
+	 * @param fileCount
+	 */
 	@Step("click on the upload SOW option button")
 	public static void uploadPdfFileInSOW(int fileCount) {
 		for (int i = 1; i <= fileCount; i++) {
@@ -91,13 +97,24 @@ public class SOWFeaturePage {
 		}
 	}
 
+	/**
+	 * This method will verify user is able to click on the 'Save' button after uploading a PDF file on the Upload SOW pop-up.
+	 * @return void
+	 * @param void
+	 */
 	@Step("user is able to click on the 'Save' button after uploading a PDF file on the Upload SOW pop-up")
 	public static void clickOnSaveButtonAfterUploadingPdfFile() {
+		Assert.assertTrue(saveButton.isDisplayed());
 		saveButton.click();
-		log.info("Enter upload pdf ");
+		log.info("Enter upload pdf and Save it");
 
 	}
 
+	/**
+	 * This method will verify SOW should be uploaded and a confirmation message should be displayed on the screen.
+	 * @return void
+	 * @param void
+	 */
 	@Step("SOW should be uploaded and a confirmation message should be displayed on the screen...")
 	public static void verifyConfirmationMessageDisplayedScreen() {
 		Assert.assertTrue(sOWUpatedSuccessfullyMessage.isDisplayed());
@@ -105,8 +122,14 @@ public class SOWFeaturePage {
 
 	}
 
-	@Step("Verify that if Staff removes a SOW file, a notification email would be sent to Technical representative of the Report")
+	/**
+	 *This method will Verify that if Staff removes a SOW file.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verify that if Staff removes a SOW file")
 	public static void staffRemovesSOWFile() {
+		Assert.assertTrue(removesSowFile.isDisplayed());
 		removesSowFile.click();
 		log.info(" Staff removes a SOW file ");
 
@@ -114,32 +137,40 @@ public class SOWFeaturePage {
 		log.info(" Staff removes a SOW file By Opting on OK ");
 	}
 
-	@Step("Verifying details of uploaded sow from yopmail link.")
-	public static void verifyDetailsOfSOWUploaded() {
-		log.info("Verified that customer is abled to move on SOW page by clicking on given link in yopmail.");
-	}
 
+	/**
+	 *This method will Verify Downloading sow.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Downloading sow..")
 	public static void downloadSOW() {
+		Assert.assertTrue(downloadSOW.isDisplayed());
 		downloadSOW.click();
 		downloadZip.click();
 		log.info("SOW Downloaded.");
 	}
 
-	@Step("Verifying details of uploaded sow from yopmail link.")
-	public static void verifyDetailsOfSOWFileRemoved() {
-		log.info("Verified that customer is abled to move on SOW page by clicking on given link in yopmail.");
-	}
-
+	/**
+	 *This method will Verifying download option is visible or not.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verifying download option is visible or not..")
 	public static void downloadOptionVisibiltiy() {
-		Assert.assertTrue(downloadSOW.isDisplayed(), "Download Option is nor visible on page");
+		Assert.assertTrue(downloadSOW.isDisplayed(), "Download Option is not visible on page");
 		log.info("Verified Downloaded option visibilty.");
 	}
 
+	/**
+	 *This method will verifying staff user should NOT be able to delete ALL the files attached as SOW.
+	 * @return void
+	 * @param void
+	 */
 	@Step("The staff user should NOT be able to delete ALL the files attached as SOW")
 	public static void verifyStaffUserUnableDeleteAllFilesSOW() throws InterruptedException {
 
+		Assert.assertTrue(downloadSOW.isDisplayed());
 		downloadSOW.click();
 		Thread.sleep(1000);
 		deleteSOWFile.click();
