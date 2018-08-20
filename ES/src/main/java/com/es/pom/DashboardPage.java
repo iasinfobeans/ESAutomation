@@ -269,9 +269,13 @@ public class DashboardPage {
 		log.info("Navigated to PMG Application Form");
 	}
 
+	/**
+	 * This method will verify and click on Quotation option
+	 */
 	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
 	public static void verifyQuotationOption() {
-		quotationOption.click();
+		SeleniumUtils.executeJavaScript("arguments[0].click();", quotationOption);
+		//quotationOption.click();
 		log.info("Verify Quotation Option displayed");
 	}
 
@@ -303,6 +307,9 @@ public class DashboardPage {
 		log.info("Verify Reports Option displayed");
 	}
 
+	/**
+	 * This method will log out from ES portal.
+	 */
 	@Step("Logging out from account...")
 	public static void logout() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", myAccountText);
@@ -356,6 +363,9 @@ public class DashboardPage {
 		log.info("view Invoices button is clicked");
 	}
 
+	/**
+	 * This method will click on View button.
+	 */
 	@Step("Click on View Button")
 	public static void verifyViewOption() {
 		Assert.assertTrue(viewLink.isDisplayed());
@@ -363,6 +373,9 @@ public class DashboardPage {
 		log.info("Verify View option displayed");
 	}
 
+	/**
+	 * This method will observ popup window elements.
+	 */
 	@Step("Observing Pop up Window")
 	public static void verifyPopUpWindowForView() {
 		Assert.assertTrue(quotationRequest.isDisplayed());
@@ -383,6 +396,9 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 * This method will verify upload option is visible or not.
+	 */
 	@Step("Verifying Upload option id visible...")
 	public static void verifyUploadOption() {
 		Assert.assertTrue(upload.isDisplayed());
@@ -390,6 +406,9 @@ public class DashboardPage {
 		log.info("Verify Upload option displayed");
 	}
 
+	/**
+	 * This method will verify popup window elements while uploading quotation.
+	 */
 	@Step("Observing Pop up Window for Upload option..")
 	public static void verifyPopUpWindowForUpload() {
 		SeleniumUtils.waitForElementToBeVisible(sendQuotation);
@@ -406,6 +425,9 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 * This method will click on send button while uploading quotation.
+	 */
 	@Step("click on send button while uploading Quotation..")
 	public static void clickSendWhileUploadingQuotation() {
 		SeleniumUtils.waitForElementToBeVisible(send);
@@ -414,6 +436,12 @@ public class DashboardPage {
 		log.info("clicked on send button while uploading Quotation.");
 	}
 
+	/**
+	 * This method will input the values while uploading Quotation.
+	 * @param progarmType
+	 * @param amount
+	 * @return void
+	 */
 	@Step("Input valid values while uploading Quotation..")
 	public static void InputValuesInUploadOption(String progarmType, String amount) {
 		dropDownInUploadQuotation.click();
@@ -481,6 +509,9 @@ public class DashboardPage {
 		log.info("clicked on the SOW option from the header section");
 	}
 
+	/**
+	 * This method will check expiry date while uploading Quotation.
+	 */
 	@Step("check expiry date..")
 	public static void checkExpiryDate() {
 		String date = checkexpiryDate.getAttribute("Value");

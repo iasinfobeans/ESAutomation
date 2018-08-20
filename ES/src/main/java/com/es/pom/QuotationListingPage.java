@@ -63,7 +63,10 @@ public class QuotationListingPage {
 		log.info("Verify Customer is able to Click onGet a Quote' button");
 	}
 
-	@Step("Click on 'View Quotes' options by staff ...")
+	/**
+	 * This method will click on view quotes link uploaded by staff.
+	 */
+	@Step("Clicking on 'View Quotes' options...")
 	public static void viewQuotesOptions() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForStaff);
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
@@ -76,6 +79,9 @@ public class QuotationListingPage {
 		log.info("Verify Customer is able to Click on 'View Quotes' options");
 	}*/
 
+	/**
+	 * This method will delete the quotation uploaded by staff. 
+	 */
 	@Step("Click on delete quote by Staff ...")
 	public static void deleteQuoteByStaff() {
 
@@ -86,6 +92,11 @@ public class QuotationListingPage {
 		log.info("Verify Staff is able to delete Quote.");
 	}
 
+	/**
+	 * This method will give product Type while request for quotation.
+	 * @param prodType
+	 * @return void
+	 */
 	@Step("Input for Product Type ...")
 	public static void inputForProductType(String prodType) {
 		SeleniumUtils.waitForElementToBeVisible(productTypeTextBox);
@@ -94,6 +105,11 @@ public class QuotationListingPage {
 		log.info("Input given for Product Type.");
 	}
 
+	/**
+	 * This method will give product description while request for quotation.
+	 * @param prodDescription
+	 * @return void
+	 */
 	@Step("Input for Product Description for get Quotation ...")
 	public static void inputForProductDescription(String prodDescription) {
 		SeleniumUtils.waitForElementToBeVisible(productDescriptionTextBox);
@@ -102,6 +118,9 @@ public class QuotationListingPage {
 		log.info("Input given Product Description for get Quotation.");
 	}
 
+	/**
+	 * This method will submit Quotation Request.
+	 */
 	@Step("Submitting Quotation Request ...")
 	public static void submitQuotationRequest() {
 		SeleniumUtils.waitForElementToBeVisible(submitQuotationRequest);

@@ -71,7 +71,7 @@ public class RegisterPage {
 
 	@Step("Enter User Details for Registration step...")
 	public static void enterPersonalInfoInRegistration(String firstName, String lastName, String companyName,
-			String phone, String newPassword, String confirmPassword) {
+			String phone, String newPassword, String confirmPassword, String email) {
 
 		dropDownMenu.isEnabled();
 		dropDownMenu.click();
