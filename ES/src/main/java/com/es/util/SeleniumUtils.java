@@ -239,8 +239,7 @@ public class SeleniumUtils {
 	 * This method executes javascript on target web element
 	 * 
 	 * @return void
-	 * @param javascript,
-	 *            webelement
+	 * @param javascript, webelement
 	 */
 	public static void executeJavaScript(String javaScript, WebElement webElement) {
 		SeleniumUtils.waitForElementToBeVisible(webElement);
