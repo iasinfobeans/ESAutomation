@@ -1,4 +1,5 @@
 package com.es.pom;
+
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -149,10 +150,16 @@ public class ApplicationsListingPage {
 		log.info("Download Option is displayed");
 	}
 
-	@Step("")
-	public static void customerDownloadRenewalApplicationDocument()
-	{
+	/**
+	 *This method will verify that the Customer is able to download Renewal Application document from application listing.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Customer is able to download Renewal Application document from application listing")
+	public static void downloadRenewalApplicationDocument() {
 		SeleniumUtils.waitForElementToBeClickable(downloadOption);
+		Assert.assertTrue(downloadOption.isDisplayed());
+		log.info("Download Option is displayed");
 		downloadOption.click();
 		log.info("Renewal Application Document is Downloaded ");
 	}
