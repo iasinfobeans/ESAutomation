@@ -21,7 +21,12 @@ public class GetAQuotePage {
 
 	@FindBy(id = "quote_submit")
 	static WebElement submitButton;
-
+	
+	/**
+	 * This method will verify Get a Quote screen to have the following fields:ProductType,Description and submit.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify The Get a Quote screen to have the following fields:ProductType,Description and submit...")
 	public static void verifyGetAQuoteButton() {
 		SeleniumUtils.waitForElementToBeVisible(productTypeBox);
@@ -36,7 +41,13 @@ public class GetAQuotePage {
 		log.info("Submit Button is displayed");
 
 	}
-
+	
+	/**
+	 * 
+	 * This method will verify that the customer is able to request for a quote.
+	 * @return void
+	 * @param String productType, String productDescription
+	 */
 	@Step("Verify that the customer is able to request for a quote")
 	public static void verifyCustomerRequestforQuote(String productType, String productDescription) {
 		SeleniumUtils.waitForElementToBeVisible(productTypeBox);
@@ -48,7 +59,8 @@ public class GetAQuotePage {
 		productDescriptionBox.clear();
 		productDescriptionBox.sendKeys(productDescription);
 		log.info("Product Description is displayed");
-
+		
+		Assert.assertTrue(submitButton.isDisplayed());
 		submitButton.click();
 		log.info("Submit Button is displayed");
 	}
