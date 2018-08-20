@@ -38,8 +38,6 @@ public class PaymentPage {
 
 	@FindBy(linkText = "Alabama")
 	static WebElement state;
-//	@FindBy(xpath = "//a[contains(text(),'Alabama')]")
-	
 
 	@FindBy(id = "zip")
 	static WebElement zipBox;
@@ -172,15 +170,24 @@ public class PaymentPage {
 		log.info("Pay Link displayed");
 	}
 
+	/**
+	 *This method will verify Payment page.
+	 * @return void
+	 * @param void
+	 */
 	@Step("verify Payment page Step...")
 	public static void verifyPaymentPage() {
 		Assert.assertTrue(paymentElement.isDisplayed());
 		log.info("Payment page is displayed");
 	}
 
-	@Step("details of customer to pay any amount greater than zero for renewal..")
-	public static void detailCustomerPayForRenewal(String payAmount, String billingAddress, String city, String zip,
-			String phone) {
+	/**
+	 *This method will verify details of customer to pay any amount greater than zero for renewal.
+	 * @return void
+	 * @param String payAmount, String billingAddress, String city, String zip, String phone.
+	 */
+	@Step("details of customer to pay any amount greater than zero for renewal.")
+	public static void customerDetailsForRenewal(String payAmount, String billingAddress, String city, String zip,String phone) {
 		SeleniumUtils.waitForElementToBeVisible(payAmountBox);
 		payAmountBox.clear();
 		payAmountBox.sendKeys(payAmount);
@@ -188,8 +195,7 @@ public class PaymentPage {
 
 		uploadElement.click();
 		log.info("Enter upload pdf ");
-		String uploadfilePath = System.getProperty("user.dir")
-				+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
+		String uploadfilePath = System.getProperty("user.dir")+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
 		RobotUtils.uploadFile(uploadfilePath);
 		log.info("upload pdf from drive ");
 
@@ -222,20 +228,31 @@ public class PaymentPage {
 		log.info("Enter your phone details");
 
 		SeleniumUtils.waitForElementToBeClickable(payButton);
-		payButton.click();
+		Assert.assertTrue(payButton.isDisplayed());
+		log.info("pay option for payment is displayed");
+	    payButton.click();
 		log.info("Enter pay option for payment");
 	}
 
-	@Step("the customer is allowed to upload renewal application...")
+	/**
+	 *This method will verify the customer is allowed to upload renewal application.
+	 * @return void
+	 * @param void.
+	 */
+	@Step("the customer is allowed to upload renewal application.")
 	public static void uploadRenewalApplicationForCustomer() {
 		uploadElement.click();
 		log.info("Enter upload pdf ");
-		String uploadfilePath = System.getProperty("user.dir")
-				+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
+		String uploadfilePath = System.getProperty("user.dir")+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
 		RobotUtils.uploadFile(uploadfilePath);
 		log.info("upload pdf from drive ");
 	}
 
+	/**
+	 *This method will verify presence of an additional field 'Renewal Form' on the payment screen for Application Renewal payment.
+	 * @return void
+	 * @param void.
+	 */
 	@Step("presence of an additional field 'Renewal Form' on the payment screen for Application Renewal payment")
 	public static void additionalCustomerFieldRenewalForm() {
 		Assert.assertTrue(renewaFormOption.isDisplayed());
@@ -290,9 +307,13 @@ public class PaymentPage {
 		assertEquals(balanceAmountAfterPay, balanceAmountbeforePay, "Compare balance amount before and after pay");
 	}
 
-	@Step("Renewal Form field is not a mandatory field for ESL & ESR renewal..")
-	public static void renewalFormNotMandatoryEslEsr(String payAmount, String billingAddress, String city, String zip,
-			String phone) {
+	/**
+	 *This method will verify Renewal Form field is not a mandatory field for ESL & ESR renewal..
+	 * @return void
+	 * @param void.
+	 */
+	@Step("Renewal Form field is not a mandatory field for ESL & ESR renewal.")
+	public static void renewalFormNotMandatoryEslEsr(String payAmount, String billingAddress, String city, String zip,String phone) {
 		SeleniumUtils.waitForElementToBeVisible(payAmountBox);
 		payAmountBox.clear();
 		payAmountBox.sendKeys(payAmount);
@@ -328,6 +349,9 @@ public class PaymentPage {
 		log.info("Enter your phone details");
 
 		SeleniumUtils.waitForElementToBeClickable(payButton);
+		Assert.assertTrue(payButton.isDisplayed());
+		log.info("pay option for payment is displayed");
+		
 		payButton.click();
 		log.info("Enter pay option for payment");
 	}
@@ -361,7 +385,11 @@ public class PaymentPage {
 		Assert.assertTrue(payLink.isDisplayed());
 		log.info("Pay Link displayed");
 	}
-
+	/**
+	 *  This method will verify payment page elements for ReportRenewal.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify payment page elements for ReportRenewal...")
 	public static void verifyPaymentPageElementsForReportRenewal() {
 		Assert.assertTrue(paymentElement.isDisplayed());
