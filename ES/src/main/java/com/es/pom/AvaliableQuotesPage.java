@@ -8,11 +8,16 @@ import io.qameta.allure.Step;
 
 public class AvaliableQuotesPage {
 
-	private static Logger log = Logger.getLogger( AvaliableQuotesPage.class.getName());
+	private static Logger log = Logger.getLogger(AvaliableQuotesPage.class.getName());
 
-	@FindBy(xpath="//*[@programslug='esr']")
+	@FindBy(xpath = "//*[@programslug='esr']")
 	static WebElement applyButton;
 
+	/**
+	 * This method will verify customer Click on the Apply button .
+	 * @return void
+	 * @param void
+	 */
 	@Step(" Click on the Apply button ...")
 	public static void applyForViewQuotesOptions() {
 		applyButton.click();

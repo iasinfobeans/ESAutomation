@@ -1,7 +1,6 @@
 package com.es.pom;
 
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,6 +10,7 @@ import org.testng.Assert;
 
 import com.es.setup.Setup;
 import com.es.util.SeleniumUtils;
+
 import io.qameta.allure.Step;
 
 public class QuotationListingPage {
@@ -26,6 +26,9 @@ public class QuotationListingPage {
 	@FindBy(xpath = "//strong[text()='Active']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
 	static WebElement viewQuotesBoxForStaff;
 
+	@FindBy(xpath = "//*[@class='odd parent']/td[@class='sorting_1']")
+	static WebElement clickonQuoteForDelete;
+	
 	@FindBy(xpath = "//*[@class='tbl-icon-delete del-quote']")
 	static WebElement deleteQuote;
 
@@ -37,46 +40,79 @@ public class QuotationListingPage {
 
 	@FindBy(xpath = "//*[@id='quote_submit']")
 	static WebElement submitQuotationRequest;
+	
+	@FindBy(xpath = "//*[@id='doc_cat_quotes']/table/tbody")
+	static WebElement fileUploaded;
+	
+	@FindBy(xpath = "//*[@id='quotation-span-msg']/span/ul/li")
+	static WebElement quotationUploaded;
 
+	/**
+	 * This method will verify'Get a Quote' button is present on the Quotation Listing page for the customer.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify that a 'Get a Quote' button is present on the Quotation Listing page for the customer...")
 	public static void verifyGetAQuoteButton() {
 		SeleniumUtils.waitForElementToBeVisible(getQuoteButton);
 		Assert.assertTrue(getQuoteButton.isDisplayed());
 		log.info("Get A QuoteButton is displayed");
 	}
-
+	
+	/**
+	 * This method will verify that the customer is able to click on the Get a Quote button.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify that the customer is able to click on the Get a Quote button...")
-	public static void customerClickOnGetAQuoteButton() {
+	public static void clickOnGetAQuoteButton() {
 		SeleniumUtils.waitForElementToBeVisible(getQuoteButton);
+		Assert.assertTrue(getQuoteButton.isDisplayed());
 		getQuoteButton.click();
 		log.info("Verify Customer is able to Click onGet a Quote' button");
 	}
 
-	@Step("Click on 'View Quotes' options by staff ...")
+	/**
+	 * This method will click on view quotes link uploaded by staff.
+	 */
+	@Step("Clicking on 'View Quotes' options...")
 	public static void viewQuotesOptions() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForStaff);
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
 	}
 	
+	
+	/**
+	 * 
+	 * This method will verify Click on 'View Quotes' options by Customer.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Click on 'View Quotes' options by Customer ...")
 	public static void viewQuotesTab() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		log.info("Verify Customer is able to Click on 'View Quotes' options");
-		}
-
-	@Step("Click on delete quote by Staff ...")
-	public static void deleteQuoteByStaff() {
-		try {
-			SeleniumUtils.executeJavaScript("arguments[0].click();", deleteQuote);
-			//deleteQuote.click();
-		} catch (Exception e) {
-			SeleniumUtils.acceptPopup();
-			log.info("Verify Staff is able to delete Quote.");
-		}
-
 	}
 
+	/**
+	 * This method will delete the quotation uploaded by staff. 
+	 */
+	@Step("Click on delete quote by Staff ...")
+	public static void deleteQuoteByStaff() {
+
+		// SeleniumUtils.executeJavaScript("arguments[0].click();",
+		// clickonQuoteForDelete);
+		SeleniumUtils.executeJavaScript("arguments[0].click();", deleteQuote);
+		SeleniumUtils.acceptPopup();
+		log.info("Verify Staff is able to delete Quote.");
+	}
+
+	/**
+	 * This method will give product Type while request for quotation.
+	 * @param prodType
+	 * @return void
+	 */
 	@Step("Input for Product Type ...")
 	public static void inputForProductType(String prodType) {
 		SeleniumUtils.waitForElementToBeVisible(productTypeTextBox);
@@ -85,7 +121,11 @@ public class QuotationListingPage {
 		log.info("Input given for Product Type.");
 	}
 
-
+	/**
+	 * This method will give product description while request for quotation.
+	 * @param prodDescription
+	 * @return void
+	 */
 	@Step("Input for Product Description for get Quotation ...")
 	public static void inputForProductDescription(String prodDescription) {
 		SeleniumUtils.waitForElementToBeVisible(productDescriptionTextBox);
@@ -94,6 +134,11 @@ public class QuotationListingPage {
 		log.info("Input given Product Description for get Quotation.");
 	}
 
+	/**
+	 * This method will verify Input for Submitting Quotation Request.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Submitting Quotation Request ...")
 	public static void submitQuotationRequest() {
 		SeleniumUtils.waitForElementToBeVisible(submitQuotationRequest);
@@ -101,15 +146,38 @@ public class QuotationListingPage {
 		log.info("Submitted Quotation Request.");
 	}
 
+	/**
+	 * This method will verify statuses in Status column.
+	 */
 	@Step("Verifying status in Status column...")
 	public static void verifyDifferentStatus() {
 		List<WebElement> rows = Setup.driver.findElements(By.cssSelector("tbody > tr"));
-	    for(WebElement row : rows){
-	        if(row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Active")  ){
-	            log.info("'Active' Status of Quotes found in Status Coloumn.");
-	        }else if(row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Expired")) {
-	        	log.info("'Expired' Status of Quotes found in Status Coloumn.");
-	        }
-	    }
+		for (WebElement row : rows) {
+			if (row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Active")) {
+				log.info("'Active' Status of Quotes found in Status Coloumn.");
+			} else if (row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Expired")) {
+				log.info("'Expired' Status of Quotes found in Status Coloumn.");
+			}
+		}
+	}
+
+	/**
+	 * This method will verify whether file is uploaded or not.
+	 */
+	@Step("Verifying whether file is uploaded or not...")
+	public static void verifyFileUploadedOrNot() {
+		SeleniumUtils.waitForElementToBeVisible(fileUploaded);
+		Assert.assertTrue(fileUploaded.isDisplayed());
+		log.info("File uploaded successfully.");
+	}
+
+	/**
+	 * This method will verify whether Quotation is uploaded or not.
+	 */
+	@Step("Verifying whether Quotation is uploaded or not...")
+	public static void verifyQuotationUploaded() {
+		SeleniumUtils.waitForElementToBeVisible(quotationUploaded);
+		Assert.assertTrue(quotationUploaded.isDisplayed());
+		log.info("Quotation uploaded successfully.");
 	}
 }

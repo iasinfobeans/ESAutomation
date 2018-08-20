@@ -19,13 +19,12 @@ import org.testng.xml.XmlTest;
 public class DriverScript {
 
 	/**
-	 * Copyright 2018 ICC Evaluation Service, LLC.
-	 * All rights reserved.
-	 * This is the confidential and proprietary information of 
-	 * ICC Evaluation Service, LLC. ("Confidential Information").  
-	 * You shall not disclose such Confidential Information and 
-	 * shall use it only in accordance with the terms of the license agreement
-	 * you entered into with ICC Evaluation Service, LLC.
+	 * Copyright 2018 ICC Evaluation Service, LLC. All rights reserved. This is
+	 * the confidential and proprietary information of ICC Evaluation Service,
+	 * LLC. ("Confidential Information"). You shall not disclose such
+	 * Confidential Information and shall use it only in accordance with the
+	 * terms of the license agreement you entered into with ICC Evaluation
+	 * Service, LLC.
 	 * 
 	 */
 
@@ -33,8 +32,8 @@ public class DriverScript {
 	 * This driver script for Web Automation project, it is main class of this
 	 * project. It gets following details from Jenkins job and create TestNG.xml
 	 * file programmatically. Created TestNG.xml would be available with name
-	 * programmedTestNG.xml in root directory of the project. It contains details of
-	 * test cases for execution.
+	 * programmedTestNG.xml in root directory of the project. It contains
+	 * details of test cases for execution.
 	 * 
 	 * @author pankaj.shukla
 	 * @version 1.0
@@ -48,7 +47,7 @@ public class DriverScript {
 
 		logger.info("Env : " + System.getProperty("Env"));
 		logger.info("Browser :" + System.getProperty("Browser"));
-		logger.info("TestSuite : "+System.getProperty("TestSuite"));
+		logger.info("TestSuite : " + System.getProperty("TestSuite"));
 
 		// Create ES Automation Suite
 		XmlSuite xmlSuite = new XmlSuite();
@@ -65,9 +64,9 @@ public class DriverScript {
 		// Create Test Suite
 		String testName = null;
 		testName = System.getProperty("Browser");
-		Map<String,String> parameters = new HashMap<String, String>();
+		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("testName", testName);
-		createTest(xmlSuite, testName,parameters);
+		createTest(xmlSuite, testName, parameters);
 		createTestNGXmlFile(xmlSuite, "programmedTestNG.xml");
 
 		// Configure and Run TestNG
@@ -78,11 +77,11 @@ public class DriverScript {
 		testNG.run();
 	}
 
-	public static XmlSuite  createTest(XmlSuite xmlSuite,String testName,Map<String, String> parameters){
-		//Set Smoke or Regression Test Suite
+	public static XmlSuite createTest(XmlSuite xmlSuite, String testName, Map<String, String> parameters) {
+		// Set Smoke or Regression Test Suite
 		XmlTest xmlTest = new XmlTest(xmlSuite);
 		xmlTest.setName(testName);
-		//xmlTest.addParameter("testName", testName);
+		// xmlTest.addParameter("testName", testName);
 		xmlTest.setPreserveOrder(true);
 		xmlTest.setParameters(parameters);
 		xmlTest.setSuite(xmlSuite);
@@ -96,26 +95,26 @@ public class DriverScript {
 		tests.add(xmlTest);
 		xmlSuite.setTests(tests);
 
-		//Group: Smoke or Regression
+		// Group: Smoke or Regression
 		XmlGroups group = new XmlGroups();
 		XmlRun xmlRun = new XmlRun();
 		xmlRun.onInclude(System.getProperty("TestSuite"));
 		group.setRun(xmlRun);
-		xmlTest.setGroups(group);	
+		xmlTest.setGroups(group);
 		return xmlSuite;
 	}
 
-	public static void createTestNGXmlFile(XmlSuite xmlSuite, String fileName){
-		//Generate TestNG file created by programmatically.
+	public static void createTestNGXmlFile(XmlSuite xmlSuite, String fileName) {
+		// Generate TestNG file created by programmatically.
 		File file = new File(fileName);
 		FileWriter writer;
 		try {
 			writer = new FileWriter(file);
 			writer.write(xmlSuite.toXml());
 			writer.close();
-			logger.info("Generated "+fileName+" file: "+file.getAbsolutePath());
+			logger.info("Generated " + fileName + " file: " + file.getAbsolutePath());
 		} catch (IOException e) {
-			logger.info("Failed to generate "+fileName+" file");
+			logger.info("Failed to generate " + fileName + " file");
 			e.printStackTrace();
 		}
 	}

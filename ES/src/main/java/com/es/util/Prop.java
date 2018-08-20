@@ -1,4 +1,5 @@
 package com.es.util;
+
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +15,13 @@ public class Prop {
 
 	private static Logger log = Logger.getLogger(Prop.class.getName());
 
+	/**
+	 * This method will load properties file of given path.
+	 * 
+	 * @param filePath
+	 * @return
+	 * @throws IOException
+	 */
 	public static Properties loadPropertiesFile(String filePath) throws IOException {
 		FileInputStream fis;
 		Properties property = null;
@@ -21,11 +29,11 @@ public class Prop {
 			fis = new FileInputStream(filePath);
 			property = new Properties();
 			property.load(fis);
-			log.info("Loaded "+filePath+" file");
+			log.info("Loaded " + filePath + " file");
 		} catch (FileNotFoundException e) {
-			log.info("Failed to load "+filePath+" file");
+			log.info("Failed to load " + filePath + " file");
 		} catch (IOException e) {
-			log.info("Faied to open "+filePath+" file");
+			log.info("Faied to open " + filePath + " file");
 		}
 		return property;
 	}
@@ -41,27 +49,27 @@ public class Prop {
 	}
 
 	private static void appendTestData(String key, String value) throws IOException {
-		if(Prop.getTestData(key)==null){
+		if (Prop.getTestData(key) == null) {
 			try {
 				FileWriter fileWritter = new FileWriter(Setup.testDataPropertiesFilePath, true);
 				BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
 				bufferWritter.newLine();
-				bufferWritter.append(key+"="+value);
+				bufferWritter.append(key + "=" + value);
 				bufferWritter.close();
-				log.info("Write "+Setup.testDataPropertiesFilePath+" file");
+				log.info("Write " + Setup.testDataPropertiesFilePath + " file");
 			} catch (FileNotFoundException e) {
-				log.info("Failed to open "+Setup.testDataPropertiesFilePath+" file");
+				log.info("Failed to open " + Setup.testDataPropertiesFilePath + " file");
 			} catch (IOException e) {
-				log.info("Faied to write "+Setup.testDataPropertiesFilePath+" file");
+				log.info("Faied to write " + Setup.testDataPropertiesFilePath + " file");
 			}
-		}else{
+		} else {
 			log.info("Key aready exist");
-//			Properties testData = Prop.loadPropertiesFile(Setup.testDataPropertiesFilePath);
-//			testData.replace(key, value);
-//			Writer writer = new FileWriter(Setup.testDataPropertiesFilePath);
-//			testData.store(writer, "updated");
+			// Properties testData =
+			// Prop.loadPropertiesFile(Setup.testDataPropertiesFilePath);
+			// testData.replace(key, value);
+			// Writer writer = new FileWriter(Setup.testDataPropertiesFilePath);
+			// testData.store(writer, "updated");
 		}
 	}
-
 
 }

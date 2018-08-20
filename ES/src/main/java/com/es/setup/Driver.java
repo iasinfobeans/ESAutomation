@@ -19,10 +19,10 @@ public class Driver {
 
 	public static WebDriver getDriver() throws IOException {
 		switch (System.getProperty("Browser")) {
-		case "chrome":			
+		case "chrome":
 			System.setProperty("webdriver.chrome.driver", CommonUtils.getChromeDriverPath());
 			driver = new ChromeDriver();
-			log.info("Initialized Chrome driver");		
+			log.info("Initialized Chrome driver");
 			break;
 		case "FireFox":
 			System.setProperty("webdriver.firefox.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");

@@ -6,6 +6,7 @@ import com.es.pom.ApplicationPageForQuotation;
 import com.es.pom.AvaliableQuotesPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.GetAQuotePage;
+import com.es.pom.OverlayPage;
 import com.es.pom.QuotationListingPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
@@ -16,11 +17,12 @@ import io.qameta.allure.Description;
 
 public class QuotesManagement extends Setup {
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that a 'Get a Quote' button is present on the Quotation Listing page for the customer.")
 	public void verifyGetAQuoteButtonOnQuotationListingPage() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.verifyGetAQuoteButton();
 		} catch (Exception e) {
@@ -30,13 +32,14 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the customer is able to click on the Get a Quote button.")
 	public void verifyCustomerClickOnGetAQuoteButton() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
-			QuotationListingPage.customerClickOnGetAQuoteButton();
+			QuotationListingPage.clickOnGetAQuoteButton();
 			GetAQuotePage.verifyGetAQuoteButton();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCustomerClickOnGetAQuoteButton");
@@ -45,13 +48,14 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that the customer is able to request for a quote.")
 	public void verifyCustomerReportforQuote() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
-			QuotationListingPage.customerClickOnGetAQuoteButton();
+			QuotationListingPage.clickOnGetAQuoteButton();
 			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
 					Prop.getTestData("productDescription"));
 		} catch (Exception e) {
@@ -61,80 +65,66 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that once the quote is submitted, the staff is notified about the same.")
 	public void verifyStaffNotifiedForQuote() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
-			QuotationListingPage.customerClickOnGetAQuoteButton();
+			QuotationListingPage.clickOnGetAQuoteButton();
 			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
 					Prop.getTestData("productDescription"));
 			Yopmail.verifyQuotationReceivedByStaff(Prop.getTestData("EmailId"));
 		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyStaffNotifiedforQuote");
+			SeleniumUtils.captureScreenshot("verifyStaffNotifiedForQuote");
 			e.getStackTrace();
 			throw e;
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that once the quote is submitted, the customer is notified about the same.")
 	public void verifyCustomerNotifiedForQuote() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
-			QuotationListingPage.customerClickOnGetAQuoteButton();
+			QuotationListingPage.clickOnGetAQuoteButton();
 			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
 					Prop.getTestData("productDescription"));
 			Yopmail.verifyQuotationSubmitByCustomer(Prop.getTestData("username"));
 		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyCustomerReportforQuote");
+			SeleniumUtils.captureScreenshot("verifyCustomerNotifiedForQuote");
 			e.getStackTrace();
 			throw e;
 		}
 	}
 
-	// 167-185 CRM based
-
-	@Test(groups = { "smoke" })
-	@Description("Verify the different statuses of the quotation request.")
-	public void verifyStatusesOfQuotationRequest() throws InterruptedException {
+	@Test(groups = { "smoke", "QuotesManagement" })
+	@Description("Verify that the staff person, on receiving the quotation request, will have an option to upload a quote.")
+	public void verifyUploadOptionForStaffOnQuotationRequest() throws Exception {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
-			QuotationListingPage.viewQuotesTab();
-			AvaliableQuotesPage.applyForViewQuotesOptions();
-			ApplicationPageForQuotation.verifyApplicationPageForViewQuote();
+			QuotationListingPage.verifyGetAQuoteButton();
+			QuotationListingPage.clickOnGetAQuoteButton();
+			QuotationListingPage.inputForProductType(Prop.getTestData("productType"));
+			QuotationListingPage.inputForProductDescription(Prop.getTestData("productDescription"));
+			QuotationListingPage.submitQuotationRequest();
+			DashboardPage.logout();
+			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyQuotationOption();
+			DashboardPage.verifyUploadOption();
 		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyStatusesOfQuotationRequest");
+			SeleniumUtils.captureScreenshot("verifyUploadOptionForStaffOnQuotationRequest");
 			e.getStackTrace();
 			throw e;
 		}
 	}
 
-	@Test(groups = { "smoke" })
-	@Description("Verify that once the quote is submitted, the staff is notified about the same..")
-	public void verifyStatusesOfQuotationRequestApplicationSaved() throws InterruptedException {
-		try {
-			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
-			DashboardPage.verifyQuotationOption();
-			QuotationListingPage.viewQuotesTab();
-			QuotationListingPage.viewQuotesOptions();
-			AvaliableQuotesPage.applyForViewQuotesOptions();
-			ApplicationPageForQuotation.fillApplication(Prop.getTestData("companyName"),
-					Prop.getTestData("companyLegalStatus"), Prop.getTestData("mailingAddress"),
-					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
-					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
-					Prop.getTestData("subjectOfReport"));
-		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyStatusesOfQuotationRequestApplicationSaved");
-			e.getStackTrace();
-			throw e;
-		}
-	}
-
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the staff is able to verify number of quotes in View Quotes column .")
 	public void verifyNumberOfQuote() throws InterruptedException {
 		try {
@@ -147,7 +137,10 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+
+
+
+	@Test(groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that the staff is able to click on the view button.")
 	public void verifyViewButton() throws InterruptedException {
 		try {
@@ -161,7 +154,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the staff is able to view pop up window.")
 	public void verifyViewButtonWithPopPupWindow() throws InterruptedException {
 		try {
@@ -176,7 +169,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the staff is able to view pop up window.")
 	public void verifyUploadButton() throws InterruptedException {
 		try {
@@ -191,7 +184,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the Expiry date is a mandatory field & it  is defaulted with a date 30 days ahead from the current date.")
 	public void verifyExpiryDateDefaultedWithThirtyDaysAhead() throws InterruptedException {
 		try {
@@ -207,7 +200,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that once the staff creates a quote, a notification email is sent to the customer along with the quote file as attachment.")
 	public void verifyAfterGivenInputInUploadOption() throws InterruptedException {
 		try {
@@ -226,7 +219,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify the email triggered to the customer once the staff creates a quote.")
 	public void verifyCustomerMailAfterGivenInputInUploadOption() throws InterruptedException {
 		try {
@@ -246,7 +239,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the staff should be able to delete any quote if it has not been used to apply for an application.")
 	public void verifyDeleteQuoteByStaff() throws InterruptedException {
 		try {
@@ -267,33 +260,15 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
-	@Description("Verify that the staff person, on receiving the quotation request, will have an option to upload a quote.")
-	public void verifyUploadOptionForStaffOnQuotationRequest() throws Exception {
-		try {
-			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
-			DashboardPage.verifyQuotationOption();
-			QuotationListingPage.verifyGetAQuoteButton();
-			QuotationListingPage.customerClickOnGetAQuoteButton();
-			QuotationListingPage.inputForProductType(Prop.getTestData("productType"));
-			QuotationListingPage.inputForProductDescription(Prop.getTestData("productDescription"));
-			QuotationListingPage.submitQuotationRequest();
-			DashboardPage.logout();
-			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
-			DashboardPage.verifyQuotationOption();
-			DashboardPage.verifyUploadOption();
-		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyUploadOptionForStaffOnQuotationRequest");
-			e.getStackTrace();
-			throw e;
-		}
-	}
 
-	@Test(groups = { "smoke" })
+
+
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify the different statuses of the quotation request.")
 	public void verifyDifferentStatusesOfQuotationRequest() throws Exception {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.verifyDifferentStatus();
 		} catch (Exception e) {
@@ -303,11 +278,61 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
-	@Description("Verify that if customer has applied for the quote and saved the application, the quote would not be allowed to be used for submitting another application.")
-	public void verifyCustomerAppliedForQuoteAndSaveApplication() throws InterruptedException {
+	@Test(groups = { "smoke", "QuotesManagement"})
+	@Description("Verify that the customer is allowed to fill one application against one quotation (Before quotation has expired)")
+	public void verifyCustomerAllowedFillOneApplicationQuotation() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.clickOnGetAQuoteButton();
+			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
+					Prop.getTestData("productDescription"));
+			DashboardPage.logout();
+			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyQuotationOption();
+			DashboardPage.verifyUploadOption();
+			DashboardPage.verifyPopUpWindowForUpload();
+			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),
+					Prop.getTestData("uploadFilePath"));
+			Thread.sleep(30000);
+			DashboardPage.clickSendWhileUploadingQuotation();
+			DashboardPage.logout();
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
+			DashboardPage.verifyDashboardPage();
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.viewQuotesTab();
+			AvaliableQuotesPage.applyForViewQuotesOptions();
+			ApplicationPageForQuotation.verifyApplicationPageForViewQuote();
+		} catch (Exception e) {
+			SeleniumUtils.captureScreenshot("verifyStatusesOfQuotationRequest");
+			e.getStackTrace();
+			throw e;
+		}
+	}
+
+	@Test(groups = { "smoke", "QuotesManagement" })
+	@Description("Verify the status of the Quotation request once the application is saved.")
+	public void verifyStatusesOfQuotationRequestOnceApplicationSaved() throws InterruptedException {
+		try {
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.clickOnGetAQuoteButton();
+			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
+					Prop.getTestData("productDescription"));
+			DashboardPage.logout();
+			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
+			DashboardPage.verifyQuotationOption();
+			DashboardPage.verifyUploadOption();
+			DashboardPage.verifyPopUpWindowForUpload();
+			DashboardPage.InputValuesInUploadOption(Prop.getTestData("programType"), Prop.getTestData("amount"),Prop.getTestData("uploadFilePath"));
+			Thread.sleep(30000);
+			DashboardPage.clickSendWhileUploadingQuotation();
+			DashboardPage.logout();
+			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.viewQuotesTab();
 			QuotationListingPage.viewQuotesOptions();
@@ -317,18 +342,21 @@ public class QuotesManagement extends Setup {
 					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
 					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
 					Prop.getTestData("subjectOfReport"));
+			DashboardPage.verifyQuotationOption();
+			QuotationListingPage.verifyDifferentStatus();
 		} catch (Exception e) {
-			SeleniumUtils.captureScreenshot("verifyCustomerAppliedForQuoteAndSaveApplication");
+			SeleniumUtils.captureScreenshot("verifyStatusesOfQuotationRequestApplicationSaved");
 			e.getStackTrace();
 			throw e;
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the Quotation amount would be basic fees for the application.")
 	public void verifyQuotationAmountWithBasicFees() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.viewQuotesTab();
 			QuotationListingPage.viewQuotesOptions();
@@ -354,11 +382,12 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the customer cannot apply for a coupon discount for applications applied through a quote request.")
 	public void verifyCouponDiscountApplicableOrNotForQuotation() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.viewQuotesTab();
 			QuotationListingPage.viewQuotesOptions();
@@ -385,11 +414,12 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke" })
+	@Test(groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that if the customer has selected the quote and saved/submitted the application, but tries to make payment after the expiration date of the quote, then for such applications, the customer should not be able to make the payment.")
 	public void verifyPaymentAfterExpiryDate() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.viewQuotesTab();
 			QuotationListingPage.viewQuotesOptions();
