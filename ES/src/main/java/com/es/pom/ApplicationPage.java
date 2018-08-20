@@ -28,9 +28,16 @@ public class ApplicationPage {
 
 	@FindBy(linkText = "Delete")
 	static WebElement deleteApplicationFromDraft;
-
+	
+	/**
+	 * This Method will verify that the signatory information is not editable.
+	 * Signatory information includes name and email-address
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("verify Edit Application page can't allow to edit signatory information(i.e. name and email)...")
-	public static void verifySignatoryInfoIsNotEditable() {
+	public static void verifySignatoryInfoIsNotEditable(){
 		companyNameTextbox.sendKeys("Infobeans");
 		log.info("Field editable");
 		SeleniumUtils.scrollToBottom();
@@ -42,6 +49,13 @@ public class ApplicationPage {
 		log.info("Verified that signer email text box is non editable");
 	}
 
+	
+	/**
+	 * This method will delete the selected application
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Verify Delete Application")
 	public static void deleteApplication() {
 		Assert.assertTrue(draftApplicationElement.isDisplayed());
@@ -51,3 +65,5 @@ public class ApplicationPage {
 		log.info("Popup Accepted");
 	}
 }
+
+

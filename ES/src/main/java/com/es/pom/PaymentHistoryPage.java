@@ -21,12 +21,19 @@ public class PaymentHistoryPage {
 
 	@FindBy(xpath = "//*[contains(text(),'Credit Card')]")
 	static WebElement paymentMode;
+	
+	@FindBy(xpath = "//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']/../following-sibling::div/span")
+	static WebElement newApplication;
 
+	/**
+	 * This Method will verify payment successful messege
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Verify that the payment was successful.")
 	public static void verifyPaymentSucess() {
-		if (paymentSuccessMessege.getText().equals(Prop.getTestData("paymentSuccessMessage"))) {
-			log.info("Payment was successful");
-		}
+		Assert.assertEquals(paymentSuccessMessege.getText(), Prop.getTestData("paymentSuccessMessage"), "Payment was successful");
 	}
 
 	@Step("A new application should be created on the portal of the same program type....")

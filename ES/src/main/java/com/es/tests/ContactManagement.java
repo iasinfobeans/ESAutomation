@@ -93,7 +93,7 @@ public class ContactManagement extends Setup {
 	}
 
 	@Test(groups = { "smoke", "ContactManagement" })
-	@Description("Verify that the dashboard widget has a link to navigate to the 'Modified users' titled 'Update Profile Requests'")
+	@Description("Verify that the staff is able to review the updated information.")
 	public static void verifyViewProfileOption() throws IOException, InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");

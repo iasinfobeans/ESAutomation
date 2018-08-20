@@ -40,17 +40,19 @@ public class CardDetailsPage {
 	@FindBy(id = "submitButton")
 	static WebElement submitButton;
 
+	/**
+	 * This Method will verify navigation to payment gateway page
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Verify Payment Gateway Page..")
 	public static void paymentGatewayPageVerification() {
 		SeleniumUtils.waitForElementToBeVisible(submitButton);
 		Assert.assertTrue(submitButton.isDisplayed());
 		log.info("Payment Gateway Page displayed");
 	}
-	/**
-	 *This method will verify customer to pay any amount greater than zero for renewal.
-	 * @return void
-	 * @param String name, String creditCardNumber, String cVCNumber
-	 */
+
 	@Step("customer to pay any amount greater than zero for renewal..")
 	public static void customerPayForRenewal(String name, String creditCardNumber, String cVCNumber) {
 

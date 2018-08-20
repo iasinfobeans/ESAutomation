@@ -28,22 +28,31 @@ public class InvoiceListingPage {
 
 	@FindBy(xpath = "//div[@class='ehading']")
 	static WebElement invoicessElement;
-	
+
 	/**
-	 * This method will verify Dashboard to have an additional head titled 'Invoices.
-	 * @return void
+	 * This Method will verify navigation to invoice listing page
+	 * 
 	 * @param void
+	 * @return void
 	 */
-	@Step("Dashboard to have an additional head titled 'Invoices.")
-	public static void verifyViewInvoicesPage() {
+	@Step("Verify user is on invoice listing page")
+	public static void verifyViewInvoicesPage(){
 		Assert.assertTrue(invoicessElement.isDisplayed());
 		log.info("verify View Invoices Page");
 	}
 
-	@Step("Method to Verify the displayed details on Payment page")
-	public static void navigateToPaymentPage() {
+	/**
+	 * This Method will navigate to payment page
+	 * from Invoice-Listings Page
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Navigate to Payment Page from Invoice-Listings Page")
+	public static void navigateToPaymentPage(){
 		SeleniumUtils.refreshPage();
 		SeleniumUtils.waitForElementToBeClickable(sortingDropdown);
+		Assert.assertTrue(sortingDropdown.isDisplayed());
 		sortingDropdown.click();
 		log.info("Sorting selected");
 		SeleniumUtils.waitForElementToBeClickable(partialSort);

@@ -1,5 +1,4 @@
 package com.es.pom;
-
 import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -29,7 +28,13 @@ public class ChangePasswordPage {
 	static WebElement successMessage;
 
 	static String storePassword;
-
+	
+	/**
+	 * This Method will change the password for the logged in account
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Change password for user account...")
 	public static void changePassword() throws IOException {
 		currentPasswordTextbox.sendKeys(Prop.getTestData("password"));

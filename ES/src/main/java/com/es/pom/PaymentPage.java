@@ -1,5 +1,4 @@
 package com.es.pom;
-
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -33,11 +32,11 @@ public class PaymentPage {
 	@FindBy(id = "city")
 	static WebElement cityBox;
 
-	@FindBy(xpath = "//a[@class='sbSelector' and contains(text(),'Select State')]")
-	static WebElement stateBox;
+	@FindBy(xpath="//a[@class='sbSelector' and contains(text(),'Select State')]")
+	static WebElement stateBox;    
 
-	@FindBy(linkText = "Alabama")
-	static WebElement state;
+	@FindBy(xpath = "//a[contains(text(),'Alabama')]")
+	static WebElement state; 
 
 	@FindBy(id = "zip")
 	static WebElement zipBox;
@@ -128,23 +127,37 @@ public class PaymentPage {
 
 	@FindBy(xpath = "///div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Application')][contains(text(),'No.')]")
 	static WebElement ApplicationNumberLabel;
-
+	
+	@FindBy(xpath = "//tr//td//label[contains(text(),'Pay')][contains(text(),'Amount')]")
+	static WebElement payAmountLabelForApplication;
+	
 	@FindBy(xpath = "//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Quotation Id')]")
 	static WebElement quotationIdLabel;
-
+	
 	@FindBy(xpath = "//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Basic Fees')]")
 	static WebElement basicFeesLabel;
-
+	
 	@FindBy(xpath = "//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Pay')][contains(text(),'Amount')]")
 	static WebElement payAmountLabel;
-
+	
+	@FindBy(xpath = "//table//tbody//tr//td//label[contains(text(),'Comment')][contains(text(),'if')][contains(text(),'any')]")
+	static WebElement commentLabelInApplicationPaymentPage;
+	
 	static String balanceAmountbeforePay;
 
 	static String balanceAmountAfterPay;
 
+
+	/**
+	 * This Method will verify payment page elements for invoice payment
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("verify Payment page elements for Invoice...")
-	public static void verifyPaymentPageElementsForInvoice() {
-		Assert.assertEquals(messageNoticeAlert.getText(), Prop.getTestData("message_invoice_payment"));
+	public static void verifyPaymentPageElementsForInvoice()
+	{
+		Assert.assertEquals(messageNoticeAlert.getText(),Prop.getTestData("message_invoice_payment"));
 		log.info(messageNoticeAlert.getText());
 		Assert.assertTrue(invoiceLabel.isDisplayed());
 		log.info("label for invoice displayed");
@@ -259,10 +272,19 @@ public class PaymentPage {
 		log.info("renewal Form option displayed");
 	}
 
+
+	/**
+	 * This Method will fill payment page form for an invoice
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Fill Payment Page Form...")
-	public static void fillPaymentPageForm() {
+	public static void fillPaymentPageFormForInvoice()
+	{
 		SeleniumUtils.refreshPage();
-		balanceAmountbeforePay = balanceAmount.getAttribute("value");
+		Assert.assertTrue(payAmountTextbox.isDisplayed());
+		balanceAmountbeforePay=balanceAmount.getAttribute("value");
 		log.info("stored balance amount");
 		payAmountTextbox.clear();
 		payAmountTextbox.sendKeys(Prop.getTestData("payAmount"));
@@ -293,27 +315,117 @@ public class PaymentPage {
 		log.info("Phone number entered");
 	}
 
-	@Step("Navigate to payment detail page...")
-	public static void navigateToPaymentGatewayPage() {
+	/**
+	 * This Method will verify payment page elements of Application
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Verify payment page elements for Applications...")
+	public static void verifyPaymentPageElementsForApplication()
+	{
+		Assert.assertEquals(messageNoticeAlert.getText(),Prop.getTestData("message_invoice_payment"));
+		log.info(messageNoticeAlert.getText());
+		Assert.assertTrue(ApplicationNumberLabel.isDisplayed());
+		log.info("label for Application no. displayed");
+		Assert.assertTrue(payAmountLabel.isDisplayed());
+		log.info("label for Pay amount displayed");
+		Assert.assertTrue(commentLabelInApplicationPaymentPage.isDisplayed());
+		log.info("label for comment displayed");
+		Assert.assertTrue(billingAddressLable.isDisplayed());
+		log.info("label for billing address displayed");
+		Assert.assertTrue(cityLable.isDisplayed());
+		log.info("label for city displayed");
+		Assert.assertTrue(stateOrProvinceLable.isDisplayed());
+		log.info("label for state Or Province displayed");
+		Assert.assertTrue(zipTextbox.isDisplayed());
+		log.info("label for Zip displayed");
+		Assert.assertTrue(CountryLable.isDisplayed());
+		log.info("label for Country displayed");
+		Assert.assertTrue(phoneLable.isDisplayed());
+		log.info("label for phone displayed");
+		Assert.assertTrue(goBackLink.isDisplayed());
+		log.info("Go Back link displayed");
+		Assert.assertTrue(payLink.isDisplayed());
+		log.info("Pay Link displayed");
+	}
+	
+	/**
+	 * This Method will fill the payment page form
+	 * for an application
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Fill Payment Page Form...")
+	public static void fillPaymentPageFormForApplication()
+	{
+		SeleniumUtils.refreshPage();
+		addressTextbox.clear();
+		addressTextbox.sendKeys(Prop.getTestData("billingAddress"));
+		log.info("Address entered");
+		cityTextbox.clear();
+		cityTextbox.sendKeys(Prop.getTestData("billingCity"));
+		log.info("City entered");
+		SeleniumUtils.scrollToBottom();
+		SeleniumUtils.waitForElementToBeVisible(stateTextbox);
+		stateTextbox.click();
+		log.info("selecting state");
+		SeleniumUtils.waitForElementToBeClickable(stateList.get(3));
+		stateList.get(3).click();
+		log.info("state selected");
+		zipTextbox.clear();
+		zipTextbox.sendKeys(Prop.getTestData("zipBillingCity"));
+		SeleniumUtils.waitForElementToBeVisible(countryDropdown);
+		countryDropdown.click();
+		log.info("selecting country");
+		SeleniumUtils.waitForElementToBeClickable(countryList.get(1));
+		countryList.get(1).click();
+		log.info("country selected");
+		phoneTextbox.clear();
+		phoneTextbox.sendKeys(Prop.getTestData("billingPhone"));
+		log.info("Phone number entered");
+	}
+	
+
+	/**
+	 * This Method will navigate you to Payment Gateway page
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Navigate to payment Gateway page...")
+	public static void navigateToPaymentGatewayPage()
+	{
 		SeleniumUtils.waitForElementToBeVisible(payLink);
+		Assert.assertTrue(payLink.isDisplayed());
 		payLink.click();
 		log.info("Clicked on pay link");
 	}
 
+
+	/**
+	 * This Method will verify that due amount gets reduced by x 
+	 * after a payment of x amount has been made
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Verify the Balance due amount on the Portal...")
-	public static void compareBalanceAmountBeforAndAfterPay() {
-		balanceAmountAfterPay = balanceAmount.getAttribute("value");
+	public static void compareBalanceAmountBeforAndAfterPay()
+	{
+		balanceAmountAfterPay=balanceAmount.getAttribute("value");
 		log.info("stored balance amount after pay");
 		assertEquals(balanceAmountAfterPay, balanceAmountbeforePay, "Compare balance amount before and after pay");
 	}
-
+	
 	/**
 	 *This method will verify Renewal Form field is not a mandatory field for ESL & ESR renewal..
 	 * @return void
 	 * @param void.
 	 */
-	@Step("Renewal Form field is not a mandatory field for ESL & ESR renewal.")
-	public static void renewalFormNotMandatoryEslEsr(String payAmount, String billingAddress, String city, String zip,String phone) {
+	@Step("Renewal Form field is not a mandatory field for ESL & ESR renewal..")
+	public static void renewalFormNotMandatoryEslEsr(String payAmount,String billingAddress,String city,String zip,String phone){
 		SeleniumUtils.waitForElementToBeVisible(payAmountBox);
 		payAmountBox.clear();
 		payAmountBox.sendKeys(payAmount);
@@ -357,7 +469,7 @@ public class PaymentPage {
 	}
 
 	@Step("Verify payment page elements for Applications...")
-	public static void verifyPaymentPageElementsForApplication() {
+	public static void verifyPaymentPageElementsForApplication_1Nisha() {
 		Assert.assertEquals(messageNoticeAlert.getText(), Prop.getTestData("message_invoice_payment"));
 		log.info(messageNoticeAlert.getText());
 		Assert.assertTrue(ApplicationNumberLabel.isDisplayed());

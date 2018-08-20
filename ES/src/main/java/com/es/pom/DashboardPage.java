@@ -1,5 +1,11 @@
 package com.es.pom;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,7 +13,6 @@ import org.testng.Assert;
 
 import com.es.util.RobotUtils;
 import com.es.util.SeleniumUtils;
-
 import io.qameta.allure.Step;
 
 public class DashboardPage {
@@ -200,6 +205,12 @@ public class DashboardPage {
 		log.info("ContactUs Option is displayed");
 	}
 
+	/**
+	 * This Method will navigate user to change password page
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Redirecting to password change page...")
 	public static void navigateToChangePasswordPage() {
 		log.info("popup arrived");
@@ -209,10 +220,18 @@ public class DashboardPage {
 		SeleniumUtils.scrollToBottom();
 		SeleniumUtils.refreshPage();
 		SeleniumUtils.waitForElementToBeVisible(changePasswordLink);
+		Assert.assertTrue(changePasswordLink.isDisplayed());
 		changePasswordLink.click();
 		log.info("Clicked on change password link");
 	}
 
+	/**
+	 * This Method will navigate user 
+	 * to Edit Profile Page
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Redirecting to Edit Profile page...")
 	public static void navigateToEditProfilePage() {
 		log.info("popup arrived");
@@ -221,14 +240,24 @@ public class DashboardPage {
 		log.info("popup closed");
 		SeleniumUtils.scrollToBottom();
 		SeleniumUtils.refreshPage();
+		Assert.assertTrue(editProfileLink.isDisplayed());
 		editProfileLink.click();
 		log.info("Navigated to edit profile page");
 	}
-
-	@Step("redirecting to Edit Profile page again...")
-	public static void navigateToEditProfilePageAgain() {
+	
+	/**
+	 * This Method will navigate a user 
+	 * to Edit Profile Page when he was already logged in
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Redirecting to Edit Profile page when already logged in...")
+	public static void navigateToEditProfilePageAgain(){
 		SeleniumUtils.scrollToBottom();
 		SeleniumUtils.refreshPage();
+		SeleniumUtils.waitForElementToBeVisible(editProfileLink);
+		Assert.assertTrue(editProfileLink.isDisplayed());
 		editProfileLink.click();
 		log.info("Navigated to edit profile page");
 	}
@@ -250,77 +279,98 @@ public class DashboardPage {
 		log.info("Verify Invoices Option displayed");
 	}
 
-	@Step("redirecting to Application Listing page...")
-	public static void navigateToApplicationListingPage() {
-		log.info("popup arrived");
-		SeleniumUtils.waitForElementToBeVisible(popupWindow);
-		popupWindow.click();
-		log.info("popup closed");
-		SeleniumUtils.refreshPage();
+	/**
+	 * This Method will navigate you to Application listings page
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Redirecting to Application Listing page...")
+	public static void navigateToApplicationListingPage()
+	{	
+		//SeleniumUtils.refreshPage();   
+		SeleniumUtils.waitForElementToBeClickable(applicationListingPageLink);
+		//Assert.assertTrue(applicationListingPageLink.isDisplayed());
 		applicationListingPageLink.click();
 		log.info("Navigated to application page");
 	}
 
 	/**
-	 *This method will verify redirecting to Application page when already logged in.
+	 * This Method will navigate to Application listing page when logged it.
+	 * 
+	 * @param void 
 	 * @return void
-	 * @param void
 	 */
-	@Step("redirecting to Application page when already logged in...")
-	public static void navigateToApplicationPageWhenLoggedIn() {
+	@Step("Redirecting to Application Listing page when already logged in...")
+	public static void navigateToApplicationListingPageWhenLoggedIn()
+	{
 		SeleniumUtils.refreshPage();
+		Assert.assertTrue(applicationListingPageLink.isDisplayed());
 		applicationListingPageLink.click();
 		log.info("Navigated to application page");
 	}
-
-	@Step("redirecting to PMG Application Form...")
-	public static void navigateToPMGApplicationProgramApprovedUser() {
+	
+	/**
+	 * This Method will navigate an Approved user 
+	 * to PMG Application Program page
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Redirecting to PMG Application Form...")
+	public static void navigateToPMGApplicationProgramApprovedUser()
+	{
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
 		log.info("popup closed");
 		SeleniumUtils.refreshPage();
+		Assert.assertTrue(pmgListingProgramLinkApprovedUser.isDisplayed());
 		pmgListingProgramLinkApprovedUser.click();
 		log.info("Navigated to PMG Application Form");
 	}
 
-	/**
-	 * 
-	 *This method will verify Quotation Option is present on Dash-board.
-	 * @return void
-	 * @param void
-	 */
-	@Step("verify Quotation Option is present on Dashboard.")
+	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
 	public static void verifyQuotationOption() {
-		
-		SeleniumUtils.waitForElementToBeVisible(quotationOption);
-
-        Assert.assertTrue(quotationOption.isDisplayed());
-		log.info("Verify quotation Option displayed");
-		SeleniumUtils.executeJavaScript("arguments[0].click();", quotationOption);
-		//quotationOption.click();
-		log.info("Verify Quotation Option is clicked");
+		quotationOption.click();
+		log.info("Verify Quotation Option displayed");
 	}
 
-	@Step("redirecting to PMG Application Form...")
-	public static void navigateToPMGApplicationProgram() {
+	/**
+	 * This Method will navigate an Unapproved user 
+	 * to PMG Application Program page
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Redirecting to PMG Application Form...")
+	public static void navigateToPMGApplicationProgram()
+	{
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
 		popupWindow.click();
 		log.info("popup closed");
-		SeleniumUtils.refreshPage();
+		SeleniumUtils.refreshPage();   
 		SeleniumUtils.waitForElementToBeVisible(pmgListingLinkForUnapprovedUser);
+		Assert.assertTrue(pmgListingLinkForUnapprovedUser.isDisplayed());
 		pmgListingLinkForUnapprovedUser.click();
 		log.info("Navigated to PMG Application Form");
 	}
 
+	/**
+	 * This Method will navigate to Modified users list 
+	 * from dashboard
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("redirecting to modified users listing page...")
-	public static void navigateToModifiedUsersList() {
+	public static void navigateToModifiedUsersList(){
 		updateProfileRequestsLink.isDisplayed();
 		log.info("Update request link present");
 		updateProfileRequestsLink.click();
 		log.info("Navigated to update profile requests list page");
-		userListingsPageElement.isDisplayed();
+		Assert.assertTrue(userListingsPageElement.isDisplayed());
 		log.info("Verified navigation");
 	}
 
@@ -338,17 +388,20 @@ public class DashboardPage {
 		reportOption.click();
 		log.info("Verify Reports Option clicked");
 	}
-	
+
 	/**
-	 * This method will verify Logging out from account.
-	 * @return void
+	 * This Method will log out from the logged in account
+	 * 
 	 * @param void
+	 * @return void
 	 */
 	@Step("Logging out from account...")
-	public static void logout() {
-		SeleniumUtils.executeJavaScript("arguments[0].click();", myAccountText);
+	public static void logout()
+	{
+		Assert.assertTrue(myAccountText.isDisplayed());
+		myAccountText.click();
 		log.info("clicked on main menu");
-		SeleniumUtils.executeJavaScript("arguments[0].click();", logoutLink);
+		logoutLink.click();
 		log.info("clicked on logout Link");
 
 	}
@@ -528,23 +581,34 @@ public class DashboardPage {
 		log.info("upload pdf from drive ");
 		log.info("Given input while uploading Quotation.");
 	}
-
+	
+	/**
+	 * This Method will navigate to Invoice listings page
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Navigating to invoice page...")
 	public static void navigatingToMyInvoices() {
-		log.info("popup arrived");
-		SeleniumUtils.waitForElementToBeVisible(popupWindow);
-		popupWindow.click();
 		log.info("popup closed");
-		SeleniumUtils.refreshPage();
+		SeleniumUtils.refreshPage(); 
 		SeleniumUtils.waitForElementToBeVisible(invoicePageLink);
+		Assert.assertTrue(invoicePageLink.isDisplayed());
 		invoicePageLink.click();
 		log.info("Nvaigating to my invoices page");
 	}
-
+	
+	/**
+	 * This Method will navigate to invoice listings page when already logged in
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Navigating to invoice page when already logged in...")
 	public static void navigatingToMyInvoicesWhenLoggedInAlready() {
-		SeleniumUtils.refreshPage();
+		SeleniumUtils.refreshPage(); 
 		SeleniumUtils.waitForElementToBeVisible(invoicePageLink);
+		Assert.assertTrue(invoicePageLink.isDisplayed());
 		invoicePageLink.click();
 		log.info("Nvaigating to my invoices page");
 	}

@@ -48,14 +48,16 @@ public class SignInPage {
 	static WebElement applyBuldingProgramLink;
 
 	/**
-	 * This method would perform login based on account type
+	 * This Method will enable you to login to your account as
+	 * Staff/Customer.
+	 * 
+	 * @param String username, String password, String accountType
 	 * @return void
-	 * @param void
 	 */
-
 	@Step("Perform login based on account type")
-	public static void login(String username, String password, String accountType) {
-		System.out.println("user-" + username + "place--" + usernameplaceholder.getAttribute("id"));
+	public static void login(String username, String password, String accountType){
+		System.out.println("user-"+username+"place--"+usernameplaceholder.getAttribute("id"));
+		Assert.assertTrue(usernameplaceholder.isDisplayed());
 		usernameplaceholder.sendKeys(username);
 		log.info("entered username");
 		userpassword.sendKeys(password);
@@ -81,8 +83,17 @@ public class SignInPage {
 		}
 	}
 
+
+	/**
+	 * This Method will navigate to forgot password page
+	 * 
+	 * @param void
+	 * @return void
+	 */
 	@Step("Navigate to forgot password...")
-	public static void navigateToForgotPassword() {
+	public static void navigateToForgotPassword()
+	{
+		Assert.assertTrue(forgotPasswordLink.isDisplayed());
 		forgotPasswordLink.click();
 		log.info("navigated to forgot password page");
 
@@ -98,7 +109,12 @@ public class SignInPage {
 	public static void navigateToRegistration() {
 		Assert.assertTrue(newUserLink.isDisplayed());
 		log.info("New User Link is displayed");
+		newUserLink.click();
+		log.info("Register new User from Simple Register");
+	}
 
+	@Step("Register new User from Normal Register steps...")
+	public static void navigateToNormalRegistration() {
 		newUserLink.click();
 		log.info("Register new User from Simple Register");
 	}
