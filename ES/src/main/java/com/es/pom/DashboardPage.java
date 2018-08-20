@@ -169,18 +169,16 @@ public class DashboardPage {
 
 	@FindBy(xpath = "//a[@title='SOW']")
 	static WebElement sowSection;
+	
+	@FindBy(xpath = "//*[@id='expiredate']")
+	static WebElement checkexpiryDate;
 
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage() {
 		Assert.assertTrue(dashboardElement.isDisplayed());
 		log.info("Dashboard displayed");
 	}
-	/**
-	 * @author Shefali.Garg
-	 * @description This method will Verify the registration process once correct OTP and other fields are entered and User is on DashboardPage .
-	 * @return void
-	 * @param void
-	 */
+
 	@Step("Verify the registration process once correct OTP and other fields are entered Step...")
 	public static void verifyRegistrationProcessAfterEnteringCorrectOTP() {
 		Assert.assertTrue(dashboardOptionElement.isDisplayed());
@@ -228,12 +226,7 @@ public class DashboardPage {
 		editProfileLink.click();
 		log.info("Navigated to edit profile page");
 	}
-	/**
-	 * @author Shefali.Garg
-	 * @description This method will Verify User is qualified and all the portal options get available to user.
-	 * @return void
-	 * @param void
-	 */
+
 	@Step("User is qualified and all the portal options get available to user.")
 	public static void verifyPortalOptionForQualifiedUser() {
 
@@ -275,16 +268,14 @@ public class DashboardPage {
 		pmgListingProgramLinkApprovedUser.click();
 		log.info("Navigated to PMG Application Form");
 	}
-	
+
 	/**
-	 * @author Shefali.Garg
-	 * @description This method will verify Quotation Option is present on Dash-board.
-	 * @return void
-	 * @param void
+	 * This method will verify and click on Quotation option
 	 */
-	@Step("verify Quotation Option is present on Dashboard.")
+	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
 	public static void verifyQuotationOption() {
-		quotationOption.click();
+		SeleniumUtils.executeJavaScript("arguments[0].click();", quotationOption);
+		//quotationOption.click();
 		log.info("Verify Quotation Option displayed");
 	}
 
@@ -310,18 +301,15 @@ public class DashboardPage {
 		log.info("Verified navigation");
 	}
 
-	/**
-	 * @author Shefali.Garg
-	 * @description This method will verify customer Dash-board to have an additional head titled 'Reports.
-	 * @return void
-	 * @param void
-	 */
 	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
 	public static void verifyTitleReports() {
 		reportOption.click();
 		log.info("Verify Reports Option displayed");
 	}
 
+	/**
+	 * This method will log out from ES portal.
+	 */
 	@Step("Logging out from account...")
 	public static void logout() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", myAccountText);
@@ -331,12 +319,6 @@ public class DashboardPage {
 
 	}
 
-	/**
-	 * @author Shefali.Garg
-	 * @description This method will verify the actions available on hovering over any report.
-	 * @return void
-	 * @param void
-	 */
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport() {
 		SeleniumUtils.waitForElementToBeInvisible(loadingIcon);
@@ -344,12 +326,7 @@ public class DashboardPage {
 		SeleniumUtils.mouseHover(reportName);
 		log.info("Hover on Report Name");
 	}
-	/**
-	 * @author Shefali.Garg
-	 * @description This method will verify hovering over any report.
-	 * @return void
-	 * @param void
-	 */
+
 	@Step("Verify the actions available on hovering over any report...")
 	public static void actionsAvailableHoveringOverAnyReport() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
@@ -365,26 +342,13 @@ public class DashboardPage {
 
 	}
 
-	/**
-	 * @author Shefali.Garg
-	 * @description This method will verify the action on clicking the 'Pay' button.
-	 * @return void
-	 * @param void
-	 */
 	@Step("action on clicking the 'Pay' button...")
 	public static void clickActionOnPayButton() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
 		payForReportButton.click();
 		log.info("pay For Report Button is clicked");
 	}
-	
-	
-	/**
-	 * @author Shefali.Garg
-	 * @description This method will verify the action on clicking the 'view Projects' button.
-	 * @return void
-	 * @param void
-	 */
+
 	@Step("action on clicking the view Projects button...")
 	public static void clickActionOnViewProjectsButton() {
 		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
@@ -392,19 +356,16 @@ public class DashboardPage {
 		log.info("view Projects button is clicked");
 	}
 
-	/**
-	 * @author Shefali.Garg
-	 * @description This method will verify the action on clicking the 'view Invoices' button.
-	 * @return void
-	 * @param void
-	 */
-	@Step("action on clicking the view Invoices button...")
+	@Step("action on clicking the view Projects button...")
 	public static void clickActionOnViewInvoicesButton() {
 		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
 		viewInvoicesForReportButton.click();
 		log.info("view Invoices button is clicked");
 	}
 
+	/**
+	 * This method will click on View button.
+	 */
 	@Step("Click on View Button")
 	public static void verifyViewOption() {
 		Assert.assertTrue(viewLink.isDisplayed());
@@ -412,6 +373,9 @@ public class DashboardPage {
 		log.info("Verify View option displayed");
 	}
 
+	/**
+	 * This method will observ popup window elements.
+	 */
 	@Step("Observing Pop up Window")
 	public static void verifyPopUpWindowForView() {
 		Assert.assertTrue(quotationRequest.isDisplayed());
@@ -432,6 +396,9 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 * This method will verify upload option is visible or not.
+	 */
 	@Step("Verifying Upload option id visible...")
 	public static void verifyUploadOption() {
 		Assert.assertTrue(upload.isDisplayed());
@@ -439,6 +406,9 @@ public class DashboardPage {
 		log.info("Verify Upload option displayed");
 	}
 
+	/**
+	 * This method will verify popup window elements while uploading quotation.
+	 */
 	@Step("Observing Pop up Window for Upload option..")
 	public static void verifyPopUpWindowForUpload() {
 		SeleniumUtils.waitForElementToBeVisible(sendQuotation);
@@ -455,6 +425,9 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 * This method will click on send button while uploading quotation.
+	 */
 	@Step("click on send button while uploading Quotation..")
 	public static void clickSendWhileUploadingQuotation() {
 		SeleniumUtils.waitForElementToBeVisible(send);
@@ -463,8 +436,14 @@ public class DashboardPage {
 		log.info("clicked on send button while uploading Quotation.");
 	}
 
+	/**
+	 * This method will input the values while uploading Quotation.
+	 * @param progarmType
+	 * @param amount
+	 * @return void
+	 */
 	@Step("Input valid values while uploading Quotation..")
-	public static void InputValuesInUploadOption(String progarmType, String amount, String uploadFilePath) {
+	public static void InputValuesInUploadOption(String progarmType, String amount) {
 		dropDownInUploadQuotation.click();
 		if (progarmType.equalsIgnoreCase("ES Core")) {
 			esCore.click();
@@ -528,6 +507,15 @@ public class DashboardPage {
 	public static void clickOnSOWOption() {
 		sowSection.click();
 		log.info("clicked on the SOW option from the header section");
+	}
+
+	/**
+	 * This method will check expiry date while uploading Quotation.
+	 */
+	@Step("check expiry date..")
+	public static void checkExpiryDate() {
+		String date = checkexpiryDate.getAttribute("Value");
+		log.info("Expiry date is :"+date);
 	}
 
 }
