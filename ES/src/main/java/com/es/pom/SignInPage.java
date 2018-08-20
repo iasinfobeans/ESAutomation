@@ -3,6 +3,8 @@ package com.es.pom;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
 import io.qameta.allure.Step;
 
 public class SignInPage {
@@ -46,10 +48,9 @@ public class SignInPage {
 	static WebElement applyBuldingProgramLink;
 
 	/**
-	 * @author Shefali.Garg
-	 * @description This method would perform login based on account type
+	 * This method would perform login based on account type
 	 * @return void
-	 * @param driver
+	 * @param void
 	 */
 
 	@Step("Perform login based on account type")
@@ -86,28 +87,67 @@ public class SignInPage {
 		log.info("navigated to forgot password page");
 
 	}
-
+	
+	/**
+	 * This method user is able to initiate the registration process by clicking on the register link present on the home page.
+	 * @return void
+	 * @param void
+	 * 
+	 */
 	@Step("Register new User from Normal Register steps...")
-	public static void navigateToNormalRegistration() {
+	public static void navigateToRegistration() {
+		Assert.assertTrue(newUserLink.isDisplayed());
+		log.info("New User Link is displayed");
+
 		newUserLink.click();
 		log.info("Register new User from Simple Register");
 	}
 
+	/**
+	 * This method would perform Registration of new User from Evaluation Reports.
+	 * @return void
+	 * @param void
+	 * 
+	 */
 	@Step("Register new User from Evaluation Reports steps...")
 	public static void navigateToER() {
+		Assert.assertTrue(applyERLink.isDisplayed());
+		log.info("New User Link is displayed from Evaluation Reports");
+		
 		applyERLink.click();
 		log.info("Register new User from Evaluation Reports");
 	}
 
+
+	/**
+	 * This method would perform Registration of new User from PMG Listing Program.
+	 * @return void
+	 * @param void
+	 * 
+	 */
 	@Step("Register new User from PMG Listing Program")
 	public static void navigateToPMG() {
+		
+		Assert.assertTrue(applyPMGLink.isDisplayed());
+		log.info("New User Link is displayed from PMG Listing Program");
+		
 		applyPMGLink.click();
 		log.info("Register new User from PMG Listing Program");
 
 	}
 
+	/**
+	 * This method would perform Registration of new User from Building Products Listing Program.
+	 * @return void
+	 * @param void
+	 * 
+	 */
 	@Step("Register new User from Building Products Listing Program steps...")
 	public static void navigateToESL() {
+		
+		Assert.assertTrue(applyBuldingProgramLink.isDisplayed());
+		log.info("New User Link is displayed from Building Products Listing Program");
+		
 		applyBuldingProgramLink.click();
 		log.info("Register new User from Building Products Listing Program");
 
