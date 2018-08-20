@@ -155,6 +155,9 @@ public class ApplicationPageForQuotation {
 		log.info("success Alert is displayed");
 	}
 
+	/**
+	 * This method will click on save and submit application.
+	 */
 	@Step("Clicking on submit button...")
 	public static void submitApplication() {
 		SeleniumUtils.waitForElementToBeVisible(submitApplication);
@@ -164,6 +167,16 @@ public class ApplicationPageForQuotation {
 		log.info("Clicked on Submit Button");
 	}
 
+	/**
+	 * This method will fill the contact details while filling the application.
+	 * @param techRepName
+	 * @param authRepName
+	 * @param billingRepName
+	 * @param techRepEmail
+	 * @param authRepEmail
+	 * @param billingRepEmail
+	 * @return void
+	 */
 	@Step("Entering contact information...")
 	public static void fillContactDetails(String techRepName, String authRepName, String billingRepName,
 			String techRepEmail, String authRepEmail, String billingRepEmail) {
@@ -186,6 +199,9 @@ public class ApplicationPageForQuotation {
 		log.info("Entered contact information");
 	}
 
+	/**
+	 * This method will accept agreement terms and conditions.
+	 */
 	@Step("Accepting agreement terms and conditions...")
 	public static void agreementCheckBox() {
 		SeleniumUtils.waitForElementToBeVisible(submitPopup);
@@ -197,6 +213,9 @@ public class ApplicationPageForQuotation {
 		log.info("Accept Agreement terms and condition.");
 	}
 
+	/**
+	 * This method will submit agreement.
+	 */
 	@Step("Submitting agreement...")
 	public static void submitAgreement() {
 		SeleniumUtils.waitForElementToBeVisible(continueToSubmit);
@@ -204,6 +223,9 @@ public class ApplicationPageForQuotation {
 		log.info("Submit Agreement.");
 	}
 
+	/**
+	 * This method will click on Pay option.
+	 */
 	@Step("clicking on pay option...")
 	public static void pay() {
 		Assert.assertTrue(pay.isDisplayed());
@@ -211,6 +233,9 @@ public class ApplicationPageForQuotation {
 		log.info("Clicked on Pay option.");
 	}
 
+	/**
+	 * This method will observ basic fees and Quotation amount
+	 */
 	@Step("Observing basic fees and Quotation amount...")
 	public static void observFees() {
 
@@ -225,6 +250,9 @@ public class ApplicationPageForQuotation {
 		log.info("Observed basic fees and Quotation amount.");
 	}
 
+	/**
+	 * This method will search for coupon option for application which is applied through Quotation
+	 */
 	@Step("Searching for coupon option for application which is applied through Quotation...")
 	public static void couponOption() {
 		if (Setup.driver.getPageSource().contains("Do you have a coupon?")) {
