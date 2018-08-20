@@ -20,15 +20,19 @@ public class ForgotPasswordPage {
 	@FindBy(xpath = "//span[@class='message success alert']/ul/li")
 	static WebElement resetPasswordSucessMessage;
 
+
+	/**
+	 * This Method will reset password of the logged in account
+	 * 
+	 * @param email
+	 * @return void
+	 */
 	@Step("Reset Password")
 	public static void resetPassword(String email) {
 		enterEmailPlaceholder.sendKeys(email);
 		log.info("entered email");
-
 		passwordResetLink.click();
 		log.info("clicked on password reset link");
-
 		Assert.assertEquals(Prop.getTestData("resetPasswordSuccess"), resetPasswordSucessMessage.getText());
 	}
-
 }
