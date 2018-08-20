@@ -30,6 +30,9 @@ public class CardDetailsPage {
 
 	@FindBy(id = "cv_data")
 	static WebElement cVCNumberElement;
+	
+	@FindBy(xpath = "//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']")
+	static WebElement oderId;
 
 	@FindBy(xpath = "//span[@class='pull-right']/parent::div/preceding-sibling::div//label[text()='Order ID:']/../following-sibling::div/span")
 	static WebElement oderIdReport;
@@ -43,7 +46,11 @@ public class CardDetailsPage {
 		Assert.assertTrue(submitButton.isDisplayed());
 		log.info("Payment Gateway Page displayed");
 	}
-
+	/**
+	 *This method will verify customer to pay any amount greater than zero for renewal.
+	 * @return void
+	 * @param String name, String creditCardNumber, String cVCNumber
+	 */
 	@Step("customer to pay any amount greater than zero for renewal..")
 	public static void customerPayForRenewal(String name, String creditCardNumber, String cVCNumber) {
 
@@ -69,20 +76,35 @@ public class CardDetailsPage {
 		expirationYear.click();
 		log.info("expiration year for payment");
 
+		Assert.assertTrue(submitButton.isDisplayed());
 		submitButton.click();
 		log.info("Sumbit payment Details");
 
 	}
-
-	@Step("User should be navigated to the payment gateway....")
+	
+	/**
+	 *This method will verify User should be navigated to the payment gateway.
+	 * @return void
+	 * @param void
+	 */
+    @Step("User should be navigated to the payment gateway.")
 	public static void verifyUserNavigatedPaymentGateway() {
 		SeleniumUtils.waitForElementToBeClickable(cardHolderName);
 		Assert.assertTrue(cardHolderName.isDisplayed());
-		log.info("Dashboard Option is displayed");
+		log.info(" Card Holder Name is displayed");
 	}
-
-	@Step("A new oderId should be created on the portal of the same program type....")
+    
+    
+    /**
+	 *This method will verify A new oderId should be created on the portal of the same program type.
+	 * @return void
+	 * @param void
+	 */
+	@Step("A new oderId should be created on the portal of the same program type.")
 	public static String verifyOderIdNewApplicationCreated() {
+		Assert.assertTrue(oderId.isDisplayed());
+		log.info("OderId is displayed");
+		
 		String orderId = oderIdReport.getText();
 		log.info("Oder Id for Report " + orderId);
 		return orderId;
