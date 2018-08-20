@@ -3,6 +3,7 @@ package com.es.pom;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import com.es.util.CommonUtils;
 import com.es.util.SeleniumUtils;
@@ -51,7 +52,12 @@ public class RegisterPage {
 	@FindBy(id = "proceed")
 	static WebElement proceedButton;
 
-	@Step("Enter User Details for Registration step...")
+	/**
+	 * This method will generate Random and unique Yopmail-ID for new User.
+	 * @return email
+	 * @param void
+	 */
+	@Step("Enter Unique Email Address for Registration step...")
 	public static String enterEmailInRegistration() {
 		email = CommonUtils.getRandomYopMailId();
 		SeleniumUtils.waitForElementToBeVisible(emailTextBox);
@@ -64,14 +70,24 @@ public class RegisterPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		Assert.assertTrue(submitButton.isDisplayed());
+		log.info("submit Button is displayed");
+		
 		submitButton.click();
 		log.info("Submit your Email Address Button ");
 		return email;
 	}
-
-	@Step("Enter User Details for Registration step...")
+	
+	/**
+	 *This method will provide User Details for Registration.
+	 * @return void
+	 * @param String firstName, String lastName, String companyName,
+			  String phone, String newPassword, String confirmPassword,String email
+	 */
+    @Step("Enter User Details for Registration step...")
 	public static void enterPersonalInfoInRegistration(String firstName, String lastName, String companyName,
-			String phone, String newPassword, String confirmPassword, String email) {
+			String phone, String newPassword, String confirmPassword,String email) {
 
 		dropDownMenu.isEnabled();
 		dropDownMenu.click();
@@ -105,8 +121,11 @@ public class RegisterPage {
 		log.info("Enter your Confirm Password");
 
 		oneTimePassword.sendKeys(Yopmail.getOTP(email));
+		
+		Assert.assertTrue(proceedButton.isDisplayed());
+		log.info("Proceed Button is displayed");
 
-		proceedButton.click();
+        proceedButton.click();
 		log.info("Submit your Details");
 
 	}
