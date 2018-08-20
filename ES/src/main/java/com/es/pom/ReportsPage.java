@@ -15,8 +15,13 @@ public class ReportsPage {
 	@FindBy(xpath = "//*[@id='programReportsTable']/tbody/tr/td/a/parent::td/following-sibling::td/a")
 	static WebElement viewReportOption;
 
+	/**
+	 * This method will verify Dash-board to have an additional head titled 'Reports'..
+	 * @return void
+	 * @param void
+	 */
 	@Step("Dashboard to have an additional head titled 'Reports.")
-	public static void verifyTitleReport() {
+	public static void verifyTitleReports() {
 		Assert.assertTrue(reportsElement.isDisplayed());
 		log.info("Reports is displayed on Dashboard");
 	}
