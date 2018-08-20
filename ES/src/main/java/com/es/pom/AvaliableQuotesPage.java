@@ -13,6 +13,11 @@ public class AvaliableQuotesPage {
 	@FindBy(xpath = "//*[@programslug='esr']")
 	static WebElement applyButton;
 
+	/**
+	 * This method will verify customer Click on the Apply button .
+	 * @return void
+	 * @param void
+	 */
 	@Step(" Click on the Apply button ...")
 	public static void applyForViewQuotesOptions() {
 		applyButton.click();
