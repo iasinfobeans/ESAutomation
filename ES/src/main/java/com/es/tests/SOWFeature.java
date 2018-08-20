@@ -14,7 +14,7 @@ import io.qameta.allure.Description;
 
 public class SOWFeature extends Setup {
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the staff is able to 'Upload SOW' for ESR applications.")
 	public void verifyStaffUploadSOWForESRApplications() throws InterruptedException {
 
@@ -48,7 +48,7 @@ public class SOWFeature extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the SOW would be uploaded as a PDF file.")
 	public void verifySOWUploadedAsPdf() throws InterruptedException {
 
@@ -65,7 +65,7 @@ public class SOWFeature extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the staff can upload any number of SOW for a single Project.")
 	public void verifyStaffuploadAnyNumberSOWSingleProject() throws InterruptedException {
 
@@ -113,8 +113,7 @@ public class SOWFeature extends Setup {
 			SOWFeaturePage.uploadPdfFileInSOW(1);
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
 			SOWFeaturePage.verifyConfirmationMessageDisplayedScreen();
-			Yopmail.verifySOWUploadedMailToAuthorizedSignatory(Prop.getTestData("technicalContactAssociatedUsername"));
-			SOWFeaturePage.verifyDetailsOfSOWUploaded();
+			Yopmail.verifySOWUploadedMailToAuthorizedSignatory(Prop.getTestData("username"));
 			SOWFeaturePage.downloadSOW();
 			Thread.sleep(20000);
 		} catch (Exception e) {
@@ -125,7 +124,7 @@ public class SOWFeature extends Setup {
 
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"  })
 	@Description("Verify that the portal will notify the authorized signatory of the Report for new SOW availability.")
 	public void verifyNotifyAuthorizedSignatoryNewSOWAvailability() throws InterruptedException {
 
@@ -138,7 +137,6 @@ public class SOWFeature extends Setup {
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
 			SOWFeaturePage.verifyConfirmationMessageDisplayedScreen();
 			Yopmail.verifySOWUploadedMailToAuthorizedSignatory(Prop.getTestData("username"));
-			SOWFeaturePage.verifyDetailsOfSOWUploaded();
 			SOWFeaturePage.downloadSOW();
 			Thread.sleep(20000);
 		} catch (Exception e) {
@@ -162,7 +160,7 @@ public class SOWFeature extends Setup {
 			SOWFeaturePage.staffRemovesSOWFile();
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
 			Yopmail.verifySOWFileRemoveMailToAuthorizedSignatory(
-					Prop.getTestData("technicalContactAssociatedUsername"));
+					Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyNotificationEmailTechnicalRepresentativeStaffRemovesSOWFile");
 			e.getStackTrace();
@@ -171,7 +169,7 @@ public class SOWFeature extends Setup {
 
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that if Staff removes a SOW file, a notification email would be sent to Authorized signatory of the Report ")
 	public void verifyNotificationEmailAuthorizedSignatoryStaffRemovesSOWFile() throws InterruptedException {
 
@@ -183,8 +181,7 @@ public class SOWFeature extends Setup {
 			SOWFeaturePage.uploadPdfFileInSOW(4);
 			SOWFeaturePage.staffRemovesSOWFile();
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
-			Yopmail.verifySOWFileRemoveMailToAuthorizedSignatory(
-					Prop.getTestData("technicalContactAssociatedUsername"));
+			Yopmail.verifySOWFileRemoveMailToAuthorizedSignatory(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyNotificationEmailAuthorizedSignatoryStaffRemovesSOWFile");
 			e.getStackTrace();
@@ -221,7 +218,7 @@ public class SOWFeature extends Setup {
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("technicalContactAssociatedUsernameForDownload"),
 					Prop.getTestData("password"), "Customer");
-			DashboardPage.verifyTitleReports();
+			DashboardPage.verifyReportsOption();
 			ReportsPage.navigateToProjectListingPage();
 			ProjectListingPage.navigateToProjectListingPage();
 			SOWFeaturePage.downloadSOW();
@@ -247,7 +244,7 @@ public class SOWFeature extends Setup {
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
-			DashboardPage.verifyTitleReports();
+			DashboardPage.verifyReportsOption();
 			ReportsPage.navigateToProjectListingPage();
 			ProjectListingPage.navigateToProjectListingPage();
 			SOWFeaturePage.downloadSOW();
