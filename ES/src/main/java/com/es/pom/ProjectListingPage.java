@@ -16,16 +16,28 @@ public class ProjectListingPage {
 	@FindBy(xpath = "//*[@id='projectTable']//a[contains(text(),'View SOW')]")
 	static WebElement viewSOWOption;
 
-	@Step("Dashboard to have an additional head titled 'Reports.")
+
+	/**
+	 * This method will verify Dash-board to have an additional head titled 'Projects'..
+	 * @return void
+	 * @param void
+	 */
+	@Step("Dashboard to have an head titled 'Reports.")
 	public static void verifyViewProjectsPage() {
+
 		Assert.assertTrue(projectsElement.isDisplayed());
 		log.info("Reports is displayed on Dashboard");
 	}
 
+	/**
+	 * This method will Click on view SOW to be Download.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Click on view SOW to be Download")
 	public static void navigateToProjectListingPage() {
+		Assert.assertTrue(viewSOWOption.isDisplayed());
 		viewSOWOption.click();
 		log.info("View SOW to be Download");
 	}
-
 }
