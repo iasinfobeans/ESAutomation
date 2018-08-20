@@ -25,8 +25,6 @@ public class QuotationListingPage {
 
 	@FindBy(xpath = "//strong[text()='Active']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
 	static WebElement viewQuotesBoxForStaff;
-	
-	//*[@id='quotation-list-dataTable']/tbody/tr/td/a
 
 	@FindBy(xpath = "//*[@class='odd parent']/td[@class='sorting_1']")
 	static WebElement clickonQuoteForDelete;
@@ -49,16 +47,27 @@ public class QuotationListingPage {
 	@FindBy(xpath = "//*[@id='quotation-span-msg']/span/ul/li")
 	static WebElement quotationUploaded;
 
+	/**
+	 * This method will verify'Get a Quote' button is present on the Quotation Listing page for the customer.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify that a 'Get a Quote' button is present on the Quotation Listing page for the customer...")
 	public static void verifyGetAQuoteButton() {
 		SeleniumUtils.waitForElementToBeVisible(getQuoteButton);
 		Assert.assertTrue(getQuoteButton.isDisplayed());
 		log.info("Get A QuoteButton is displayed");
 	}
-
+	
+	/**
+	 * This method will verify that the customer is able to click on the Get a Quote button.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify that the customer is able to click on the Get a Quote button...")
-	public static void customerClickOnGetAQuoteButton() {
+	public static void clickOnGetAQuoteButton() {
 		SeleniumUtils.waitForElementToBeVisible(getQuoteButton);
+		Assert.assertTrue(getQuoteButton.isDisplayed());
 		getQuoteButton.click();
 		log.info("Verify Customer is able to Click onGet a Quote' button");
 	}
@@ -71,13 +80,20 @@ public class QuotationListingPage {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForStaff);
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
 	}
-
-	/*@Step("Click on 'View Quotes' options by Customer ...")
+	
+	
+	/**
+	 * 
+	 * This method will verify Click on 'View Quotes' options by Customer.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Click on 'View Quotes' options by Customer ...")
 	public static void viewQuotesTab() {
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		log.info("Verify Customer is able to Click on 'View Quotes' options");
-	}*/
+	}
 
 	/**
 	 * This method will delete the quotation uploaded by staff. 
@@ -119,7 +135,9 @@ public class QuotationListingPage {
 	}
 
 	/**
-	 * This method will submit Quotation Request.
+	 * This method will verify Input for Submitting Quotation Request.
+	 * @return void
+	 * @param void
 	 */
 	@Step("Submitting Quotation Request ...")
 	public static void submitQuotationRequest() {
