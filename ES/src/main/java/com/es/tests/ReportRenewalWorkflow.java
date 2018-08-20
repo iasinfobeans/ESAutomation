@@ -373,7 +373,7 @@ public class ReportRenewalWorkflow extends Setup {
 					Prop.getTestData("cVCNumber"));
 			DashboardPage.verifyDashboardPage();
 			DashboardPage.navigateToApplicationListingPageWhenLoggedIn();
-			ApplicationsListingPage.customerDownloadRenewalApplicationDocument();
+			ApplicationsListingPage.downloadRenewalApplicationDocument();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCustomerDownloadRenewalApplicationDocument");
 			e.getStackTrace();
@@ -388,7 +388,7 @@ public class ReportRenewalWorkflow extends Setup {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyDashboardPage();
 			DashboardPage.navigateToApplicationListingPageWhenLoggedIn();
-			ApplicationsListingPage.customerDownloadRenewalApplicationDocument();
+			ApplicationsListingPage.downloadRenewalApplicationDocument();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyStaffDownloadRenewalApplicationDocument");
 			e.getStackTrace();
