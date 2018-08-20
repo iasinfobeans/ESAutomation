@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import com.es.util.Prop;
+import com.es.util.SeleniumUtils;
 
 import io.qameta.allure.Step;
 
@@ -33,7 +34,8 @@ public class PaymentHistoryPage {
 		searchTextbox.clear();
 		searchTextbox.sendKeys(orderId);
 		log.info("Enter the OderId in the Search Box");
-
+		
+		SeleniumUtils.waitForElementToBeVisible(paymentMode);
 		Assert.assertTrue(paymentMode.isDisplayed());
 		log.info("payment Mode for application is displayed");
 	}
