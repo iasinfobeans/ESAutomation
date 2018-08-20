@@ -15,7 +15,12 @@ public class OverlayPage {
 	@FindBy(xpath = "//div[contains(@class,'enjoyhint_skip_btn') and text()='Skip']")
 	static WebElement skipButtonMessage;
 
-	@Step("Overlay Page is dispayed whwn User Completed Registration...")
+	/**
+	 * This method would perform skip Operation on Overlay Page.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Overlay Page is dispayed when User Completed Registration...")
 	public static void skipoverlayPage()
 
 	{
