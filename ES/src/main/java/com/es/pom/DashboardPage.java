@@ -169,16 +169,22 @@ public class DashboardPage {
 
 	@FindBy(xpath = "//a[@title='SOW']")
 	static WebElement sowSection;
-	
-	@FindBy(xpath = "//*[@id='expiredate']")
-	static WebElement checkexpiryDate;
 
+	/**
+	 *This method will verify dashboard page.
+	 * @return void
+	 * @param void
+	 */
 	@Step("verify dashboard page Step...")
 	public static void verifyDashboardPage() {
 		Assert.assertTrue(dashboardElement.isDisplayed());
 		log.info("Dashboard displayed");
 	}
-
+	/**
+	 * This method will Verify the registration process once correct OTP and other fields are entered and User is on DashboardPage .
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify the registration process once correct OTP and other fields are entered Step...")
 	public static void verifyRegistrationProcessAfterEnteringCorrectOTP() {
 		Assert.assertTrue(dashboardOptionElement.isDisplayed());
@@ -226,7 +232,11 @@ public class DashboardPage {
 		editProfileLink.click();
 		log.info("Navigated to edit profile page");
 	}
-
+	/**
+	 * This method will Verify User is qualified and all the portal options get available to user.
+	 * @return void
+	 * @param void
+	 */
 	@Step("User is qualified and all the portal options get available to user.")
 	public static void verifyPortalOptionForQualifiedUser() {
 
@@ -251,6 +261,11 @@ public class DashboardPage {
 		log.info("Navigated to application page");
 	}
 
+	/**
+	 *This method will verify redirecting to Application page when already logged in.
+	 * @return void
+	 * @param void
+	 */
 	@Step("redirecting to Application page when already logged in...")
 	public static void navigateToApplicationPageWhenLoggedIn() {
 		SeleniumUtils.refreshPage();
@@ -270,13 +285,21 @@ public class DashboardPage {
 	}
 
 	/**
-	 * This method will verify and click on Quotation option
+	 * 
+	 *This method will verify Quotation Option is present on Dash-board.
+	 * @return void
+	 * @param void
 	 */
-	@Step("'Get a Quote' button is present on the Quotation Listing page for the customer.")
+	@Step("verify Quotation Option is present on Dashboard.")
 	public static void verifyQuotationOption() {
+		
+		SeleniumUtils.waitForElementToBeVisible(quotationOption);
+
+        Assert.assertTrue(quotationOption.isDisplayed());
+		log.info("Verify quotation Option displayed");
 		SeleniumUtils.executeJavaScript("arguments[0].click();", quotationOption);
 		//quotationOption.click();
-		log.info("Verify Quotation Option displayed");
+		log.info("Verify Quotation Option is clicked");
 	}
 
 	@Step("redirecting to PMG Application Form...")
@@ -301,14 +324,25 @@ public class DashboardPage {
 		log.info("Verified navigation");
 	}
 
-	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
-	public static void verifyTitleReports() {
-		reportOption.click();
-		log.info("Verify Reports Option displayed");
-	}
-
 	/**
-	 * This method will log out from ES portal.
+	 * This method will verify customer Dash-board to have an additional head titled 'Reports.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verify the customer Dashboard to have an additional head titled 'Reports.")
+	public static void verifyReportsOption() {
+		
+		Assert.assertTrue(reportOption.isDisplayed());
+		log.info("Verify report Option displayed");
+		
+		reportOption.click();
+		log.info("Verify Reports Option clicked");
+	}
+	
+	/**
+	 * This method will verify Logging out from account.
+	 * @return void
+	 * @param void
 	 */
 	@Step("Logging out from account...")
 	public static void logout() {
@@ -319,14 +353,28 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 * This method will verify the actions available on hovering over any report.
+	 * @return void
+	 * @param void
+	 */
 	@Step("actions available on hovering over any report...")
 	public static void hoveringOverAnyReport() {
 		SeleniumUtils.waitForElementToBeInvisible(loadingIcon);
 		SeleniumUtils.waitForElementToBeVisible(reportName);
+		
+		Assert.assertTrue(reportName.isDisplayed());
+		log.info("Verify report Name displayed");
+		
 		SeleniumUtils.mouseHover(reportName);
 		log.info("Hover on Report Name");
 	}
-
+	
+	/**
+	 * This method will verify hovering over any report.
+	 * @return void
+	 * @param void
+	 */
 	@Step("Verify the actions available on hovering over any report...")
 	public static void actionsAvailableHoveringOverAnyReport() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
@@ -342,29 +390,59 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 *This method will verify the action on clicking the 'Pay' button.
+	 * @return void
+	 * @param void
+	 */
 	@Step("action on clicking the 'Pay' button...")
 	public static void clickActionOnPayButton() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
+		
+		Assert.assertTrue(payForReportButton.isDisplayed());
+		log.info("pay For Report Button is displayed");
+		
 		payForReportButton.click();
 		log.info("pay For Report Button is clicked");
 	}
 
+
+	/**
+	 * This method will verify the action on clicking the 'view Projects' button.
+	 * @return void
+	 * @param void
+	 */
 	@Step("action on clicking the view Projects button...")
 	public static void clickActionOnViewProjectsButton() {
 		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
+		
+		Assert.assertTrue(viewProjectsForReportButton.isDisplayed());
+		log.info("view Projects For Report Button is displayed");
+		
 		viewProjectsForReportButton.click();
 		log.info("view Projects button is clicked");
 	}
 
-	@Step("action on clicking the view Projects button...")
+	/**
+	 * This method will verify the action on clicking the 'view Invoices' button.
+	 * @return void
+	 * @param void
+	 */
+	@Step("action on clicking the view Invoices button...")
 	public static void clickActionOnViewInvoicesButton() {
-		SeleniumUtils.waitForElementToBeVisible(viewProjectsForReportButton);
+		SeleniumUtils.waitForElementToBeVisible(viewInvoicesForReportButton);
+		
+		Assert.assertTrue(viewInvoicesForReportButton.isDisplayed());
+		log.info("view Projects For Report Button is displayed");
+		
 		viewInvoicesForReportButton.click();
 		log.info("view Invoices button is clicked");
 	}
-
 	/**
-	 * This method will click on View button.
+	 * 
+	 *This method will verify Click on View Button.
+	 * @return void
+	 * @param void
 	 */
 	@Step("Click on View Button")
 	public static void verifyViewOption() {
@@ -373,9 +451,6 @@ public class DashboardPage {
 		log.info("Verify View option displayed");
 	}
 
-	/**
-	 * This method will observ popup window elements.
-	 */
 	@Step("Observing Pop up Window")
 	public static void verifyPopUpWindowForView() {
 		Assert.assertTrue(quotationRequest.isDisplayed());
@@ -395,9 +470,10 @@ public class DashboardPage {
 		log.info("Verified Pop up Window and parameters on it for view option.");
 
 	}
-
 	/**
-	 * This method will verify upload option is visible or not.
+	 * This method would Verifying Upload option id visible.
+	 * @return void
+	 * @param void
 	 */
 	@Step("Verifying Upload option id visible...")
 	public static void verifyUploadOption() {
@@ -406,9 +482,6 @@ public class DashboardPage {
 		log.info("Verify Upload option displayed");
 	}
 
-	/**
-	 * This method will verify popup window elements while uploading quotation.
-	 */
 	@Step("Observing Pop up Window for Upload option..")
 	public static void verifyPopUpWindowForUpload() {
 		SeleniumUtils.waitForElementToBeVisible(sendQuotation);
@@ -425,9 +498,6 @@ public class DashboardPage {
 
 	}
 
-	/**
-	 * This method will click on send button while uploading quotation.
-	 */
 	@Step("click on send button while uploading Quotation..")
 	public static void clickSendWhileUploadingQuotation() {
 		SeleniumUtils.waitForElementToBeVisible(send);
@@ -436,14 +506,8 @@ public class DashboardPage {
 		log.info("clicked on send button while uploading Quotation.");
 	}
 
-	/**
-	 * This method will input the values while uploading Quotation.
-	 * @param progarmType
-	 * @param amount
-	 * @return void
-	 */
 	@Step("Input valid values while uploading Quotation..")
-	public static void InputValuesInUploadOption(String progarmType, String amount) {
+	public static void InputValuesInUploadOption(String progarmType, String amount, String uploadFilePath) {
 		dropDownInUploadQuotation.click();
 		if (progarmType.equalsIgnoreCase("ES Core")) {
 			esCore.click();
@@ -485,37 +549,55 @@ public class DashboardPage {
 		log.info("Nvaigating to my invoices page");
 	}
 
+	/**
+	 * This method will verifyTechnical contact associated with the report can see the report at the Dashboard
+	 * under the head 'Reports (Pending Approval).
+	 * @return void
+	 * @param void
+	 */
 	@Step("Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval).")
 	public static void technicalContactAssociatedWithReport() {
 		Assert.assertTrue(reportName.isDisplayed());
 		log.info("Technical Contact Associated is displayed");
 	}
-
+	
+	/**
+	 * This method will verify Additional Technical contact associated with the report can see the report at the Dashboard
+	 * under the head 'Reports (Pending Approval).
+	 * @return void
+	 * @param void
+	 */
 	@Step("Additional Technical contact associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval).")
 	public static void additionalTechnicalContactAssociatedWithReport() {
 		Assert.assertTrue(reportName.isDisplayed());
 		log.info("Additional Technical Contact Associated is displayed");
 	}
-
+	
+	/**
+	 * This method will verify Authorized signatory associated with the report can see the report at the Dashboard
+	 * under the head 'Reports (Pending Approval).
+	 * @return void
+	 * @param void
+	 */
 	@Step("Authorized signatory associated with the report can see the report at the Dashboard under the head 'Reports (Pending Approval)")
 	public static void authorizedSignatoryAssociatedWithReport() {
 		Assert.assertTrue(reportName.isDisplayed());
 		log.info("Technical Contact Associated is displayed");
 	}
 
+	/**
+	 * This method will click on the SOW option from the header section.
+	 * @return void
+	 * @param void
+	 */
 	@Step("click on the SOW option from the header section")
 	public static void clickOnSOWOption() {
+		
+		Assert.assertTrue(sowSection.isDisplayed());
+		log.info("SOW Section is displayed");
+		
 		sowSection.click();
 		log.info("clicked on the SOW option from the header section");
-	}
-
-	/**
-	 * This method will check expiry date while uploading Quotation.
-	 */
-	@Step("check expiry date..")
-	public static void checkExpiryDate() {
-		String date = checkexpiryDate.getAttribute("Value");
-		log.info("Expiry date is :"+date);
 	}
 
 }
