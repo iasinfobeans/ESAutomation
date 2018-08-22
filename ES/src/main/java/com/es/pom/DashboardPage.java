@@ -174,6 +174,9 @@ public class DashboardPage {
 
 	@FindBy(xpath = "//a[@title='SOW']")
 	static WebElement sowSection;
+	
+	@FindBy(xpath = "//*[@id='expiredate']")
+	static WebElement checkexpiryDate;
 
 	/**
 	 *This method will verify dashboard page.
@@ -664,4 +667,13 @@ public class DashboardPage {
 		log.info("clicked on the SOW option from the header section");
 	}
 
+	/**
+	 * This method will check expiry date while uploading Quotation.
+	 */
+	@Step("check expiry date..")
+	public static void checkExpiryDate() {
+		Assert.assertTrue(checkexpiryDate.isDisplayed());
+		String date = checkexpiryDate.getAttribute("Value");
+		log.info("Expiry date is :"+date);
+	}
 }
