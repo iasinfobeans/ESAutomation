@@ -65,7 +65,7 @@ public class QuotationListingPage {
 	 * @param void
 	 */
 	@Step("Verify that the customer is able to click on the Get a Quote button...")
-	public static void customerClickOnGetAQuoteButton() {
+	public static void clickOnGetAQuoteButton() {
 		Assert.assertTrue(getQuoteButton.isDisplayed());
 		SeleniumUtils.waitForElementToBeVisible(getQuoteButton);
 		getQuoteButton.click();
