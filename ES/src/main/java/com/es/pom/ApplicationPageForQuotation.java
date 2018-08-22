@@ -109,6 +109,7 @@ public class ApplicationPageForQuotation {
 			String city, String state, String zip, String companyPhoneNumber, String companyEmailAddress,
 			String subjectOfReport) {
 
+		Assert.assertTrue(companyNameTextBox.isDisplayed());
 		companyNameTextBox.clear();
 		companyNameTextBox.sendKeys(companyName);
 		log.info("Enter your company name");
@@ -161,6 +162,7 @@ public class ApplicationPageForQuotation {
 	@Step("Clicking on submit button...")
 	public static void submitApplication() {
 		SeleniumUtils.waitForElementToBeVisible(submitApplication);
+		Assert.assertTrue(submitApplication.isDisplayed());
 		saveButton.click();
 		log.info("Click on save Button");
 		submitApplication.click();
@@ -169,6 +171,7 @@ public class ApplicationPageForQuotation {
 
 	/**
 	 * This method will fill the contact details while filling the application.
+	 * 
 	 * @param techRepName
 	 * @param authRepName
 	 * @param billingRepName
@@ -180,6 +183,7 @@ public class ApplicationPageForQuotation {
 	@Step("Entering contact information...")
 	public static void fillContactDetails(String techRepName, String authRepName, String billingRepName,
 			String techRepEmail, String authRepEmail, String billingRepEmail) {
+		Assert.assertTrue(technicalRepresentativeName.isDisplayed());
 		technicalRepresentativeName.clear();
 		technicalRepresentativeName.sendKeys(techRepName);
 		authSignatoryName.clear();
@@ -219,6 +223,7 @@ public class ApplicationPageForQuotation {
 	@Step("Submitting agreement...")
 	public static void submitAgreement() {
 		SeleniumUtils.waitForElementToBeVisible(continueToSubmit);
+		Assert.assertTrue(continueToSubmit.isDisplayed());
 		continueToSubmit.click();
 		log.info("Submit Agreement.");
 	}
@@ -238,7 +243,7 @@ public class ApplicationPageForQuotation {
 	 */
 	@Step("Observing basic fees and Quotation amount...")
 	public static void observFees() {
-
+		Assert.assertTrue(basicFees.isDisplayed());
 		String basicFee = basicFees.getAttribute("Value");
 		basicFee = basicFee.substring(0, basicFee.indexOf("."));
 		String quotAmount = quotationAmount.getAttribute("Value");
@@ -251,10 +256,12 @@ public class ApplicationPageForQuotation {
 	}
 
 	/**
-	 * This method will search for coupon option for application which is applied through Quotation
+	 * This method will search for coupon option for application which is
+	 * applied through Quotation
 	 */
 	@Step("Searching for coupon option for application which is applied through Quotation...")
 	public static void couponOption() {
+		Assert.assertTrue(basicFees.isDisplayed());
 		if (Setup.driver.getPageSource().contains("Do you have a coupon?")) {
 			log.info("Coupon Discount available for Quotation.");
 		} else {
