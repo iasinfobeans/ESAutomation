@@ -538,6 +538,9 @@ public class DashboardPage {
 		log.info("Verify Upload option displayed");
 	}
 
+	/**
+	 * This method will verify popup window elements while uploading quotation.
+	 */
 	@Step("Observing Pop up Window for Upload option..")
 	public static void verifyPopUpWindowForUpload() {
 		SeleniumUtils.waitForElementToBeVisible(sendQuotation);
@@ -554,6 +557,9 @@ public class DashboardPage {
 
 	}
 
+	/**
+	 * This method will click on send button while uploading quotation.
+	 */
 	@Step("click on send button while uploading Quotation..")
 	public static void clickSendWhileUploadingQuotation() {
 		SeleniumUtils.waitForElementToBeVisible(send);
@@ -562,8 +568,14 @@ public class DashboardPage {
 		log.info("clicked on send button while uploading Quotation.");
 	}
 
+	/**
+	 * This method will input the values while uploading Quotation.
+	 * @param progarmType
+	 * @param amount
+	 * @return void
+	 */
 	@Step("Input valid values while uploading Quotation..")
-	public static void InputValuesInUploadOption(String progarmType, String amount, String uploadFilePath) {
+	public static void InputValuesInUploadOption(String progarmType, String amount) {
 		dropDownInUploadQuotation.click();
 		if (progarmType.equalsIgnoreCase("ES Core")) {
 			esCore.click();
