@@ -64,7 +64,7 @@ public class UpdateProfilePage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Updating a customer account steps...")
+	@Step("Update a customer account")
 	public static void updateProfile() {
 		jobtitleTextbox.clear();
 		jobtitleTextbox.sendKeys(Prop.getTestData("jobtitle"));
@@ -100,6 +100,7 @@ public class UpdateProfilePage {
 	 * @param void
 	 * @return void
 	 */
+	@Step("Update profile page again")
 	public static void updateProfileAgain()
 	{
 		Assert.assertTrue(jobtitleTextbox.isDisplayed());
@@ -138,7 +139,7 @@ public class UpdateProfilePage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Restrictions on updating profile verification steps...")
+	@Step("Verify Restrictions on updating profile verification")
 	public static void updateRestriction() {
 		String readonly = emailTextbox.getAttribute("readonly");
 		Assert.assertNotNull(readonly);
