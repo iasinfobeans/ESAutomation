@@ -704,4 +704,28 @@ public class Yopmail {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
+	
+	/**
+	 * This method will verify Delivered signing mail link.
+	 * @param email
+	 * (For test case no 101)-- lrrepresentative@yopmail.com
+	 *             @return void
+	 */
+	public static void verifyDeliveredSigningMailLinks(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openverifyDeliveredSigningMailLinks();
+			YopmailPage.verifyverifyDeliveredSigningMailLinks();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
 }
