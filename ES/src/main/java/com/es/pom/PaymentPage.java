@@ -154,7 +154,7 @@ public class PaymentPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("verify Payment page elements for Invoice...")
+	@Step("Verify Payment page elements for Invoice")
 	public static void verifyPaymentPageElementsForInvoice()
 	{
 		Assert.assertEquals(messageNoticeAlert.getText(),Prop.getTestData("message_invoice_payment"));
@@ -279,7 +279,7 @@ public class PaymentPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Fill Payment Page Form...")
+	@Step("Fill Payment Page Form for invoice")
 	public static void fillPaymentPageFormForInvoice()
 	{
 		SeleniumUtils.refreshPage();
@@ -321,7 +321,7 @@ public class PaymentPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Verify payment page elements for Applications...")
+	@Step("Verify payment page elements for Applications")
 	public static void verifyPaymentPageElementsForApplication()
 	{
 		Assert.assertEquals(messageNoticeAlert.getText(),Prop.getTestData("message_invoice_payment"));
@@ -357,7 +357,7 @@ public class PaymentPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Fill Payment Page Form...")
+	@Step("Fill Payment Page Form")
 	public static void fillPaymentPageFormForApplication()
 	{
 		SeleniumUtils.refreshPage();
@@ -394,7 +394,7 @@ public class PaymentPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Navigate to payment Gateway page...")
+	@Step("Navigate to payment Gateway page")
 	public static void navigateToPaymentGatewayPage()
 	{
 		SeleniumUtils.waitForElementToBeVisible(payLink);
@@ -411,7 +411,7 @@ public class PaymentPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Verify the Balance due amount on the Portal...")
+	@Step("Verify the Balance due amount on the Portal")
 	public static void compareBalanceAmountBeforAndAfterPay()
 	{
 		balanceAmountAfterPay=balanceAmount.getAttribute("value");
