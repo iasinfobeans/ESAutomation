@@ -18,8 +18,7 @@ public class ContactManagement extends Setup {
 	@Description("Verify that the customers are allowed to update their own profile information")
 	public static void verifyUpdateProfile() throws IOException, InterruptedException {
 		try {
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),
-					"Customer");
+			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
 			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateProfile();
 		} catch (Exception e) {
@@ -33,8 +32,7 @@ public class ContactManagement extends Setup {
 	@Description("Verify that the customer is able to update all the information except email address & company name")
 	public static void verifyUpdateProfileWithRestrictions() throws IOException, InterruptedException {
 		try {
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),
-					"Customer");
+			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
 			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateRestriction();
 			UpdateProfilePage.updateProfile();
@@ -49,8 +47,7 @@ public class ContactManagement extends Setup {
 	@Description("Verify that once the profile has been updated, the customer receives an email notification.")
 	public static void verifyUpdateAccountEmail_Customer() throws IOException, InterruptedException {
 		try {
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),
-					"Customer");
+			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
 			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateRestriction();
 			UpdateProfilePage.updateProfile();
@@ -66,8 +63,7 @@ public class ContactManagement extends Setup {
 	@Description("Verify that once the profile has been updated, the staff receives an email notification.")
 	public static void verifyUpdateAccountEmail_Staff() throws IOException, InterruptedException {
 		try {
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),
-					"Customer");
+			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
 			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateProfile();
 			UpdateProfilePage.updateRestriction();
@@ -124,13 +120,11 @@ public class ContactManagement extends Setup {
 	@Description("Verify that the customer can update their information any no. of times.")
 	public static void verifyUpdateProfileMultipleTimes() throws IOException, InterruptedException {
 		try {
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),
-					"Customer");
+			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
 			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateProfile();
 			DashboardPage.logout();
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),
-					"Customer");
+			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
 			DashboardPage.navigateToEditProfilePageAgain();
 			UpdateProfilePage.updateProfileAgain();
 		} catch (Exception e) {
@@ -144,14 +138,12 @@ public class ContactManagement extends Setup {
 	@Description("Verify that the staff personnel would only see the most recent change requests and can approve/deny the same")
 	public static void verifyRecentChangesVisibility() throws IOException, InterruptedException {
 		try {
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),
-					"Customer");
+			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
 			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateProfile();
 			DashboardPage.logout();
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),
-					"Customer");
-			DashboardPage.navigateToEditProfilePageAgain();
+			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
+			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateProfileAgain();
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
