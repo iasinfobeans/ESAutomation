@@ -51,10 +51,12 @@ public class SignInPage {
 	 * This Method will enable you to login to your account as
 	 * Staff/Customer.
 	 * 
-	 * @param String username, String password, String accountType
+	 * @param username
+	 * @param password
+	 * @param accountType
 	 * @return void
 	 */
-	@Step("Perform login based on account type")
+	@Step("Login")
 	public static void login(String username, String password, String accountType){
 		System.out.println("user-"+username+"place--"+usernameplaceholder.getAttribute("id"));
 		Assert.assertTrue(usernameplaceholder.isDisplayed());
@@ -90,7 +92,7 @@ public class SignInPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Navigate to forgot password...")
+	@Step("Navigate to forgot password page")
 	public static void navigateToForgotPassword()
 	{
 		Assert.assertTrue(forgotPasswordLink.isDisplayed());
