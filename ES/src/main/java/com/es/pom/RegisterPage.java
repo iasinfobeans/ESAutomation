@@ -53,6 +53,27 @@ public class RegisterPage {
 	static WebElement proceedButton;
 
 	/**
+	 * This method will generate Random email
+	 * @return email
+	 * @param void
+	 */
+	@Step("Generate Email")
+	public static String generateMail() {
+		email = CommonUtils.getRandomYopMailId();
+		SeleniumUtils.waitForElementToBeVisible(emailTextBox);
+		emailTextBox.clear();
+		emailTextBox.sendKeys(email);
+		log.info("Enter new email Address: " + email);
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return email;
+	}
+	
+	/**
 	 * This method will generate Random and unique Yopmail-ID for new User.
 	 * @return email
 	 * @param void
