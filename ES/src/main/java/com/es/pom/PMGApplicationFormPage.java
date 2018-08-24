@@ -47,8 +47,8 @@ public class PMGApplicationFormPage {
 	@FindBy(id = "english_language_yes")
 	static WebElement englishLanguageCheckbox;
 	
-	@FindBy(id = "learning_center_yes")
-	static WebElement learning_center_yesCheckbox;
+	@FindBy(id = "learning_center_no")
+	static WebElement learning_center_NoCheckbox;
 	
 	@FindBy(id = "tech_rep_name")
 	static WebElement technicalRepresentativeTextbox;
@@ -101,6 +101,11 @@ public class PMGApplicationFormPage {
 	@FindBy(xpath="//div[text()='Please check this box to sign the application']")
 	static WebElement errorMessage;
 	
+	@FindBy(id="educate_building_professionals_no")
+	static  WebElement educateBuildingProfessionalsYesCheckBox;
+	
+	@FindBy(xpath="//strong[@class='agreement_bullets']")
+	static WebElement agreementBullets;
 
 	/**
 	 * This Method will fill the form for PMG application
@@ -108,7 +113,7 @@ public class PMGApplicationFormPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("PMG Listing application form...")
+	@Step("PMG Listing application form fill")
 	public static void PmgApplicationFormFill(String legalRepresentativeMail){
 		SeleniumUtils.waitForElementToBeVisible(companyNameTextbox);
 		Assert.assertTrue(companyNameTextbox.isDisplayed());
@@ -126,8 +131,8 @@ public class PMGApplicationFormPage {
 		log.info("Entered country");
 		emailTextbox.sendKeys(Prop.getTestData("pmgMail"));
 		log.info("Entered Zip");
-		productDescriptionTextbox.sendKeys("PMG listing test product");
-		log.info("Entered country");
+		//productDescriptionTextbox.sendKeys("PMG listing test product");
+		//log.info("Entered country");
 		productDescriptionTextbox.sendKeys("PMG listing test product");
 		log.info("Entered product description");
 		productNameModelTextbox.sendKeys("Product is of test type");
@@ -148,12 +153,15 @@ public class PMGApplicationFormPage {
 		log.info("Entered legal representative title");
 		lrPhoneTextbox.sendKeys(Prop.getTestData("legalRepresentativePhone"));
 		log.info("Entered legal representative phone");
+		lrEmailTextbox.clear();
 		lrEmailTextbox.sendKeys(legalRepresentativeMail);
 		log.info("Entered legal representative mail");
-		learning_center_yesCheckbox.click();
-		log.info("check Box ");
 		hazardSituationCheckbox.click();
-		log.info("check Box ");
+		log.info("hazard sittuation check Box ");
+		learning_center_NoCheckbox.click();
+		log.info("Learning center checkbox ");
+		educateBuildingProfessionalsYesCheckBox.click();
+		log.info("Educate building professionals check Box ");
 	}
 
 
@@ -166,7 +174,8 @@ public class PMGApplicationFormPage {
 	@Step("Verify that a non approved user is able to sign the application")
 	public static void SignAsAuthorizedSignatory(){
 		SeleniumUtils.scrollToBottom();
-		Assert.assertTrue(agreementCheckBox.isDisplayed());
+		//SeleniumUtils.waitForElementToBeClickable(agreementCheckBox);
+		Assert.assertTrue(agreementBullets.isDisplayed());
 		agreementCheckBox.click();
 		log.info("Signed the application as authorized signatory");
 	}
@@ -178,7 +187,7 @@ public class PMGApplicationFormPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("PMG Listing application form submit actions...")
+	@Step("PMG Listing application form submit action")
 	public static void PmgApplicationFormSubmit(){
 		Assert.assertTrue(submitButton.isDisplayed());
 		submitButton.click();
@@ -191,14 +200,20 @@ public class PMGApplicationFormPage {
 		log.info("continue and submit");
 	}
 
-
+	@Step("PMG application Submitted sucess message...")
+	public static void clickSubmitPMGApplication(){
+		Assert.assertTrue(submitButton.isDisplayed());
+		submitButton.click();
+		log.info("clicked on submit");
+	}
+	
 	/**
 	 * This Method will verify that PMG Application has been successfully submitted
 	 * 
 	 * @param void
 	 * @return void
 	 */
-	@Step("PMG application Submitted sucess message...")
+	@Step("PMG application Submit sucess message")
 	public static void verifySuccessMessage(){
 		Assert.assertTrue(successMessage.isDisplayed());
 		log.info(successMessage.getText());
@@ -212,7 +227,7 @@ public class PMGApplicationFormPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Saving PMG application...")
+	@Step("Save PMG application")
 	public static void PmgApplicationSave(){
 		saveButton.click();
 		log.info("clicked on save button");
@@ -230,7 +245,7 @@ public class PMGApplicationFormPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Verify application cant be saved without signing if submitter is the authorized signatory...")
+	@Step("Verify application cant be saved without signing if submitter is the authorized signatory")
 	public static void checkIfApplicationNotSubmitted(){
 		Assert.assertTrue(saveButton.isDisplayed());
 		log.info("Application not submitted. User is on the smae page");
