@@ -35,7 +35,7 @@ public class ResetPasswordPage {
 	 * @param resetPasswordLink
 	 * @return void
 	 */
-	@Step("Change password for user account...")
+	@Step("Change password for user account")
 	public static void changePassword(String resetPasswordLink) {
 		SeleniumUtils.openUrl(resetPasswordLink);
 		newPassword.sendKeys(Prop.getTestData("password"));
