@@ -183,7 +183,7 @@ public class DashboardPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("verify dashboard page Step...")
+	@Step("Verify dashboard page")
 	public static void verifyDashboardPage() {
 		Assert.assertTrue(dashboardElement.isDisplayed());
 		log.info("Dashboard displayed");
@@ -214,7 +214,7 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Redirecting to password change page...")
+	@Step("Navigate to password change page...")
 	public static void navigateToChangePasswordPage() {
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
@@ -235,7 +235,7 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Redirecting to Edit Profile page...")
+	@Step("Navigate to Edit Profile page")
 	public static void navigateToEditProfilePage() {
 		log.info("popup arrived");
 		SeleniumUtils.waitForElementToBeVisible(popupWindow);
@@ -255,7 +255,7 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Redirecting to Edit Profile page when already logged in...")
+	@Step("Navigate to Edit Profile page when already logged in")
 	public static void navigateToEditProfilePageAgain(){
 		SeleniumUtils.scrollToBottom();
 		SeleniumUtils.refreshPage();
@@ -269,7 +269,7 @@ public class DashboardPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("User is qualified and all the portal options get available to user.")
+	@Step("User is qualified and all the portal options get available to user")
 	public static void verifyPortalOptionForQualifiedUser() {
 
 		Assert.assertTrue(quotationOption.isDisplayed());
@@ -288,10 +288,9 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Redirecting to Application Listing page...")
+	@Step("Navigate to Application Listing page")
 	public static void navigateToApplicationListingPage()
-	{	
-		//SeleniumUtils.refreshPage();   
+	{	  
 		SeleniumUtils.waitForElementToBeClickable(applicationListingPageLink);
 		//Assert.assertTrue(applicationListingPageLink.isDisplayed());
 		applicationListingPageLink.click();
@@ -304,7 +303,7 @@ public class DashboardPage {
 	 * @param void 
 	 * @return void
 	 */
-	@Step("Redirecting to Application Listing page when already logged in...")
+	@Step("Navigate to Application Listing page when already logged in")
 	public static void navigateToApplicationListingPageWhenLoggedIn()
 	{
 		SeleniumUtils.refreshPage();
@@ -320,7 +319,7 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Redirecting to PMG Application Form...")
+	@Step("Navigate to PMG Application Form")
 	public static void navigateToPMGApplicationProgramApprovedUser()
 	{
 		log.info("popup arrived");
@@ -340,13 +339,30 @@ public class DashboardPage {
 	}
 
 	/**
-	 * This Method will navigate an Unapproved user 
+	 * This Method will navigate an Un-approved user 
 	 * to PMG Application Program page
 	 * 
 	 * @param void
 	 * @return void
 	 */
-	@Step("Redirecting to PMG Application Form...")
+	@Step("Navigate to PMG Application Form")
+	public static void navigateToPMGApplicationProgramWithNoPopup()
+	{
+		SeleniumUtils.refreshPage();   
+		SeleniumUtils.waitForElementToBeVisible(pmgListingLinkForUnapprovedUser);
+		Assert.assertTrue(pmgListingLinkForUnapprovedUser.isDisplayed());
+		pmgListingLinkForUnapprovedUser.click();
+		log.info("Navigated to PMG Application Form");
+	}
+	
+	/**
+	 * This Method will navigate an Un-approved user 
+	 * to PMG Application Program page
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Navigate to PMG Application Form")
 	public static void navigateToPMGApplicationProgram()
 	{
 		log.info("popup arrived");
@@ -367,7 +383,7 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("redirecting to modified users listing page...")
+	@Step("Navigate to modified users listing page")
 	public static void navigateToModifiedUsersList(){
 		updateProfileRequestsLink.isDisplayed();
 		log.info("Update request link present");
@@ -398,7 +414,7 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Logging out from account...")
+	@Step("Log Out")
 	public static void logout()
 	{
 		Assert.assertTrue(myAccountText.isDisplayed());
@@ -603,7 +619,7 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Navigating to invoice page...")
+	@Step("Navigating to invoice page")
 	public static void navigatingToMyInvoices() {
 		log.info("popup closed");
 		SeleniumUtils.refreshPage(); 
@@ -619,13 +635,13 @@ public class DashboardPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Navigating to invoice page when already logged in...")
+	@Step("Navigating to invoice page when already logged in")
 	public static void navigatingToMyInvoicesWhenLoggedInAlready() {
 		SeleniumUtils.refreshPage(); 
 		SeleniumUtils.waitForElementToBeVisible(invoicePageLink);
 		Assert.assertTrue(invoicePageLink.isDisplayed());
 		invoicePageLink.click();
-		log.info("Nvaigating to my invoices page");
+		log.info("Navigating to my invoices page");
 	}
 
 	/**
