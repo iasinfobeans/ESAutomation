@@ -66,8 +66,8 @@ public class QuotationListingPage {
 	 */
 	@Step("Verify that the customer is able to click on the Get a Quote button...")
 	public static void clickOnGetAQuoteButton() {
-		SeleniumUtils.waitForElementToBeVisible(getQuoteButton);
 		Assert.assertTrue(getQuoteButton.isDisplayed());
+		SeleniumUtils.waitForElementToBeVisible(getQuoteButton);
 		getQuoteButton.click();
 		log.info("Verify Customer is able to Click onGet a Quote' button");
 	}
@@ -77,6 +77,7 @@ public class QuotationListingPage {
 	 */
 	@Step("Clicking on 'View Quotes' options...")
 	public static void viewQuotesOptions() {
+		Assert.assertTrue(viewQuotesBoxForStaff.isDisplayed());
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForStaff);
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
 	}
@@ -103,6 +104,7 @@ public class QuotationListingPage {
 
 		// SeleniumUtils.executeJavaScript("arguments[0].click();",
 		// clickonQuoteForDelete);
+		Assert.assertTrue(deleteQuote.isDisplayed());
 		SeleniumUtils.executeJavaScript("arguments[0].click();", deleteQuote);
 		SeleniumUtils.acceptPopup();
 		log.info("Verify Staff is able to delete Quote.");
@@ -116,6 +118,7 @@ public class QuotationListingPage {
 	@Step("Input for Product Type ...")
 	public static void inputForProductType(String prodType) {
 		SeleniumUtils.waitForElementToBeVisible(productTypeTextBox);
+		Assert.assertTrue(productTypeTextBox.isDisplayed());
 		productTypeTextBox.clear();
 		productTypeTextBox.sendKeys(prodType);
 		log.info("Input given for Product Type.");
@@ -129,6 +132,7 @@ public class QuotationListingPage {
 	@Step("Input for Product Description for get Quotation ...")
 	public static void inputForProductDescription(String prodDescription) {
 		SeleniumUtils.waitForElementToBeVisible(productDescriptionTextBox);
+		Assert.assertTrue(productDescriptionTextBox.isDisplayed());
 		productDescriptionTextBox.clear();
 		productDescriptionTextBox.sendKeys(prodDescription);
 		log.info("Input given Product Description for get Quotation.");
@@ -142,6 +146,7 @@ public class QuotationListingPage {
 	@Step("Submitting Quotation Request ...")
 	public static void submitQuotationRequest() {
 		SeleniumUtils.waitForElementToBeVisible(submitQuotationRequest);
+		Assert.assertTrue(submitQuotationRequest.isDisplayed());
 		submitQuotationRequest.click();
 		log.info("Submitted Quotation Request.");
 	}
@@ -151,6 +156,7 @@ public class QuotationListingPage {
 	 */
 	@Step("Verifying status in Status column...")
 	public static void verifyDifferentStatus() {
+		Assert.assertTrue(viewQuotesBoxForCustomer.isDisplayed());
 		List<WebElement> rows = Setup.driver.findElements(By.cssSelector("tbody > tr"));
 		for (WebElement row : rows) {
 			if (row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals("Active")) {
