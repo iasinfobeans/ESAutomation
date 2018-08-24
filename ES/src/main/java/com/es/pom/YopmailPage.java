@@ -317,6 +317,12 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the details, please ')]")
 	static WebElement pmgApplicationInCustomerMail5;
 
+	@FindBy(xpath = "//*[contains(text(),' requires your signature')]")
+	static WebElement openPMGverifyDeliveredSigningMailLinks;
+	
+	@FindBy(xpath = "//*[@id='mailmillieu']/div/table/tbody/tr/td/a")
+	static WebElement clickhereLink;
+	
 	/**
 	 * This method will navigate to yopmail inbox of given email id.
 	 * 
@@ -1712,5 +1718,42 @@ public class YopmailPage {
 
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified PMG Application mail body in customer inbox.");
+	}
+
+	/**
+	 * This method will open Delivered Signing Mail.
+	 * 
+	 * @return void
+	 * @param void
+	 */
+	@Step("Opening Application requires signature mail..")
+	public static void openverifyDeliveredSigningMailLinks() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			Assert.assertTrue(openPMGverifyDeliveredSigningMailLinks.isDisplayed());
+			openPMGverifyDeliveredSigningMailLinks.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openPMGverifyDeliveredSigningMailLinks.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened Application requires signature mail");
+	}
+
+	/**
+	 * This method will Verify verify Delivered Signing Mail Links.
+	 * 
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verifying Application requires signature mail link..")
+	public static void verifyverifyDeliveredSigningMailLinks() {
+		SeleniumUtils.switchToIframeById("ifmail");
+		Assert.assertTrue(clickhereLink.isDisplayed());
+		clickhereLink.click();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified Application requires signature mail link nad clicked on it.");
 	}
 }
