@@ -33,7 +33,8 @@ public class ApplicationEditForStaff extends Setup {
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.navigateToApplicationListingPage();
-			ApplicationsListingPage.navigateToEditApplicationPage();
+			String appId = ApplicationsListingPage.getFirstApplicationId();
+			ApplicationsListingPage.navigateToEditApplicationPage(appId);
 			ApplicationPage.verifySignatoryInfoIsNotEditable();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyEditOptionForSignatoryInformation");
