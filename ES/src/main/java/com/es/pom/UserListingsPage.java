@@ -50,7 +50,7 @@ private static Logger log = Logger.getLogger(UserListingsPage.class.getName());
 	 * @param void
 	 * @return void
 	 */
-	@Step("Verify approve and decline requests visibility for updation from user listings")
+	@Step("Verify approve and decline requests option visibility for updation from users list")
 	public static void checkApproveAndDeclineOption() {
 		Assert.assertTrue(buttonForMoreOptions.isDisplayed());
 		buttonForMoreOptions.click();
