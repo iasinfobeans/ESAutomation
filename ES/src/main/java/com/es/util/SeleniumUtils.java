@@ -136,7 +136,21 @@ public class SeleniumUtils {
 		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
-
+	
+	/**
+	 * This method wait for given element to Contains Attribute Value
+	 * 
+	 * @return void
+	 * @param WebElement
+	 * @param attribute
+	 * @param value
+	 */
+	public static void waitForElementToContainsAttributeValue(WebElement element, String attribute, String value) {
+		log.info("Waiting for element to be invisible....");
+		WebDriverWait wait = new WebDriverWait(Setup.driver, 120);
+		wait.until(ExpectedConditions.attributeContains(element, attribute, value));
+	}
+	
 	/**
 	 * This method wait for given element to be clickable in DOM
 	 * 
