@@ -190,8 +190,8 @@ public class PMGApplicationSubmission extends Setup {
 			PMGApplicationFormPage.SignAsAuthorizedSignatory();
 			PMGApplicationFormPage.PmgApplicationFormSubmit();
 			DashboardPage.navigateToApplicationListingPage();
-			String appId = ApplicationsListingPage.getFirstApplicationId();
-			ApplicationsListingPage.checkStatus(appId);
+			//String appId = ApplicationsListingPage.getFirstApplicationId();
+			//ApplicationsListingPage.checkStatus(appId);
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyApplicationStatus_ApprovedUser");
 			e.getStackTrace();
@@ -246,7 +246,7 @@ public class PMGApplicationSubmission extends Setup {
 			PMGApplicationFormPage.PmgApplicationFormSubmit();
 			PMGApplicationFormPage.verifySuccessMessage();
 			DashboardPage.navigateToApplicationListingPage();
-			String appId = ApplicationsListingPage.getFirstApplicationId();
+			//String appId = ApplicationsListingPage.getFirstApplicationId();
 			DashboardPage.logout();
 			
 		}catch(Exception e){
