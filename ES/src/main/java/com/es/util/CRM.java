@@ -60,4 +60,29 @@ public class CRM {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
+	
+	/**
+	 * This method will disqualify lead of given email and name.
+	 * @param username
+	 * @param password
+	 * @param name
+	 * @param email
+	 * @return void
+	 */
+	public static void disQualifyLeadInCRM(String username, String password, String name, String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(crmPortalUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String crmWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(crmWindowHandle);
+		try {
+			CRMPage.login(username, password);
+			CRMPage.disQualifyLeadInCRMPage(name, email);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(crmWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
 }
