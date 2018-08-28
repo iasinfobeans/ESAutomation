@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
@@ -99,4 +100,25 @@ public class CommonUtils {
 		return "TestESApp." + new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()) + "@yopmail.com";
 	}
 
+	/**
+	 * This method will return current date.
+	 * @return current date
+	 */
+	public static String getCurrentDate() {
+		return new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+	}
+	
+	/**
+	 * This method will return date with added thirty days to current date..
+	 * 
+	 * @return current date
+	 */
+	public static String getDateAddedThirtyDaysToCurrentDate() {
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, 30);
+		// Date after adding the days to the current date
+		String newDate = formatter.format(cal.getTime());
+		return newDate;
+	}
 }
