@@ -67,7 +67,16 @@ public class CRMPage {
 
 	@FindBy(xpath = "//*[@id='navTabButtonUserInfoSignOutId']")
 	static WebElement signOutOption;
+	
+	@FindBy(xpath = "//*[text()=' Disqualify ']")
+	static WebElement disQualify;
+	
+	@FindBy(xpath = "//*[text()=' Canceled ']")
+	static WebElement canceledLead;
 
+	@FindBy(xpath = "//*[text()=' Advanced Find ']")
+	static WebElement advancedFind;
+	
 	/**
 	 * This method will login in CRM using given credentials.
 	 * 
@@ -142,6 +151,44 @@ public class CRMPage {
 		SeleniumUtils.waitForElementToBeVisible(signOutOption);
 		signOutOption.click();
 		log.info("Logged out from CRM.");
+	}
+
+	/**
+	 * This method will disqualify lead in CRM.
+	 * @param name
+	 * @param email
+	 */
+	@Step("Disqualifying lead in CRM..")
+	public static void disQualifyLeadInCRMPage(String name, String email) {
+		try {
+			String findLead = "//*[text()='" + email + "']";
+			Actions act = new Actions(Setup.driver);
+			act.moveToElement(moveToSales).perform();
+			SeleniumUtils.waitForElementToBeVisible(clickOnSales);
+			act.moveToElement(clickOnSales).click().build().perform();
+			SeleniumUtils.switchToIframeByIndex(0);
+			SeleniumUtils.executeJavaScript("arguments[0].click();", refreshLeadList);
+			log.info("Refreshed Lead List.");
+			Assert.assertTrue(searchFilter.isDisplayed());
+			SeleniumUtils.waitForElementToBeVisible(searchFilter);
+			searchFilter.sendKeys(name);
+			searchFilter.sendKeys(Keys.RETURN);
+			SeleniumUtils.waitForElementToBeVisible(clickForSort);
+			clickForSort.click();
+			clickForSort.click();
+			WebElement ele = Setup.driver.findElement(By.xpath(findLead));
+			SeleniumUtils.executeJavaScript("arguments[0].click();", ele);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			SeleniumUtils.switchToDefaultIframe();
+		}
+		SeleniumUtils.executeJavaScript("arguments[0].click();", disQualify);
+		SeleniumUtils.waitForElementToBeVisible(canceledLead);
+		SeleniumUtils.executeJavaScript("arguments[0].click();", canceledLead);
+		SeleniumUtils.waitForElementToBeVisible(advancedFind);
+		log.info("DisQualified lead in CRM for " + name + "and for email id :" + email);
 	}
 
 }
