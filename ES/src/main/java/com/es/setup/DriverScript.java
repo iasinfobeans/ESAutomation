@@ -59,6 +59,8 @@ public class DriverScript {
 		// Add listeners to test suite
 		List<String> listeners = new ArrayList<String>();
 		listeners.add("com.es.util.LoggingListener");
+		listeners.add("org.uncommons.reportng.HTMLReporter");
+		listeners.add("org.uncommons.reportng.JUnitXMLReporter");
 		xmlSuite.setListeners(listeners);
 
 		// Create Test Suite
