@@ -582,7 +582,7 @@ public class Yopmail {
 	 * the SOW page.
 	 * 
 	 * @param email
-	 *            -- rachelzane@yopmail.com
+	 *            -- @yopmail.com
 	 *             @return void
 	 */
 	public static void verifySOWUploadedMailToAuthorizedSignatory(String email) {
@@ -720,7 +720,78 @@ public class Yopmail {
 		try {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openverifyDeliveredSigningMailLinks();
-			YopmailPage.verifyverifyDeliveredSigningMailLinks();
+			YopmailPage.verifyDeliveredSigningMailLinks();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+	
+	/**
+	 * This method will verify mail in authorized signatory's inbox.
+	 * @param email
+	 * (For test case no 36)-- lrrepresentative@yopmail.com
+	 *             @return void
+	 */
+	public static void verifyMailInAuthorizedSignatoryInbox(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openverifyDeliveredSigningMailLinks();
+			YopmailPage.verifyDeliveredSigningMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+	
+	/**
+	 * This method will verify mail in authorized signatory's inbox.
+	 * @param email
+	 * (For test case no 38)-- iasinfobeans@yopmail.com
+	 *             @return void
+	 */
+	public static void verifySignaturesReceivedMail(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openSignaturesReceivedMail();
+			YopmailPage.verifySignaturesReceivedMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+	
+	/**
+	 * This method will verify expiry date of quotation mail.
+	 * @param email -- iasinfobeans@yopmail.com
+	 *             @return void
+	 */
+	public static void verifyExpiryDateForQuotationMail(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openExpiryDateForQuotationMail();
+			YopmailPage.verifyExpiryDateForQuotationMail();
 		} catch (Exception e) {
 			throw e;
 		} finally {

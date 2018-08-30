@@ -319,9 +319,45 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[contains(text(),' requires your signature')]")
 	static WebElement openPMGverifyDeliveredSigningMailLinks;
-	
+
 	@FindBy(xpath = "//*[@id='mailmillieu']/div/table/tbody/tr/td/a")
 	static WebElement clickhereLink;
+
+	@FindBy(xpath = "//*[contains(text(),'SOW has been removed for Project')]")
+	static WebElement sowRemovedMailLine2;
+	
+	@FindBy(xpath = "//*[contains(text(),'You have been designated as the Authorized Signatory')]")
+	static WebElement verifyDeliveredSigningMail2;
+	
+	@FindBy(xpath = "//*[contains(text(),'To review the details and electronically sign')]")
+	static WebElement verifyDeliveredSigningMail3;
+	
+	@FindBy(xpath = "//*[contains(text(),'If you have any questions or concerns, please contact ')]")
+	static WebElement verifyDeliveredSigningMail4;
+	
+	@FindBy(xpath = "//*[contains(text(),'has been signed by all signatories')]")
+	static WebElement openSignaturesReceivedMail;
+
+	@FindBy(xpath = "//*[contains(text(),'has been signed')]")
+	static WebElement verifySignaturesReceivedMail2;
+	
+	@FindBy(xpath = "//*[contains(text(),'If you have not made the payment')]")
+	static WebElement verifySignaturesReceivedMail3;
+	
+	@FindBy(xpath = "//*[contains(text(),'This application has been forwarded')]")
+	static WebElement verifySignaturesReceivedMail4;
+	
+	@FindBy(xpath = "//*[contains(text(),'ICC-ES: New Quotation Available for Quotation Request')]")
+	static WebElement openExpiryDateForQuotationMail;
+
+	@FindBy(xpath = "//*[contains(text(),'As requested by you, please find enclosed quotation for quotation request')]")
+	static WebElement verifyExpiryDateForQuotationMail2;
+	
+	@FindBy(xpath = "//*[contains(text(),'To view the quotation and apply for report, please ')]")
+	static WebElement verifyExpiryDateForQuotationMail3;
+	
+	@FindBy(xpath = "//*[contains(text(),'This Quote will expire on')]")
+	static WebElement verifyExpiryDateForQuotationMail4;
 	
 	/**
 	 * This method will navigate to yopmail inbox of given email id.
@@ -1525,7 +1561,26 @@ public class YopmailPage {
 	@Step("Verifying SOW uploaded mail body in customer inbox.")
 	public static void verifySOWUploadeMailBodyInCustomerInbox() {
 		SeleniumUtils.switchToIframeById("ifmail");
-		sowUploadLink.click();
+
+		String hi = pmgApplicationSubmitByNonApprovedUserMailLine1.getText();
+		String firstRgistrationLine = openSOWUploadeMailInCustomerInbox.getText();
+		String secondRgistrationLine = pmgApplicationInCustomerMail5.getText();
+		String forthRgistrationLine = pmgApplicationSubmitByNonApprovedUserMailLine4.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("SOW has been uploaded for Project"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("To view details, please "), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified SOW uploaded mail body in customer inbox.");
 	}
@@ -1561,8 +1616,26 @@ public class YopmailPage {
 	@Step("Verifying SOW file removed mail body.")
 	public static void verifySOWFileRemovedMailBody() {
 		SeleniumUtils.switchToIframeById("ifmail");
-		Assert.assertTrue(sowFileRemovedLink.isDisplayed());
-		sowFileRemovedLink.click();
+
+		String hi = pmgApplicationSubmitByNonApprovedUserMailLine1.getText();
+		String firstRgistrationLine = sowRemovedMailLine2.getText();
+		String secondRgistrationLine = pmgApplicationInCustomerMail5.getText();
+		String forthRgistrationLine = pmgApplicationSubmitByNonApprovedUserMailLine4.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstRgistrationLine.contains("SOW has been removed for Project"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondRgistrationLine.contains("To view details, please "), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("Thank you,"), true,
+				"Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified SOW file removed mail body.");
 	}
@@ -1743,17 +1816,172 @@ public class YopmailPage {
 	}
 
 	/**
-	 * This method will Verify verify Delivered Signing Mail Links.
+	 * This method will verify Delivered Signing Mail Links.
 	 * 
 	 * @return void
 	 * @param void
 	 */
 	@Step("Verifying Application requires signature mail link..")
-	public static void verifyverifyDeliveredSigningMailLinks() {
+	public static void verifyDeliveredSigningMailLinks() {
 		SeleniumUtils.switchToIframeById("ifmail");
 		Assert.assertTrue(clickhereLink.isDisplayed());
 		clickhereLink.click();
 		SeleniumUtils.switchToDefaultIframe();
-		log.info("Verified Application requires signature mail link nad clicked on it.");
+		log.info("Verified Application requires signature mail link and clicked on it.");
+	}
+
+	/**
+	 * This method will Verify verify Delivered Signing Mail.
+	 * 
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verifying Application requires signature mail body..")
+	public static void verifyDeliveredSigningMail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = pmgMailLine1.getText();
+		String firstLine = verifyDeliveredSigningMail2.getText();
+		String secondLine = verifyDeliveredSigningMail3.getText();
+		String thirdLine = verifyDeliveredSigningMail4.getText();
+		String fifthLine = pmgMailLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstLine.contains("You have been designated as the Authorized Signatory"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondLine.contains("To review the details and electronically sign"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(thirdLine.contains("If you have any questions or concerns, please contact "), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(fifthLine.contains("Thank you,"), true, "Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(fifthLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified Application requires signature mail body.");
+	}
+
+	/**
+	 * This method will open Signature Received Mail.
+	 * 
+	 * @return void
+	 * @param void
+	 */
+	@Step("Opening signature received mail..")
+	public static void openSignaturesReceivedMail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			Assert.assertTrue(openSignaturesReceivedMail.isDisplayed());
+			openSignaturesReceivedMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openSignaturesReceivedMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened signature received mail.");
+	}
+
+	/**
+	 * This method will verify Signatures Received Mail.
+	 * 
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verifying signatures received mail body..")
+	public static void verifySignaturesReceivedMail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = pmgMailLine1.getText();
+		String firstLine = verifySignaturesReceivedMail2.getText();
+		String secondLine = verifySignaturesReceivedMail3.getText();
+		String thirdLine = verifySignaturesReceivedMail4.getText();
+		String fifthLine = pmgMailLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hi"), true, "Hi is not contain in email body");
+
+		Assert.assertEquals(firstLine.contains("has been signed"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondLine.contains("If you have not made the payment"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(thirdLine.contains("This application has been forwarded"), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(thirdLine.contains("To view the details, please "), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(fifthLine.contains("Thank you,"), true, "Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(fifthLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified signature received mail body.");
+	}
+
+	/**
+	 * This method will open expiry date for quotation Mail.
+	 * 
+	 * @return void
+	 * @param void
+	 */
+	@Step("Opening expiry date for quotation mail..")
+	public static void openExpiryDateForQuotationMail() {
+		SeleniumUtils.switchToIframeById("ifinbox");
+		try {
+			Assert.assertTrue(openExpiryDateForQuotationMail.isDisplayed());
+			openExpiryDateForQuotationMail.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Seraching email Subject on second page.");
+			searchOnNextPage.click();
+			openExpiryDateForQuotationMail.click();
+		}
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Opened expiry date for quotation mail.");
+	}
+
+	/**
+	 * This method will verify expiry date for quotation Mail.
+	 * 
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verifying expiry date for quotation mail body..")
+	public static void verifyExpiryDateForQuotationMail() {
+		SeleniumUtils.switchToIframeById("ifmail");
+
+		String hi = pmgMailLine1.getText();
+		String firstLine = verifyExpiryDateForQuotationMail2.getText();
+		String secondLine = verifyExpiryDateForQuotationMail3.getText();
+		String thirdLine = verifyExpiryDateForQuotationMail4.getText();
+		String fifthLine = pmgMailLine5.getText();
+
+		Assert.assertEquals(hi.contains("Hello"), true, "Hello is not contain in email body");
+
+		Assert.assertEquals(firstLine.contains("As requested by you, please find enclosed quotation for quotation request"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(secondLine.contains("To view the quotation and apply for report, please "), true,
+				"Text is not contain in email body");
+		
+		Assert.assertEquals(thirdLine.contains("This Quote will expire on"), true,
+				"Text is not contain in email body");
+
+		Assert.assertEquals(fifthLine.contains("Thank you,"), true, "Text 'Thank you,' is not contain in email body");
+
+		Assert.assertEquals(fifthLine.contains("ICC Evaluation Service, LLC"), true,
+				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
+
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified expiry date for quotation mail body.");
 	}
 }
