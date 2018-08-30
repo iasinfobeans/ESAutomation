@@ -12,6 +12,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+
+import com.es.pom.AdminPage;
 import com.es.pom.ApplicationPage;
 import com.es.pom.ApplicationPageForQuotation;
 import com.es.pom.ApplicationsListingPage;
@@ -67,7 +69,7 @@ public class Setup {
 		CommonUtils.cleanOrCreateDirectory(allureReportPath);
 
 		// Create or clean log directory
-		CommonUtils.cleanOrCreateDirectory(logPath);
+	//	CommonUtils.cleanOrCreateDirectory(logPath);
 
 		// load properties files
 		config = Prop.loadPropertiesFile(configPropertiesFilePath);
@@ -123,6 +125,7 @@ public class Setup {
 		PageFactory.initElements(driver, PaymentHistoryPage.class);
 		PageFactory.initElements(driver, PaymentHistoryPage.class);
 		PageFactory.initElements(driver, SOWFeaturePage.class);
+		PageFactory.initElements(driver, AdminPage.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
