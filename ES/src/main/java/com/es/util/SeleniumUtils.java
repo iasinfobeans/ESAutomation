@@ -26,8 +26,7 @@ public class SeleniumUtils {
 	 * directory, if directory is not exist then it creates the directory
 	 * 
 	 * @return Screenshot File path
-	 * @param Test
-	 *            case name
+	 * @param Test case name
 	 */
 	@Attachment(value = "Page screenshot", type = "image/png")
 	public static byte[] captureScreenshot(String testName) {
