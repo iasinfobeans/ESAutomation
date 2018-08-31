@@ -35,7 +35,7 @@ public class ChangePasswordPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Change password for user account...")
+	@Step("Change password for user account")
 	public static void changePassword() throws IOException {
 		currentPasswordTextbox.sendKeys(Prop.getTestData("password"));
 		log.info("entered current password");
