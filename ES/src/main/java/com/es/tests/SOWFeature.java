@@ -2,6 +2,7 @@ package com.es.tests;
 
 import org.testng.annotations.Test;
 import com.es.pom.DashboardPage;
+import com.es.pom.OverlayPage;
 import com.es.pom.ProjectListingPage;
 import com.es.pom.ReportsPage;
 import com.es.pom.SOWFeaturePage;
@@ -17,7 +18,6 @@ public class SOWFeature extends Setup {
 	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the staff is able to 'Upload SOW' for ESR applications.")
 	public void verifyStaffUploadSOWForESRApplications() throws InterruptedException {
-
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.clickOnSOWOption();
@@ -34,7 +34,6 @@ public class SOWFeature extends Setup {
 	@Test(groups = { "smoke", "SOWFeature" })
 	@Description("Verify that the staff is able to 'Upload SOW' for ESL applications.")
 	public void verifyStaffUploadSOWForESLApplications() throws InterruptedException {
-
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.clickOnSOWOption();
@@ -51,7 +50,6 @@ public class SOWFeature extends Setup {
 	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the SOW would be uploaded as a PDF file.")
 	public void verifySOWUploadedAsPdf() throws InterruptedException {
-
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.clickOnSOWOption();
@@ -68,7 +66,6 @@ public class SOWFeature extends Setup {
 	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the staff can upload any number of SOW for a single Project.")
 	public void verifyStaffuploadAnyNumberSOWSingleProject() throws InterruptedException {
-
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.clickOnSOWOption();
@@ -82,7 +79,7 @@ public class SOWFeature extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the user is able to click on the 'Save' button after uploading a PDF file on the Upload SOW pop-up")
 	public void verifyUserAbleClickOnSaveButton() throws InterruptedException {
 
@@ -101,7 +98,7 @@ public class SOWFeature extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the portal will notify the technical representative of the Report for new SOW availability.")
 	public void verifyNotifyTechnicalRepresentativeNewSOWAvailability() throws InterruptedException {
 
@@ -109,22 +106,19 @@ public class SOWFeature extends Setup {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.clickOnSOWOption();
 			SOWFeaturePage.clickOnUploadSOWOption();
-			SOWFeaturePage.clickOnValidValuEProjectNumberField(Prop.getTestData("projectNumber"));
+			SOWFeaturePage.clickOnValidValuEProjectNumberField(Prop.getTestData("projectNumberESR"));
 			SOWFeaturePage.uploadPdfFileInSOW(1);
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
 			SOWFeaturePage.verifyConfirmationMessageDisplayedScreen();
-			Yopmail.verifySOWUploadedMailToAuthorizedSignatory(Prop.getTestData("username"));
-			SOWFeaturePage.downloadSOW();
-			Thread.sleep(20000);
+			Yopmail.verifySOWUploadedMail(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyNotifyTechnicalRepresentativeNewSOWAvailability");
 			e.getStackTrace();
 			throw e;
 		}
-
 	}
 
-	@Test(groups = { "smoke", "SOWFeature"  })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the portal will notify the authorized signatory of the Report for new SOW availability.")
 	public void verifyNotifyAuthorizedSignatoryNewSOWAvailability() throws InterruptedException {
 
@@ -132,13 +126,11 @@ public class SOWFeature extends Setup {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.clickOnSOWOption();
 			SOWFeaturePage.clickOnUploadSOWOption();
-			SOWFeaturePage.clickOnValidValuEProjectNumberField(Prop.getTestData("projectNumber"));
+			SOWFeaturePage.clickOnValidValuEProjectNumberField(Prop.getTestData("projectNumberESR"));
 			SOWFeaturePage.uploadPdfFileInSOW(1);
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
 			SOWFeaturePage.verifyConfirmationMessageDisplayedScreen();
-			Yopmail.verifySOWUploadedMailToAuthorizedSignatory(Prop.getTestData("username"));
-			SOWFeaturePage.downloadSOW();
-			Thread.sleep(20000);
+			Yopmail.verifySOWUploadedMail(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyNotifyAuthorizedSignatoryNewSOWAvailability");
 			e.getStackTrace();
@@ -147,7 +139,7 @@ public class SOWFeature extends Setup {
 
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that if Staff removes a SOW file, a notification email would be sent to Technical representative of the Report.")
 	public void verifyNotificationEmailTechnicalRepresentativeStaffRemovesSOWFile() throws InterruptedException {
 
@@ -155,12 +147,11 @@ public class SOWFeature extends Setup {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.clickOnSOWOption();
 			SOWFeaturePage.clickOnUploadSOWOption();
-			SOWFeaturePage.clickOnValidValuEProjectNumberField(Prop.getTestData("projectNumber"));
-			SOWFeaturePage.uploadPdfFileInSOW(4);
+			SOWFeaturePage.clickOnValidValuEProjectNumberField(Prop.getTestData("projectNumberESR"));
+			Thread.sleep(1000);
 			SOWFeaturePage.staffRemovesSOWFile();
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
-			Yopmail.verifySOWFileRemoveMailToAuthorizedSignatory(
-					Prop.getTestData("username"));
+			Yopmail.verifySOWFileRemoveMail(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyNotificationEmailTechnicalRepresentativeStaffRemovesSOWFile");
 			e.getStackTrace();
@@ -177,11 +168,11 @@ public class SOWFeature extends Setup {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.clickOnSOWOption();
 			SOWFeaturePage.clickOnUploadSOWOption();
-			SOWFeaturePage.clickOnValidValuEProjectNumberField(Prop.getTestData("projectNumber"));
-			SOWFeaturePage.uploadPdfFileInSOW(4);
+			SOWFeaturePage.clickOnValidValuEProjectNumberField(Prop.getTestData("projectNumberESR"));
+			Thread.sleep(1000);
 			SOWFeaturePage.staffRemovesSOWFile();
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
-			Yopmail.verifySOWFileRemoveMailToAuthorizedSignatory(Prop.getTestData("username"));
+			Yopmail.verifySOWFileRemoveMail(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyNotificationEmailAuthorizedSignatoryStaffRemovesSOWFile");
 			e.getStackTrace();
@@ -190,7 +181,7 @@ public class SOWFeature extends Setup {
 
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the staff user is NOT able to delete ALL the files attached as SOW")
 	public void verifyUnableDeleteAllFilesSOW() throws InterruptedException {
 		try {
@@ -216,11 +207,12 @@ public class SOWFeature extends Setup {
 			SOWFeaturePage.uploadPdfFileInSOW(1);
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
 			DashboardPage.logout();
-			SignInPage.login(Prop.getTestData("technicalContactAssociatedUsernameForDownload"),
-					Prop.getTestData("password"), "Customer");
+			SignInPage.login(Prop.getTestData("technicalContactAssociated"),
+					Prop.getTestData("password"),"Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyReportsOption();
 			ReportsPage.navigateToProjectListingPage();
-			ProjectListingPage.navigateToProjectListingPage();
+			ProjectListingPage.clickOnViewSOW();
 			SOWFeaturePage.downloadSOW();
 			Thread.sleep(20000);
 		} catch (Exception e) {
@@ -231,7 +223,7 @@ public class SOWFeature extends Setup {
 
 	}
 
-	@Test(groups = { "smoke", "SOWFeature" })
+	@Test(groups = { "smoke", "SOWFeature"})
 	@Description("Verify that the Technical representative of the report would be able to download the SOW file from the Project listing page.")
 	public void verifyAuthorizedSignatoryAableDownloadSOWFile() throws InterruptedException {
 
@@ -243,10 +235,11 @@ public class SOWFeature extends Setup {
 			SOWFeaturePage.uploadPdfFileInSOW(1);
 			SOWFeaturePage.clickOnSaveButtonAfterUploadingPdfFile();
 			DashboardPage.logout();
-			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
+			SignInPage.login(Prop.getTestData("AuthorizedSignatoryAssociated"), Prop.getTestData("password"), "Customer");
+			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyReportsOption();
 			ReportsPage.navigateToProjectListingPage();
-			ProjectListingPage.navigateToProjectListingPage();
+			ProjectListingPage.clickOnViewSOW();
 			SOWFeaturePage.downloadSOW();
 			Thread.sleep(20000);
 		} catch (Exception e) {
