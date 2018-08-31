@@ -31,7 +31,7 @@ public class PaymentHistoryPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Verify that the payment was successful.")
+	@Step("Verify that the payment was successful")
 	public static void verifyPaymentSucess() {
 		Assert.assertEquals(paymentSuccessMessege.getText(), Prop.getTestData("paymentSuccessMessage"), "Payment was successful");
 	}
