@@ -35,7 +35,7 @@ public class ProjectListingPage {
 	 * @param void
 	 */
 	@Step("Click on view SOW to be Download")
-	public static void navigateToProjectListingPage() {
+	public static void clickOnViewSOW() {
 		Assert.assertTrue(viewSOWOption.isDisplayed());
 		viewSOWOption.click();
 		log.info("View SOW to be Download");
