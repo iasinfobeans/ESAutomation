@@ -66,8 +66,8 @@ public class CommonUtils {
 	}
 
 	/**
-	 * This method deletes all the files of a directory or create a directory if
-	 * it doesn't exist.
+	 * This method deletes all the files of a directory or create a directory if it
+	 * doesn't exist.
 	 * 
 	 * @return void
 	 * @param directoy
@@ -102,19 +102,22 @@ public class CommonUtils {
 
 	/**
 	 * This method will return current date.
+	 * 
 	 * @return current date
 	 */
 	public static String getCurrentDate() {
 		return new SimpleDateFormat("MM/dd/yyyy").format(new Date());
 	}
-	
+
 	/**
 	 * This method will return date with added thirty days to current date..
-	 * 
 	 * @return current date
+	 * 
 	 */
 	public static String getDateAddedThirtyDaysToCurrentDate() {
+		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+		String strDate = formatter.format(date);
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 30);
 		// Date after adding the days to the current date
