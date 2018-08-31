@@ -46,7 +46,7 @@ public class CardDetailsPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Verify Payment Gateway Page..")
+	@Step("Verify Payment Gateway Page")
 	public static void paymentGatewayPageVerification() {
 		SeleniumUtils.waitForElementToBeVisible(submitButton);
 		Assert.assertTrue(submitButton.isDisplayed());
