@@ -307,6 +307,7 @@ public class DashboardPage {
 	public static void navigateToApplicationListingPageWhenLoggedIn()
 	{
 		SeleniumUtils.refreshPage();
+		SeleniumUtils.waitForElementToBeClickable(applicationListingPageLink);
 		Assert.assertTrue(applicationListingPageLink.isDisplayed());
 		applicationListingPageLink.click();
 		log.info("Navigated to application page");
