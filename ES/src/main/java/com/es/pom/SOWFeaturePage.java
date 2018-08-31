@@ -60,9 +60,10 @@ public class SOWFeaturePage {
 	 * @return void
 	 * @param void
 	 */
-	@Step(" Input a valid value in the Project Number field")
+	@Step("Input a valid value in the Project Number field")
 	public static void clickOnValidValuEProjectNumberField(String projectNumber) {
 		SeleniumUtils.waitForElementToBeVisible(projectNumberTextbox);
+		Assert.assertTrue(uploadSOWOption.isDisplayed());
 		projectNumberTextbox.clear();
 		projectNumberTextbox.sendKeys(projectNumber);
 		log.info("Input a valid ESR/ESL Project or Project Number in the Project Number field ");
@@ -73,12 +74,13 @@ public class SOWFeaturePage {
 	 * @return void
 	 * @param fileCount
 	 */
-	@Step("click on the upload SOW option button")
+	@Step("Verify click on the upload SOW option button")
 	public static void uploadPdfFileInSOW(int fileCount) {
 		for (int i = 1; i <= fileCount; i++) {
 			log.info("fileCount start loop: " + fileCount);
 			log.info("i: " + i);
 			SeleniumUtils.waitForElementToBeVisible(uploadOption);
+			Assert.assertTrue(uploadOption.isDisplayed());
 			uploadOption.click();
 			log.info("Enter upload pdf ");
 
@@ -102,7 +104,7 @@ public class SOWFeaturePage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("user is able to click on the 'Save' button after uploading a PDF file on the Upload SOW pop-up")
+	@Step("Verify user is able to click on the 'Save' button")
 	public static void clickOnSaveButtonAfterUploadingPdfFile() {
 		Assert.assertTrue(saveButton.isDisplayed());
 		saveButton.click();
@@ -115,7 +117,7 @@ public class SOWFeaturePage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("SOW should be uploaded and a confirmation message should be displayed on the screen...")
+	@Step("Verify upload SOW and a confirmation message is displayed on the screen")
 	public static void verifyConfirmationMessageDisplayedScreen() {
 		Assert.assertTrue(sOWUpatedSuccessfullyMessage.isDisplayed());
 		log.info(" confirmation message is displayed on the screen");
@@ -129,6 +131,7 @@ public class SOWFeaturePage {
 	 */
 	@Step("Verify that if Staff removes a SOW file")
 	public static void staffRemovesSOWFile() {
+		SeleniumUtils.waitForElementToBeVisible(removesSowFile);
 		Assert.assertTrue(removesSowFile.isDisplayed());
 		removesSowFile.click();
 		log.info(" Staff removes a SOW file ");
@@ -139,11 +142,11 @@ public class SOWFeaturePage {
 
 
 	/**
-	 *This method will Verify Downloading sow.
+	 *This method will Verify Downloading SOW.
 	 * @return void
 	 * @param void
 	 */
-	@Step("Downloading sow..")
+	@Step("Downloading SOW")
 	public static void downloadSOW() {
 		Assert.assertTrue(downloadSOW.isDisplayed());
 		downloadSOW.click();
@@ -156,7 +159,7 @@ public class SOWFeaturePage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("Verifying download option is visible or not..")
+	@Step("Verify download option is visible or not")
 	public static void downloadOptionVisibiltiy() {
 		Assert.assertTrue(downloadSOW.isDisplayed(), "Download Option is not visible on page");
 		log.info("Verified Downloaded option visibilty.");
@@ -167,7 +170,7 @@ public class SOWFeaturePage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("The staff user should NOT be able to delete ALL the files attached as SOW")
+	@Step("Verify staff user unable to delete ALL the files attached as SOW")
 	public static void verifyStaffUserUnableDeleteAllFilesSOW() throws InterruptedException {
 
 		Assert.assertTrue(downloadSOW.isDisplayed());
