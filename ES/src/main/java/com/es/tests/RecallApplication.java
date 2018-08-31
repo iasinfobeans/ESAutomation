@@ -10,6 +10,7 @@ import com.es.pom.PMGApplicationFormPage;
 import com.es.pom.SignInPage;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
+import com.es.util.Yopmail;
 
 import io.qameta.allure.Description;
 
@@ -24,8 +25,8 @@ public class RecallApplication extends Setup{
 			PMGApplicationFormPage.PmgApplicationFormFill(Prop.getTestData("legalRepresentativeMail"));
 			PMGApplicationFormPage.PmgApplicationFormSubmit();
 			DashboardPage.navigateToApplicationListingPage();
-			//String applicationNumber= ApplicationsListingPage.clickOnRecallApplication();
-			//ApplicationsListingPage.verifyApplicationMovedToDraft(applicationNumber);
+			String applicationNumber= ApplicationsListingPage.clickOnRecallApplication();
+			ApplicationsListingPage.verifyApplicationMovedToDraft(applicationNumber);
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyRecallApplicationOption");
 			e.getStackTrace();
@@ -43,8 +44,9 @@ public class RecallApplication extends Setup{
 			PMGApplicationFormPage.PmgApplicationFormFill(Prop.getTestData("legalRepresentativeMail"));
 			PMGApplicationFormPage.PmgApplicationFormSubmit();
 			DashboardPage.navigateToApplicationListingPage();
-			//String applicationNumber= ApplicationsListingPage.clickOnRecallApplication();
-			//ApplicationsListingPage.verifyApplicationMovedToDraft(applicationNumber);
+			String applicationNumber= ApplicationsListingPage.clickOnRecallApplication();
+			ApplicationsListingPage.verifyApplicationMovedToDraft(applicationNumber);
+			Yopmail.verifyDeliveredSigningMailLinks(Prop.getTestData("legalRepresentativeMail"));
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyRecallOptionInvalidatesSigningMailLink");
 			e.getStackTrace();
