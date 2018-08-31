@@ -36,7 +36,7 @@ public class ApplicationPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("verify Edit Application page can't allow to edit signatory information(i.e. name and email)...")
+	@Step("Verify Edit Application page can't allow to edit signatory information(i.e. name and email)...")
 	public static void verifySignatoryInfoIsNotEditable(){
 		companyNameTextbox.sendKeys("Infobeans");
 		log.info("Field editable");
