@@ -22,12 +22,12 @@ public class ForgotPasswordPage {
 
 
 	/**
-	 * This Method will reset password of the logged in account
+	 * This Method will click on reset password of the email account
 	 * 
 	 * @param email
 	 * @return void
 	 */
-	@Step("Reset Password")
+	@Step("Click on Reset Password")
 	public static void resetPassword(String email) {
 		enterEmailPlaceholder.sendKeys(email);
 		log.info("entered email");
