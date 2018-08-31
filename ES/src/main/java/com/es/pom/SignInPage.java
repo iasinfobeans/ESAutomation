@@ -107,7 +107,7 @@ public class SignInPage {
 	 * @param void
 	 * 
 	 */
-	@Step("Register new User from Normal Register steps...")
+	@Step("Register new User from Normal Register")
 	public static void navigateToRegistration() {
 		Assert.assertTrue(newUserLink.isDisplayed());
 		log.info("New User Link is displayed");
@@ -115,7 +115,7 @@ public class SignInPage {
 		log.info("Register new User from Simple Register");
 	}
 
-	@Step("Register new User from Normal Register steps...")
+	@Step("Register new User from Normal Register steps")
 	public static void navigateToNormalRegistration() {
 		newUserLink.click();
 		log.info("Register new User from Simple Register");
@@ -127,7 +127,7 @@ public class SignInPage {
 	 * @param void
 	 * 
 	 */
-	@Step("Register new User from Evaluation Reports steps...")
+	@Step("Register new User from Evaluation Reports steps")
 	public static void navigateToER() {
 		Assert.assertTrue(applyERLink.isDisplayed());
 		log.info("New User Link is displayed from Evaluation Reports");
