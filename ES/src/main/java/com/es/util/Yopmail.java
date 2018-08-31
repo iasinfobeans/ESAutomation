@@ -403,7 +403,7 @@ public class Yopmail {
 	 * This method will verify email for received payment in customer inbox.
 	 * 
 	 * @param email
-	 *            -- iasinfobeans@yopmail.com
+	 *           -- iasinfobeans@yopmail.com
 	 *            @return void
 	 */
 	public static void verifyMailReceivedByCustomerForPayment(String email) {
@@ -582,10 +582,10 @@ public class Yopmail {
 	 * the SOW page.
 	 * 
 	 * @param email
-	 *            -- @yopmail.com
+	 *            -- rachelzane@yopmail.com
 	 *             @return void
 	 */
-	public static void verifySOWUploadedMailToAuthorizedSignatory(String email) {
+	public static void verifySOWUploadedMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
 		String esWindowHandle = itr.next();
@@ -610,7 +610,7 @@ public class Yopmail {
 	 *            -- rachelzane@yopmail.com
 	 *             @return void
 	 */
-	public static void verifySOWFileRemoveMailToAuthorizedSignatory(String email) {
+	public static void verifySOWFileRemoveMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
 		Iterator<String> itr = windowHandles.iterator();
 		String esWindowHandle = itr.next();
