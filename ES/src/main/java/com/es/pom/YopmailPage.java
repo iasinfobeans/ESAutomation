@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import com.es.setup.Setup;
 import com.es.util.SeleniumUtils;
 
 import io.qameta.allure.Step;
@@ -1826,7 +1827,14 @@ public class YopmailPage {
 		SeleniumUtils.switchToIframeById("ifmail");
 		Assert.assertTrue(clickhereLink.isDisplayed());
 		clickhereLink.click();
-		SeleniumUtils.switchToDefaultIframe();
+		String Parent_Window  = Setup.driver.getWindowHandle();
+		for (String Child_Window  : Setup.driver.getWindowHandles()) {
+			Setup.driver.switchTo().window(Child_Window );
+		}
+		PMGApplicationFormPage.SignAsAuthorizedSignatory();
+		PMGApplicationFormPage.clickSubmitPMGApplication();
+//		Setup.driver.switchTo().window(Parent_Window);  
+//		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified Application requires signature mail link and clicked on it.");
 	}
 
