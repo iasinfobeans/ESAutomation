@@ -78,7 +78,7 @@ public class RegisterPage {
 	 * @return email
 	 * @param void
 	 */
-	@Step("Enter Unique Email Address for Registration step...")
+	@Step("Verify User enter a Unique Email Address")
 	public static String enterEmailInRegistration() {
 		email = CommonUtils.getRandomYopMailId();
 		SeleniumUtils.waitForElementToBeVisible(emailTextBox);
@@ -103,10 +103,15 @@ public class RegisterPage {
 	/**
 	 *This method will provide User Details for Registration.
 	 * @return void
-	 * @param String firstName, String lastName, String companyName,
-			  String phone, String newPassword, String confirmPassword,String email
+	 * @param  firstName, 
+	 * @param  lastName,
+	 * @param  companyName,
+	 * @param  phone,
+	 * @param  newPassword,
+	 * @param  confirmPassword,
+	 * @param  email
 	 */
-    @Step("Enter User Details for Registration step...")
+    @Step("Verify User Enter Personal Details")
 	public static void enterPersonalInfoInRegistration(String firstName, String lastName, String companyName,
 			String phone, String newPassword, String confirmPassword,String email) {
 
@@ -145,7 +150,6 @@ public class RegisterPage {
 		
 		Assert.assertTrue(proceedButton.isDisplayed());
 		log.info("Proceed Button is displayed");
-
         proceedButton.click();
 		log.info("Submit your Details");
 
