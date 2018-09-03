@@ -117,14 +117,14 @@ public class ApplicationsListingPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("verify Application page for PMG Step...")
+	@Step("verify User is on Application Page for PMG")
 	public static void verifyApplicationPageForPMG() {
 		Assert.assertTrue(verifyRegisterfromPMG.isDisplayed());
 		log.info("Verify Register from PMG displayed");
 
 	}
 
-	@Step("verify Application page for ESL Step...")
+	@Step("verify Application page for ESL Step")
 	public static void verifyApplicationPageForESL() {
 		Assert.assertTrue(verifyRegisterfromESL.isDisplayed());
 		log.info("Verify Register from ESL displayed");
@@ -191,7 +191,13 @@ public class ApplicationsListingPage {
 		log.info("navigated to edit application page");
 		}
 
-	@Step("On newly created applications, user should not be able to perform predefined operations like edit/view/delete/recall....")
+	/**
+	 * This method will verify that On newly created applications,
+	 * user should not be able to perform predefined operations like edit/view/delete/recall.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verify on newly created applications,user unable to perform predefined operations")
 	public static void verifyUserUnablePerformPredefinedOperations()
 	{
 		SeleniumUtils.waitForElementToBeClickable(downloadOption);
@@ -204,7 +210,7 @@ public class ApplicationsListingPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("Customer is able to download Renewal Application document from application listing")
+	@Step("Verify download Renewal Application document from application listing")
 	public static void downloadRenewalApplicationDocument() {
 		SeleniumUtils.waitForElementToBeClickable(downloadOption);
 		Assert.assertTrue(downloadOption.isDisplayed());

@@ -27,7 +27,7 @@ public class GetAQuotePage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("Verify The Get a Quote screen to have the following fields:ProductType,Description and submit...")
+	@Step("Verify Get a Quote screen to have the following fields:ProductType,Description and submit")
 	public static void verifyGetAQuoteButton() {
 		SeleniumUtils.waitForElementToBeVisible(productTypeBox);
 
@@ -46,7 +46,8 @@ public class GetAQuotePage {
 	 * 
 	 * This method will verify that the customer is able to request for a quote.
 	 * @return void
-	 * @param String productType, String productDescription
+	 * @param productType
+	 * @param productDescription
 	 */
 	@Step("Verify that the customer is able to request for a quote")
 	public static void verifyCustomerRequestforQuote(String productType, String productDescription) {

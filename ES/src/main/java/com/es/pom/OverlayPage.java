@@ -20,7 +20,7 @@ public class OverlayPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("Overlay Page is dispayed when User Completed Registration...")
+	@Step("Skip Overlay page")
 	public static void skipoverlayPage()
 
 	{

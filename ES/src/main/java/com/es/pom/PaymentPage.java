@@ -122,27 +122,30 @@ public class PaymentPage {
 	@FindBy(id = "phone")
 	static WebElement phoneTextbox;
 
+	@FindBy(xpath ="//*[text()=' has expired, please contact ICC-ES staff for further assistance']")
+	static WebElement applicationExpiredMessage ;
+
 	@FindBy(xpath = "//input[@class='custom-input-box balance_amount']")
 	static WebElement balanceAmount;
 
 	@FindBy(xpath = "///div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Application')][contains(text(),'No.')]")
 	static WebElement ApplicationNumberLabel;
-	
+
 	@FindBy(xpath = "//tr//td//label[contains(text(),'Pay')][contains(text(),'Amount')]")
 	static WebElement payAmountLabelForApplication;
-	
+
 	@FindBy(xpath = "//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Quotation Id')]")
 	static WebElement quotationIdLabel;
-	
+
 	@FindBy(xpath = "//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Basic Fees')]")
 	static WebElement basicFeesLabel;
-	
+
 	@FindBy(xpath = "//div[@class='form-group invoice-no-patch']//table//tbody//tr//td//label[contains(text(),'Pay')][contains(text(),'Amount')]")
 	static WebElement payAmountLabel;
-	
+
 	@FindBy(xpath = "//table//tbody//tr//td//label[contains(text(),'Comment')][contains(text(),'if')][contains(text(),'any')]")
 	static WebElement commentLabelInApplicationPaymentPage;
-	
+
 	static String balanceAmountbeforePay;
 
 	static String balanceAmountAfterPay;
@@ -188,7 +191,7 @@ public class PaymentPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("verify Payment page Step...")
+	@Step("verify Payment page Step")
 	public static void verifyPaymentPage() {
 		Assert.assertTrue(paymentElement.isDisplayed());
 		log.info("Payment page is displayed");
@@ -197,9 +200,13 @@ public class PaymentPage {
 	/**
 	 *This method will verify details of customer to pay any amount greater than zero for renewal.
 	 * @return void
-	 * @param String payAmount, String billingAddress, String city, String zip, String phone.
+	 * @param payAmount 
+	 * @param billingAddress
+	 * @param city
+	 * @param zip 
+	 * @param phone
 	 */
-	@Step("details of customer to pay any amount greater than zero for renewal.")
+	@Step("Verify Details of customer")
 	public static void customerDetailsForRenewal(String payAmount, String billingAddress, String city, String zip,String phone) {
 		SeleniumUtils.waitForElementToBeVisible(payAmountBox);
 		payAmountBox.clear();
@@ -243,7 +250,7 @@ public class PaymentPage {
 		SeleniumUtils.waitForElementToBeClickable(payButton);
 		Assert.assertTrue(payButton.isDisplayed());
 		log.info("pay option for payment is displayed");
-	    payButton.click();
+		payButton.click();
 		log.info("Enter pay option for payment");
 	}
 
@@ -252,8 +259,9 @@ public class PaymentPage {
 	 * @return void
 	 * @param void.
 	 */
-	@Step("the customer is allowed to upload renewal application.")
+	@Step("Verify Upload renewal application")
 	public static void uploadRenewalApplicationForCustomer() {
+		Assert.assertTrue(payAmountBox.isDisplayed());
 		uploadElement.click();
 		log.info("Enter upload pdf ");
 		String uploadfilePath = System.getProperty("user.dir")+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
@@ -266,7 +274,7 @@ public class PaymentPage {
 	 * @return void
 	 * @param void.
 	 */
-	@Step("presence of an additional field 'Renewal Form' on the payment screen for Application Renewal payment")
+	@Step("Verify Additional field 'Renewal Form' on the payment screen for Application Renewal payment")
 	public static void additionalCustomerFieldRenewalForm() {
 		Assert.assertTrue(renewaFormOption.isDisplayed());
 		log.info("renewal Form option displayed");
@@ -349,7 +357,7 @@ public class PaymentPage {
 		Assert.assertTrue(payLink.isDisplayed());
 		log.info("Pay Link displayed");
 	}
-	
+
 	/**
 	 * This Method will fill the payment page form
 	 * for an application
@@ -386,7 +394,7 @@ public class PaymentPage {
 		phoneTextbox.sendKeys(Prop.getTestData("billingPhone"));
 		log.info("Phone number entered");
 	}
-	
+
 
 	/**
 	 * This Method will navigate you to Payment Gateway page
@@ -418,13 +426,13 @@ public class PaymentPage {
 		log.info("stored balance amount after pay");
 		assertEquals(balanceAmountAfterPay, balanceAmountbeforePay, "Compare balance amount before and after pay");
 	}
-	
+
 	/**
 	 *This method will verify Renewal Form field is not a mandatory field for ESL & ESR renewal..
 	 * @return void
 	 * @param void.
 	 */
-	@Step("Renewal Form field is not a mandatory field for ESL & ESR renewal..")
+	@Step("Verify Renewal Form field is not a mandatory field for ESL & ESR renewal")
 	public static void renewalFormNotMandatoryEslEsr(String payAmount,String billingAddress,String city,String zip,String phone){
 		SeleniumUtils.waitForElementToBeVisible(payAmountBox);
 		payAmountBox.clear();
@@ -463,7 +471,7 @@ public class PaymentPage {
 		SeleniumUtils.waitForElementToBeClickable(payButton);
 		Assert.assertTrue(payButton.isDisplayed());
 		log.info("pay option for payment is displayed");
-		
+
 		payButton.click();
 		log.info("Enter pay option for payment");
 	}
@@ -498,14 +506,26 @@ public class PaymentPage {
 		log.info("Pay Link displayed");
 	}
 	/**
-	 *  This method will verify payment page elements for ReportRenewal.
+	 * This method will verify payment page elements for ReportRenewal.
 	 * @return void
 	 * @param void
 	 */
-	@Step("Verify payment page elements for ReportRenewal...")
+	@Step("Verify payment page Element")
 	public static void verifyPaymentPageElementsForReportRenewal() {
 		Assert.assertTrue(paymentElement.isDisplayed());
 		log.info("Payment Element displayed");
 
+	}
+
+	/**
+	 * Verify that if the customer has selected the quote and saved/submitted the application, but tries to make payment 
+	 * after the expiration date of the quote, then for such applications, the customer should not be able to make the payment.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verify customer tries to make payment after the expiration date of the quote unable to make the payment")
+	public static void paymenAfterExpirationDate() {
+		Assert.assertTrue(applicationExpiredMessage.isDisplayed());
+		log.info("application Expired Message.");
 	}
 }

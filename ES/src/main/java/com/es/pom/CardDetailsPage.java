@@ -53,7 +53,15 @@ public class CardDetailsPage {
 		log.info("Payment Gateway Page displayed");
 	}
 
-	@Step("customer to pay any amount greater than zero for renewal..")
+	/**
+	 * This Method will verify customer to pay any amount greater than zero for renewal.
+	 * 
+	 * @param name
+	 * @param creditCardNumber, 
+	 * @param cVCNumber
+	 * @return void
+	 */
+	@Step("Verify customer to pay for renewal of Report")
 	public static void customerPayForRenewal(String name, String creditCardNumber, String cVCNumber) {
 
 		SeleniumUtils.waitForElementToBeClickable(cardHolderName);
@@ -89,7 +97,7 @@ public class CardDetailsPage {
 	 * @return void
 	 * @param void
 	 */
-    @Step("User should be navigated to the payment gateway.")
+    @Step("Verify User navigate to payment gateway")
 	public static void verifyUserNavigatedPaymentGateway() {
 		SeleniumUtils.waitForElementToBeClickable(cardHolderName);
 		Assert.assertTrue(cardHolderName.isDisplayed());
@@ -98,11 +106,11 @@ public class CardDetailsPage {
     
     
     /**
-	 *This method will verify A new oderId should be created on the portal of the same program type.
+	 * This method will verify A new oderId should be created on the portal of the same program type.
 	 * @return void
 	 * @param void
 	 */
-	@Step("A new oderId should be created on the portal of the same program type.")
+	@Step("A new oderId should be created on the portal of program type")
 	public static String verifyOderIdNewApplicationCreated() {
 		Assert.assertTrue(oderId.isDisplayed());
 		log.info("OderId is displayed");

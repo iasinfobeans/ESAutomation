@@ -20,7 +20,7 @@ public class ReportsPage {
 	 * @return void
 	 * @param void
 	 */
-	@Step("Dashboard to have an additional head titled 'Reports.")
+	@Step("Verify additional head titled 'Reports on Dashboard")
 	public static void verifyTitleReports() {
 		Assert.assertTrue(reportsElement.isDisplayed());
 		log.info("Reports is displayed on Dashboard");

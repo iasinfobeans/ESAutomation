@@ -360,6 +360,9 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[contains(text(),'This Quote will expire on')]")
 	static WebElement verifyExpiryDateForQuotationMail4;
 	
+	@FindBy(linkText = "Click Here")
+	static WebElement viewQuotationFromYopmailLink;
+	
 	/**
 	 * This method will navigate to yopmail inbox of given email id.
 	 * 
@@ -1174,6 +1177,15 @@ public class YopmailPage {
 		Assert.assertEquals(forthRgistrationLine.contains("ICC Evaluation Service, LLC"), true,
 				"Text 'ICC Evaluation Service, LLC' is not contain in email body");
 
+		
+		viewQuotationFromYopmailLink.click();
+		String Parent_Window = Setup.driver.getWindowHandle();
+		for (String Child_Window : Setup.driver.getWindowHandles()) {
+			Setup.driver.switchTo().window(Child_Window);
+		}
+		QuotationListingPage.viewQuotesOptions();
+		QuotationListingPage.downloadQuote();
+		
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified New Quotation Available Mail body");
 	}

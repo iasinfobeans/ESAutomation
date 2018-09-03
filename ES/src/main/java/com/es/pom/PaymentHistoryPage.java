@@ -31,12 +31,17 @@ public class PaymentHistoryPage {
 	 * @param void
 	 * @return void
 	 */
-	@Step("Verify that the payment was successful")
+	@Step("Verify that the payment was successful.")
 	public static void verifyPaymentSucess() {
 		Assert.assertEquals(paymentSuccessMessege.getText(), Prop.getTestData("paymentSuccessMessage"), "Payment was successful");
 	}
-
-	@Step("A new application should be created on the portal of the same program type....")
+	/**
+	 * A new application should be created on the portal of the same program type.
+	 * 
+	 * @param String orderId
+	 * @return void
+	 */
+    @Step("A new application create on the portal")
 	public static void verifyNewApplicationCreated(String orderId) {
 		searchTextbox.clear();
 		searchTextbox.sendKeys(orderId);
