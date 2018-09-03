@@ -353,7 +353,7 @@ public class Yopmail {
 	 * This method will verified approved or decline profile changes mail body
 	 * in customer inbox.
 	 * @param email
-	 *            -- iasinfobeans@yopmail.com
+	 *            -- iasinfobeans@yopmail.com (for test case no 210)
 	 *            @return void
 	 */
 	public static void verifyApprovedOrDeclineProfileChanges(String email) {
