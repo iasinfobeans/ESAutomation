@@ -1845,8 +1845,8 @@ public class YopmailPage {
 		}
 		PMGApplicationFormPage.SignAsAuthorizedSignatory();
 		PMGApplicationFormPage.clickSubmitPMGApplication();
-//		Setup.driver.switchTo().window(Parent_Window);  
-//		SeleniumUtils.switchToDefaultIframe();
+		Setup.driver.switchTo().window(Parent_Window);  
+		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified Application requires signature mail link and clicked on it.");
 	}
 
@@ -2003,5 +2003,16 @@ public class YopmailPage {
 
 		SeleniumUtils.switchToDefaultIframe();
 		log.info("Verified expiry date for quotation mail body.");
+	}
+
+	/**
+	 *  This method will verify delivered signing link in Recall Option.
+	 */
+	public static void verifyDeliveredSigningMailLinksInRecallOption() {
+		SeleniumUtils.switchToIframeById("ifmail");
+		Assert.assertTrue(clickhereLink.isDisplayed());
+		clickhereLink.click();
+		SeleniumUtils.switchToDefaultIframe();
+		log.info("Verified Application requires signature mail link and clicked on it in Recall Option.");
 	}
 }
