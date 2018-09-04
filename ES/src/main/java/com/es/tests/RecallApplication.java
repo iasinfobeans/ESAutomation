@@ -46,7 +46,7 @@ public class RecallApplication extends Setup{
 			DashboardPage.navigateToApplicationListingPage();
 			String applicationNumber= ApplicationsListingPage.clickOnRecallApplication();
 			ApplicationsListingPage.verifyApplicationMovedToDraft(applicationNumber);
-			Yopmail.verifyDeliveredSigningMailLinks(Prop.getTestData("legalRepresentativeMail"));
+			Yopmail.verifyDeliveredSigningMailLinksInRecallOption(Prop.getTestData("legalRepresentativeMail"));
 		}catch(Exception e){
 			SeleniumUtils.captureScreenshot("verifyRecallOptionInvalidatesSigningMailLink");
 			e.getStackTrace();
