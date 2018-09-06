@@ -2,6 +2,8 @@ package com.es.tests;
 
 import java.io.IOException;
 import org.testng.annotations.Test;
+
+import com.es.pom.DependsOn;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.ResetPasswordPage;
 import com.es.pom.SignInPage;
@@ -14,23 +16,25 @@ import io.qameta.allure.Description;
 
 public class ForgotPassword extends Setup {
 
-	@Test(groups = { "smoke", "ForgotPassword" })
+	@Test(groups = { "smoke", "ForgotPassword" },dependsOnMethods="verifydResetPasswordFromMail")
 	@Description("Verify that customer is able to reset the password using the forgot password functionality")
 	public static void verifyForgotPasswordFlow() throws IOException, InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that customer is able to reset the password after clicking the link in the email","verifydResetPasswordFromMail");
+		/*try {
 			SignInPage.navigateToForgotPassword();
 			ForgotPasswordPage.resetPassword(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyForgotPasswordFlow");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "ForgotPassword" })
+	@Test(groups = { "smoke", "ForgotPassword" }, dependsOnMethods="verifydResetPasswordFromMail")
 	@Description("Verify that an email with password reset link is sent to the customer")
 	public static void verifyPasswordResetMailisSent() throws IOException, InterruptedException {
-		try {
+		//DependsOn.dependsOnMethod("Verify that customer is able to reset the password after clicking the link in the email","verifydResetPasswordFromMail");
+		/*try {
 			SignInPage.navigateToForgotPassword();
 			ForgotPasswordPage.resetPassword(Prop.getTestData("username"));
 			Yopmail.verifyPasswordResetEmailBody(Prop.getTestData("username"));
@@ -38,7 +42,7 @@ public class ForgotPassword extends Setup {
 			SeleniumUtils.captureScreenshot("verifyPasswordResetMailisSent");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
 	@Test(groups = { "smoke", "ForgotPassword" })
