@@ -12,7 +12,7 @@ public class DependsOn {
 
 	private static Logger log = Logger.getLogger(DependsOn.class.getName());
 	/**
-	 * This method will print details for dependent test case
+	 * This method will print details for dependent test case on Allure report
 	 * 
 	 * @param Test_Description
 	 * @param Test_Method_Name
