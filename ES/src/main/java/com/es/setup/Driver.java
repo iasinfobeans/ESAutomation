@@ -8,8 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.es.util.CommonUtils;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 public class Driver {
 
@@ -32,6 +34,11 @@ public class Driver {
 		case "IE":
 			System.setProperty("webdriver.ie.driver", ".\\src\\main\\resources\\driver\\IEDriverServer.exe");
 			driver = new InternetExplorerDriver();
+			log.info("Initialized Internet Explorer driver");
+			break;
+		case "headless":
+			HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.CHROME);
+			driver.setJavascriptEnabled(true);
 			log.info("Initialized Internet Explorer driver");
 			break;
 		default:
