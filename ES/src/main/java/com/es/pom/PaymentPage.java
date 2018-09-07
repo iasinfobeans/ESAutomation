@@ -122,7 +122,7 @@ public class PaymentPage {
 	@FindBy(id = "phone")
 	static WebElement phoneTextbox;
 
-	@FindBy(xpath ="//*[text()=' has expired, please contact ICC-ES staff for further assistance']")
+	@FindBy(xpath ="//li[contains(text(),'Quote')]")
 	static WebElement applicationExpiredMessage ;
 
 	@FindBy(xpath = "//input[@class='custom-input-box balance_amount']")
@@ -149,6 +149,9 @@ public class PaymentPage {
 	static String balanceAmountbeforePay;
 
 	static String balanceAmountAfterPay;
+	
+	@FindBy(xpath = "//div[contains(text(),'Please select file')]")
+	static WebElement pleaseSelectFileMessage;
 
 
 	/**
@@ -213,13 +216,7 @@ public class PaymentPage {
 		payAmountBox.sendKeys(payAmount);
 		log.info("Enter pay Amount ");
 
-		uploadElement.click();
-		log.info("Enter upload pdf ");
-		String uploadfilePath = System.getProperty("user.dir")+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
-		RobotUtils.uploadFile(uploadfilePath);
-		log.info("upload pdf from drive ");
-
-		billingAddressBox.clear();
+	    billingAddressBox.clear();
 		billingAddressBox.sendKeys(billingAddress);
 		log.info("Enter billing Address For Renewal of Report ");
 
@@ -242,7 +239,6 @@ public class PaymentPage {
 		country.click();
 		log.info("Enter your country");
 
-		SeleniumUtils.waitForElementToBeClickable(phoneBox);
 		phoneBox.clear();
 		phoneBox.sendKeys(phone);
 		log.info("Enter your phone details");
@@ -250,7 +246,7 @@ public class PaymentPage {
 		SeleniumUtils.waitForElementToBeClickable(payButton);
 		Assert.assertTrue(payButton.isDisplayed());
 		log.info("pay option for payment is displayed");
-		payButton.click();
+		SeleniumUtils.executeJavaScript("arguments[0].click();", payButton);
 		log.info("Enter pay option for payment");
 	}
 
@@ -528,4 +524,16 @@ public class PaymentPage {
 		Assert.assertTrue(applicationExpiredMessage.isDisplayed());
 		log.info("application Expired Message.");
 	}
+
+
+/**
+ *This method will verify  please Select File Message when Renewal Form field is a mandatory field for PMG renewal.
+ * @return void
+ * @param void
+ */
+@Step("verify please Select File Message for Renewal of PMG")
+public static void verifyRenewalFormMandatoryFieldPMG() {
+	Assert.assertTrue( pleaseSelectFileMessage.isDisplayed());
+	log.info("Payment page is displayed");
+  }
 }
