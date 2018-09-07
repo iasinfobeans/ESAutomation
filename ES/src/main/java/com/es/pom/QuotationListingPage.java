@@ -36,7 +36,7 @@ public class QuotationListingPage {
 	@FindBy(xpath = "//strong[text()='Active']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
 	static WebElement viewActiveQuotesBox;
 
-	@FindBy(xpath = "//strong[text()='Expired']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
+	@FindBy(xpath = "//*[@id='quotation-list-dataTable']//a[@class='view-quote-popupbox']")
 	static WebElement viewExpiredQuotesBox;
 
 	@FindBy(xpath = "//*[@class='odd parent']/td[@class='sorting_1']")
@@ -158,6 +158,15 @@ public class QuotationListingPage {
 	
 	@FindBy(xpath = "//strong[text()='Active']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
 	static WebElement viewQuotesBoxForStaff;
+	
+    @FindBy(xpath="//div[@id='app-list-dataTable_processing']")
+	static WebElement processingTableElement;
+    
+    @FindBy(xpath = "//strong[text()='Expired']/ancestor::tr[@role='row']//a[@class='view-quote-popupbox']")
+	static WebElement viewQuotesBoxForExpired;
+    
+  @FindBy(xpath = "//strong[contains(text(),'Expired')]")
+	static WebElement statusSavedApplication;
 
 
 	/**
@@ -192,6 +201,7 @@ public class QuotationListingPage {
 	 */
 	@Step("Verify click on Active Quotes")
 	public static void viewQuotesOptions() {
+		SeleniumUtils.waitForElementToBeVisible(viewQuotesBoxForStaff);
 		Assert.assertTrue(viewQuotesBoxForStaff.isDisplayed());
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForStaff);
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
@@ -205,8 +215,8 @@ public class QuotationListingPage {
 	@Step("Verify click on Expired Quotes")
 	public static void viewExpiredQuotesOptions() {
 		SeleniumUtils.waitForElementToBeVisible(viewExpiredQuotesBox);
+		SeleniumUtils.waitForElementToBeClickable(viewExpiredQuotesBox);
 		Assert.assertTrue(viewExpiredQuotesBox.isDisplayed());
-		SeleniumUtils.executeJavaScript("arguments[0].click();", viewExpiredQuotesBox);
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewExpiredQuotesBox);
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
 	}
@@ -243,11 +253,10 @@ public class QuotationListingPage {
 	 */
 	@Step("Click on Active Status of Quote")
 	public static void viewActiveStatusofQuote() {
-		SeleniumUtils.executeJavaScript("arguments[0].click();",statusOfQuotes );
+		Assert.assertTrue(statusOfQuotes.isDisplayed());
 		SeleniumUtils.executeJavaScript("arguments[0].click();",statusOfQuotes );
 		log.info("Customer is able to Click on 'status Of Quotes' options");
-
-		SeleniumUtils.executeJavaScript("arguments[0].click();",activeQuotes );
+		
 		SeleniumUtils.executeJavaScript("arguments[0].click();",activeQuotes );
 		log.info("Customer is able to Click on 'active Quotes' options");
 
@@ -260,13 +269,13 @@ public class QuotationListingPage {
 	 */
 	@Step("Click on Expired Status of Quote")
 	public static void viewExpiredStatusofQuote() {
-		SeleniumUtils.executeJavaScript("arguments[0].click();",statusOfQuotes );
+		Assert.assertTrue(statusOfQuotes.isDisplayed());
 		SeleniumUtils.executeJavaScript("arguments[0].click();",statusOfQuotes );
 		log.info("Customer is able to Click on 'status Of Quotes' options");
 
 		SeleniumUtils.executeJavaScript("arguments[0].click();",ExpiredQuotes );
-		SeleniumUtils.executeJavaScript("arguments[0].click();",ExpiredQuotes );
 		log.info("Customer is able to Click on 'Expired Quotes' options");
+
 
 	}
 
@@ -278,7 +287,6 @@ public class QuotationListingPage {
 	 */
 	@Step("Click on 'View Quotes' option")
 	public static void viewQuotesTab() {
-		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForCustomer);
 		log.info("Verify Customer is able to Click on 'View Quotes' options");
 	}
@@ -295,6 +303,7 @@ public class QuotationListingPage {
 		Assert.assertTrue(quotationRequest.isDisplayed());
 		log.info("Verify quotation Request");
 	}
+	
 	/**
 	 * 
 	 *This method will verify Observe Pop up Window.
@@ -348,9 +357,8 @@ public class QuotationListingPage {
 	 */
 	@Step("Verify click on send button")
 	public static void clickSendWhileUploadingQuotation() {
-		SeleniumUtils.waitForElementToBeVisible(send);
 		Assert.assertTrue(send.isDisplayed());
-		send.click();
+		SeleniumUtils.executeJavaScript("arguments[0].click();", send);
 		log.info("clicked on send button while uploading Quotation.");
 	}
 	/**
@@ -416,6 +424,21 @@ public class QuotationListingPage {
 			}
 		}
 	}
+	
+	
+	/**
+	 * This method will verify status Saved Application in Status column.
+	 * @return void
+	 * @param void
+	 */
+	@Step("Verify status in Status column")
+	public static void verifyStatus() {
+		
+		SeleniumUtils.waitForElementToBeVisible(statusSavedApplication);
+		Assert.assertTrue(statusSavedApplication.isDisplayed());
+		SeleniumUtils.executeJavaScript("arguments[0].click();", statusSavedApplication);
+		}
+	
 
 	/**
 	 * This method will verify whether file is uploaded or not.
@@ -458,58 +481,6 @@ public class QuotationListingPage {
 		}else {
 			log.info("Expiry date is not 30 days ahead from the current date");
 
-		}
-	}
-
-	/**
-	 * 
-	 * This Method will verify The ES staff should be able to upload multiple quotes.
-	 * @param progarmType
-	 * @param amount
-	 * @param fileCount
-	 * @return void
-	 */
-	@Step("The ES staff should be able to upload multiple quotes")
-	public static void inputMultipleValuesInUploadOption(String progarmType, String amount,int fileCount) {
-		for (int i = 1; i <= fileCount; i++) {
-			log.info("fileCount start loop: " + fileCount);
-			log.info("i: " + i);
-			{
-				dropDownInUploadQuotation.click();
-				if (progarmType.equalsIgnoreCase("ES Core")) {
-					esCore.click();
-				}
-				if (progarmType.equalsIgnoreCase("plumbingMechanicAndGas")) {
-					plumbingMechanicAndGas.click();
-				}
-				if (progarmType.equalsIgnoreCase("Evaluation Service Listing")) {
-					evaluationServiceListing.click();
-					log.info("Enter program Type for Quotation");
-				}
-
-				amountTextBox.sendKeys(amount);
-				log.info("Enter the amount to pay for Quotation");
-
-				uploadButton.click();
-				log.info("Enter upload pdf ");
-				String uploadfilePath = System.getProperty("user.dir")+ "\\src\\main\\resources\\testFiles\\TestFileForUpload.pdf";
-				RobotUtils.uploadFile(uploadfilePath);
-				log.info("upload pdf from drive ");
-				log.info("Given input while uploading Quotation.");
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				log.info("upload pdf from drive ");
-				log.info("fileCount end loop: " + fileCount);
-				log.info("i: " + i);
-			}
-			SeleniumUtils.waitForElementToBeVisible(send);
-			Assert.assertTrue(send.isDisplayed());
-			send.click();
-			log.info("clicked on send button while uploading Quotation.");
 		}
 	}
 
@@ -583,15 +554,34 @@ public class QuotationListingPage {
 
 		expiredQuotation.clear();
 		expiredQuotation.sendKeys(expiredQuotationNumber);
-		log.info("Enter expired Quotation Number");
+		log.info("Enter expired Quotation Number: "+expiredQuotationNumber);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * This method will download quotation.
+	 * @param  void
+	 * @return void
 	 */
-	public static void downloadQuote() {
+     public static void downloadQuote() {
 		Assert.assertTrue(quotationDownloaded.isDisplayed());
 		SeleniumUtils.executeJavaScript("arguments[0].click();", quotationDownloaded);
 		log.info("Verify Staff is able to Click on 'View Quotes' options");
+	}
+	
+	/**
+	 * This method will click on view quotes of expired quotation.
+	 * @param  void
+	 * @return void
+	 */
+	public static void viewQuotesOptionsForExpiredQuotes() {
+		Assert.assertTrue(viewQuotesBoxForExpired.isDisplayed());
+		SeleniumUtils.executeJavaScript("arguments[0].click();", viewQuotesBoxForExpired);
+		log.info("Verify Staff is able to Click on 'View Quotes' options for expired Quote");
 	}
 }
