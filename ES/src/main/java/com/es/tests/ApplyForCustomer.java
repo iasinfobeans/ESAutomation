@@ -26,7 +26,7 @@ public class ApplyForCustomer extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "ApplyForCustomer" })
+	@Test(groups = { "smoke", "ApplyForCustomer"  })
 	@Description("Verify the email for OTP..")
 	public void verifyEmailForOTPApplyWorkflow() throws InterruptedException {
 		try {
@@ -40,7 +40,7 @@ public class ApplyForCustomer extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "ApplyForCustomer"})
+	@Test(groups = { "smoke", "ApplyForCustomer" })
 	@Description("Verify the registration process once correct OTP and other fields are entered.")
 	public void verifyRegistrationFromApplyWorkflow() throws InterruptedException {
 		try {
