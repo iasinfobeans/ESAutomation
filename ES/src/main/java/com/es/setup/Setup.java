@@ -21,6 +21,7 @@ import com.es.pom.CRMPage;
 import com.es.pom.CardDetailsPage;
 import com.es.pom.ChangePasswordPage;
 import com.es.pom.DashboardPage;
+import com.es.pom.DependsOn;
 import com.es.pom.ForgotPasswordPage;
 import com.es.pom.GetAQuotePage;
 import com.es.pom.InvoiceListingPage;
@@ -125,6 +126,7 @@ public class Setup {
 		PageFactory.initElements(driver, PaymentHistoryPage.class);
 		PageFactory.initElements(driver, SOWFeaturePage.class);
 		PageFactory.initElements(driver, AdminPage.class);
+		PageFactory.initElements(driver, DependsOn.class);
 	}
 
 	@AfterMethod(alwaysRun = true)
