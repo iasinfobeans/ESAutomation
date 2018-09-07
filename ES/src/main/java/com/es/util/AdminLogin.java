@@ -22,4 +22,12 @@ public class AdminLogin {
 		SignInPage.login(Prop.getTestData("adminUser"), Prop.getTestData("adminPassword"), "Customer");
 		AdminPage.runQuoteExpiryJob();
 	}
+	
+	/**
+	 * This method will Run Approve registration job to fetch qualified / disqualified leads from CRM to the portal.
+	 */
+	public static void runJobForApproveRegistration() {
+		SignInPage.login(Prop.getTestData("adminUser"), Prop.getTestData("adminPassword"), "Customer");
+		AdminPage.runApproveRegistrationJob();
+	}
 }

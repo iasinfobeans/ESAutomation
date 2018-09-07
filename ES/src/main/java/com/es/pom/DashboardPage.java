@@ -91,7 +91,10 @@ public class DashboardPage {
 	
 	@FindBy(xpath = "//*[@id='expiredate']")
 	static WebElement checkexpiryDate;
-
+	
+	@FindBy(xpath = "//a[@title='Dashboard']")
+	static WebElement dashboardLink;
+	
 	/**
 	 *This method will verify dashboard page.
 	 * @return void
@@ -530,4 +533,19 @@ public class DashboardPage {
 		String date = checkexpiryDate.getAttribute("Value");
 		log.info("Expiry date is :"+date);
 	}
+	
+	
+	/**
+	 * This Method will navigate to Dashboard
+	 * 
+	 * @param void
+	 * @return void
+	 */
+	@Step("Navigate to modified users listing page")
+	public static void navigateToDashboard(){
+		Assert.assertTrue(dashboardLink.isDisplayed());
+		dashboardLink.click();
+		log.info("Navigated to dashboard");
+	}
+
 }
