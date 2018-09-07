@@ -13,7 +13,6 @@ public class ReportsPage {
 	static WebElement viewReportOption;
 	
 	
-	
     @Step(" Navigate to Project listing page")
 	public static void navigateToProjectListingPage() {
 		viewReportOption.click();
