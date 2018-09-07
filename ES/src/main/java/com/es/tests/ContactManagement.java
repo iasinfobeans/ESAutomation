@@ -3,6 +3,7 @@ package com.es.tests;
 import java.io.IOException;
 import org.testng.annotations.Test;
 import com.es.pom.DashboardPage;
+import com.es.pom.OverlayPage;
 import com.es.pom.SignInPage;
 import com.es.pom.UpdateProfilePage;
 import com.es.pom.UserListingsPage;
@@ -59,7 +60,7 @@ public class ContactManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "ContactManagement" })
+	@Test(groups = { "smoke", "ContactManagement"})
 	@Description("Verify that once the profile has been updated, the staff receives an email notification.")
 	public static void verifyUpdateAccountEmail_Staff() throws IOException, InterruptedException {
 		try {
@@ -134,16 +135,15 @@ public class ContactManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "ContactManagement" })
+	@Test(groups = { "smoke", "ContactManagement"})
 	@Description("Verify that the staff personnel would only see the most recent change requests and can approve/deny the same")
 	public static void verifyRecentChangesVisibility() throws IOException, InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
 			DashboardPage.navigateToEditProfilePage();
 			UpdateProfilePage.updateProfile();
-			DashboardPage.logout();
-			SignInPage.login(Prop.getTestData("updateProfileUser"), Prop.getTestData("updateProfileUserPassword"),"Customer");
-			DashboardPage.navigateToEditProfilePage();
+			DashboardPage.navigateToDashboard();
+			DashboardPage.navigateToEditProfilePageAgain();
 			UpdateProfilePage.updateProfileAgain();
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
@@ -203,6 +203,7 @@ public class ContactManagement extends Setup {
 			DashboardPage.logout();
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.navigateToModifiedUsersList();
+			UserListingsPage.approveProfileUpdateRequest();
 			Yopmail.verifyApprovedOrDeclineProfileChanges(Prop.getTestData("username"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyApproveUpdationMail");

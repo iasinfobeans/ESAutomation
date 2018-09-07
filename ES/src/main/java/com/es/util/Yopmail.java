@@ -353,7 +353,7 @@ public class Yopmail {
 	 * This method will verified approved or decline profile changes mail body
 	 * in customer inbox.
 	 * @param email
-	 *            -- iasinfobeans@yopmail.com
+	 *            -- iasinfobeans@yopmail.com (for test case no 210)
 	 *            @return void
 	 */
 	public static void verifyApprovedOrDeclineProfileChanges(String email) {
@@ -792,6 +792,28 @@ public class Yopmail {
 			YopmailPage.navigateToInbox(email);
 			YopmailPage.openExpiryDateForQuotationMail();
 			YopmailPage.verifyExpiryDateForQuotationMail();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
+
+	/**
+	 * This method will verify delivered signing link in Recall Option.
+	 * @param email
+	 */
+	public static void verifyDeliveredSigningMailLinksInRecallOption(String email) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String yopmailWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(yopmailWindowHandle);
+		try {
+			YopmailPage.navigateToInbox(email);
+			YopmailPage.openverifyDeliveredSigningMailLinks();
+			YopmailPage.verifyDeliveredSigningMailLinksInRecallOption();
 		} catch (Exception e) {
 			throw e;
 		} finally {
