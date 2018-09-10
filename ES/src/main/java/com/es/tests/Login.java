@@ -20,6 +20,7 @@ public class Login extends Setup {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			DashboardPage.verifyDashboardPage();
+			DashboardPage.logout();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyLoginAsCustomer");
 			e.getStackTrace();
@@ -33,6 +34,7 @@ public class Login extends Setup {
 		try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyDashboardPage();
+			DashboardPage.logout();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyLoginAsStaff");
 			e.getStackTrace();
