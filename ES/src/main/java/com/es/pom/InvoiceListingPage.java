@@ -1,5 +1,7 @@
 package com.es.pom;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +31,15 @@ public class InvoiceListingPage {
 	@FindBy(xpath = "//div[@class='ehading']")
 	static WebElement invoicessElement;
 
+	@FindBy(xpath="//td[text()='No invoice found']")
+	static List<WebElement> noInvoiceMessege;
+	
+	@FindBy(xpath="//th[@aria-label=' Application ID: activate to sort column ascending']")
+	static WebElement applicationIdTableHeading;
+	
+	@FindBy(linkText = "New")
+	static WebElement newSort;
+	
 	/**
 	 * This Method will verify navigation to invoice listing page
 	 * 
@@ -58,6 +69,16 @@ public class InvoiceListingPage {
 		SeleniumUtils.waitForElementToBeClickable(partialSort);
 		partialSort.click();
 		log.info("partially sorted");
+		if(noInvoiceMessege.size()>0)
+		{
+			log.info(noInvoiceMessege.get(0).getText());
+			partialSort.click();
+			log.info("Sorting dropdown selected");
+			SeleniumUtils.waitForElementToBeClickable(newSort);
+			newSort.click();
+			log.info("new sort");
+		}
+		log.info("Click on pay link");
 		paymentPageLink.click();
 		log.info("Payment page");
 	}
