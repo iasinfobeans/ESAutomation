@@ -22,14 +22,16 @@ public class AvaliableQuotesPage {
 	@FindBy(xpath = "//*[@class='sbHolder']//a[contains(text(),'Applied')]")
 	static WebElement appliedQuotes;
 
-	@FindBy(xpath = "//strong[text()='Applied']")
+	@FindBy(xpath = "//strong[contains(text(),'Applied')]")
 	static WebElement appliedQuoteStatus;
 
-	@FindBy(linkText = "Edit")
-	static WebElement edit;
-
-	@FindBy(xpath ="//*[@id='view-quotes-dataTable']//a[@class='tbl-btn'][contains(text(),'View')]")
+    @FindBy(xpath ="//*[@id='view-quotes-dataTable']//a[@class='tbl-btn'][contains(text(),'View')]")
 	static WebElement view;
+	
+	@FindBy(xpath="//div[@id='app-list-dataTable_processing']")
+	static WebElement processingTableElement;
+	
+	
 
 	/**
 	 * This method will verify customer Click on the Apply button .
@@ -38,10 +40,9 @@ public class AvaliableQuotesPage {
 	 */
 	@Step("Click on the Apply button")
 	public static void applyForViewQuotesOptions() {
-		SeleniumUtils.waitForElementToBeVisible(applyButton);
-		SeleniumUtils.waitForElementToBeClickable(applyButton);
-		applyButton.click();
 		Assert.assertTrue(applyButton.isDisplayed());
+		SeleniumUtils.waitForElementToBeVisible(applyButton);
+		SeleniumUtils.executeJavaScript("arguments[0].click();",applyButton);
 		log.info("Verify Customer is able to Click on Apply button ");
 
 	}
@@ -54,8 +55,8 @@ public class AvaliableQuotesPage {
 	@Step("Verify quote not allowed to be used to submitt another application")
 	public static void verifyAppliedQuote() {
 		Assert.assertTrue(appliedQuoteStatus.isDisplayed());
-		Assert.assertTrue(edit.isDisplayed());
-		log.info("Verify Customer is able to edit on Applied Quote but cannot aplly again.");
+		Assert.assertTrue(view.isDisplayed());
+		log.info("Verify Customer is able to view on Applied Quote but cannot apply again.");
 
 	}
 
@@ -67,12 +68,11 @@ public class AvaliableQuotesPage {
 	@Step("Click on the view button")
 	public static void viewQuotesForExpiredQuote() {
 		SeleniumUtils.waitForElementToBeVisible(view);
-		SeleniumUtils.waitForElementToBeClickable(view);
+		//SeleniumUtils.waitForElementToBeClickable(view);
 		Assert.assertTrue(view.isDisplayed());
-		view.click();
-		SeleniumUtils.executeJavaScript("arguments[0].click();", view);
-		SeleniumUtils.executeJavaScript("arguments[0].click();", view);
-		log.info("Verify Customer is able to Click on view button ");
+		SeleniumUtils.executeJavaScript("arguments[0].click();",view);
+	    log.info("Verify Customer is able to Click on view button ");
 
 	}
+
 }

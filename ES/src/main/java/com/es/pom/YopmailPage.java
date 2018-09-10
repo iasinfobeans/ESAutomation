@@ -132,10 +132,10 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[text()='ICC-ES: Account Registration Approved']")
 	static WebElement openNewAccApprovedMail;
 
-	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Profile has been updated by')]")
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'Your account has been approved by ICC Evaluation Service, LLC')]")
 	static WebElement newAccRegApprovedLine2;
 
-	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To review and approve/reject the request, please ')]")
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'More features have been added to your account on the portal.')]")
 	static WebElement newAccRegApprovedLine3;
 
 	@FindBy(xpath = "//a[@class='igif next']']")
@@ -272,6 +272,12 @@ public class YopmailPage {
 
 	@FindBy(xpath = "//*[contains(text(),'ICC-ES: SOW has been uploaded for Project')]")
 	static WebElement openSOWUploadeMailInCustomerInbox;
+	
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'SOW has been uploaded for Project')]")
+	static WebElement SOWUploadeMailLine2;
+	
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the details, please ')]")
+	static WebElement SOWUploadeMailLine3;
 
 	@FindBy(linkText = "click here")
 	static WebElement sowUploadLink;
@@ -315,7 +321,7 @@ public class YopmailPage {
 	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'If you have not made the payment')]")
 	static WebElement pmgApplicationInCustomerMail4;
 
-	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view the details, please ')]")
+	@FindBy(xpath = "//*[@id='mailmillieu']//p[contains(text(),'To view details, please ')]")
 	static WebElement pmgApplicationInCustomerMail5;
 
 	@FindBy(xpath = "//*[contains(text(),' requires your signature')]")
@@ -1576,7 +1582,7 @@ public class YopmailPage {
 		SeleniumUtils.switchToIframeById("ifmail");
 
 		String hi = pmgApplicationSubmitByNonApprovedUserMailLine1.getText();
-		String firstRgistrationLine = openSOWUploadeMailInCustomerInbox.getText();
+		String firstRgistrationLine = SOWUploadeMailLine2.getText();
 		String secondRgistrationLine = pmgApplicationInCustomerMail5.getText();
 		String forthRgistrationLine = pmgApplicationSubmitByNonApprovedUserMailLine4.getText();
 

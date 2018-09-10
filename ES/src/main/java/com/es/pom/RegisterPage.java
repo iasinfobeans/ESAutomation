@@ -115,8 +115,9 @@ public class RegisterPage {
 	public static void enterPersonalInfoInRegistration(String firstName, String lastName, String companyName,
 			String phone, String newPassword, String confirmPassword,String email) {
 
+		SeleniumUtils.waitForElementToBeVisible(dropDownMenu);
 		dropDownMenu.isEnabled();
-		dropDownMenu.click();
+		SeleniumUtils.executeJavaScript("arguments[0].click();", dropDownMenu);
 		log.info("Enter your Title");
 
 		optionTitle.click();
@@ -150,7 +151,7 @@ public class RegisterPage {
 		
 		Assert.assertTrue(proceedButton.isDisplayed());
 		log.info("Proceed Button is displayed");
-        proceedButton.click();
+       SeleniumUtils.executeJavaScript("arguments[0].click();",proceedButton );
 		log.info("Submit your Details");
 
 	}

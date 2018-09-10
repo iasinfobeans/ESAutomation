@@ -135,11 +135,26 @@ public class SOWFeaturePage {
 		Assert.assertTrue(removesSowFile.isDisplayed());
 		removesSowFile.click();
 		log.info(" Staff removes a SOW file ");
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		SeleniumUtils.acceptPopup();
 		log.info(" Staff removes a SOW file By Opting on OK ");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
+	
 
 	/**
 	 *This method will Verify Downloading SOW.
@@ -148,6 +163,7 @@ public class SOWFeaturePage {
 	 */
 	@Step("Downloading SOW")
 	public static void downloadSOW() {
+		SeleniumUtils.waitForElementToBeVisible(downloadSOW);
 		Assert.assertTrue(downloadSOW.isDisplayed());
 		downloadSOW.click();
 		downloadZip.click();

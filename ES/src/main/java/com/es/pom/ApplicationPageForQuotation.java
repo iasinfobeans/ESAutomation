@@ -313,6 +313,7 @@ public class ApplicationPageForQuotation {
 	@Step("Verify customer tries to make payment after the expiration date of the quote unable to make the payment")
 	public static void payForExpiredQuote() {
 		Assert.assertTrue(payNow.isDisplayed());
+		SeleniumUtils.waitForElementToBeClickable(payNow);
 		payNow.click();
 		log.info("pay for expired Application.");
 		

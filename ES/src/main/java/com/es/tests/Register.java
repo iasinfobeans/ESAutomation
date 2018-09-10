@@ -5,6 +5,7 @@ import com.es.pom.DashboardPage;
 import com.es.pom.RegisterPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
+import com.es.util.AdminLogin;
 import com.es.util.CRM;
 import com.es.util.Prop;
 import com.es.util.SeleniumUtils;
@@ -100,7 +101,7 @@ public class Register extends Setup {
 			throw e;
 		}
 	}
-
+	
 	@Test(groups = { "smoke", "Register" })
 	@Description("Verify the email notifications sent to the Customer upon successful registration.")
 	public void verifySuccessfulRegistrationEmailNotificationsToCustomer() throws InterruptedException {
@@ -153,31 +154,29 @@ public class Register extends Setup {
 		}
 	}
 
-	/*@Test(groups = { "smoke", "Register" })
+	@Test(groups = { "smoke", "Register"})
 	@Description("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.")
 	public void verifyConfirmationEmailToCustomerCRMQualifying() throws InterruptedException {
 		try {
-			
-			 * SignInPage.navigateToNormalRegistration(); String email =
-			 * RegisterPage.enterEmailInRegistration();
-			 * RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"),
-			 * Prop.getTestData("lastName"),Prop.getTestData("companyName"),Prop.getTestData
-			 * ("phone"),Prop.getTestData("newPassword"),Prop.getTestData("confirmPassword")
-			 * ); CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"),Prop.getTestData(
-			 * "Staffpassword"),Prop.getTestData("Name"),email);
-			 
-			Yopmail.verifyNewAccountApprovedBody("testesapp.20180726-164702");
+
+			SignInPage.navigateToNormalRegistration();
+			String email = RegisterPage.enterEmailInRegistration();
+			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
+					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
+					Prop.getTestData("confirmPassword"), email);
+			DashboardPage.logout();
+			CRM.qualifyLeadInCRM(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"),
+					Prop.getTestData("Name"), email);
+			AdminLogin.runJobForApproveRegistration();
+			Yopmail.verifyNewAccountApprovedBody(email);
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyConfirmationEmailToCustomerCRMQualifying");
 			e.getStackTrace();
 			throw e;
 		}
-	} // Qualifying to User Mail is send after 10-15 minutes to the customer,so we
-	// need to wait for that time. Please see what can be done.
-	// currently for checking functioning of this method i have used a hardcoded
-	// data which is a qualified User.*/
+	} 
 
-	@Test(groups = { "smoke", "Register" })
+	@Test(groups = { "smoke", "Register"})
 	@Description("Verify that the user is qualified and all the portal options get available to user.")
 	public void verifyUserIsQualified() throws InterruptedException {
 		try {

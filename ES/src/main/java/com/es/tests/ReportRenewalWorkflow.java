@@ -9,7 +9,6 @@ import com.es.pom.OverlayPage;
 import com.es.pom.PaymentHistoryPage;
 import com.es.pom.PaymentPage;
 import com.es.pom.ProjectListingPage;
-import com.es.pom.ReportsPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
 import com.es.util.Prop;
@@ -19,15 +18,14 @@ import io.qameta.allure.Description;
 
 public class ReportRenewalWorkflow extends Setup {
 
-	@Test(groups = { "smoke", "ReportRenewalWorkflow" })
+	@Test(groups = { "smoke", "ReportRenewalWorkflow"})
 	@Description("Verify the customer Dashboard to have an additional head titled 'Reports (Pending Renewal.")
 	public void verifyGetAQuoteButtonOnQuotationListingPage() throws InterruptedException {
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyReportsOption();
-			ReportsPage.verifyTitleReports();
-		} catch (Exception e) {
+	  } catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyGetAQuoteButtonOnQuotationListingPage");
 			e.getStackTrace();
 			throw e;
@@ -188,7 +186,7 @@ public class ReportRenewalWorkflow extends Setup {
 
 	}
 
-	@Test(groups = { "smoke", "ReportRenewalWorkflow" })
+	@Test(groups = { "smoke", "ReportRenewalWorkflow","piyu" })
 	@Description("Verify that the Renewal Form field is a mandatory field for PMG renewal")
 	public void verifyRenewalFormMandatoryFieldPMGRenewal() throws InterruptedException {
 		try {
@@ -198,6 +196,7 @@ public class ReportRenewalWorkflow extends Setup {
 			DashboardPage.clickActionOnPayButton();
 			PaymentPage.customerDetailsForRenewal(Prop.getTestData("payAmount"), Prop.getTestData("billingAddress"),
 					Prop.getTestData("city"), Prop.getTestData("zip"), Prop.getTestData("phone"));
+			PaymentPage.verifyRenewalFormMandatoryFieldPMG();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyRenewalFormMandatoryFieldPMGRenewal");
 			e.getStackTrace();

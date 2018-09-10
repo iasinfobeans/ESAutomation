@@ -276,8 +276,6 @@ public class DashboardPage {
 	@Step("Verify Quotation Option is present")
 	public static void verifyQuotationOption() {
 		Assert.assertTrue(quotationOption.isDisplayed());
-		//quotationOption.click();
-		SeleniumUtils.executeJavaScript("arguments[0].click();", quotationOption);
 		SeleniumUtils.executeJavaScript("arguments[0].click();", quotationOption);
 		log.info("Verify Quotation Option displayed");
 	}
@@ -330,9 +328,14 @@ public class DashboardPage {
 		Assert.assertTrue(reportOption.isDisplayed());
 		log.info("Verify report Option displayed");
 		
-		reportOption.click();
-		log.info("Verify Reports Option clicked");
-	}
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+}
 
 	/**
 	 * This Method will log out from the logged in account
@@ -399,12 +402,8 @@ public class DashboardPage {
 	@Step("Click on 'Pay' button")
 	public static void clickActionOnPayButton() {
 		SeleniumUtils.waitForElementToBeVisible(payForReportButton);
-		SeleniumUtils.waitForElementToBeClickable(payForReportButton);
-		
-		Assert.assertTrue(payForReportButton.isDisplayed());
+	    Assert.assertTrue(payForReportButton.isDisplayed());
 		log.info("pay For Report Button is displayed");
-
-		SeleniumUtils.executeJavaScript("arguments[0].click();", payForReportButton);
 		SeleniumUtils.executeJavaScript("arguments[0].click();", payForReportButton);
 		log.info("pay For Report Button is clicked");
 	}

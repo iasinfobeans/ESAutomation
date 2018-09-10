@@ -195,6 +195,7 @@ public class SeleniumUtils {
 	 */
 	public static void switchToWindow(String handle) {
 		Setup.driver.switchTo().window(handle);
+		log.info("Window Switched.");
 	}
 
 	/**
@@ -206,6 +207,7 @@ public class SeleniumUtils {
 	 */
 	public static void switchToWindowAndClose(String handle) {
 		Setup.driver.switchTo().window(handle).close();
+		log.info("Window closed.");
 	}
 
 	/**
@@ -255,6 +257,7 @@ public class SeleniumUtils {
 	 * @param javascript, webelement
 	 */
 	public static void executeJavaScript(String javaScript, WebElement webElement) {
+		log.info("Executing java script...");
 		SeleniumUtils.waitForElementToBeVisible(webElement);
 		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Setup.driver;
 		javascriptExecutor.executeScript(javaScript, webElement);
