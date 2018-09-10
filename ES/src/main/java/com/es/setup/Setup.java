@@ -2,12 +2,16 @@ package com.es.setup;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -69,7 +73,7 @@ public class Setup {
 		CommonUtils.cleanOrCreateDirectory(allureReportPath);
 
 		// Create or clean log directory
-	//	CommonUtils.cleanOrCreateDirectory(logPath);
+		//	CommonUtils.cleanOrCreateDirectory(logPath);
 
 		// load properties files
 		config = Prop.loadPropertiesFile(configPropertiesFilePath);
@@ -87,52 +91,58 @@ public class Setup {
 	}
 
 	@BeforeMethod(alwaysRun = true)
-	public static void testSetup() throws IOException {
+	public static void testSetup(Method method) throws IOException {
 		log.info("\n");
 		log.info("**********************************************");
 		log.info("Executing Test Case Number: " + i++);
-		driver = Driver.getDriver();
-		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		driver.get(CommonUtils.getURL());
+		Annotation[] annotationArray = method.getAnnotations();		
+		if(annotationArray[0].toString().contains("dependsOnMethods=[]")) {
+			driver = Driver.getDriver();
+			driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			driver.get(CommonUtils.getURL());
 
-		// Initialize PageFactory classes
-		PageFactory.initElements(driver, SignInPage.class);
-		PageFactory.initElements(driver, DashboardPage.class);
-		PageFactory.initElements(driver, ForgotPasswordPage.class);
-		PageFactory.initElements(driver, YopmailPage.class);
-		PageFactory.initElements(driver, ApplicationsListingPage.class);
-		PageFactory.initElements(driver, RegisterPage.class);
-		PageFactory.initElements(driver, OverlayPage.class);
-		PageFactory.initElements(driver, ChangePasswordPage.class);
-		PageFactory.initElements(driver, Yopmail.class);
-		PageFactory.initElements(driver, UpdateProfilePage.class);
-		PageFactory.initElements(driver, ResetPasswordPage.class);
-		PageFactory.initElements(driver, ApplicationPage.class);
-		PageFactory.initElements(driver, QuotationListingPage.class);
-		PageFactory.initElements(driver, GetAQuotePage.class);
-		PageFactory.initElements(driver, ReportsPage.class);
-		PageFactory.initElements(driver, AvaliableQuotesPage.class);
-		PageFactory.initElements(driver, ApplicationPageForQuotation.class);
-		PageFactory.initElements(driver, GetAQuotePage.class);
-		PageFactory.initElements(driver, CRMPage.class);
-		PageFactory.initElements(driver, UserListingsPage.class);
-		PageFactory.initElements(driver, PMGApplicationFormPage.class);
-		PageFactory.initElements(driver, PaymentPage.class);
-		PageFactory.initElements(driver, ProjectListingPage.class);
-		PageFactory.initElements(driver, InvoiceListingPage.class);
-		PageFactory.initElements(driver, CardDetailsPage.class);
-		PageFactory.initElements(driver, PaymentHistoryPage.class);
-		PageFactory.initElements(driver, PaymentHistoryPage.class);
-		PageFactory.initElements(driver, SOWFeaturePage.class);
-		PageFactory.initElements(driver, AdminPage.class);
-		PageFactory.initElements(driver, DependsOn.class);
+			// Initialize PageFactory classes
+			PageFactory.initElements(driver, SignInPage.class);
+			PageFactory.initElements(driver, DashboardPage.class);
+			PageFactory.initElements(driver, ForgotPasswordPage.class);
+			PageFactory.initElements(driver, YopmailPage.class);
+			PageFactory.initElements(driver, ApplicationsListingPage.class);
+			PageFactory.initElements(driver, RegisterPage.class);
+			PageFactory.initElements(driver, OverlayPage.class);
+			PageFactory.initElements(driver, ChangePasswordPage.class);
+			PageFactory.initElements(driver, Yopmail.class);
+			PageFactory.initElements(driver, UpdateProfilePage.class);
+			PageFactory.initElements(driver, ResetPasswordPage.class);
+			PageFactory.initElements(driver, ApplicationPage.class);
+			PageFactory.initElements(driver, QuotationListingPage.class);
+			PageFactory.initElements(driver, GetAQuotePage.class);
+			PageFactory.initElements(driver, ReportsPage.class);
+			PageFactory.initElements(driver, AvaliableQuotesPage.class);
+			PageFactory.initElements(driver, ApplicationPageForQuotation.class);
+			PageFactory.initElements(driver, GetAQuotePage.class);
+			PageFactory.initElements(driver, CRMPage.class);
+			PageFactory.initElements(driver, UserListingsPage.class);
+			PageFactory.initElements(driver, PMGApplicationFormPage.class);
+			PageFactory.initElements(driver, PaymentPage.class);
+			PageFactory.initElements(driver, ProjectListingPage.class);
+			PageFactory.initElements(driver, InvoiceListingPage.class);
+			PageFactory.initElements(driver, CardDetailsPage.class);
+			PageFactory.initElements(driver, PaymentHistoryPage.class);
+			PageFactory.initElements(driver, PaymentHistoryPage.class);
+			PageFactory.initElements(driver, SOWFeaturePage.class);
+			PageFactory.initElements(driver, AdminPage.class);
+			PageFactory.initElements(driver, DependsOn.class);
+		}
 	}
 
 	@AfterMethod(alwaysRun = true)
-	public static void testTearDown() {
-		driver.quit();
-		log.info("Closed browser");
+	public static void testTearDown(Method method) {
+		Annotation[] annotationArray = method.getAnnotations();		
+		if(annotationArray[0].toString().contains("dependsOnMethods=[]")) {
+			driver.quit();
+			log.info("Closed browser");
+		}
 	}
 
 }

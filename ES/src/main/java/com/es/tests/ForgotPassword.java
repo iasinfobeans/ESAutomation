@@ -33,7 +33,7 @@ public class ForgotPassword extends Setup {
 	@Test(groups = { "smoke", "ForgotPassword" }, dependsOnMethods="verifydResetPasswordFromMail")
 	@Description("Verify that an email with password reset link is sent to the customer")
 	public static void verifyPasswordResetMailisSent() throws IOException, InterruptedException {
-		//DependsOn.dependsOnMethod("Verify that customer is able to reset the password after clicking the link in the email","verifydResetPasswordFromMail");
+		DependsOn.dependsOnMethod("Verify that customer is able to reset the password after clicking the link in the email","verifydResetPasswordFromMail");
 		/*try {
 			SignInPage.navigateToForgotPassword();
 			ForgotPasswordPage.resetPassword(Prop.getTestData("username"));
