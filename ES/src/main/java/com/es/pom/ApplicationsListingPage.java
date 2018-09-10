@@ -234,6 +234,7 @@ public class ApplicationsListingPage {
 		log.info("Sorting dropdown selected");
 		newSort.click();
 		log.info("new sort");
+		SeleniumUtils.waitForElementToContainsAttributeValue(processingTableElement, "style", "display: none;" );
 		Assert.assertTrue(paymentPageLink.isDisplayed());
 		SeleniumUtils.waitForElementToBeClickable(paymentPageLink);
 		paymentPageLink.click();
