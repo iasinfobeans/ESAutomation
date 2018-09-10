@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import com.es.pom.ApplicationsListingPage;
 import com.es.pom.DashboardPage;
 import com.es.pom.OverlayPage;
+import com.es.pom.PMGApplicationFormPage;
 import com.es.pom.PaymentPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
@@ -20,6 +21,9 @@ public class ApplicationPayment extends Setup {
 		try{
 			SignInPage.login(Prop.getTestData("username"),Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
+			DashboardPage.navigateToPMGApplicationProgramWithNoPopup();
+			PMGApplicationFormPage.PmgApplicationFormFill(Prop.getTestData("legalRepresentativeMail"));
+			PMGApplicationFormPage.PmgApplicationFormSubmit();
 			DashboardPage.navigateToApplicationListingPage();
 			ApplicationsListingPage.navigateToPaymentPage();
 			PaymentPage.verifyPaymentPageElementsForApplication();
