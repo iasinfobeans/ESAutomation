@@ -141,6 +141,12 @@ public class Setup {
 	public static void testTearDown(Method method) {
 		Annotation[] annotationArray = method.getAnnotations();		
 		if(annotationArray[0].toString().contains("dependsOnMethods=[]")) {
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			driver.quit();
 			log.info("Closed browser");
 		}
