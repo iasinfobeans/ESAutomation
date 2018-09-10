@@ -133,6 +133,7 @@ public class Setup {
 			PageFactory.initElements(driver, SOWFeaturePage.class);
 			PageFactory.initElements(driver, AdminPage.class);
 			PageFactory.initElements(driver, DependsOn.class);
+			
 		}
 	}
 
