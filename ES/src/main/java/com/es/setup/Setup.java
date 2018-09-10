@@ -137,6 +137,7 @@ public class Setup {
 		}
 	}
 
+	
 	@AfterMethod(alwaysRun = true)
 	public static void testTearDown(Method method) {
 		Annotation[] annotationArray = method.getAnnotations();		
