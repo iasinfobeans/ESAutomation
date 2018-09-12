@@ -343,10 +343,11 @@ public class Yopmail {
 			YopmailPage.verifyQuotationReqRecBody();
 		} catch (Exception e) {
 			throw e;
-		} finally {
+		}/* finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
+	}*/
 	}
 
 	/**
@@ -597,18 +598,17 @@ public class Yopmail {
 			YopmailPage.verifySOWUploadeMailBodyInCustomerInbox();
 		} catch (Exception e) {
 			throw e;
-		} finally {
+		} /*finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
-		SeleniumUtils.switchToWindow(esWindowHandle);
+		SeleniumUtils.switchToWindow(esWindowHandle);*/
 	}
 
 	/**
 	 * This method will verify SOW file removed mail.
 	 * 
-	 * @param email
-	 *            -- rachelzane@yopmail.com
-	 *             @return void
+	 * @param email -- rachelzane@yopmail.com
+	 * @return void
 	 */
 	public static void verifySOWFileRemoveMail(String email) {
 		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(yopmailUrl);
@@ -622,10 +622,10 @@ public class Yopmail {
 			YopmailPage.verifySOWFileRemovedMailBody();
 		} catch (Exception e) {
 			throw e;
-		} finally {
+		} /*finally {
 			SeleniumUtils.switchToWindowAndClose(yopmailWindowHandle);
 		}
-		SeleniumUtils.switchToWindow(esWindowHandle);
+		SeleniumUtils.switchToWindow(esWindowHandle);*/
 	}
 
 	/**
