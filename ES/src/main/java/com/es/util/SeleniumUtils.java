@@ -217,7 +217,22 @@ public class SeleniumUtils {
 	 * @param void
 	 */
 	public static void scrollToBottom() {
+		log.info("Scrolling to bottom...");
 		((JavascriptExecutor) Setup.driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+	}
+	
+	/**
+	 * This method scrolls window vertically.
+	 * 
+	 * @return void
+	 * @param top
+	 * @param bottom
+	 * 
+	 */
+	public static void scrollVertically(int top, int bottom) {
+		log.info("Scrolling to Vertically...");
+		String javaScript = "window.scrollTo("+top+", "+bottom+")";
+		((JavascriptExecutor) Setup.driver).executeScript(javaScript);
 	}
 
 	/**
