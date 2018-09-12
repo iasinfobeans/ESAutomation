@@ -85,4 +85,28 @@ public class CRM {
 		}
 		SeleniumUtils.switchToWindow(esWindowHandle);
 	}
+	
+	/**
+	 * This method will verify report contact details for given report number.
+	 * @param reportNumber - For this report number report contact will be verify.
+	 * @param username - username for crm login.
+	 * @param password - password for crm login
+	 * 
+	 */
+	public static void verifyReportContactDetails(String username, String password,String reportNumber) {
+		Set<String> windowHandles = SeleniumUtils.openUrlInNewWindow(crmPortalUrl);
+		Iterator<String> itr = windowHandles.iterator();
+		String esWindowHandle = itr.next();
+		String crmWindowHandle = itr.next();
+		SeleniumUtils.switchToWindow(crmWindowHandle);
+		try {
+			CRMPage.login(username, password);
+			CRMPage.verifyReportContacts(reportNumber);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			SeleniumUtils.switchToWindowAndClose(crmWindowHandle);
+		}
+		SeleniumUtils.switchToWindow(esWindowHandle);
+	}
 }
