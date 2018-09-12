@@ -2,6 +2,7 @@ package com.es.tests;
 
 import org.testng.annotations.Test;
 import com.es.pom.DashboardPage;
+import com.es.pom.DependsOn;
 import com.es.pom.RegisterPage;
 import com.es.pom.SignInPage;
 import com.es.setup.Setup;
@@ -58,23 +59,25 @@ public class Register extends Setup {
 	 * ); ApplicationPage.verifyApplicationPageForESL(); }
 	 */
 
-	@Test(groups = { "smoke", "Register" })
+	@Test(groups = { "smoke", "Register"},dependsOnMethods="verifyConfirmationEmailToCustomerCRMQualifying")
 	@Description("Verify that the user is able to initiate the registration process by clicking on the register link present on the home page.")
 	public void verifyRegistrationFromHomePage() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.","verifyConfirmationEmailToCustomerCRMQualifying");
+		/*try {
 			SignInPage.navigateToRegistration();
 			RegisterPage.enterEmailInRegistration();
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyRegistrationFromHomePage");
 			e.getStackTrace();
 			throw e;
-		}
+		} */
 	}
 
-	@Test(groups = { "smoke", "Register" })
+	@Test(groups = { "smoke", "Register" },dependsOnMethods="verifyConfirmationEmailToCustomerCRMQualifying")
 	@Description("Verify the email for OTP.")
 	public void verifyEmailForOTP() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.","verifyConfirmationEmailToCustomerCRMQualifying");
+		/*try {
 			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			Yopmail.verifyOTPEmailBody(email);
@@ -82,13 +85,14 @@ public class Register extends Setup {
 			SeleniumUtils.captureScreenshot("verifyEmailForOTP");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "Register" })
-	@Description("Verify the registration process once correct OTP and other fields are entered.")
+	@Test(groups = { "smoke", "Register" },dependsOnMethods="verifyConfirmationEmailToCustomerCRMQualifying")
+	@Description("Verify the registration process once correct OTP and other fields are entered")
 	public void verifyRegistrationWithCorrectOTP() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.","verifyConfirmationEmailToCustomerCRMQualifying");
+		/*try {
 			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
@@ -99,10 +103,10 @@ public class Register extends Setup {
 			SeleniumUtils.captureScreenshot("verifyRegistrationWithCorrectOTP");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 	
-	@Test(groups = { "smoke", "Register" })
+	@Test(priority=1,groups = { "smoke", "Register"})
 	@Description("Verify the email notifications sent to the Customer upon successful registration.")
 	public void verifySuccessfulRegistrationEmailNotificationsToCustomer() throws InterruptedException {
 		try {
@@ -112,6 +116,7 @@ public class Register extends Setup {
 					Prop.getTestData("companyName"), Prop.getTestData("phone"), Prop.getTestData("newPassword"),
 					Prop.getTestData("confirmPassword"),email);
 			Yopmail.verifyRegistrationEmailBody(email);
+			Yopmail.verifyNewAccountRegistrationEmailBody(Prop.getTestData("EmailId"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifySuccessfulRegistrationEmailNotificationsToCustomer");
 			e.getStackTrace();
@@ -119,10 +124,11 @@ public class Register extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "Register" })
+	@Test(groups = { "smoke", "Register" },dependsOnMethods="verifyConfirmationEmailToCustomerCRMQualifying")
 	@Description("Verify the email notifications sent to the Staff upon successful registration.")
 	public void verifyEmailNotificationsToStaff() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.","verifyConfirmationEmailToCustomerCRMQualifying");
+		/*try {
 			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
@@ -133,13 +139,14 @@ public class Register extends Setup {
 			SeleniumUtils.captureScreenshot("verifyEmailNotificationsToStaff");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "Register"})
+	@Test(groups = { "smoke", "Register" },dependsOnMethods="verifyConfirmationEmailToCustomerCRMQualifying")
 	@Description("Verify that ES Staff is able to qualify the lead in CRM.")
 	public void verifyEsStaffQualifyLeadinCRM() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.","verifyConfirmationEmailToCustomerCRMQualifying");
+		/*try {
 			SignInPage.navigateToRegistration();
 			String email = RegisterPage.enterEmailInRegistration();
 			RegisterPage.enterPersonalInfoInRegistration(Prop.getTestData("firstName"), Prop.getTestData("lastName"),
@@ -151,10 +158,10 @@ public class Register extends Setup {
 			SeleniumUtils.captureScreenshot("verifyEsStaffQualifyLeadinCRM");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "Register"})
+	@Test(priority=2, groups = { "smoke", "Register"})
 	@Description("Verify that after qualifying from CRM, a confirmation email is triggered to the customer.")
 	public void verifyConfirmationEmailToCustomerCRMQualifying() throws InterruptedException {
 		try {
@@ -176,7 +183,7 @@ public class Register extends Setup {
 		}
 	} 
 
-	@Test(groups = { "smoke", "Register"})
+	@Test(priority=3,groups = { "smoke", "Register"})
 	@Description("Verify that the user is qualified and all the portal options get available to user.")
 	public void verifyUserIsQualified() throws InterruptedException {
 		try {

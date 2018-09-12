@@ -1,9 +1,9 @@
 package com.es.tests;
-
 import org.testng.annotations.Test;
 import com.es.pom.ApplicationPageForQuotation;
 import com.es.pom.AvaliableQuotesPage;
 import com.es.pom.DashboardPage;
+import com.es.pom.DependsOn;
 import com.es.pom.GetAQuotePage;
 import com.es.pom.OverlayPage;
 import com.es.pom.PaymentPage;
@@ -18,10 +18,11 @@ import io.qameta.allure.Description;
 
 public class QuotesManagement extends Setup {
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement"},dependsOnMethods="verifyCustomerNotifiedForQuote")
 	@Description("Verify that a 'Get a Quote' button is present on the Quotation Listing page for the customer.")
 	public void verifyGetAQuoteButtonOnQuotationListingPage() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("	Verify that once the quote is submitted, the customer is notified about the same.","verifyCustomerNotifiedForQuote");
+		/*try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
@@ -30,13 +31,14 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyGetAQuoteButtonOnQuotationListingPage");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement" },dependsOnMethods="verifyCustomerNotifiedForQuote")
 	@Description("Verify that the customer is able to click on the Get a Quote button.")
 	public void verifyCustomerClickOnGetAQuoteButton() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("	Verify that once the quote is submitted, the customer is notified about the same.","verifyCustomerNotifiedForQuote");
+		/*try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
@@ -46,13 +48,14 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyCustomerClickOnGetAQuoteButton");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement" },dependsOnMethods="verifyCustomerNotifiedForQuote")
 	@Description("Verify that the customer is able to request for a quote.")
 	public void verifyCustomerRequestforQuote() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("	Verify that once the quote is submitted, the customer is notified about the same.","verifyCustomerNotifiedForQuote");
+		/*try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
@@ -63,12 +66,14 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyCustomerReportforQuote");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement"})
+	@Test(groups = { "smoke", "QuotesManagement"},dependsOnMethods="verifyCustomerNotifiedForQuote")
 	@Description("Verify that once the quote is submitted, the staff is notified about the same.")
 	public void verifyStaffNotifiedForQuote() throws InterruptedException {
+		DependsOn.dependsOnMethod("	Verify that once the quote is submitted, the customer is notified about the same.","verifyCustomerNotifiedForQuote");
+		/*
 		try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
@@ -81,10 +86,10 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyStaffNotifiedForQuote");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=1,groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that once the quote is submitted, the customer is notified about the same.")
 	public void verifyCustomerNotifiedForQuote() throws InterruptedException {
 		try {
@@ -95,6 +100,7 @@ public class QuotesManagement extends Setup {
 			GetAQuotePage.verifyCustomerRequestforQuote(Prop.getTestData("productType"),
 					Prop.getTestData("productDescription"));
 			Yopmail.verifyQuotationSubmitByCustomer(Prop.getTestData("username"));
+			Yopmail.verifyQuotationReceivedByStaff(Prop.getTestData("EmailId"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCustomerNotifiedForQuote");
 			e.getStackTrace();
@@ -102,10 +108,11 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement"},dependsOnMethods="verifyESstaffUploadMultipleQuotes")
 	@Description("Verify that the staff person, on receiving the quotation request, will have an option to upload a quote.")
 	public void verifyUploadOptionForStaffOnQuotationRequest() throws Exception {
-		try {
+		DependsOn.dependsOnMethod("Verify that the ES staff can upload multiple quotes.","verifyESstaffUploadMultipleQuotes");
+		/*try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
@@ -121,13 +128,14 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyUploadOptionForStaffOnQuotationRequest");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement" },dependsOnMethods="verifyESstaffUploadMultipleQuotes")
 	@Description("Verify the View Quotes column to have the number of quotes that the staff has uploaded for a particular Quotation No.")
 	public void verifyNumberOfQuote() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that the ES staff can upload multiple quotes.","verifyESstaffUploadMultipleQuotes");
+		/*try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
@@ -150,13 +158,14 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyNumberOfQuote");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement" },dependsOnMethods="verifyViewButtonWithPopPupWindow")
 	@Description("Verify that the staff is able to click on the view button.")
 	public void verifyViewButton() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that the staff is able to view pop up window.","verifyViewButtonWithPopPupWindow");
+		/*try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.verifyViewOption();
@@ -165,10 +174,10 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyViewButton");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=2,groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that the staff is able to view pop up window.")
 	public void verifyViewButtonWithPopPupWindow() throws InterruptedException {
 		try {
@@ -183,10 +192,11 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(groups = { "smoke", "QuotesManagement"},dependsOnMethods="verifyESstaffUploadMultipleQuotes")
 	@Description("Verify that the staff is able to click on the Upload button")
 	public void verifyUploadButton() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that the ES staff can upload multiple quotes.","verifyESstaffUploadMultipleQuotes");
+		/*try {
 			SignInPage.login(Prop.getTestData("Staffuser"), Prop.getTestData("Staffpassword"), "Staff");
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.verifyUploadOption();
@@ -195,10 +205,10 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyUploadButton");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=3,groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that the Expiry date is a mandatory field & it  is defaulted with a date 30 days ahead from the current date.")
 	public void verifyExpiryDateDefaultedWithThirtyDaysAhead() throws InterruptedException {
 		try {
@@ -215,7 +225,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=4,groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that once the staff creates a quote, a notification email is sent to the customer along with the quote file as attachment.")
 	public void verifyNotificationEmailAndQuoteFile() throws InterruptedException {
 		try {
@@ -236,7 +246,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=5,groups = { "smoke", "QuotesManagement" })
 	@Description("Verify the email triggered to the customer once the staff creates a quote.")
 	public void verifyCustomerMailAfterGivenInputInUploadOption() throws InterruptedException {
 		try {
@@ -254,7 +264,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=6,groups = { "smoke", "QuotesManagement" })
 	@Description("Verify that the staff should be able to delete any quote if it has not been used to apply for an application.")
 	public void verifyDeleteQuoteByStaff() throws InterruptedException {
 		try {
@@ -275,7 +285,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=7,groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that the ES staff can upload multiple quotes.")
 	public void verifyESstaffUploadMultipleQuotes() throws InterruptedException {
 		int fileCount = 7;
@@ -305,7 +315,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=8,groups = { "smoke", "QuotesManagement" })
 	@Description("Verify the different statuses of the quotation request.")
 	public void verifyDifferentStatusesOfQuotationRequest() throws Exception {
 		try {
@@ -320,10 +330,11 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement"}) 
+	@Test(groups = { "smoke", "QuotesManagement"},dependsOnMethods="verifyStatusesOfQuotationRequestOnceApplicationSaved") 
 	@Description("Verify that the customer is allowed to fill one application against one quotation.")
 	public void verifyCustomerAllowedFillOneApplicationQuotation() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify the status of the Quotation request once the application is saved.","verifyStatusesOfQuotationRequestOnceApplicationSaved");
+		/*try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
@@ -356,10 +367,10 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyStatusesOfQuotationRequest");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" }) 
+	@Test(priority=9,groups = { "smoke", "QuotesManagement"}) 
 	@Description("Verify the status of the Quotation request once the application is saved.")
 	public void verifyStatusesOfQuotationRequestOnceApplicationSaved() throws InterruptedException {
 		try {
@@ -390,6 +401,7 @@ public class QuotesManagement extends Setup {
 					Prop.getTestData("city"), Prop.getTestData("state"), Prop.getTestData("zip"),
 					Prop.getTestData("companyPhoneNumber"), Prop.getTestData("companyEmailAddress"),
 					Prop.getTestData("subjectOfReport"));
+			ApplicationPageForQuotation.verifySaveReport();
 			ApplicationPageForQuotation.verifyApplicationPageForViewQuote();
 			DashboardPage.verifyQuotationOption();
 			QuotationListingPage.verifyStatus();
@@ -400,7 +412,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement"})
+	@Test(priority=10,groups = { "smoke", "QuotesManagement"})
 	@Description("Verify that if customer has applied for the quote and saved the application, the quote would not be allowed to be used for submitting another application.")
 	public void verifyAppliedQuoteNotAllowedSubmittingAnotherApplication() throws Exception {
 		try {
@@ -417,10 +429,12 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" }) 
+	@Test(groups = { "smoke", "QuotesManagement" },dependsOnMethods="verifyCouponDiscountApplicableOrNotForQuotation") 
 	@Description("Verify that the Quotation amount would be basic fees for the application.")
 	public void verifyQuotationAmountWithBasicFees() throws InterruptedException {
-		try {
+		DependsOn.dependsOnMethod("Verify that the customer cannot apply for a coupon discount for applications applied through a quote request.","verifyCouponDiscountApplicableOrNotForQuotation");
+
+		/*try {
 			SignInPage.login(Prop.getTestData("username"), Prop.getTestData("password"), "Customer");
 			OverlayPage.skipoverlayPage();
 			DashboardPage.verifyQuotationOption();
@@ -462,10 +476,10 @@ public class QuotesManagement extends Setup {
 			SeleniumUtils.captureScreenshot("verifyQuotationAmountWithBasicFees");
 			e.getStackTrace();
 			throw e;
-		}
+		}*/
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" }) 
+	@Test(priority=11, groups = { "smoke", "QuotesManagement"}) 
 	@Description("Verify that the customer cannot apply for a coupon discount for applications applied through a quote request.")
 	public void verifyCouponDiscountApplicableOrNotForQuotation() throws InterruptedException {
 		try {
@@ -507,6 +521,8 @@ public class QuotesManagement extends Setup {
 			ApplicationPageForQuotation.pay();
 			ApplicationPageForQuotation.observeBasicFees();
 			ApplicationPageForQuotation.couponOption();
+			ApplicationPageForQuotation.customerDetailsForQuotation(Prop.getTestData("billingAddress"),
+					Prop.getTestData("city"),Prop.getTestData("zip"), Prop.getTestData("phone"));
 		} catch (Exception e) {
 			SeleniumUtils.captureScreenshot("verifyCouponDiscountApplicableOrNotForQuotation");
 			e.getStackTrace();
@@ -515,7 +531,7 @@ public class QuotesManagement extends Setup {
 	}
 
 
-	@Test(groups = { "smoke", "QuotesManagement"}) 
+	@Test(priority=12,groups = { "smoke", "QuotesManagement"}) 
 	@Description("Verify that if the customer has selected the quote and saved/submitted the application, but tries to make payment after the expiration date of the quote, then for such applications, the customer should not be able to make the payment.")
 	public void verifyPaymentAfterExpiryDate() throws InterruptedException {
 		try {
@@ -534,7 +550,7 @@ public class QuotesManagement extends Setup {
 		}
 	}
 
-	@Test(groups = { "smoke", "QuotesManagement" })
+	@Test(priority=13,groups = { "smoke", "QuotesManagement" ,"priority=23"})
 	@Description("Customer has requested for a quotation; Staff has send the quote; It should be 7 or 2 or 1 day(s) before the expiration date.")
 	public void verifyStaffSendQuoteBeforeExpirationDate() throws InterruptedException {
 		try {
