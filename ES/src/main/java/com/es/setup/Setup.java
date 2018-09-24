@@ -52,7 +52,7 @@ public class Setup {
 	public static int i = 1;
 	private static Logger log = Logger.getLogger(Setup.class.getName());
 	public static String screenshotPath = System.getProperty("user.dir") + File.separator + "screenshots";
-	private static String allureReportPath = System.getProperty("user.dir") + File.separator + "alure-reports";
+	private static String allureReportPath = System.getProperty("user.dir") + File.separator + "allure-results";
 	private static String logPath = System.getProperty("user.dir") + File.separator + "log";
 	public static Properties testData = null;
 	public static Properties config = null;
